@@ -1,7 +1,8 @@
 #ifndef VENTA_H
 #define VENTA_H
 
-#include "VentaDetalle.h"
+#include "Producto.h"
+
 #include <vector>
 using namespace std;
 
@@ -18,10 +19,19 @@ private:
 	float total;
 	
 public:
-	Venta(int idCliente, vector<Producto> articulos);
+	Venta();
+	Venta(int idCliente, vector<Producto> v);
+	Venta(int idCliente, float total);
+	Venta(int id, int idCliente, vector<Producto> v);
+	Venta(int id, int idCliente, float total);
 	
+	int GetID();
+	int GetLastID();
 	
-	int getLastID();
+	int GetIDCliente();
+	
+	float GetTotal();
+	float CalcularTotal(vector<Producto> v);
 	
 	~Venta(){};
 };

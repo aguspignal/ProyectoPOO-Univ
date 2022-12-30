@@ -12,10 +12,6 @@ struct RegistroProducto {
 	char descripcion[200];
 	float precio;
 	int stock;
-	
-	bool operator==(const RegistroProducto reg) const {
-		return id == reg.id;
-	}
 };
 
 class Producto {
@@ -30,19 +26,23 @@ public:
 	Producto(std::string m_descripcion, float m_precio, int m_stock);
 	Producto(int m_id, std::string m_descripcion, float m_precio, int m_stock);
 	
-	int getID();
-	int GetLastID();
+	/// ID
+	int GetID();
+	int GetLastID(); // mayor id en la base de datos
 	
-	std::string getDescripcion();
-	void setDescripcion(std::string descrip);
+	/// Descripcion
+	std::string GetDescripcion();
+	void SetDescripcion(std::string descrip);
 	
-	int getPrecio();
-	void setPrecio(float precio);
+	/// Precio
+	int GetPrecio();
+	void SetPrecio(float precio);
 	
-	int getStock();
-	void setStock(int stock);
+	/// Stock
+	int GetStock();
+	void SetStock(int stock);
 	
-	/// Manipulacion del Binario
+	/// Agregar a la database
 	void AddProducto();
 	
 	~Producto(){};

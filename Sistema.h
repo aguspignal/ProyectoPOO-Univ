@@ -3,6 +3,7 @@
 
 #include "Producto.h"
 #include "Cliente.h"
+#include "Venta.h"
 
 #include <string>
 #include <vector>
@@ -11,22 +12,35 @@ using namespace std;
 class Sistema {
 	vector<Producto> productos;
 	vector<Cliente> clientes;
+	vector<Venta> ventas;
 	
 public:
 	Sistema();
 	
 	void ActualizarProductos();
 	void ActualizarClientes();
+	void ActualizarVentas();
 	
-	int getProductosSize();
-	int getClientesSize();
+	void CargarProductos();
+	void CargarClientes();
+	void CargarVentas();
 	
-	void DeleteProducto(int m_id);
-	void DeleteCliente(int m_id);
+	void DeleteProducto(int id);
+	void DeleteCliente(int id);
+	void DeleteVenta(int id);
 	
-	Producto &getProducto(int i);
+	Producto &GetProducto(int i);
+	Producto GetProductoByID(int id);
 	
-	int GetLastID(ifstream archivo);
+	Cliente &GetCliente(int i);
+	Cliente GetClienteByID(int id);
+	
+	Venta &GetVenta(int i);
+	Venta GetVentaByID(int id);
+	
+	int GetProductosSize();
+	int GetClientesSize();
+	int GetVentasSize();
 	
 	~Sistema(){};
 };

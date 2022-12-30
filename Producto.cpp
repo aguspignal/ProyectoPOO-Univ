@@ -2,14 +2,14 @@
 using namespace std;
 
 Producto::Producto(){
-	GetLastID() == 0 ? id = 1 : id = GetLastID()+1;
+	id = 0;
 	descripcion = "none";
 	precio = 0;
 	stock = 0;
 }
 
 Producto::Producto(std::string m_descripcion, float m_precio, int m_stock){
-	GetLastID() == 0 ? id = 1 : id = GetLastID()+1;
+	this->id = GetLastID()+1;
 	this->descripcion = m_descripcion;
 	this->precio = m_precio;
 	this->stock = m_stock;
@@ -24,21 +24,21 @@ Producto::Producto(int m_id, std::string m_descripcion, float m_precio, int m_st
 
 
 /// -- ID -- 
-int Producto::getID(){
+int Producto::GetID(){
 	return id;
 }
 
 int Producto::GetLastID(){
 	int id = 0;
-	fstream archi("productos.bin",ios::binary|ios::in|ios::ate);
+	ifstream archi("productos.bin",ios::binary|ios::in|ios::ate);
 	int cant_productos = archi.tellg() / sizeof(RegistroProducto);
 	archi.seekg(0);
 	
-	if(cant_productos > 0){ // buscar mayor valor de id
+	if(cant_productos > 0){ 
 		RegistroProducto reg;
 		for(int i=0; i<cant_productos; i++){
 			archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
-			if (reg.id>id) {
+			if (reg.id > id) {
 				id = reg.id;
 			}
 		}
@@ -49,31 +49,31 @@ int Producto::GetLastID(){
 }
 
 /// -- Descripcion --
-std::string Producto::getDescripcion(){
+std::string Producto::GetDescripcion(){
 	return descripcion;
 }
 
-void Producto::setDescripcion(std::string descrip){
+void Producto::SetDescripcion(std::string descrip){
 	this->descripcion = descrip;
 }
 
 
 /// -- Precio --
-int Producto::getPrecio(){
+int Producto::GetPrecio(){
 	return precio;
 }
 
-void Producto::setPrecio(float precio){
+void Producto::SetPrecio(float precio){
 	this->precio = precio;
 }
 
 
 /// -- Stock --
-int Producto::getStock(){
+int Producto::GetStock(){
 	return stock;
 }
 
-void Producto::setStock(int stock){
+void Producto::SetStock(int stock){
 	this->stock = stock;
 }
 

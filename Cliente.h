@@ -13,10 +13,6 @@ struct RegistroCliente {
 //	char email[100];
 //	int telefono;
 	int dni;
-	
-	bool operator==(const RegistroCliente reg) const {
-		return id == reg.id;
-	}
 };
 	
 	
@@ -24,21 +20,30 @@ class Cliente {
 private:
 	int id;
 	std::string nombre;
+//	std::string direccion;
+//	std::string email[100];
+//	int telefono;
 	int dni;
 	
 public:
 	Cliente();
 	Cliente(std::string nombre, int dni);
+	Cliente(int id, std::string nombre, int dni);
 	
+	/// ID
 	int GetID();
-	int GetLastID();
+	int GetLastID(); // mayor id en la base de datos
 	
+	/// Nombre
 	std::string GetNombre();
-
-	int GetDNI();
+	void SetNombre(std::string nombre);
 	
-	/// Manipulacion del Binario
-	void addCliente();
+	/// DNI
+	int GetDNI();
+	void SetDNI(int dni);
+	
+	/// Agregar a la database
+	void AddCliente();
 	
 	~Cliente(){};
 };
