@@ -21,13 +21,10 @@ public:
 	int getProductosSize();
 	int getClientesSize();
 	
-	void AgregarProducto(RegistroProducto reg);
-	
 	void DeleteProducto(int m_id);
 	void DeleteCliente(int m_id);
 	
 	Producto &getProducto(int i);
-	void deleteProducto(int i);
 	
 	int GetLastID(ifstream archivo);
 	

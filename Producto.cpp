@@ -32,6 +32,7 @@ int Producto::GetLastID(){
 	int id = 0;
 	fstream archi("productos.bin",ios::binary|ios::in|ios::ate);
 	int cant_productos = archi.tellg() / sizeof(RegistroProducto);
+	archi.seekg(0);
 	
 	if(cant_productos > 0){ // buscar mayor valor de id
 		RegistroProducto reg;

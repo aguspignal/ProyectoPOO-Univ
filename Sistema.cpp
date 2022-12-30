@@ -48,15 +48,8 @@ int Sistema::getClientesSize(){
 	return clientes.size();
 }
 
-/// -- Agregar Producto / Cliente
-void AgregarProducto(RegistroProducto reg){
-	ofstream archi("productos.bin",ios::binary|ios::out|ios::app);
-	archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
-	archi.close();
-}
 
-
-/// -- Eliminar Producto / Cliente 
+/// -- Eliminar Producto 
 void Sistema::DeleteProducto(int m_id){
 	ifstream archiIn("productos.bin",ios::binary|ios::in|ios::ate);
 	
@@ -88,17 +81,17 @@ void Sistema::DeleteProducto(int m_id){
 	archiOut.close();
 }
 
-
+/// -- Eliminar Cliente 
 void Sistema::DeleteCliente(int m_id){
 	ifstream archiIn("clientes.bin",ios::binary|ios::in|ios::ate);
 	
-	int cant_productos = archiIn.tellg() / sizeof(RegistroCliente);
+	int cant_clientes = archiIn.tellg() / sizeof(RegistroCliente);
 	archiIn.seekg(0);
 	
 	RegistroCliente reg;
 	vector<RegistroCliente> v;
 	
-	for(int i=0; i<cant_productos; i++){
+	for(int i=0; i<cant_clientes; i++){
 		archiIn.read(reinterpret_cast<char*>(&reg),sizeof(reg));
 		v.push_back(reg);
 	}
@@ -125,8 +118,5 @@ Producto &Sistema::getProducto(int i){
 	return productos[i];
 }
 
-void Sistema::deleteProducto(int i){
-	productos.erase(productos.begin()+i);
-}
 
 

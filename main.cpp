@@ -2,11 +2,18 @@
 
 #include <iostream>
 #include <cstring>
+#include <iomanip>
 using namespace std;
 
+void MostrarArticulos();
 void AgregarArticulo();
 void EditarArticulo();
 void BorrarArticulo();
+
+ostream &operator<<(ostream &o, RegistroProducto reg){
+	o << reg.id <<"   "<< reg.descripcion <<"   "<< reg.precio <<"  "<< reg.stock <<endl;
+	return o;
+}
 
 int GetInput()
 {
@@ -30,6 +37,7 @@ void DisplayArticulosMenu()
 {
 	cout << "Articulos\n";
 	cout << "Seleccione una opcion\n";
+	cout << "0 - Ver Articulos\n";
 	cout << "1 - Agregar\n";
 	cout << "2 - Editar\n";
 	cout << "3 - Borrar\n";
@@ -69,14 +77,17 @@ void Articulos()
 		choice = GetInput();
 		switch(choice)
 		{
+		case  0:
+			MostrarArticulos();
+			break;
 		case 1:
 			AgregarArticulo();
 			break;
 		case 2:
-			cout << "EditarArticulo()...";
+			EditarArticulo();
 			break;
 		case 3:
-			cout << "BorrarArticulo()...";
+			BorrarArticulo();
 			break;
 		default:
 			break;
@@ -159,10 +170,26 @@ int main()
 		}
 	} while(choice!=4);
 	
-	system("PAUSE");
 	return EXIT_SUCCESS;
 }
 
+
+void MostrarArticulos(){
+	cout<<"\n\nID | Descripcion | Precio | Stock\n";
+	
+	ifstream archi("productos.bin",ios::binary|ios::in|ios::ate);
+	int cant_prods = archi.tellg() / sizeof(RegistroProducto);
+	archi.seekg(0);
+	
+	RegistroProducto reg;
+	for(int i=0; i<cant_prods; i++){
+		archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
+		cout << reg;
+	}
+	
+	cout<<endl;
+	system("PAUSE");
+}
 
 void AgregarArticulo(){
 	cin.ignore();
@@ -175,22 +202,21 @@ void AgregarArticulo(){
 	cout << "> Stock: ";
 	int stock = GetInput();
 	
-	RegistroProducto reg;
-	strcpy(reg.descripcion,str.c_str());
-	reg.precio = precio;
-	reg.stock = stock;
-	
-	Producto prod(reg.descripcion, reg.precio, reg.stock);
+	Producto prod(str, precio, stock);
 	prod.AddProducto();
 }
 
 
 void EditarArticulo(){
-	
+	cout<<"ID del articulo: ";
+	int choice = GetInput();
 }
 
 
 void BorrarArticulo(){
+	cout<<"ID del articulo: ";
+	int id = GetInput();
 	
+	Sistema sist;
+	sist.DeleteProducto(id);
 }
-
