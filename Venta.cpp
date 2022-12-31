@@ -1,4 +1,6 @@
 #include "Venta.h"
+#include <fstream>
+using namespace std;
 
 Venta::Venta(){
 	this->id = 0;
@@ -6,22 +8,27 @@ Venta::Venta(){
 	this->total = 0;
 }
 
-Venta::Venta(int idCliente, vector<Producto> v){
+Venta::Venta(int idCliente, vector<ProductoCantidad> productos){
 	this->id = GetLastID()+1;
 	this->id_cliente = idCliente;
-	this->total = CalcularTotal(v);
+	
+	for(int i=0; i<productos.size(); i++){
+		VentaDetalle vdetalle(this->id, productos[i].prod, productos[i].cant);
+		vdetalle.AddVentaDetalle();
+	}
+	
+	this->total = CalcularTotal(productos);
 }
 
-Venta::Venta(int idCliente, float m_total){
-	this->id = GetLastID()+1;
-	this->id_cliente = idCliente;
-	this->total = total;
-}
-
-Venta::Venta(int m_id, int idCliente, vector<Producto> v){
+Venta::Venta(int m_id, int idCliente, vector<ProductoCantidad> productos){
 	this->id = m_id;
 	this->id_cliente = idCliente;
-	this->total = CalcularTotal(v);
+	
+	for(int i=0; i<productos.size(); i++){
+		VentaDetalle vdetalle(this->id, productos[i].prod, productos[i].cant);
+		vdetalle.AddVentaDetalle();
+	}
+	this->total = CalcularTotal(productos);
 }
 
 Venta::Venta(int m_id, int idCliente, float m_total){
@@ -29,7 +36,6 @@ Venta::Venta(int m_id, int idCliente, float m_total){
 	this->id_cliente = idCliente;
 	this->total = m_total;
 }
-
 
 /// -- ID
 int Venta::GetID(){
@@ -60,20 +66,35 @@ int Venta::GetLastID(){
 	return id;
 }
 
+/// -- Detalles
+int Venta::GetDetallesSize(){
+	return detalles.size();
+}
+
 /// -- Total
 float Venta::GetTotal() {
 	return total;
 }
 
-float Venta::CalcularTotal(vector<Producto> v){
+float Venta::CalcularTotal(vector<ProductoCantidad> productos){
 	float suma = 0;
-	for(int i=0; i<v.size(); i++){
-		suma += v.size();
+	for(int i=0; i<productos.size(); i++){
+		suma += (productos[i].prod.GetPrecio() * productos[i].cant);
 	}
 	return suma;
 }
 
-
-
+/// -- Agregar al archivo
+void Venta::AddVenta(){
+	ofstream archi("ventas.bin",ios::binary|ios::out|ios::app);
+	
+	RegistroVenta reg;
+	reg.id = this->id;
+	reg.id_cliente = id_cliente;
+	reg.total = total;
+	
+	archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
+	archi.close();
+}
 
 

@@ -1,4 +1,9 @@
 #include "Producto.h"
+#include <string>
+#include <fstream>
+#include <vector>
+#include <cstring>
+#include <algorithm>
 using namespace std;
 
 Producto::Producto(){
@@ -77,17 +82,21 @@ void Producto::SetStock(int stock){
 	this->stock = stock;
 }
 
+bool Producto::CheckStock(int cant){
+	return stock >= cant;
+}
+
 /// -- Add Producto --
 void Producto::AddProducto(){
 	ofstream archi("productos.bin",ios::binary|ios::out|ios::app);
 	
-	RegistroProducto reg_prod;
-	reg_prod.id = this->id;
-	strcpy(reg_prod.descripcion, descripcion.c_str());
-	reg_prod.precio = precio;
-	reg_prod.stock = stock;
+	RegistroProducto reg;
+	reg.id = this->id;
+	strcpy(reg.descripcion, descripcion.c_str());
+	reg.precio = precio;
+	reg.stock = stock;
 	
-	archi.write(reinterpret_cast<char*>(&reg_prod),sizeof(reg_prod));
+	archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
 	archi.close();
 }
 

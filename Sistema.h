@@ -4,6 +4,7 @@
 #include "Producto.h"
 #include "Cliente.h"
 #include "Venta.h"
+#include "VentaDetalle.h"
 
 #include <string>
 #include <vector>
@@ -13,6 +14,7 @@ class Sistema {
 	vector<Producto> productos;
 	vector<Cliente> clientes;
 	vector<Venta> ventas;
+	vector<VentaDetalle> detallesventa;
 	
 public:
 	Sistema();
@@ -21,11 +23,13 @@ public:
 	void ActualizarProductos();
 	void ActualizarClientes();
 	void ActualizarVentas();
+	void ActualizarDetallesVenta();
 	
 	/// Cargar desde el archivo
 	void CargarProductos();
 	void CargarClientes();
 	void CargarVentas();
+	void CargarDetallesVenta();
 	
 	/// Eliminar
 	void DeleteProducto(int id);
@@ -33,8 +37,8 @@ public:
 	void DeleteVenta(int id);
 	
 	/// Modificar
-	void ModificarProducto(int id, string descripcion, float precio, int stock);
-	void ModificarCliente(int id, string nombre, int dni);
+	void ModificarProducto(int id, string descripcion="none", float precio=-1, int stock=-1);
+	void ModificarCliente(int id, string nombre="none", int dni=-1);
 	
 	/// Devolviendo cosas
 	Producto &GetProducto(int i);
@@ -46,9 +50,12 @@ public:
 	Venta &GetVenta(int i);
 	Venta GetVentaByID(int id);
 	
-	int GetProductosSize(); // (Sizes de los vectores, no del archivo)
-	int GetClientesSize(); //
-	int GetVentasSize();  //
+	vector<VentaDetalle> GetDetallesByIDVenta(int id_venta);
+	
+	int GetProductosSize();     // (Sizes de los vectores, no del archivo)
+	int GetClientesSize();      //
+	int GetVentasSize();        //
+	int GetDetallesVentaSize(); //
 	
 	~Sistema(){};
 };

@@ -1,11 +1,7 @@
 #ifndef PRODUCTO_H
 #define PRODUCTO_H
-
 #include <string>
-#include <fstream>
-#include <vector>
-#include <cstring>
-#include <algorithm>
+
 
 struct RegistroProducto {
 	int id;
@@ -41,6 +37,7 @@ public:
 	/// Stock
 	int GetStock();
 	void SetStock(int stock);
+	bool CheckStock(int cant);
 	
 	/// Agregar a la database
 	void AddProducto();

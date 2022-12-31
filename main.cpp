@@ -21,6 +21,12 @@ ostream &operator<<(ostream &o, Cliente c){
 	o << c.GetID() <<"   "<< c.GetNombre()<<"  "<< c.GetDNI() <<endl;
 	return o;
 }
+ostream &operator<<(ostream &o, VentaDetalle vdetalle){
+	o << vdetalle.GetProducto().GetID() <<"     "<< vdetalle.GetProducto().GetDescripcion() 
+		<<"   $"<< vdetalle.GetProducto().GetPrecio() <<"    "<<vdetalle.GetCantidad()
+		<<"    "<< vdetalle.GetProducto().GetStock() <<"     "<<vdetalle.GetSubtotal() <<endl;
+	return o;
+}
 
 int GetInput()
 {
@@ -33,11 +39,6 @@ int GetInput()
 void MostrarArticulos(){
 	cout<<"\n\nID |    Descripcion    | Precio | Stock\n";
 	
-//	Sistema sist;
-//	for(int i=0; i<sist.GetProductosSize(); i++){
-//		cout << sist.GetProducto(i);
-//	}
-//	A diferencia de Cliente aca andan bien las dos maneras
 	ifstream archi("productos.bin",ios::binary|ios::in|ios::ate);
 	int cant_prods = archi.tellg() / sizeof(RegistroProducto);
 	archi.seekg(0);
@@ -160,10 +161,70 @@ void BorrarCliente(){
 	sist.DeleteCliente(id);
 }
 	
+	
+/// -- Venta
+void MostrarVentas(){
+	Sistema sist;
+	for(int i=0; i<sist.GetVentasSize(); i++){
+		cout << "\n\nID | ID Cliente\n";
+		cout << sist.GetVenta(i).GetID() <<"    "<< sist.GetVenta(i).GetIDCliente() <<endl;
+		
+		vector<VentaDetalle> detallesventa = sist.GetDetallesByIDVenta(sist.GetVenta(i).GetID());
+		
+		cout << "ID Prod |   Descripcion   | Precio | Cantidad | Stock (Actual) | Subtotal\n";
+		for(int j=0; j<detallesventa.size(); j++){
+			cout << detallesventa[j];
+		}
+		cout << "\n | Total = " << sist.GetVenta(i).GetTotal()<<" |\n";
+	}
+	cout<<endl;
+	system("PAUSE");
+}
+	
+void AgregarVenta(){
+	Sistema sist;
+	
+	cout << "ID Cliente: ";
+	int id_cliente; cin >> id_cliente;
+	
+	int id;
+	ProductoCantidad ProdCant;
+	vector<ProductoCantidad> articulos;
+	do {
+		cout << "ID Articulo: (0 para terminar)\n";
+		cin >> id;
+		if(id != 0){
+			ProdCant.prod = sist.GetProductoByID(id);
+			
+			bool result;
+			do {
+				cout << "Cantidad: ";
+				cin >> ProdCant.cant;
+				
+				result = ProdCant.prod.CheckStock(ProdCant.cant);
+				if(!result){
+					cout << "Falta de stock!\n";
+				} else {
+					int x = ProdCant.prod.GetStock() - ProdCant.cant;
+					sist.ModificarProducto(ProdCant.prod.GetID(),"none",-1,x);
+					
+					articulos.push_back(ProdCant);
+				}
+				
+			} while(!result);
+		}
+	} while(id != 0);
+	
+	Venta venta(id_cliente, articulos);
+	venta.AddVenta();
+}
+
+
+	
 /// -- Menu 
 void DisplayMainMenu()
 {
-	cout << "Menu Principal\n";
+	cout << "- Menu Principal -\n";
 	cout << "Seleccione una opcion:\n";
 	cout << "1 - Articulos\n";
 	cout << "2 - Clientes\n";
@@ -174,7 +235,7 @@ void DisplayMainMenu()
 
 void DisplayArticulosMenu()
 {
-	cout << "Articulos\n";
+	cout << "- Articulos -\n";
 	cout << "Seleccione una opcion\n";
 	cout << "0 - Ver Articulos\n";
 	cout << "1 - Agregar\n";
@@ -186,7 +247,7 @@ void DisplayArticulosMenu()
 
 void DisplayClientesMenu()
 {
-	cout << "Clientes\n";
+	cout << "- Clientes -\n";
 	cout << "Seleccione una opcion\n";
 	cout << "0 - Ver Clientes\n";
 	cout << "1 - Agregar\n";
@@ -198,8 +259,9 @@ void DisplayClientesMenu()
 
 void DisplayVentasMenu()
 {
-	cout << "Ventas\n";
+	cout << "- Ventas -\n";
 	cout << "Seleccione una opcion\n";
+	cout << "0 - Ver Ventas\n";
 	cout << "1 - Agregar\n";
 	cout << "2 - Editar\n";
 	cout << "3 - Borrar\n";
@@ -273,8 +335,11 @@ void Ventas()
 		choice = GetInput();
 		switch(choice)
 		{
+		case 0:
+			MostrarVentas();
+			break;
 		case 1:
-			cout << "AgregarVenta()...";
+			AgregarVenta();
 			break;
 		case 2:
 			cout << "EditarVenta()...";
