@@ -19,9 +19,8 @@ void AddProductoFrame::ClickAgregar( wxCommandEvent& event )  {
 	int stock = input_Stock->GetValue();	
 	
 	Producto prod(descripcion,precio,stock);
-	prod.addProducto();
-	
-	sistema->ActualizarProductos();
+	prod.AddProducto();
+	sistema->CargarProductos();
 	
 	EndModal(1);
 }

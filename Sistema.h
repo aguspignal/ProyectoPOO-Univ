@@ -17,18 +17,26 @@ class Sistema {
 public:
 	Sistema();
 	
+	/// Actualizar el archivo 
 	void ActualizarProductos();
 	void ActualizarClientes();
 	void ActualizarVentas();
 	
+	/// Cargar desde el archivo
 	void CargarProductos();
 	void CargarClientes();
 	void CargarVentas();
 	
+	/// Eliminar
 	void DeleteProducto(int id);
 	void DeleteCliente(int id);
 	void DeleteVenta(int id);
 	
+	/// Modificar
+	void ModificarProducto(int id, string descripcion, float precio, int stock);
+	void ModificarCliente(int id, string nombre, int dni);
+	
+	/// Devolviendo cosas
 	Producto &GetProducto(int i);
 	Producto GetProductoByID(int id);
 	
@@ -38,9 +46,9 @@ public:
 	Venta &GetVenta(int i);
 	Venta GetVentaByID(int id);
 	
-	int GetProductosSize();
-	int GetClientesSize();
-	int GetVentasSize();
+	int GetProductosSize(); // (Sizes de los vectores, no del archivo)
+	int GetClientesSize(); //
+	int GetVentasSize();  //
 	
 	~Sistema(){};
 };

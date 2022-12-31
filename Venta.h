@@ -25,11 +25,14 @@ public:
 	Venta(int id, int idCliente, vector<Producto> v);
 	Venta(int id, int idCliente, float total);
 	
+	/// ID
 	int GetID();
 	int GetLastID();
 	
+	/// ID Cliente
 	int GetIDCliente();
 	
+	/// Total
 	float GetTotal();
 	float CalcularTotal(vector<Producto> v);
 	

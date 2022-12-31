@@ -9,6 +9,7 @@ private:
 	Sistema *sistema;
 	
 protected:
+	void DisplayEditarProducto( wxCommandEvent& event )  override;
 	void EliminarProducto( wxCommandEvent& event )  override;
 	void BackToHome( wxCommandEvent& event )  override;
 	void DisplayAddProducto( wxCommandEvent& event )  override;

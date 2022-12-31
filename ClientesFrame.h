@@ -9,6 +9,10 @@ private:
 	Sistema *sistema;
 	
 protected:
+	void DisplayAddCliente( wxCommandEvent& event )  override;
+	void EliminarCliente( wxCommandEvent& event )  override;
+	void DisplayEditarCliente( wxCommandEvent& event )  override;
+	void ActualizarGrid();
 	void BackToHome( wxCommandEvent& event )  override;
 	
 public:

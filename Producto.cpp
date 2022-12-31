@@ -59,8 +59,8 @@ void Producto::SetDescripcion(std::string descrip){
 
 
 /// -- Precio --
-int Producto::GetPrecio(){
-	return precio;
+float Producto::GetPrecio(){
+	return ((precio*10)/10);
 }
 
 void Producto::SetPrecio(float precio){
@@ -77,7 +77,7 @@ void Producto::SetStock(int stock){
 	this->stock = stock;
 }
 
-/// -- Add & Delete Producto --
+/// -- Add Producto --
 void Producto::AddProducto(){
 	ofstream archi("productos.bin",ios::binary|ios::out|ios::app);
 	

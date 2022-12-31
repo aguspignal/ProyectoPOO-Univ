@@ -35,7 +35,7 @@ public:
 	void SetDescripcion(std::string descrip);
 	
 	/// Precio
-	int GetPrecio();
+	float GetPrecio();
 	void SetPrecio(float precio);
 	
 	/// Stock

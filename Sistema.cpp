@@ -14,6 +14,7 @@ void Sistema::CargarProductos(){
 	archi.seekg(0);
 	
 	RegistroProducto reg;
+	productos.clear();
 	for(int i=0; i<cant_productos; i++){
 		archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
 		Producto prod(reg.id,reg.descripcion,reg.precio,reg.stock);
@@ -31,16 +32,13 @@ void Sistema::CargarClientes(){
 	archi.seekg(0);
 	
 	RegistroCliente reg;
-	clientes.clear();				
-	clientes.resize(cant_clientes); 
+	clientes.clear();			
 	for(int i=0; i<cant_clientes; i++){
 		archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
 		
-		Cliente cliente(reg.nombre, reg.dni);
-		clientes[i] = cliente;
+		Cliente cliente(reg.id, reg.nombre, reg.dni);
+		clientes.push_back(cliente);
 	}
-	
-	archi.close();
 }
 
 void Sistema::CargarVentas(){
@@ -50,6 +48,7 @@ void Sistema::CargarVentas(){
 	archi.seekg(0);
 	
 	RegistroVenta reg;
+	ventas.clear();
 	for(int i=0; i<cant_ventas; i++){
 		archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
 		Venta venta(reg.id,reg.id_cliente,reg.total);
@@ -59,7 +58,6 @@ void Sistema::CargarVentas(){
 	
 	archi.close();
 }
-
 
 /// -- Actualizar los archivos 
 void Sistema::ActualizarProductos(){
@@ -139,6 +137,29 @@ void Sistema::DeleteVenta(int id){
 	ActualizarVentas();
 }
 
+/// -- Modificar Producto
+void Sistema::ModificarProducto(int id, string descripcion, float precio, int stock){
+	for(int i=0; i<productos.size(); i++){
+		if(productos[i].GetID() == id){
+			productos[i].SetDescripcion(descripcion);
+			productos[i].SetPrecio(precio);
+			productos[i].SetStock(stock);
+		}
+	}
+	ActualizarProductos();
+}
+
+/// -- Modificar Cliente 
+void Sistema::ModificarCliente(int id, string nombre, int dni){
+	for(int i=0; i<clientes.size(); i++){
+		if(clientes[i].GetID() == id){
+			clientes[i].SetNombre(nombre);
+			clientes[i].SetDNI(dni);
+		}
+	}
+	ActualizarClientes();
+}
+
 /// -- Buscar Producto 
 Producto &Sistema::GetProducto(int i){
 	return productos[i];
@@ -161,28 +182,11 @@ Cliente &Sistema::GetCliente(int i){
 }
 
 Cliente Sistema::GetClienteByID(int id){
-	// asi no anda
-//	for(int i=0; i<clientes.size(); i++){
-//		if(clientes[i].GetID() == id){
-//			return clientes[i];
-//		}
-//	}
-	// asi anda
-	ifstream archi("clientes.bin",ios::binary|ios::in|ios::ate);
-	int cant_clientes = archi.tellg() / sizeof(RegistroCliente);
-	archi.seekg(0);
-	
-	RegistroCliente reg;
-	for(int i=0; i<cant_clientes; i++){
-		archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
-		if(reg.id == id){
-			Cliente cliente(reg.id,reg.nombre,reg.dni);
-			return cliente;
+	for(int i=0; i<clientes.size(); i++){
+		if(clientes[i].GetID() == id){
+			return clientes[i];
 		}
 	}
-	
-	Cliente cliente;
-	return cliente;
 }
 
 /// -- Buscar Venta

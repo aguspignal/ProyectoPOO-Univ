@@ -91,14 +91,7 @@ void EditarArticulo(){
 		cout << "> Stock: ";
 		int stock = GetInput();
 		
-		for(int i=0; i<sist.GetProductosSize(); i++){
-			if(sist.GetProducto(i).GetID() == prod.GetID()){
-				sist.GetProducto(i).SetDescripcion(str);
-				sist.GetProducto(i).SetPrecio(precio);
-				sist.GetProducto(i).SetStock(stock);
-				sist.ActualizarProductos();
-			}
-		}
+		sist.ModificarProducto(id,str,precio,stock);
 	}
 }
 
@@ -110,29 +103,14 @@ void BorrarArticulo(){
 	sist.DeleteProducto(id);
 }
 
-/// - Clientes
+/// -- Clientes
 void MostrarClientes(){
 	cout<<"\n\nID |    Nombre    | DNI\n";
 	
-	// Falla al leerlo desde el vector<Cliente> de Sistema
-//	Sistema sist;
-//	for(int i=0; i<sist.GetClientesSize(); i++){
-//		cout << sist.GetCliente(i);
-//	}
-//	
-	// Desde el archivo lee bien
-	ifstream archi("clientes.bin",ios::binary|ios::in|ios::ate);
-	int cant_clientes = archi.tellg() / sizeof(RegistroCliente);
-	archi.seekg(0);
-	
-	RegistroCliente reg;
-	for(int i=0; i<cant_clientes; i++){
-		archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
-//		Cliente cliente(reg.id,reg.nombre,reg.dni);
-//		cout << cliente;
-		cout << reg;
-	}
-	
+	Sistema sist;
+	for(int i=0; i<sist.GetClientesSize(); i++){
+		cout << sist.GetCliente(i);
+	}	
 	cout<<endl;
 	system("PAUSE");
 }
@@ -152,11 +130,10 @@ void AgregarCliente(){
 	
 void EditarCliente(){
 	cout<<"ID del cliente: ";
-	int id = GetInput();
+	int id; cin>>id;
 	
 	Sistema sist;
 	Cliente cliente = sist.GetClienteByID(id);
-//	cout << cliente;
 	
 	if(cliente.GetID() == 0){
 		cout << "Cliente no encontrado\n";
@@ -169,15 +146,9 @@ void EditarCliente(){
 		string str; getline(cin,str);
 		
 		cout << "> DNI: ";
-		int dni = GetInput();
+		int dni; cin>>dni;
 		
-		for(int i=0; i<sist.GetClientesSize(); i++){
-			if(sist.GetCliente(i).GetID() == cliente.GetID()){
-				sist.GetCliente(i).SetNombre(str);
-				sist.GetCliente(i).SetDNI(dni);
-				sist.ActualizarClientes();
-			}
-		}
+		sist.ModificarCliente(id,str,dni);
 	}
 }
 	

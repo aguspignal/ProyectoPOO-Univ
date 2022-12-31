@@ -12,4 +12,3 @@ bool Application::OnInit() {
 	
 	return true;
 }
-
