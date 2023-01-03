@@ -125,7 +125,9 @@ void AgregarCliente(){
 	int dni = GetInput();
 	
 	Cliente cliente(str, dni);
-	cliente.AddCliente();
+	
+	Sistema sist;
+	sist.GuardarCliente(cliente);
 }
 
 	
@@ -171,7 +173,7 @@ void MostrarVentas(){
 		
 		vector<VentaDetalle> detallesventa = sist.GetDetallesByIDVenta(sist.GetVenta(i).GetID());
 		
-		cout << "ID Prod |   Descripcion   | Precio | Cantidad | Stock (Actual) | Subtotal\n";
+		cout << "ProdID |   Descripcion   | Precio | Cantidad | Stock (Actual) | Subtotal\n";
 		for(int j=0; j<detallesventa.size(); j++){
 			cout << detallesventa[j];
 		}
@@ -203,11 +205,8 @@ void AgregarVenta(){
 				
 				result = ProdCant.prod.CheckStock(ProdCant.cant);
 				if(!result){
-					cout << "Falta de stock!\n";
+					cout<< "Falta de stock!\n";
 				} else {
-					int x = ProdCant.prod.GetStock() - ProdCant.cant;
-					sist.ModificarProducto(ProdCant.prod.GetID(),"none",-1,x);
-					
 					articulos.push_back(ProdCant);
 				}
 				
@@ -216,7 +215,7 @@ void AgregarVenta(){
 	} while(id != 0);
 	
 	Venta venta(id_cliente, articulos);
-	venta.AddVenta();
+	sist.GuardarVenta(venta);
 }
 
 

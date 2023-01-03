@@ -31,14 +31,20 @@ public:
 	void CargarVentas();
 	void CargarDetallesVenta();
 	
+	/// Guardar en el archivo
+	void GuardarProducto(Producto p);
+	void GuardarCliente(Cliente c);
+	void GuardarVenta(Venta v);
+	void GuardarDetalleVenta(VentaDetalle vdetalle);
+	
 	/// Eliminar
 	void DeleteProducto(int id);
 	void DeleteCliente(int id);
 	void DeleteVenta(int id);
 	
 	/// Modificar
-	void ModificarProducto(int id, string descripcion="none", float precio=-1, int stock=-1);
-	void ModificarCliente(int id, string nombre="none", int dni=-1);
+	void ModificarProducto(int id, string descripcion, float precio, int stock);
+	void ModificarCliente(int id, string nombre, int dni);
 	
 	/// Devolviendo cosas
 	Producto &GetProducto(int i);

@@ -44,7 +44,7 @@ public:
 	/// Total
 	float GetTotal();
 	float CalcularTotal(vector<ProductoCantidad> v);
-	
+		
 	/// Agregar al archivo
 	void AddVenta();
 	

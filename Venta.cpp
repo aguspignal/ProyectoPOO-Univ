@@ -89,7 +89,7 @@ void Venta::AddVenta(){
 	ofstream archi("ventas.bin",ios::binary|ios::out|ios::app);
 	
 	RegistroVenta reg;
-	reg.id = this->id;
+	reg.id = id;
 	reg.id_cliente = id_cliente;
 	reg.total = total;
 	

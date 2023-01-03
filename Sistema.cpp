@@ -8,7 +8,7 @@ Sistema::Sistema(){
 	CargarDetallesVenta();
 }
 
-/// -- Cargar datos desde los archivos
+/// -- CARGAR Productos
 void Sistema::CargarProductos(){
 	ifstream archi("productos.bin",ios::binary|ios::in|ios::ate);
 
@@ -27,6 +27,7 @@ void Sistema::CargarProductos(){
 	archi.close();
 }
 
+/// -- CARGAR Clientes
 void Sistema::CargarClientes(){
 	ifstream archi("clientes.bin",ios::binary|ios::in|ios::ate);
 	
@@ -43,6 +44,7 @@ void Sistema::CargarClientes(){
 	}
 }
 
+/// -- CARGAR Ventas
 void Sistema::CargarVentas(){
 	ifstream archi("ventas.bin",ios::binary|ios::in|ios::ate);
 	
@@ -61,6 +63,7 @@ void Sistema::CargarVentas(){
 	archi.close();
 }
 
+/// -- CARGAR Detalles de Venta
 void Sistema::CargarDetallesVenta(){
 	ifstream archi("ventasdetalle.bin",ios::binary|ios::in|ios::ate);
 	
@@ -81,7 +84,8 @@ void Sistema::CargarDetallesVenta(){
 	archi.close();
 }
 
-/// -- Actualizar los archivos 
+
+/// -- ACTUALIZAR Productos
 void Sistema::ActualizarProductos(){
 	ofstream archi("productos.bin",ios::binary|ios::trunc);
 	
@@ -97,6 +101,7 @@ void Sistema::ActualizarProductos(){
 	archi.close();
 }
 
+/// ACTUALIZAR Clientes
 void Sistema::ActualizarClientes(){
 	ofstream archi("clientes.bin",ios::binary|ios::trunc);
 	
@@ -111,6 +116,7 @@ void Sistema::ActualizarClientes(){
 	archi.close();
 }
 
+/// ACTUALIZAR Ventas
 void Sistema::ActualizarVentas(){
 	ofstream archi("ventas.bin",ios::binary|ios::trunc);
 	
@@ -125,12 +131,12 @@ void Sistema::ActualizarVentas(){
 	archi.close();
 }
 
+/// ACTUALIZAR Detalles de Venta
 void Sistema::ActualizarDetallesVenta(){
 	ofstream archi("ventasdetalle.bin",ios::binary|ios::trunc);
 	
 	RegistroVentaDetalle reg;
 	for(int i=0; i<detallesventa.size(); i++){
-
 		reg.id = detallesventa[i].GetID();
 		reg.id_venta = detallesventa[i].GetIDVenta();
 		reg.cant = detallesventa[i].GetCantidad();
@@ -147,7 +153,43 @@ void Sistema::ActualizarDetallesVenta(){
 	archi.close();
 }
 
-/// -- Eliminar Producto 
+
+/// -- GUARDAR Producto
+void Sistema::GuardarProducto(Producto p){
+	productos.push_back(p);
+	ActualizarProductos();
+}
+
+/// -- GUARDAR Cliente
+void Sistema::GuardarCliente(Cliente c){
+	clientes.push_back(c);
+	ActualizarClientes();
+}
+
+/// -- GUARDAR Venta
+void Sistema::GuardarVenta(Venta v){
+	ventas.push_back(v);
+	ActualizarVentas();
+
+	// modifica stock
+	vector<VentaDetalle> detalles = GetDetallesByIDVenta(v.GetID());
+	for(int i=0; i<detalles.size(); i++){
+		Producto prod = detalles[i].GetProducto();
+		
+		int newStock = prod.GetStock() - detalles[i].GetCantidad();
+		
+		ModificarProducto(prod.GetID(),prod.GetDescripcion(),prod.GetPrecio(),newStock);
+	}
+}
+
+/// -- GUARDAR Detalle Venta
+void Sistema::GuardarDetalleVenta(VentaDetalle vdetalle){
+	detallesventa.push_back(vdetalle);
+	ActualizarDetallesVenta();
+}
+
+
+/// -- ELIMINAR Producto 
 void Sistema::DeleteProducto(int id){
 	for(int i=0; i<productos.size(); i++){
 		
@@ -158,7 +200,7 @@ void Sistema::DeleteProducto(int id){
 	ActualizarProductos();
 }
 
-/// -- Eliminar Cliente 
+/// -- ELIMINAR Cliente 
 void Sistema::DeleteCliente(int id){
 	for(int i=0; i<clientes.size(); i++){
 		
@@ -169,7 +211,7 @@ void Sistema::DeleteCliente(int id){
 	ActualizarClientes();
 }
 
-/// -- Eliminar Venta
+/// -- ELIMINAR Venta
 void Sistema::DeleteVenta(int id){
 	for(int i=0; i<ventas.size(); i++){
 		
@@ -180,40 +222,31 @@ void Sistema::DeleteVenta(int id){
 	ActualizarVentas();
 }
 
-/// -- Modificar Producto
+
+/// -- MODIFICAR Producto
 void Sistema::ModificarProducto(int id, string descripcion, float precio, int stock){
 	for(int i=0; i<productos.size(); i++){
 		if(productos[i].GetID() == id){
-			if(descripcion != "none"){
-				productos[i].SetDescripcion(descripcion);
-			}
-			if(precio != -1){
-				productos[i].SetPrecio(precio);
-			}
-			if(stock != -1){
-				productos[i].SetStock(stock);
-			}
+			productos[i].SetDescripcion(descripcion);
+			productos[i].SetPrecio(precio);
+			productos[i].SetStock(stock);
 		}
 	}
 	ActualizarProductos();
 }
 
-/// -- Modificar Cliente 
+/// -- MODIFICAR Cliente 
 void Sistema::ModificarCliente(int id, string nombre, int dni){
 	for(int i=0; i<clientes.size(); i++){
 		if(clientes[i].GetID() == id){
-			if(nombre != "none"){
-				clientes[i].SetNombre(nombre);
-			}
-			if(dni != -1){
-				clientes[i].SetDNI(dni);
-			}
+			clientes[i].SetNombre(nombre);
+			clientes[i].SetDNI(dni);
 		}
 	}
 	ActualizarClientes();
 }
 
-/// -- Buscar Producto 
+/// -- BUSCAR Producto 
 Producto &Sistema::GetProducto(int i){
 	return productos[i];
 }
@@ -229,7 +262,7 @@ Producto Sistema::GetProductoByID(int id){
 	return prod;
 }
 
-/// -- Buscar Cliente
+/// -- BUSCAR Cliente
 Cliente &Sistema::GetCliente(int i){
 	return clientes[i];
 }
@@ -242,7 +275,7 @@ Cliente Sistema::GetClienteByID(int id){
 	}
 }
 
-/// -- Buscar Venta
+/// -- BUSCAR Venta
 Venta &Sistema::GetVenta(int i){
 	return ventas[i];
 }
@@ -258,7 +291,7 @@ Venta Sistema::GetVentaByID(int id){
 	return venta;
 }
 
-/// -- Buscar Detalles Venta
+/// -- BUSCAR Detalles Venta
 vector<VentaDetalle> Sistema::GetDetallesByIDVenta(int id_venta){
 	vector<VentaDetalle> v;
 	
