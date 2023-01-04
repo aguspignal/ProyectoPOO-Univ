@@ -48,20 +48,21 @@ public:
 	
 	/// Devolviendo cosas
 	Producto &GetProducto(int i);
-	Producto GetProductoByID(int id);
+	Producto &GetProductoByID(int id);
 	
 	Cliente &GetCliente(int i);
-	Cliente GetClienteByID(int id);
+	Cliente &GetClienteByID(int id);
 	
 	Venta &GetVenta(int i);
-	Venta GetVentaByID(int id);
+	Venta &GetVentaByID(int id);
 	
-	vector<VentaDetalle> GetDetallesByIDVenta(int id_venta);
+	VentaDetalle &GetDetalleVenta(int i);
+	vector<VentaDetalle> &GetDetallesByIDVenta(int id_venta);
 	
-	int GetProductosSize();     // (Sizes de los vectores, no del archivo)
-	int GetClientesSize();      //
-	int GetVentasSize();        //
-	int GetDetallesVentaSize(); //
+	int GetProductosSize();
+	int GetClientesSize();      
+	int GetVentasSize();        
+	int GetDetallesVentaSize(); 
 	
 	~Sistema(){};
 };

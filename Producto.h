@@ -43,7 +43,12 @@ public:
 	void AddProducto();
 	
 	~Producto(){};
+	
+	bool operator==(Producto p){
+		return this->id == p.GetID();
+	}
 };
+
 
 
 #endif

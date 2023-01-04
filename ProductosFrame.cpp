@@ -1,7 +1,7 @@
 #include "ProductosFrame.h"
 #include "AddProductoFrame.h"
 #include "string_conv.h"
-#include "ConfirmEliminar.h"
+#include "Confirm.h"
 #include "EditProducto.h"
 
 ProductosFrame::ProductosFrame(wxWindow *parent, Sistema *m_sistema) 
@@ -33,7 +33,7 @@ void ProductosFrame::DisplayAddProducto( wxCommandEvent& event )  {
 }
 
 void ProductosFrame::EliminarProducto( wxCommandEvent& event )  {
-	ConfirmEliminar *win = new ConfirmEliminar(this);
+	Confirm *win = new Confirm(this);
 	if(win->ShowModal() == 1){
 		int row = gridProductos->GetGridCursorRow();
 		string str = wx_to_std(gridProductos->GetCellValue(row,0));

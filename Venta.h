@@ -22,13 +22,10 @@ class Venta {
 private:
 	int id;
 	int id_cliente;
-	vector<VentaDetalle> detalles;
 	float total;
 	
 public:
 	Venta();
-	Venta(int idCliente, vector<ProductoCantidad> productos);
-	Venta(int id, int idCliente, vector<ProductoCantidad> productos);
 	Venta(int id, int id_cliente, float total);
 	
 	/// ID

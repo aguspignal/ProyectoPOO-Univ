@@ -1,14 +1,15 @@
 #include "VentaDetalle.h"
 #include <fstream>
 #include <cstring>
+#include "Sistema.h"
 using namespace std;
 	
-VentaDetalle::VentaDetalle(int idVenta, Producto prod, int cant){
+VentaDetalle::VentaDetalle(int idVenta, int m_cantidad, Producto m_producto){
 	this->id = GetLastId()+1;
 	this->id_venta = idVenta;
-	this->producto = prod;
-	this->cantidad = cant;
-	this->subtotal = prod.GetPrecio()*cant;
+	this->producto = m_producto;
+	this->cantidad = m_cantidad;
+	this->subtotal = m_producto.GetPrecio()*m_cantidad;
 }
 
 VentaDetalle::VentaDetalle(int m_id, int idVenta, int m_cantidad, float m_subtotal, Producto m_producto){
@@ -84,8 +85,9 @@ void VentaDetalle::AddVentaDetalle(){
 	
 	archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
 	archi.close();
+	
+	Sistema sist;
+	int newstock = producto.GetStock() - cantidad;
+	sist.ModificarProducto(producto.GetID(), producto.GetDescripcion(), producto.GetPrecio(), newstock);
 }
-
-
-
 

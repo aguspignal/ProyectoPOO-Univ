@@ -9,24 +9,25 @@
 
 #include <wx/artprov.h>
 #include <wx/xrc/xmlres.h>
-#include <wx/button.h>
-#include <wx/string.h>
-#include <wx/bitmap.h>
-#include <wx/image.h>
-#include <wx/icon.h>
+#include <wx/panel.h>
 #include <wx/gdicmn.h>
 #include <wx/font.h>
 #include <wx/colour.h>
 #include <wx/settings.h>
+#include <wx/string.h>
+#include <wx/stattext.h>
+#include <wx/button.h>
+#include <wx/bitmap.h>
+#include <wx/image.h>
+#include <wx/icon.h>
 #include <wx/sizer.h>
 #include <wx/frame.h>
-#include <wx/srchctrl.h>
-#include <wx/grid.h>
-#include <wx/panel.h>
 #include <wx/textctrl.h>
-#include <wx/stattext.h>
+#include <wx/grid.h>
 #include <wx/dialog.h>
 #include <wx/spinctrl.h>
+#include <wx/statbox.h>
+#include <wx/srchctrl.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -39,9 +40,13 @@ class BaseHomepage : public wxFrame
 	private:
 
 	protected:
+		wxPanel* m_panel17;
+		wxStaticText* m_staticText34;
+		wxPanel* m_panel24;
 		wxButton* btn_Productos;
 		wxButton* btn_Clientes;
 		wxButton* btn_Ventas;
+		wxPanel* m_panel18;
 
 		// Virtual event handlers, override them in your derived class
 		virtual void DisplayProductsFrmae( wxCommandEvent& event ) { event.Skip(); }
@@ -51,7 +56,7 @@ class BaseHomepage : public wxFrame
 
 	public:
 
-		BaseHomepage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 753,466 ), long style = wxDEFAULT_FRAME_STYLE|wxMAXIMIZE|wxTAB_TRAVERSAL );
+		BaseHomepage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 700,500 ), long style = wxDEFAULT_FRAME_STYLE|wxMAXIMIZE|wxTAB_TRAVERSAL );
 
 		~BaseHomepage();
 
@@ -66,7 +71,9 @@ class BaseProductosFrame : public wxFrame
 
 	protected:
 		wxButton* btn_BackHome;
-		wxSearchCtrl* searchbar_Productos;
+		wxTextCtrl* input_BuscarProducto;
+		wxButton* btn_BuscarProducto;
+		wxStaticText* txt_Productos;
 		wxGrid* gridProductos;
 		wxButton* btn_AddProducto;
 		wxButton* btn_DeleteProducto;
@@ -82,7 +89,7 @@ class BaseProductosFrame : public wxFrame
 
 	public:
 
-		BaseProductosFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 954,733 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		BaseProductosFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1000,700 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~BaseProductosFrame();
 
@@ -97,14 +104,15 @@ class BaseClientesFrame : public wxFrame
 
 	protected:
 		wxButton* btn_BackHome;
-		wxTextCtrl* input_BuscarProducto;
+		wxTextCtrl* input_BuscarCliente;
 		wxButton* btn_BuscarProducto;
+		wxStaticText* txt_Clientes;
 		wxGrid* gridClientes;
 		wxButton* btn_AddCliente;
 		wxButton* btn_DeleteCliente;
 		wxButton* btn_EditCliente;
 		wxButton* btn_VentasCliente;
-		wxStaticText* txt_Copyright;
+		wxPanel* m_panel25;
 
 		// Virtual event handlers, override them in your derived class
 		virtual void BackToHome( wxCommandEvent& event ) { event.Skip(); }
@@ -115,16 +123,47 @@ class BaseClientesFrame : public wxFrame
 
 	public:
 
-		BaseClientesFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1060,772 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		BaseClientesFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1100,750 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~BaseClientesFrame();
 
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Class BaseConfirmEliminar
+/// Class BaseVentasFrame
 ///////////////////////////////////////////////////////////////////////////////
-class BaseConfirmEliminar : public wxDialog
+class BaseVentasFrame : public wxFrame
+{
+	private:
+
+	protected:
+		wxStaticText* txt_Ventas;
+		wxGrid* m_grid3;
+		wxStaticText* txt_Detalle;
+		wxGrid* m_grid4;
+		wxButton* btn_AddVenta;
+		wxButton* btn_VerDetalle;
+		wxButton* btn_DeleteVenta;
+		wxPanel* m_panel23;
+
+		// Virtual event handlers, override them in your derived class
+		virtual void DisplayAddVenta( wxCommandEvent& event ) { event.Skip(); }
+		virtual void DisplayDetalleVenta( wxCommandEvent& event ) { event.Skip(); }
+		virtual void DisplayConfirmation( wxCommandEvent& event ) { event.Skip(); }
+
+
+	public:
+
+		BaseVentasFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 950,550 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+
+		~BaseVentasFrame();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class BaseConfirm
+///////////////////////////////////////////////////////////////////////////////
+class BaseConfirm : public wxDialog
 {
 	private:
 
@@ -140,9 +179,9 @@ class BaseConfirmEliminar : public wxDialog
 
 	public:
 
-		BaseConfirmEliminar( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE );
+		BaseConfirm( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE );
 
-		~BaseConfirmEliminar();
+		~BaseConfirm();
 
 };
 
@@ -154,13 +193,14 @@ class BaseAddProductoFrame : public wxDialog
 	private:
 
 	protected:
-		wxStaticText* txt_AgregarProducto;
+		wxPanel* m_panel8;
 		wxStaticText* txt_Descripcion;
 		wxTextCtrl* input_Descripcion;
 		wxStaticText* txt_Precio;
 		wxSpinCtrlDouble* input_Precio;
 		wxStaticText* txt_Stock;
 		wxSpinCtrl* input_Stock;
+		wxPanel* m_panel9;
 		wxButton* btn_Agregar;
 		wxButton* btn_Cancelar;
 
@@ -171,7 +211,7 @@ class BaseAddProductoFrame : public wxDialog
 
 	public:
 
-		BaseAddProductoFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Agregar producto nuevo"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 282,245 ), long style = wxDEFAULT_DIALOG_STYLE );
+		BaseAddProductoFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 300,300 ), long style = wxDEFAULT_DIALOG_STYLE );
 
 		~BaseAddProductoFrame();
 
@@ -185,13 +225,14 @@ class BaseEditProducto : public wxDialog
 	private:
 
 	protected:
-		wxStaticText* txt_EditarProducto;
+		wxPanel* m_panel6;
 		wxStaticText* txt_Descripcion;
 		wxTextCtrl* input_Descripcion;
 		wxStaticText* txt_Precio;
 		wxSpinCtrlDouble* input_Precio;
 		wxStaticText* txt_Stock;
 		wxSpinCtrl* input_Stock;
+		wxPanel* m_panel7;
 		wxButton* btn_Guardar;
 		wxButton* btn_Cancelar;
 
@@ -202,7 +243,7 @@ class BaseEditProducto : public wxDialog
 
 	public:
 
-		BaseEditProducto( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Editar producto"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 268,245 ), long style = wxDEFAULT_DIALOG_STYLE );
+		BaseEditProducto( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 300,300 ), long style = wxDEFAULT_DIALOG_STYLE );
 
 		~BaseEditProducto();
 
@@ -216,11 +257,12 @@ class BaseAddClienteFrame : public wxDialog
 	private:
 
 	protected:
-		wxStaticText* txt_AgregarCliente;
+		wxPanel* m_panel3;
 		wxStaticText* txt_Nombre;
 		wxTextCtrl* input_Nombre;
 		wxStaticText* txt_DNI;
 		wxSpinCtrl* input_DNI;
+		wxPanel* m_panel2;
 		wxButton* btn_Agregar;
 		wxButton* btn_Cancelar;
 
@@ -231,7 +273,7 @@ class BaseAddClienteFrame : public wxDialog
 
 	public:
 
-		BaseAddClienteFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Agregar cliente nuevo"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 282,245 ), long style = wxDEFAULT_DIALOG_STYLE );
+		BaseAddClienteFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 300,250 ), long style = wxDEFAULT_DIALOG_STYLE );
 
 		~BaseAddClienteFrame();
 
@@ -245,11 +287,12 @@ class BaseEditCliente : public wxDialog
 	private:
 
 	protected:
-		wxStaticText* txt_EditarCliente;
+		wxPanel* m_panel4;
 		wxStaticText* txt_Nombre;
 		wxTextCtrl* input_Nombre;
-		wxStaticText* txt_Stock;
+		wxStaticText* txt_DNI;
 		wxSpinCtrl* input_DNI;
+		wxPanel* m_panel5;
 		wxButton* btn_Guardar;
 		wxButton* btn_Cancelar;
 
@@ -260,9 +303,41 @@ class BaseEditCliente : public wxDialog
 
 	public:
 
-		BaseEditCliente( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Editar cliente"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 268,213 ), long style = wxDEFAULT_DIALOG_STYLE );
+		BaseEditCliente( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 300,250 ), long style = wxDEFAULT_DIALOG_STYLE );
 
 		~BaseEditCliente();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class BaseAddVenta
+///////////////////////////////////////////////////////////////////////////////
+class BaseAddVenta : public wxDialog
+{
+	private:
+
+	protected:
+		wxSearchCtrl* m_searchCtrl2;
+		wxGrid* m_grid5;
+		wxStaticText* m_staticText29;
+		wxTextCtrl* m_textCtrl10;
+		wxStaticText* m_staticText30;
+		wxTextCtrl* m_textCtrl11;
+		wxStaticText* m_staticText31;
+		wxSpinCtrl* m_spinCtrl5;
+		wxButton* btn_Agregar;
+		wxButton* btn_Confirmar;
+		wxButton* btn_Cancelar;
+
+		// Virtual event handlers, override them in your derived class
+		virtual void DisplayConfirmar( wxCommandEvent& event ) { event.Skip(); }
+
+
+	public:
+
+		BaseAddVenta( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 730,500 ), long style = wxDEFAULT_DIALOG_STYLE );
+
+		~BaseAddVenta();
 
 };
 

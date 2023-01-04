@@ -8,29 +8,6 @@ Venta::Venta(){
 	this->total = 0;
 }
 
-Venta::Venta(int idCliente, vector<ProductoCantidad> productos){
-	this->id = GetLastID()+1;
-	this->id_cliente = idCliente;
-	
-	for(int i=0; i<productos.size(); i++){
-		VentaDetalle vdetalle(this->id, productos[i].prod, productos[i].cant);
-		vdetalle.AddVentaDetalle();
-	}
-	
-	this->total = CalcularTotal(productos);
-}
-
-Venta::Venta(int m_id, int idCliente, vector<ProductoCantidad> productos){
-	this->id = m_id;
-	this->id_cliente = idCliente;
-	
-	for(int i=0; i<productos.size(); i++){
-		VentaDetalle vdetalle(this->id, productos[i].prod, productos[i].cant);
-		vdetalle.AddVentaDetalle();
-	}
-	this->total = CalcularTotal(productos);
-}
-
 Venta::Venta(int m_id, int idCliente, float m_total){
 	this->id = m_id;
 	this->id_cliente = idCliente;
@@ -64,11 +41,6 @@ int Venta::GetLastID(){
 	
 	archi.close();
 	return id;
-}
-
-/// -- Detalles
-int Venta::GetDetallesSize(){
-	return detalles.size();
 }
 
 /// -- Total

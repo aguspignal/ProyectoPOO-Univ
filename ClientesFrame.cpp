@@ -1,6 +1,6 @@
 #include "ClientesFrame.h"
 #include "AddClienteFrame.h"
-#include "ConfirmEliminar.h"
+#include "Confirm.h"
 #include "EditCliente.h"
 #include "string_conv.h"
 
@@ -39,7 +39,7 @@ void ClientesFrame::DisplayAddCliente( wxCommandEvent& event )  {
 }
 
 void ClientesFrame::EliminarCliente( wxCommandEvent& event )  {
-	ConfirmEliminar *win = new ConfirmEliminar(this);
+	Confirm *win = new Confirm(this);
 	if(win->ShowModal() == 1){
 		int row = gridClientes->GetGridCursorRow();
 		string str = wx_to_std(gridClientes->GetCellValue(row,0));

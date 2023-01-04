@@ -171,6 +171,7 @@ void MostrarVentas(){
 		cout << "\n\nID | ID Cliente\n";
 		cout << sist.GetVenta(i).GetID() <<"    "<< sist.GetVenta(i).GetIDCliente() <<endl;
 		
+		cout<<"a";
 		vector<VentaDetalle> detallesventa = sist.GetDetallesByIDVenta(sist.GetVenta(i).GetID());
 		
 		cout << "ProdID |   Descripcion   | Precio | Cantidad | Stock (Actual) | Subtotal\n";
@@ -189,14 +190,14 @@ void AgregarVenta(){
 	cout << "ID Cliente: ";
 	int id_cliente; cin >> id_cliente;
 	
-	int id;
+	int id_prod;
 	ProductoCantidad ProdCant;
 	vector<ProductoCantidad> articulos;
 	do {
 		cout << "ID Articulo: (0 para terminar)\n";
-		cin >> id;
-		if(id != 0){
-			ProdCant.prod = sist.GetProductoByID(id);
+		cin >> id_prod;
+		if(id_prod != 0){
+			ProdCant.prod = sist.GetProductoByID(id_prod);
 			
 			bool result;
 			do {
@@ -212,13 +213,10 @@ void AgregarVenta(){
 				
 			} while(!result);
 		}
-	} while(id != 0);
+	} while(id_prod != 0);
 	
-	Venta venta(id_cliente, articulos);
-	sist.GuardarVenta(venta);
+	
 }
-
-
 	
 /// -- Menu 
 void DisplayMainMenu()

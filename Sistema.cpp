@@ -170,16 +170,6 @@ void Sistema::GuardarCliente(Cliente c){
 void Sistema::GuardarVenta(Venta v){
 	ventas.push_back(v);
 	ActualizarVentas();
-
-	// modifica stock
-	vector<VentaDetalle> detalles = GetDetallesByIDVenta(v.GetID());
-	for(int i=0; i<detalles.size(); i++){
-		Producto prod = detalles[i].GetProducto();
-		
-		int newStock = prod.GetStock() - detalles[i].GetCantidad();
-		
-		ModificarProducto(prod.GetID(),prod.GetDescripcion(),prod.GetPrecio(),newStock);
-	}
 }
 
 /// -- GUARDAR Detalle Venta
@@ -251,7 +241,7 @@ Producto &Sistema::GetProducto(int i){
 	return productos[i];
 }
 
-Producto Sistema::GetProductoByID(int id){
+Producto &Sistema::GetProductoByID(int id){
 	for(int i=0; i<productos.size(); i++){
 		if(productos[i].GetID() == id){
 			return productos[i];
@@ -267,7 +257,7 @@ Cliente &Sistema::GetCliente(int i){
 	return clientes[i];
 }
 
-Cliente Sistema::GetClienteByID(int id){
+Cliente &Sistema::GetClienteByID(int id){
 	for(int i=0; i<clientes.size(); i++){
 		if(clientes[i].GetID() == id){
 			return clientes[i];
@@ -280,7 +270,7 @@ Venta &Sistema::GetVenta(int i){
 	return ventas[i];
 }
 	
-Venta Sistema::GetVentaByID(int id){
+Venta &Sistema::GetVentaByID(int id){
 	for(int i=0; i<ventas.size(); i++){
 		if(ventas[i].GetID() == id){
 			return ventas[i];
@@ -292,7 +282,11 @@ Venta Sistema::GetVentaByID(int id){
 }
 
 /// -- BUSCAR Detalles Venta
-vector<VentaDetalle> Sistema::GetDetallesByIDVenta(int id_venta){
+VentaDetalle &Sistema::GetDetalleVenta(int i){
+	return detallesventa[i];
+}
+
+vector<VentaDetalle> &Sistema::GetDetallesByIDVenta(int id_venta){
 	vector<VentaDetalle> v;
 	
 	for(int i=0; i<detallesventa.size(); i++){
