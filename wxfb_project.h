@@ -24,9 +24,9 @@
 #include <wx/frame.h>
 #include <wx/textctrl.h>
 #include <wx/grid.h>
-#include <wx/dialog.h>
 #include <wx/spinctrl.h>
 #include <wx/statbox.h>
+#include <wx/dialog.h>
 #include <wx/srchctrl.h>
 
 ///////////////////////////////////////////////////////////////////////////
@@ -157,31 +157,6 @@ class BaseVentasFrame : public wxFrame
 		BaseVentasFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1125,750 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~BaseVentasFrame();
-
-};
-
-///////////////////////////////////////////////////////////////////////////////
-/// Class BaseConfirm
-///////////////////////////////////////////////////////////////////////////////
-class BaseConfirm : public wxDialog
-{
-	private:
-
-	protected:
-		wxStaticText* txt_Confirmar;
-		wxButton* btn_Confirm;
-		wxButton* btn_No;
-
-		// Virtual event handlers, override them in your derived class
-		virtual void ClickSI( wxCommandEvent& event ) { event.Skip(); }
-		virtual void ClickNO( wxCommandEvent& event ) { event.Skip(); }
-
-
-	public:
-
-		BaseConfirm( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE );
-
-		~BaseConfirm();
 
 };
 

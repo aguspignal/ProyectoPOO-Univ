@@ -1,8 +1,8 @@
 #include "ProductosFrame.h"
 #include "AddProductoFrame.h"
 #include "string_conv.h"
-#include "Confirm.h"
 #include "EditProducto.h"
+#include <wx/msgdlg.h>
 
 ProductosFrame::ProductosFrame(wxWindow *parent, Sistema *m_sistema) 
 	: BaseProductosFrame(parent), sistema(m_sistema) { 
@@ -13,8 +13,9 @@ ProductosFrame::ProductosFrame(wxWindow *parent, Sistema *m_sistema)
 ProductosFrame::~ProductosFrame() { }
 
 void ProductosFrame::ActualizarGrid(){
-	int numberRows = gridProductos->GetNumberRows();
-	gridProductos->DeleteRows(0,numberRows);
+	if(gridProductos->GetNumberRows() != 0){
+		gridProductos->DeleteRows(0,gridProductos->GetNumberRows());
+	}
 	
 	for(int i=0; i<sistema->GetProductosSize(); i++){
 		gridProductos->AppendRows();
@@ -33,15 +34,21 @@ void ProductosFrame::DisplayAddProducto( wxCommandEvent& event )  {
 }
 
 void ProductosFrame::EliminarProducto( wxCommandEvent& event )  {
-	Confirm *win = new Confirm(this);
-	if(win->ShowModal() == 1){
-		int row = gridProductos->GetGridCursorRow();
-		string str = wx_to_std(gridProductos->GetCellValue(row,0));
-		int id = stoi(str); // str to int
-		sistema->DeleteProducto(id);
+	if(gridProductos->GetNumberRows() == 0){
+		wxMessageBox("No hay productos","Error",wxOK|wxICON_ERROR);
 		
-		ActualizarGrid();
+	} else {
+		int choice = wxMessageBox("¿Esta seguro?","Advertencia",wxYES_NO|wxICON_QUESTION);
+		if(choice == wxYES){
+			int row = gridProductos->GetGridCursorRow();
+			string str = wx_to_std(gridProductos->GetCellValue(row,0));
+			int id = stoi(str); // str to int
+			sistema->DeleteProducto(id);
+			
+			ActualizarGrid();
+		}
 	}
+
 }
 
 void ProductosFrame::DisplayEditarProducto( wxCommandEvent& event )  {

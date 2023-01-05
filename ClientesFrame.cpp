@@ -1,8 +1,8 @@
 #include "ClientesFrame.h"
 #include "AddClienteFrame.h"
-#include "Confirm.h"
 #include "EditCliente.h"
 #include "string_conv.h"
+#include <wx/msgdlg.h>
 
 ClientesFrame::ClientesFrame(wxWindow *parent, Sistema *m_sistema) 
 	: BaseClientesFrame(parent), sistema(m_sistema) {
@@ -17,8 +17,9 @@ void ClientesFrame::BackToHome( wxCommandEvent& event )  {
 }
 
 void ClientesFrame::ActualizarGrid(){
-	int numberRows = gridClientes->GetNumberRows();
-	gridClientes->DeleteRows(0,numberRows);
+	if(gridClientes->GetNumberRows() != 0){
+		gridClientes->DeleteRows(0,gridClientes->GetNumberRows());
+	}
 	
 	for(int i=0; i<sistema->GetClientesSize(); i++){
 		gridClientes->AppendRows();
@@ -39,14 +40,19 @@ void ClientesFrame::DisplayAddCliente( wxCommandEvent& event )  {
 }
 
 void ClientesFrame::EliminarCliente( wxCommandEvent& event )  {
-	Confirm *win = new Confirm(this);
-	if(win->ShowModal() == 1){
-		int row = gridClientes->GetGridCursorRow();
-		string str = wx_to_std(gridClientes->GetCellValue(row,0));
-		int id = stoi(str); // str to int
-		sistema->DeleteCliente(id);
+	if(gridClientes->GetNumberRows() == 0){
+		wxMessageBox("No hay clientes","Error",wxOK|wxICON_ERROR);
 		
-		ActualizarGrid();
+	} else {
+		int choice = wxMessageBox("¿Esta seguro?","Advertencia",wxYES_NO|wxICON_QUESTION);
+		if(choice == wxYES){
+			int row = gridClientes->GetGridCursorRow();
+			string str = wx_to_std(gridClientes->GetCellValue(row,0));
+			int id = stoi(str); // str to int
+			sistema->DeleteCliente(id);
+			
+			ActualizarGrid();
+		}
 	}
 }
 

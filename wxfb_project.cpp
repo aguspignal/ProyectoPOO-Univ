@@ -162,15 +162,15 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 
 	btn_AddProducto = new wxButton( this, wxID_ANY, wxT("Agregar Producto"), wxDefaultPosition, wxDefaultSize, 0 );
 	btn_AddProducto->SetLabelMarkup( wxT("Agregar Producto") );
-	bSizer5->Add( btn_AddProducto, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
+	bSizer5->Add( btn_AddProducto, 0, wxALL|wxEXPAND, 5 );
 
 	btn_DeleteProducto = new wxButton( this, wxID_ANY, wxT("Eliminar Producto"), wxDefaultPosition, wxDefaultSize, 0 );
 	btn_DeleteProducto->SetLabelMarkup( wxT("Eliminar Producto") );
-	bSizer5->Add( btn_DeleteProducto, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
+	bSizer5->Add( btn_DeleteProducto, 0, wxALL|wxEXPAND, 5 );
 
 	btn_EditProducto = new wxButton( this, wxID_ANY, wxT("Editar"), wxDefaultPosition, wxDefaultSize, 0 );
 	btn_EditProducto->SetLabelMarkup( wxT("Editar") );
-	bSizer5->Add( btn_EditProducto, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
+	bSizer5->Add( btn_EditProducto, 0, wxALL|wxEXPAND, 5 );
 
 
 	bSizer5->Add( 0, 0, 1, wxEXPAND, 5 );
@@ -294,19 +294,19 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 
 	btn_AddCliente = new wxButton( this, wxID_ANY, wxT("Agregar cliente"), wxDefaultPosition, wxDefaultSize, 0 );
 	btn_AddCliente->SetLabelMarkup( wxT("Agregar cliente") );
-	bSizer5->Add( btn_AddCliente, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
+	bSizer5->Add( btn_AddCliente, 0, wxALL|wxEXPAND, 5 );
 
 	btn_DeleteCliente = new wxButton( this, wxID_ANY, wxT("Eliminar cliente"), wxDefaultPosition, wxDefaultSize, 0 );
 	btn_DeleteCliente->SetLabelMarkup( wxT("Eliminar cliente") );
-	bSizer5->Add( btn_DeleteCliente, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
+	bSizer5->Add( btn_DeleteCliente, 0, wxALL|wxEXPAND, 5 );
 
 	btn_EditCliente = new wxButton( this, wxID_ANY, wxT("Editar"), wxDefaultPosition, wxDefaultSize, 0 );
 	btn_EditCliente->SetLabelMarkup( wxT("Editar") );
-	bSizer5->Add( btn_EditCliente, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
+	bSizer5->Add( btn_EditCliente, 0, wxALL|wxEXPAND, 5 );
 
 	btn_VentasCliente = new wxButton( this, wxID_ANY, wxT("Ver ventas del cliente"), wxDefaultPosition, wxDefaultSize, 0 );
 	btn_VentasCliente->SetLabelMarkup( wxT("Ver ventas del cliente") );
-	bSizer5->Add( btn_VentasCliente, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
+	bSizer5->Add( btn_VentasCliente, 0, wxALL|wxEXPAND, 5 );
 
 
 	bSizer5->Add( 0, 0, 1, wxEXPAND, 5 );
@@ -489,55 +489,6 @@ BaseVentasFrame::~BaseVentasFrame()
 	btn_AddVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayAddVenta ), NULL, this );
 	btn_VerDetalle->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayDetalleVenta ), NULL, this );
 	btn_DeleteVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayConfirmation ), NULL, this );
-
-}
-
-BaseConfirm::BaseConfirm( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
-{
-	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
-
-	wxBoxSizer* bSizer22;
-	bSizer22 = new wxBoxSizer( wxVERTICAL );
-
-	txt_Confirmar = new wxStaticText( this, wxID_ANY, wxT("Estas seguro?"), wxDefaultPosition, wxDefaultSize, 0 );
-	txt_Confirmar->Wrap( -1 );
-	bSizer22->Add( txt_Confirmar, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
-
-	wxBoxSizer* bSizer23;
-	bSizer23 = new wxBoxSizer( wxHORIZONTAL );
-
-
-	bSizer23->Add( 0, 0, 1, wxEXPAND, 5 );
-
-	btn_Confirm = new wxButton( this, wxID_ANY, wxT("Si"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer23->Add( btn_Confirm, 0, wxALL, 5 );
-
-	btn_No = new wxButton( this, wxID_ANY, wxT("No"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer23->Add( btn_No, 0, wxALL, 5 );
-
-
-	bSizer23->Add( 0, 0, 1, wxEXPAND, 5 );
-
-
-	bSizer22->Add( bSizer23, 1, wxALL|wxEXPAND, 5 );
-
-
-	this->SetSizer( bSizer22 );
-	this->Layout();
-	bSizer22->Fit( this );
-
-	this->Centre( wxBOTH );
-
-	// Connect Events
-	btn_Confirm->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseConfirm::ClickSI ), NULL, this );
-	btn_No->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseConfirm::ClickNO ), NULL, this );
-}
-
-BaseConfirm::~BaseConfirm()
-{
-	// Disconnect Events
-	btn_Confirm->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseConfirm::ClickSI ), NULL, this );
-	btn_No->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseConfirm::ClickNO ), NULL, this );
 
 }
 
