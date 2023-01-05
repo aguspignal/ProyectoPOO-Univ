@@ -20,10 +20,11 @@ Venta::Venta(int idCliente, vector<ProductoCantidad> v){
 	}
 }
 
-Venta::Venta(int m_id, int idCliente, float m_total){
+Venta::Venta(int m_id, int idCliente, float m_total, bool modif){
 	this->id = m_id;
 	this->id_cliente = idCliente;
 	this->total = m_total;
+	this->modificada = modif;
 }
 
 /// -- ID
@@ -65,7 +66,7 @@ float Venta::GetTotal() {
 }
 
 void Venta::SetTotal(float m_total){
-	this->total = total;
+	this->total = m_total;
 }
 
 float Venta::CalcularTotal(vector<ProductoCantidad> productos){
@@ -78,6 +79,15 @@ float Venta::CalcularTotal(vector<ProductoCantidad> productos){
 	return suma;
 }
 
+/// -- Bool
+bool Venta::GetModif(){
+	return modificada;
+}
+
+void  Venta::SetModifTrue(){
+	this->modificada = true;
+}
+
 /// -- Agregar al archivo
 void Venta::AddVenta(){
 	ofstream archi("ventas.bin",ios::binary|ios::out|ios::app);
@@ -86,6 +96,7 @@ void Venta::AddVenta(){
 	reg.id = id;
 	reg.id_cliente = id_cliente;
 	reg.total = total;
+	reg.modificada = modificada;
 	
 	archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
 	archi.close();

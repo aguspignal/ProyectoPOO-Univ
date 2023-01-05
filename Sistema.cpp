@@ -56,7 +56,7 @@ void Sistema::CargarVentas(){
 	ventas.clear();
 	for(int i=0; i<cant_ventas; i++){
 		archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
-		Venta venta(reg.id,reg.id_cliente,reg.total);
+		Venta venta(reg.id,reg.id_cliente,reg.total,reg.modificada);
 		
 		ventas.push_back(venta);
 	}
@@ -124,6 +124,7 @@ void Sistema::ActualizarVentas(){
 		reg.id = ventas[i].GetID();
 		reg.id_cliente = ventas[i].GetIDCliente();
 		reg.total = ventas[i].GetTotal();
+		reg.modificada = ventas[i].GetModif();
 		archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
 	}
 	
@@ -256,6 +257,7 @@ void Sistema::ModificarVenta(int id, int id_cliente, float total){
 		if(ventas[i].GetID() == id){
 			ventas[i].SetIDCliente(id_cliente);
 			ventas[i].SetTotal(total);
+			ventas[i].SetModifTrue();
 		}
 	}
 	ActualizarVentas();
@@ -353,7 +355,7 @@ int Sistema::GetVentasSize(){
 //		<< vdetalle.GetSubtotal() <<endl;
 //	return o;
 //}
-//
+
 //void Sistema::MostrarDetalles(){
 //	cout << "ProdID |   Descripcion   | Precio | Cantidad | Subtotal\n";
 //	for(int j=0; j<detallesventa.size(); j++){

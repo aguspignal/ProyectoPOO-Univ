@@ -188,6 +188,9 @@ void MostrarVentas(){
 		for(int j=0; j<detallesventa.size(); j++){
 			cout << detallesventa[j];
 		}
+		if(sist.GetVenta(i).GetModif()){
+			cout<<"\n				      *Venta Editada";
+		}
 	}
 	cout<<endl;
 	system("PAUSE");
@@ -233,14 +236,14 @@ void EditarVenta(){
 	int id; cin>>id;
 	
 	Sistema sist;
-	Venta venta = sist.GetClienteByID(id);
+	Venta venta = sist.GetVentaByID(id);
 	
 	if(venta.GetID() == 0){
 		cout << "Venta no encontrada\n";
 		system("PAUSE");
 	} else {
-		cout << "\n\nID | ID Cliente |  Total = $"<< sist.GetVenta(i).GetTotal() << " |\n";
-		cout << sist.GetVenta(i).GetID() <<"    "<< sist.GetVenta(i).GetIDCliente() <<endl;
+		cout << "\n\nID | ID Cliente |  Total = $"<< venta.GetTotal() << " |\n";
+		cout << venta.GetID() <<"    "<< venta.GetIDCliente() <<endl;
 		
 		vector<VentaDetalle> detallesventa = sist.GetDetallesByIDVenta(venta.GetID());
 		
@@ -249,9 +252,8 @@ void EditarVenta(){
 			cout << detallesventa[j];
 		}
 		
-		cout << "> ID Cliente: ";
+		cout << "\n> ID Cliente: ";
 		int id_cliente; cin>>id_cliente;
-		
 		cout << "> Total: ";
 		float total; cin>>total;
 		

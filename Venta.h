@@ -11,6 +11,7 @@ struct RegistroVenta {
 	int id;
 	int id_cliente;
 	float total;
+	bool modificada = false;
 };
 
 class Venta {
@@ -18,11 +19,12 @@ private:
 	int id;
 	int id_cliente;
 	float total;
+	bool modificada=false;
 	
 public:
 	Venta();
 	Venta(int id_cliente, vector<ProductoCantidad> v);
-	Venta(int id, int id_cliente, float total);
+	Venta(int id, int id_cliente, float total, bool modif);
 	
 	/// ID
 	int GetID();
@@ -32,8 +34,9 @@ public:
 	int GetIDCliente();
 	void SetIDCliente(int id_cliente);
 	
-	/// Detalles
-	int GetDetallesSize();
+	/// Bool
+	bool GetModif();
+	void SetModifTrue();
 	
 	/// Total
 	float GetTotal();
