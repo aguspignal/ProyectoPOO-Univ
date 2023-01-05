@@ -414,7 +414,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	// Columns
 	m_grid4->SetColSize( 0, 100 );
-	m_grid4->SetColSize( 1, 225 );
+	m_grid4->SetColSize( 1, 400 );
 	m_grid4->SetColSize( 2, 75 );
 	m_grid4->SetColSize( 3, 75 );
 	m_grid4->SetColSize( 4, 100 );
@@ -424,8 +424,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 	m_grid4->SetColLabelValue( 1, wxT("Descripcion") );
 	m_grid4->SetColLabelValue( 2, wxT("Precio") );
 	m_grid4->SetColLabelValue( 3, wxT("Cantidad") );
-	m_grid4->SetColLabelValue( 4, wxT("Stock actual") );
-	m_grid4->SetColLabelValue( 5, wxT("Subtotal") );
+	m_grid4->SetColLabelValue( 4, wxT("Subtotal") );
 	m_grid4->SetColLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Rows

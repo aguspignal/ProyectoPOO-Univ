@@ -46,16 +46,17 @@ public:
 	void ModificarProducto(int id, string descripcion, float precio, int stock);
 	void RetirarStockProducto(int id, int cantidad);
 	void ModificarCliente(int id, string nombre, int dni);
+	void ModificarVenta(int id, int id_cliente, float total);
 	
 	/// Devolviendo cosas
 	Producto &GetProducto(int i);
-	Producto &GetProductoByID(int id);
+	Producto GetProductoByID(int id);
 	
 	Cliente &GetCliente(int i);
-	Cliente &GetClienteByID(int id);
+	Cliente GetClienteByID(int id);
 	
 	Venta &GetVenta(int i);
-	Venta &GetVentaByID(int id);
+	Venta GetVentaByID(int id);
 	
 	VentaDetalle &GetDetalleVenta(int i);
 	vector<VentaDetalle> GetDetallesByIDVenta(int id_venta);
@@ -65,7 +66,11 @@ public:
 	int GetVentasSize();        
 	int GetDetallesVentaSize(); 
 	
+	void MostrarDetalles();
+	
 	~Sistema(){};
 };
+
+
 
 #endif

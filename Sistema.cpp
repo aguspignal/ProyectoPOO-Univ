@@ -1,4 +1,5 @@
 #include "Sistema.h"
+#include <iostream>
 using namespace std;
 
 Sistema::Sistema(){
@@ -75,15 +76,7 @@ void Sistema::CargarDetallesVenta(){
 	for(int i=0; i<cant_detalles; i++){
 		archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
 		
-		reg.id = detallesventa[i].GetID();
-		reg.id_venta = detallesventa[i].GetIDVenta();
-		reg.id_producto = detallesventa[i].GetIDProducto();
-		reg.valor_vendido = detallesventa[i].GetValorVendido();
-		reg.cantidad = detallesventa[i].GetCantidad();
-		reg.subtotal = detallesventa[i].GetSubtotal();
-		
-		VentaDetalle vdetalle(reg.id, reg.id_venta, reg.id_producto, reg.valor_vendido, reg.cantidad, reg.subtotal);
-		
+		VentaDetalle vdetalle(reg.id, reg.id_venta, reg.id_producto, reg.cantidad, reg.valor_vendido, reg.subtotal);
 		detallesventa.push_back(vdetalle);
 	}
 	
@@ -146,8 +139,8 @@ void Sistema::ActualizarDetallesVenta(){
 		reg.id = detallesventa[i].GetID();
 		reg.id_venta = detallesventa[i].GetIDVenta();
 		reg.id_producto = detallesventa[i].GetIDProducto();
-		reg.valor_vendido = detallesventa[i].GetValorVendido();
 		reg.cantidad = detallesventa[i].GetCantidad();
+		reg.valor_vendido = detallesventa[i].GetValorVendido();
 		reg.subtotal = detallesventa[i].GetSubtotal();
 		
 		archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
@@ -207,12 +200,19 @@ void Sistema::DeleteCliente(int id){
 /// -- ELIMINAR Venta
 void Sistema::DeleteVenta(int id){
 	for(int i=0; i<ventas.size(); i++){
-		
 		if(ventas[i].GetID() == id){
 			ventas.erase(ventas.begin()+i);
 		}
 	}
+	
+	for(int i=0; i<detallesventa.size(); i++){
+		if(detallesventa[i].GetIDVenta() == id){
+			detallesventa.erase(detallesventa.begin()+i);
+		}
+	}	
+	
 	ActualizarVentas();
+	ActualizarDetallesVenta();
 }
 
 
@@ -250,12 +250,24 @@ void Sistema::ModificarCliente(int id, string nombre, int dni){
 	ActualizarClientes();
 }
 
+/// -- MODIFICAR Venta
+void Sistema::ModificarVenta(int id, int id_cliente, float total){
+	for(int i=0; i<ventas.size(); i++){
+		if(ventas[i].GetID() == id){
+			ventas[i].SetIDCliente(id_cliente);
+			ventas[i].SetTotal(total);
+		}
+	}
+	ActualizarVentas();
+}
+
+
 /// -- BUSCAR Producto 
 Producto &Sistema::GetProducto(int i){
 	return productos[i];
 }
 
-Producto &Sistema::GetProductoByID(int id){
+Producto Sistema::GetProductoByID(int id){
 	for(int i=0; i<productos.size(); i++){
 		if(productos[i].GetID() == id){
 			return productos[i];
@@ -271,7 +283,7 @@ Cliente &Sistema::GetCliente(int i){
 	return clientes[i];
 }
 
-Cliente &Sistema::GetClienteByID(int id){
+Cliente Sistema::GetClienteByID(int id){
 	for(int i=0; i<clientes.size(); i++){
 		if(clientes[i].GetID() == id){
 			return clientes[i];
@@ -284,7 +296,7 @@ Venta &Sistema::GetVenta(int i){
 	return ventas[i];
 }
 	
-Venta &Sistema::GetVentaByID(int id){
+Venta Sistema::GetVentaByID(int id){
 	for(int i=0; i<ventas.size(); i++){
 		if(ventas[i].GetID() == id){
 			return ventas[i];
@@ -324,4 +336,29 @@ int Sistema::GetVentasSize(){
 	return ventas.size();
 }
 
+//ostream &operator<<(ostream &o, VentaDetalle vdetalle){
+//	Sistema sist;
+//	string str;
+//	if(sist.GetProductoByID(vdetalle.GetIDProducto()).GetDescripcion() == "none"){
+//		str = "Producto eliminado";
+//	} else { 
+//		str = sist.GetProductoByID(vdetalle.GetIDProducto()).GetDescripcion(); 
+//	}
+//	
+//	o << vdetalle.GetIDVenta() <<"    "
+//	   << vdetalle.GetIDProducto() <<"     "
+//		<< str <<"   $"
+//		<< vdetalle.GetValorVendido() <<"    "
+//		<< vdetalle.GetCantidad() <<"    "
+//		<< vdetalle.GetSubtotal() <<endl;
+//	return o;
+//}
+//
+//void Sistema::MostrarDetalles(){
+//	cout << "ProdID |   Descripcion   | Precio | Cantidad | Subtotal\n";
+//	for(int j=0; j<detallesventa.size(); j++){
+//		cout << detallesventa[j];
+//	}
+//	system("PAUSE");
+//}
 	

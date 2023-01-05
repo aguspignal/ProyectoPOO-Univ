@@ -35,6 +35,10 @@ int Venta::GetIDCliente(){
 	return id_cliente;
 }
 
+void Venta::SetIDCliente(int id_cliente){
+	this->id_cliente = id_cliente;
+}
+
 int Venta::GetLastID(){
 	int id = 0;
 	ifstream archi("ventas.bin",ios::binary|ios::in|ios::ate);
@@ -58,6 +62,10 @@ int Venta::GetLastID(){
 /// -- Total
 float Venta::GetTotal() {
 	return total;
+}
+
+void Venta::SetTotal(float m_total){
+	this->total = total;
 }
 
 float Venta::CalcularTotal(vector<ProductoCantidad> productos){

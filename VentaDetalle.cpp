@@ -25,7 +25,7 @@ VentaDetalle::VentaDetalle(int idVenta, int m_cantidad, int idProducto, float pr
 	RetirarStock();
 }
 
-VentaDetalle::VentaDetalle(int m_id, int idVenta, int idProducto, float valor_vendido, int m_cantidad, float m_subtotal){
+VentaDetalle::VentaDetalle(int m_id, int idVenta, int idProducto, int m_cantidad, float valor_vendido, float m_subtotal){
 	this->id = m_id;
 	this->id_venta = idVenta;
 	this->id_producto = idProducto;
@@ -105,8 +105,8 @@ void VentaDetalle::AddVentaDetalle(){
 	reg.id = this->id;
 	reg.id_venta = this->id_venta;
 	reg.id_producto = this->id_producto;
-	reg.valor_vendido = this->valor_vendido;
 	reg.cantidad = this->cantidad;
+	reg.valor_vendido = this->valor_vendido;
 	reg.subtotal = this->subtotal;
 	
 	archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));

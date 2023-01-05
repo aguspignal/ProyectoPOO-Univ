@@ -23,9 +23,18 @@ ostream &operator<<(ostream &o, Cliente c){
 }
 ostream &operator<<(ostream &o, VentaDetalle vdetalle){
 	Sistema sist;
-	o << vdetalle.GetIDProducto() <<"     "<< sist.GetProductoByID(vdetalle.GetIDProducto()).GetDescripcion()
-		<<"   $"<< vdetalle.GetValorVendido() <<"    "<< vdetalle.GetCantidad() 
-		<<"    "<< vdetalle.GetSubtotal() <<endl;
+	string str;
+	if(sist.GetProductoByID(vdetalle.GetIDProducto()).GetDescripcion() == "none"){
+		str = "Producto eliminado";
+	} else { 
+		str = sist.GetProductoByID(vdetalle.GetIDProducto()).GetDescripcion(); 
+	}
+	
+	o << vdetalle.GetIDProducto() <<"     "
+		<< str <<"   $"
+		<< vdetalle.GetValorVendido() <<"    "
+		<< vdetalle.GetCantidad() <<"    "
+		<< vdetalle.GetSubtotal() <<endl;
 	return o;
 }
 
@@ -167,9 +176,10 @@ void BorrarCliente(){
 	
 /// -- Venta
 void MostrarVentas(){
-	Sistema sist;
+	Sistema sist; 
+//	sist.MostrarDetalles();
 	for(int i=0; i<sist.GetVentasSize(); i++){
-		cout << "\n\nID | ID Cliente\n";
+		cout << "\n\nID | ID Cliente |  Total = $"<< sist.GetVenta(i).GetTotal() << " |\n";
 		cout << sist.GetVenta(i).GetID() <<"    "<< sist.GetVenta(i).GetIDCliente() <<endl;
 		
 		vector<VentaDetalle> detallesventa = sist.GetDetallesByIDVenta(sist.GetVenta(i).GetID());
@@ -178,7 +188,6 @@ void MostrarVentas(){
 		for(int j=0; j<detallesventa.size(); j++){
 			cout << detallesventa[j];
 		}
-		cout << "\n | Total = " << sist.GetVenta(i).GetTotal()<<" |\n";
 	}
 	cout<<endl;
 	system("PAUSE");
@@ -217,6 +226,45 @@ void AgregarVenta(){
 	
 	Venta venta(id_cliente, articulos);
 	venta.AddVenta();
+}
+	
+void EditarVenta(){
+	cout<<"ID de la venta: ";
+	int id; cin>>id;
+	
+	Sistema sist;
+	Venta venta = sist.GetClienteByID(id);
+	
+	if(venta.GetID() == 0){
+		cout << "Venta no encontrada\n";
+		system("PAUSE");
+	} else {
+		cout << "\n\nID | ID Cliente |  Total = $"<< sist.GetVenta(i).GetTotal() << " |\n";
+		cout << sist.GetVenta(i).GetID() <<"    "<< sist.GetVenta(i).GetIDCliente() <<endl;
+		
+		vector<VentaDetalle> detallesventa = sist.GetDetallesByIDVenta(venta.GetID());
+		
+		cout << "ProdID |   Descripcion   | Precio | Cantidad | Subtotal\n";
+		for(int j=0; j<detallesventa.size(); j++){
+			cout << detallesventa[j];
+		}
+		
+		cout << "> ID Cliente: ";
+		int id_cliente; cin>>id_cliente;
+		
+		cout << "> Total: ";
+		float total; cin>>total;
+		
+		sist.ModificarVenta(id,id_cliente,total);
+	}
+}
+
+void BorrarVenta(){
+	cout<<"ID de la venta: ";
+	int id = GetInput();
+	
+	Sistema sist;
+	sist.DeleteVenta(id);
 }
 	
 /// -- Menu 
@@ -340,10 +388,10 @@ void Ventas()
 			AgregarVenta();
 			break;
 		case 2:
-			cout << "EditarVenta()...";
+			EditarVenta();
 			break;
 		case 3:
-			cout << "BorrarVenta()...";
+			BorrarVenta();
 			break;
 		default:
 			break;

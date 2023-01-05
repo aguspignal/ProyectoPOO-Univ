@@ -30,14 +30,16 @@ public:
 	
 	/// ID Cliente
 	int GetIDCliente();
+	void SetIDCliente(int id_cliente);
 	
 	/// Detalles
 	int GetDetallesSize();
 	
 	/// Total
 	float GetTotal();
+	void SetTotal(float total);
 	float CalcularTotal(vector<ProductoCantidad> v);
-		
+	
 	/// Agregar al archivo
 	void AddVenta();
 	
