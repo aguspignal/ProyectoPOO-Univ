@@ -1,11 +1,23 @@
 #include "Venta.h"
 #include <fstream>
+#include "Sistema.h"
 using namespace std;
 
 Venta::Venta(){
 	this->id = 0;
 	this->id_cliente = 0;
 	this->total = 0;
+}
+
+Venta::Venta(int idCliente, vector<ProductoCantidad> v){
+	this->id = GetLastID()+1;
+	this->id_cliente = idCliente;
+	this->total = CalcularTotal(v);
+	
+	for(int i=0; i<v.size(); i++){
+		VentaDetalle vdetalle(this->id, v[i].cant, v[i].prod.GetID(), v[i].prod.GetPrecio());
+		vdetalle.AddVentaDetalle();
+	}
 }
 
 Venta::Venta(int m_id, int idCliente, float m_total){
@@ -49,9 +61,11 @@ float Venta::GetTotal() {
 }
 
 float Venta::CalcularTotal(vector<ProductoCantidad> productos){
+	Sistema sist;
 	float suma = 0;
 	for(int i=0; i<productos.size(); i++){
-		suma += (productos[i].prod.GetPrecio() * productos[i].cant);
+		float precio = sist.GetProductoByID(productos[i].prod.GetID()).GetPrecio();
+		suma += (precio * productos[i].cant);
 	}
 	return suma;
 }

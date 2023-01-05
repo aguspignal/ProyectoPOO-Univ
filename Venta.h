@@ -13,11 +13,6 @@ struct RegistroVenta {
 	float total;
 };
 
-struct ProductoCantidad {
-	Producto prod;
-	int cant;
-};
-
 class Venta {
 private:
 	int id;
@@ -26,6 +21,7 @@ private:
 	
 public:
 	Venta();
+	Venta(int id_cliente, vector<ProductoCantidad> v);
 	Venta(int id, int id_cliente, float total);
 	
 	/// ID

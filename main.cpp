@@ -22,9 +22,10 @@ ostream &operator<<(ostream &o, Cliente c){
 	return o;
 }
 ostream &operator<<(ostream &o, VentaDetalle vdetalle){
-	o << vdetalle.GetProducto().GetID() <<"     "<< vdetalle.GetProducto().GetDescripcion() 
-		<<"   $"<< vdetalle.GetProducto().GetPrecio() <<"    "<<vdetalle.GetCantidad()
-		<<"    "<< vdetalle.GetProducto().GetStock() <<"     "<<vdetalle.GetSubtotal() <<endl;
+	Sistema sist;
+	o << vdetalle.GetIDProducto() <<"     "<< sist.GetProductoByID(vdetalle.GetIDProducto()).GetDescripcion()
+		<<"   $"<< vdetalle.GetValorVendido() <<"    "<< vdetalle.GetCantidad() 
+		<<"    "<< vdetalle.GetSubtotal() <<endl;
 	return o;
 }
 
@@ -171,10 +172,9 @@ void MostrarVentas(){
 		cout << "\n\nID | ID Cliente\n";
 		cout << sist.GetVenta(i).GetID() <<"    "<< sist.GetVenta(i).GetIDCliente() <<endl;
 		
-		cout<<"a";
 		vector<VentaDetalle> detallesventa = sist.GetDetallesByIDVenta(sist.GetVenta(i).GetID());
 		
-		cout << "ProdID |   Descripcion   | Precio | Cantidad | Stock (Actual) | Subtotal\n";
+		cout << "ProdID |   Descripcion   | Precio | Cantidad | Subtotal\n";
 		for(int j=0; j<detallesventa.size(); j++){
 			cout << detallesventa[j];
 		}
@@ -190,21 +190,21 @@ void AgregarVenta(){
 	cout << "ID Cliente: ";
 	int id_cliente; cin >> id_cliente;
 	
-	int id_prod;
+	int id;
 	ProductoCantidad ProdCant;
 	vector<ProductoCantidad> articulos;
 	do {
 		cout << "ID Articulo: (0 para terminar)\n";
-		cin >> id_prod;
-		if(id_prod != 0){
-			ProdCant.prod = sist.GetProductoByID(id_prod);
+		cin >> id;
+		if(id != 0){
+			ProdCant.prod = sist.GetProductoByID(id);
 			
 			bool result;
 			do {
 				cout << "Cantidad: ";
 				cin >> ProdCant.cant;
 				
-				result = ProdCant.prod.CheckStock(ProdCant.cant);
+				result = sist.GetProductoByID(id).CheckStock(ProdCant.cant);
 				if(!result){
 					cout<< "Falta de stock!\n";
 				} else {
@@ -213,9 +213,10 @@ void AgregarVenta(){
 				
 			} while(!result);
 		}
-	} while(id_prod != 0);
+	} while(id != 0);
 	
-	
+	Venta venta(id_cliente, articulos);
+	venta.AddVenta();
 }
 	
 /// -- Menu 

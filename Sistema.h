@@ -44,6 +44,7 @@ public:
 	
 	/// Modificar
 	void ModificarProducto(int id, string descripcion, float precio, int stock);
+	void RetirarStockProducto(int id, int cantidad);
 	void ModificarCliente(int id, string nombre, int dni);
 	
 	/// Devolviendo cosas
@@ -57,7 +58,7 @@ public:
 	Venta &GetVentaByID(int id);
 	
 	VentaDetalle &GetDetalleVenta(int i);
-	vector<VentaDetalle> &GetDetallesByIDVenta(int id_venta);
+	vector<VentaDetalle> GetDetallesByIDVenta(int id_venta);
 	
 	int GetProductosSize();
 	int GetClientesSize();      

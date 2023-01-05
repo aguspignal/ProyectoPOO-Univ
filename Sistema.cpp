@@ -75,8 +75,14 @@ void Sistema::CargarDetallesVenta(){
 	for(int i=0; i<cant_detalles; i++){
 		archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
 		
-		Producto prod(reg.reg_prod.id, reg.reg_prod.descripcion, reg.reg_prod.precio, reg.reg_prod.stock);
-		VentaDetalle vdetalle(reg.id, reg.id_venta, reg.cant, reg.subtotal, prod);
+		reg.id = detallesventa[i].GetID();
+		reg.id_venta = detallesventa[i].GetIDVenta();
+		reg.id_producto = detallesventa[i].GetIDProducto();
+		reg.valor_vendido = detallesventa[i].GetValorVendido();
+		reg.cantidad = detallesventa[i].GetCantidad();
+		reg.subtotal = detallesventa[i].GetSubtotal();
+		
+		VentaDetalle vdetalle(reg.id, reg.id_venta, reg.id_producto, reg.valor_vendido, reg.cantidad, reg.subtotal);
 		
 		detallesventa.push_back(vdetalle);
 	}
@@ -139,13 +145,10 @@ void Sistema::ActualizarDetallesVenta(){
 	for(int i=0; i<detallesventa.size(); i++){
 		reg.id = detallesventa[i].GetID();
 		reg.id_venta = detallesventa[i].GetIDVenta();
-		reg.cant = detallesventa[i].GetCantidad();
+		reg.id_producto = detallesventa[i].GetIDProducto();
+		reg.valor_vendido = detallesventa[i].GetValorVendido();
+		reg.cantidad = detallesventa[i].GetCantidad();
 		reg.subtotal = detallesventa[i].GetSubtotal();
-		
-		reg.reg_prod.id = detallesventa[i].GetProducto().GetID();
-		strcpy(reg.reg_prod.descripcion, detallesventa[i].GetProducto().GetDescripcion().c_str());
-		reg.reg_prod.precio = detallesventa[i].GetProducto().GetPrecio();
-		reg.reg_prod.stock = detallesventa[i].GetProducto().GetStock();
 		
 		archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
 	}
@@ -225,6 +228,17 @@ void Sistema::ModificarProducto(int id, string descripcion, float precio, int st
 	ActualizarProductos();
 }
 
+void Sistema::RetirarStockProducto(int id, int cantidad){
+	for(int i=0; i<productos.size(); i++){
+		if(productos[i].GetID() == id){
+			int nuevo_stock = productos[i].GetStock() - cantidad;
+			productos[i].SetStock(nuevo_stock);
+		}
+	}
+	ActualizarProductos();
+}
+
+
 /// -- MODIFICAR Cliente 
 void Sistema::ModificarCliente(int id, string nombre, int dni){
 	for(int i=0; i<clientes.size(); i++){
@@ -286,7 +300,7 @@ VentaDetalle &Sistema::GetDetalleVenta(int i){
 	return detallesventa[i];
 }
 
-vector<VentaDetalle> &Sistema::GetDetallesByIDVenta(int id_venta){
+vector<VentaDetalle> Sistema::GetDetallesByIDVenta(int id_venta){
 	vector<VentaDetalle> v;
 	
 	for(int i=0; i<detallesventa.size(); i++){

@@ -50,5 +50,9 @@ public:
 };
 
 
+struct ProductoCantidad {
+	Producto prod;
+	int cant;
+};
 
 #endif

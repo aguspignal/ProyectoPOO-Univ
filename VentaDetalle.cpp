@@ -4,19 +4,33 @@
 #include "Sistema.h"
 using namespace std;
 	
-VentaDetalle::VentaDetalle(int idVenta, int m_cantidad, Producto m_producto){
+//VentaDetalle::VentaDetalle(int idVenta, int m_cantidad, Producto m_producto){
+//	this->id = GetLastId()+1;
+//	this->id_venta = idVenta;
+//	this->producto = m_producto;
+//	this->cantidad = m_cantidad;
+//	this->subtotal = m_producto.GetPrecio()*m_cantidad;
+//	
+//	RetirarStock();
+//}
+
+VentaDetalle::VentaDetalle(int idVenta, int m_cantidad, int idProducto, float precio_producto){
 	this->id = GetLastId()+1;
 	this->id_venta = idVenta;
-	this->producto = m_producto;
+	this->id_producto = idProducto;
 	this->cantidad = m_cantidad;
-	this->subtotal = m_producto.GetPrecio()*m_cantidad;
+	this->valor_vendido = precio_producto;
+	this->subtotal = cantidad * valor_vendido;
+	
+	RetirarStock();
 }
 
-VentaDetalle::VentaDetalle(int m_id, int idVenta, int m_cantidad, float m_subtotal, Producto m_producto){
+VentaDetalle::VentaDetalle(int m_id, int idVenta, int idProducto, float valor_vendido, int m_cantidad, float m_subtotal){
 	this->id = m_id;
 	this->id_venta = idVenta;
-	this->producto = m_producto;
+	this->id_producto = idProducto;
 	this->cantidad = m_cantidad;
+	this->valor_vendido = valor_vendido;
 	this->subtotal = m_subtotal;
 }
 
@@ -50,8 +64,16 @@ int VentaDetalle::GetLastId(){
 }
 
 /// -- Producto
-Producto VentaDetalle::GetProducto(){
-	return producto;
+//Producto VentaDetalle::GetProducto(){
+//	return producto;
+//}
+int VentaDetalle::GetIDProducto(){
+	return id_producto;
+}
+
+/// -- Valor vendido
+float VentaDetalle::GetValorVendido(){
+	return valor_vendido;
 }
 
 /// -- Cantidad
@@ -59,14 +81,21 @@ int VentaDetalle::GetCantidad(){
 	return cantidad;
 }
 
-void VentaDetalle::SetCantidad(int cant){
-	this->cantidad = cant;
-}
-
 /// -- Subtotal
 float VentaDetalle::GetSubtotal(){
 	return subtotal;
 }
+
+void VentaDetalle::SetCantidad(int cant){
+	this->cantidad = cant;
+}
+
+/// -- Retirar Stock del producto
+void VentaDetalle::RetirarStock(){
+	Sistema sistema;
+	sistema.RetirarStockProducto(id_producto, cantidad);
+}
+
 
 /// -- Agregar al archivo
 void VentaDetalle::AddVentaDetalle(){
@@ -74,20 +103,12 @@ void VentaDetalle::AddVentaDetalle(){
 	
 	RegistroVentaDetalle reg;
 	reg.id = this->id;
-	reg.id_venta = id_venta;
-	reg.cant = cantidad;
-	reg.subtotal = subtotal;
-	
-	reg.reg_prod.id = producto.GetID();
-	strcpy(reg.reg_prod.descripcion, producto.GetDescripcion().c_str());
-	reg.reg_prod.precio = producto.GetPrecio();
-	reg.reg_prod.stock = producto.GetStock();
+	reg.id_venta = this->id_venta;
+	reg.id_producto = this->id_producto;
+	reg.valor_vendido = this->valor_vendido;
+	reg.cantidad = this->cantidad;
+	reg.subtotal = this->subtotal;
 	
 	archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
 	archi.close();
-	
-	Sistema sist;
-	int newstock = producto.GetStock() - cantidad;
-	sist.ModificarProducto(producto.GetID(), producto.GetDescripcion(), producto.GetPrecio(), newstock);
 }
-

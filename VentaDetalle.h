@@ -4,22 +4,24 @@
 #include "Producto.h"
 
 struct RegistroVentaDetalle {
-	int id, id_venta, cant;
-	float subtotal;
-	RegistroProducto reg_prod;
+	int id, id_venta, id_producto, cantidad;
+	float subtotal, valor_vendido;
 };
 
 class VentaDetalle {
 private:
 	int id;
 	int id_venta;
-	Producto producto;
+//	Producto producto;
+	int id_producto;
+	float valor_vendido; // precio_producto , valor_producto 
 	int cantidad;
 	float subtotal;
 
 public:
-	VentaDetalle(int idVenta, int cantidad, Producto producto);
-	VentaDetalle(int id, int id_venta, int cantidad, float subtotal, Producto producto);
+//	VentaDetalle(int idVenta, int cantidad, Producto producto);
+	VentaDetalle(int idVenta, int cantidad, int id_producto, float precio_producto);
+	VentaDetalle(int id, int id_venta, int id_producto, float valor_vendido, int cantidad, float subtotal);
 	
 	/// ID
 	int GetID();
@@ -27,7 +29,11 @@ public:
 	int GetLastId();
 	
 	/// Producto
-	Producto GetProducto();
+//	Producto GetProducto();
+	int GetIDProducto();
+	
+	/// Valor vendido
+	float GetValorVendido();
 	
 	/// Cantidad
 	int GetCantidad();
@@ -35,6 +41,9 @@ public:
 	
 	/// Subtotal
 	float GetSubtotal();
+	
+	/// Retirar Stock
+	void RetirarStock();
 	
 	/// Agregar al archivo
 	void AddVentaDetalle();
