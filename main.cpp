@@ -199,36 +199,38 @@ void MostrarVentas(){
 void AgregarVenta(){
 	Sistema sist;
 	
-	cout << "ID Cliente: ";
+	cout << "ID Cliente: (0 para cancelar) ";
 	int id_cliente; cin >> id_cliente;
-	
-	int id;
-	ProductoCantidad ProdCant;
-	vector<ProductoCantidad> articulos;
-	do {
-		cout << "ID Articulo: (0 para terminar)\n";
-		cin >> id;
-		if(id != 0){
-			ProdCant.prod = sist.GetProductoByID(id);
-			
-			bool result;
-			do {
-				cout << "Cantidad: ";
-				cin >> ProdCant.cant;
+	if(id_cliente != 0){
+		
+		int id;
+		ProductoCantidad ProdCant;
+		vector<ProductoCantidad> articulos;
+		do {
+			cout << "ID Articulo: (0 para terminar)\n";
+			cin >> id;
+			if(id != 0){
+				ProdCant.prod = sist.GetProductoByID(id);
 				
-				result = sist.GetProductoByID(id).CheckStock(ProdCant.cant);
-				if(!result){
-					cout<< "Falta de stock!\n";
-				} else {
-					articulos.push_back(ProdCant);
-				}
-				
-			} while(!result);
-		}
-	} while(id != 0);
-	
-	Venta venta(id_cliente, articulos);
-	venta.AddVenta();
+				bool result;
+				do {
+					cout << "Cantidad: ";
+					cin >> ProdCant.cant;
+					
+					result = sist.GetProductoByID(id).CheckStock(ProdCant.cant);
+					if(!result){
+						cout<< "Falta de stock!\n";
+					} else {
+						articulos.push_back(ProdCant);
+					}
+					
+				} while(!result);
+			}
+		} while(id != 0);
+		
+		Venta venta(id_cliente, articulos);
+		venta.AddVenta();
+	}
 }
 	
 void EditarVenta(){

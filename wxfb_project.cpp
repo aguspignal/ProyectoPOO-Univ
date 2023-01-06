@@ -360,36 +360,36 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	bSizer33->Add( txt_Ventas, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
-	m_grid3 = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
+	gridVentas = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 
 	// Grid
-	m_grid3->CreateGrid( 0, 3 );
-	m_grid3->EnableEditing( true );
-	m_grid3->EnableGridLines( true );
-	m_grid3->EnableDragGridSize( false );
-	m_grid3->SetMargins( 0, 0 );
+	gridVentas->CreateGrid( 0, 3 );
+	gridVentas->EnableEditing( true );
+	gridVentas->EnableGridLines( true );
+	gridVentas->EnableDragGridSize( false );
+	gridVentas->SetMargins( 0, 0 );
 
 	// Columns
-	m_grid3->SetColSize( 0, 100 );
-	m_grid3->SetColSize( 1, 100 );
-	m_grid3->SetColSize( 2, 100 );
-	m_grid3->EnableDragColMove( false );
-	m_grid3->EnableDragColSize( true );
-	m_grid3->SetColLabelValue( 0, wxT("ID") );
-	m_grid3->SetColLabelValue( 1, wxT("ID Cliente") );
-	m_grid3->SetColLabelValue( 2, wxT("Total") );
-	m_grid3->SetColLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
+	gridVentas->SetColSize( 0, 50 );
+	gridVentas->SetColSize( 1, 75 );
+	gridVentas->SetColSize( 2, 150 );
+	gridVentas->EnableDragColMove( false );
+	gridVentas->EnableDragColSize( true );
+	gridVentas->SetColLabelValue( 0, wxT("ID") );
+	gridVentas->SetColLabelValue( 1, wxT("ID Cliente") );
+	gridVentas->SetColLabelValue( 2, wxT("Total") );
+	gridVentas->SetColLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Rows
-	m_grid3->EnableDragRowSize( true );
-	m_grid3->SetRowLabelSize( 0 );
-	m_grid3->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
+	gridVentas->EnableDragRowSize( true );
+	gridVentas->SetRowLabelSize( 0 );
+	gridVentas->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Label Appearance
 
 	// Cell Defaults
-	m_grid3->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
-	bSizer33->Add( m_grid3, 1, wxALL|wxEXPAND, 5 );
+	gridVentas->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	bSizer33->Add( gridVentas, 1, wxALL|wxEXPAND, 5 );
 
 
 	bSizer59->Add( bSizer33, 0, wxALL|wxEXPAND, 5 );
@@ -403,40 +403,40 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	bSizer34->Add( txt_Detalle, 0, wxALL, 5 );
 
-	m_grid4 = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
+	gridDetalles = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 
 	// Grid
-	m_grid4->CreateGrid( 0, 5 );
-	m_grid4->EnableEditing( true );
-	m_grid4->EnableGridLines( true );
-	m_grid4->EnableDragGridSize( false );
-	m_grid4->SetMargins( 0, 0 );
+	gridDetalles->CreateGrid( 0, 5 );
+	gridDetalles->EnableEditing( true );
+	gridDetalles->EnableGridLines( true );
+	gridDetalles->EnableDragGridSize( false );
+	gridDetalles->SetMargins( 0, 0 );
 
 	// Columns
-	m_grid4->SetColSize( 0, 100 );
-	m_grid4->SetColSize( 1, 400 );
-	m_grid4->SetColSize( 2, 75 );
-	m_grid4->SetColSize( 3, 75 );
-	m_grid4->SetColSize( 4, 100 );
-	m_grid4->EnableDragColMove( false );
-	m_grid4->EnableDragColSize( true );
-	m_grid4->SetColLabelValue( 0, wxT("ID Producto") );
-	m_grid4->SetColLabelValue( 1, wxT("Descripcion") );
-	m_grid4->SetColLabelValue( 2, wxT("Precio") );
-	m_grid4->SetColLabelValue( 3, wxT("Cantidad") );
-	m_grid4->SetColLabelValue( 4, wxT("Subtotal") );
-	m_grid4->SetColLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
+	gridDetalles->SetColSize( 0, 100 );
+	gridDetalles->SetColSize( 1, 400 );
+	gridDetalles->SetColSize( 2, 75 );
+	gridDetalles->SetColSize( 3, 75 );
+	gridDetalles->SetColSize( 4, 100 );
+	gridDetalles->EnableDragColMove( false );
+	gridDetalles->EnableDragColSize( true );
+	gridDetalles->SetColLabelValue( 0, wxT("ID Producto") );
+	gridDetalles->SetColLabelValue( 1, wxT("Descripcion") );
+	gridDetalles->SetColLabelValue( 2, wxT("Precio") );
+	gridDetalles->SetColLabelValue( 3, wxT("Cantidad") );
+	gridDetalles->SetColLabelValue( 4, wxT("Subtotal") );
+	gridDetalles->SetColLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Rows
-	m_grid4->EnableDragRowSize( true );
-	m_grid4->SetRowLabelSize( 0 );
-	m_grid4->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
+	gridDetalles->EnableDragRowSize( true );
+	gridDetalles->SetRowLabelSize( 0 );
+	gridDetalles->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Label Appearance
 
 	// Cell Defaults
-	m_grid4->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
-	bSizer34->Add( m_grid4, 1, wxALL|wxEXPAND, 5 );
+	gridDetalles->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	bSizer34->Add( gridDetalles, 1, wxALL|wxEXPAND, 5 );
 
 
 	bSizer59->Add( bSizer34, 1, wxALL|wxEXPAND, 5 );
@@ -457,6 +457,9 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 	btn_VerDetalle = new wxButton( this, wxID_ANY, wxT("Ver Detalle"), wxDefaultPosition, wxDefaultSize, 0 );
 	btn_VerDetalle->SetLabelMarkup( wxT("Ver Detalle") );
 	bSizer35->Add( btn_VerDetalle, 0, wxALL, 5 );
+
+	btn_EditarVenta = new wxButton( this, wxID_ANY, wxT("Editar Venta"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer35->Add( btn_EditarVenta, 0, wxALL, 5 );
 
 	btn_DeleteVenta = new wxButton( this, wxID_ANY, wxT("Eliminar Venta"), wxDefaultPosition, wxDefaultSize, 0 );
 	btn_DeleteVenta->SetLabelMarkup( wxT("Eliminar Venta") );
@@ -480,7 +483,8 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 	// Connect Events
 	btn_AddVenta->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayAddVenta ), NULL, this );
 	btn_VerDetalle->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayDetalleVenta ), NULL, this );
-	btn_DeleteVenta->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayConfirmation ), NULL, this );
+	btn_EditarVenta->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayEditarVenta ), NULL, this );
+	btn_DeleteVenta->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::EliminarVenta ), NULL, this );
 }
 
 BaseVentasFrame::~BaseVentasFrame()
@@ -488,7 +492,8 @@ BaseVentasFrame::~BaseVentasFrame()
 	// Disconnect Events
 	btn_AddVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayAddVenta ), NULL, this );
 	btn_VerDetalle->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayDetalleVenta ), NULL, this );
-	btn_DeleteVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayConfirmation ), NULL, this );
+	btn_EditarVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayEditarVenta ), NULL, this );
+	btn_DeleteVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::EliminarVenta ), NULL, this );
 
 }
 
@@ -733,7 +738,7 @@ BaseAddClienteFrame::BaseAddClienteFrame( wxWindow* parent, wxWindowID id, const
 	txt_DNI->Wrap( -1 );
 	bSizer132->Add( txt_DNI, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_DNI = new wxSpinCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, 10000000, 99999999, 1 );
+	input_DNI = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer132->Add( input_DNI, 1, wxALL, 5 );
 
 
@@ -882,101 +887,149 @@ BaseAddVenta::BaseAddVenta( wxWindow* parent, wxWindowID id, const wxString& tit
 	wxStaticBoxSizer* sbSizer6;
 	sbSizer6 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Agregar venta nueva") ), wxVERTICAL );
 
-	wxBoxSizer* bSizer41;
-	bSizer41 = new wxBoxSizer( wxVERTICAL );
-
-	m_searchCtrl2 = new wxSearchCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	#ifndef __WXMAC__
-	m_searchCtrl2->ShowSearchButton( true );
-	#endif
-	m_searchCtrl2->ShowCancelButton( false );
-	bSizer41->Add( m_searchCtrl2, 0, wxALL|wxEXPAND, 5 );
-
-	m_grid5 = new wxGrid( sbSizer6->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
-
-	// Grid
-	m_grid5->CreateGrid( 0, 5 );
-	m_grid5->EnableEditing( true );
-	m_grid5->EnableGridLines( true );
-	m_grid5->EnableDragGridSize( false );
-	m_grid5->SetMargins( 0, 0 );
-
-	// Columns
-	m_grid5->SetColSize( 0, 50 );
-	m_grid5->SetColSize( 1, 400 );
-	m_grid5->SetColSize( 2, 75 );
-	m_grid5->SetColSize( 3, 75 );
-	m_grid5->EnableDragColMove( false );
-	m_grid5->EnableDragColSize( true );
-	m_grid5->SetColLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
-
-	// Rows
-	m_grid5->EnableDragRowSize( true );
-	m_grid5->SetRowLabelSize( 1 );
-	m_grid5->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
-
-	// Label Appearance
-
-	// Cell Defaults
-	m_grid5->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
-	bSizer41->Add( m_grid5, 1, wxALL|wxEXPAND, 5 );
-
-
-	sbSizer6->Add( bSizer41, 1, wxALL|wxEXPAND, 5 );
-
 	wxBoxSizer* bSizer42;
-	bSizer42 = new wxBoxSizer( wxHORIZONTAL );
+	bSizer42 = new wxBoxSizer( wxVERTICAL );
 
-	wxBoxSizer* bSizer47;
-	bSizer47 = new wxBoxSizer( wxHORIZONTAL );
+	wxBoxSizer* bSizer421;
+	bSizer421 = new wxBoxSizer( wxHORIZONTAL );
 
-	m_staticText29 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("ID Cliente"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText29->Wrap( -1 );
-	bSizer47->Add( m_staticText29, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	txt_IDCliente = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("ID Cliente"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_IDCliente->Wrap( -1 );
+	txt_IDCliente->SetFont( wxFont( 9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Arial") ) );
 
-	m_textCtrl10 = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer47->Add( m_textCtrl10, 1, wxALL, 5 );
+	bSizer421->Add( txt_IDCliente, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+	input_IDCliente = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer421->Add( input_IDCliente, 1, wxALL, 5 );
+
+	btn_Cliente = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Aceptar"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer421->Add( btn_Cliente, 0, wxALL, 5 );
 
 
-	bSizer42->Add( bSizer47, 1, 0, 5 );
+	bSizer421->Add( 0, 0, 1, 0, 5 );
+
+
+	bSizer421->Add( 0, 0, 1, wxEXPAND, 5 );
+
+	txt_DatosCliente = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Nombre y DNI del Cliente"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_DatosCliente->Wrap( -1 );
+	bSizer421->Add( txt_DatosCliente, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+
+	bSizer42->Add( bSizer421, 1, wxALL|wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer43;
+	bSizer43 = new wxBoxSizer( wxHORIZONTAL );
 
 	wxBoxSizer* bSizer48;
 	bSizer48 = new wxBoxSizer( wxHORIZONTAL );
 
-	m_staticText30 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("ID Producto"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText30->Wrap( -1 );
-	bSizer48->Add( m_staticText30, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	txt_IDProducto = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT(" ID Producto"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_IDProducto->Wrap( -1 );
+	txt_IDProducto->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxEmptyString ) );
 
-	m_textCtrl11 = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer48->Add( m_textCtrl11, 1, wxALL, 5 );
+	bSizer48->Add( txt_IDProducto, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+	input_IDProducto = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer48->Add( input_IDProducto, 1, wxALL, 5 );
 
 
-	bSizer42->Add( bSizer48, 1, 0, 5 );
+	bSizer43->Add( bSizer48, 1, 0, 5 );
 
 	wxBoxSizer* bSizer49;
 	bSizer49 = new wxBoxSizer( wxHORIZONTAL );
 
-	m_staticText31 = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Cantidad"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText31->Wrap( -1 );
-	bSizer49->Add( m_staticText31, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	txt_Cantidad = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Cantidad"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Cantidad->Wrap( -1 );
+	txt_Cantidad->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxEmptyString ) );
 
-	m_spinCtrl5 = new wxSpinCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
-	bSizer49->Add( m_spinCtrl5, 1, wxALL, 5 );
+	bSizer49->Add( txt_Cantidad, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+	input_Cantidad = new wxSpinCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 999999, 1 );
+	bSizer49->Add( input_Cantidad, 1, wxALL, 5 );
 
 
-	bSizer42->Add( bSizer49, 1, 0, 5 );
+	bSizer43->Add( bSizer49, 1, 0, 5 );
+
+
+	bSizer43->Add( 0, 0, 1, wxEXPAND, 5 );
 
 	btn_Agregar = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Agregar producto"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer42->Add( btn_Agregar, 0, wxALL, 5 );
+	bSizer43->Add( btn_Agregar, 0, wxALL, 5 );
+
+	btn_EliminarProducto = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Eliminar Producto"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer43->Add( btn_EliminarProducto, 0, wxALL, 5 );
+
+
+	bSizer42->Add( bSizer43, 0, wxEXPAND, 5 );
 
 
 	sbSizer6->Add( bSizer42, 0, wxALL|wxEXPAND, 5 );
 
-	wxBoxSizer* bSizer56;
-	bSizer56 = new wxBoxSizer( wxVERTICAL );
+	wxBoxSizer* bSizer41;
+	bSizer41 = new wxBoxSizer( wxVERTICAL );
+
+	txt_Productos = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Productos añadidos"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Productos->Wrap( -1 );
+	txt_Productos->SetFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Arial") ) );
+
+	bSizer41->Add( txt_Productos, 0, wxALL, 5 );
+
+	gridDetalles = new wxGrid( sbSizer6->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
+
+	// Grid
+	gridDetalles->CreateGrid( 0, 5 );
+	gridDetalles->EnableEditing( true );
+	gridDetalles->EnableGridLines( true );
+	gridDetalles->EnableDragGridSize( false );
+	gridDetalles->SetMargins( 0, 0 );
+
+	// Columns
+	gridDetalles->SetColSize( 0, 90 );
+	gridDetalles->SetColSize( 1, 350 );
+	gridDetalles->SetColSize( 2, 80 );
+	gridDetalles->SetColSize( 3, 80 );
+	gridDetalles->SetColSize( 4, 80 );
+	gridDetalles->EnableDragColMove( false );
+	gridDetalles->EnableDragColSize( true );
+	gridDetalles->SetColLabelValue( 0, wxT("ID Producto") );
+	gridDetalles->SetColLabelValue( 1, wxT("Descripcion") );
+	gridDetalles->SetColLabelValue( 2, wxT("Precio") );
+	gridDetalles->SetColLabelValue( 3, wxT("Cantidad") );
+	gridDetalles->SetColLabelValue( 4, wxT("Subtotal") );
+	gridDetalles->SetColLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
+
+	// Rows
+	gridDetalles->EnableDragRowSize( true );
+	gridDetalles->SetRowLabelSize( 1 );
+	gridDetalles->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
+
+	// Label Appearance
+
+	// Cell Defaults
+	gridDetalles->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	bSizer41->Add( gridDetalles, 1, wxALL|wxEXPAND, 5 );
 
 
-	sbSizer6->Add( bSizer56, 0, wxEXPAND, 5 );
+	sbSizer6->Add( bSizer41, 1, wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer44;
+	bSizer44 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_Total = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Total:"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Total->Wrap( -1 );
+	txt_Total->SetFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Arial") ) );
+
+	bSizer44->Add( txt_Total, 0, wxALL|wxALIGN_BOTTOM, 5 );
+
+	txt_Monto = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("$0"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Monto->Wrap( -1 );
+	txt_Monto->SetFont( wxFont( 12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
+
+	bSizer44->Add( txt_Monto, 0, wxALL, 5 );
+
+
+	sbSizer6->Add( bSizer44, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer51;
 	bSizer51 = new wxBoxSizer( wxHORIZONTAL );
@@ -988,7 +1041,7 @@ BaseAddVenta::BaseAddVenta( wxWindow* parent, wxWindowID id, const wxString& tit
 	bSizer51->Add( btn_Cancelar, 0, wxALL, 5 );
 
 
-	sbSizer6->Add( bSizer51, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
+	sbSizer6->Add( bSizer51, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
 
 
 	bSizer36->Add( sbSizer6, 1, wxALL|wxEXPAND, 5 );
@@ -1000,12 +1053,20 @@ BaseAddVenta::BaseAddVenta( wxWindow* parent, wxWindowID id, const wxString& tit
 	this->Centre( wxBOTH );
 
 	// Connect Events
-	btn_Confirmar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::DisplayConfirmar ), NULL, this );
+	btn_Cliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::AgregarCliente ), NULL, this );
+	btn_Agregar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::AgregarProducto ), NULL, this );
+	btn_EliminarProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::EliminarProducto ), NULL, this );
+	btn_Confirmar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::ConfirmarVenta ), NULL, this );
+	btn_Cancelar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::CancelarVenta ), NULL, this );
 }
 
 BaseAddVenta::~BaseAddVenta()
 {
 	// Disconnect Events
-	btn_Confirmar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::DisplayConfirmar ), NULL, this );
+	btn_Cliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::AgregarCliente ), NULL, this );
+	btn_Agregar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::AgregarProducto ), NULL, this );
+	btn_EliminarProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::EliminarProducto ), NULL, this );
+	btn_Confirmar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::ConfirmarVenta ), NULL, this );
+	btn_Cancelar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::CancelarVenta ), NULL, this );
 
 }

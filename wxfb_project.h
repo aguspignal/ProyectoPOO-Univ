@@ -27,7 +27,6 @@
 #include <wx/spinctrl.h>
 #include <wx/statbox.h>
 #include <wx/dialog.h>
-#include <wx/srchctrl.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -138,23 +137,25 @@ class BaseVentasFrame : public wxFrame
 
 	protected:
 		wxStaticText* txt_Ventas;
-		wxGrid* m_grid3;
+		wxGrid* gridVentas;
 		wxStaticText* txt_Detalle;
-		wxGrid* m_grid4;
+		wxGrid* gridDetalles;
 		wxButton* btn_AddVenta;
 		wxButton* btn_VerDetalle;
+		wxButton* btn_EditarVenta;
 		wxButton* btn_DeleteVenta;
 		wxPanel* m_panel23;
 
 		// Virtual event handlers, override them in your derived class
 		virtual void DisplayAddVenta( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DisplayDetalleVenta( wxCommandEvent& event ) { event.Skip(); }
-		virtual void DisplayConfirmation( wxCommandEvent& event ) { event.Skip(); }
+		virtual void DisplayEditarVenta( wxCommandEvent& event ) { event.Skip(); }
+		virtual void EliminarVenta( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
 
-		BaseVentasFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1125,750 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		BaseVentasFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1097,750 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 
 		~BaseVentasFrame();
 
@@ -236,7 +237,7 @@ class BaseAddClienteFrame : public wxDialog
 		wxStaticText* txt_Nombre;
 		wxTextCtrl* input_Nombre;
 		wxStaticText* txt_DNI;
-		wxSpinCtrl* input_DNI;
+		wxTextCtrl* input_DNI;
 		wxPanel* m_panel2;
 		wxButton* btn_Agregar;
 		wxButton* btn_Cancelar;
@@ -292,25 +293,34 @@ class BaseAddVenta : public wxDialog
 	private:
 
 	protected:
-		wxSearchCtrl* m_searchCtrl2;
-		wxGrid* m_grid5;
-		wxStaticText* m_staticText29;
-		wxTextCtrl* m_textCtrl10;
-		wxStaticText* m_staticText30;
-		wxTextCtrl* m_textCtrl11;
-		wxStaticText* m_staticText31;
-		wxSpinCtrl* m_spinCtrl5;
+		wxStaticText* txt_IDCliente;
+		wxTextCtrl* input_IDCliente;
+		wxButton* btn_Cliente;
+		wxStaticText* txt_DatosCliente;
+		wxStaticText* txt_IDProducto;
+		wxTextCtrl* input_IDProducto;
+		wxStaticText* txt_Cantidad;
+		wxSpinCtrl* input_Cantidad;
 		wxButton* btn_Agregar;
+		wxButton* btn_EliminarProducto;
+		wxStaticText* txt_Productos;
+		wxGrid* gridDetalles;
+		wxStaticText* txt_Total;
+		wxStaticText* txt_Monto;
 		wxButton* btn_Confirmar;
 		wxButton* btn_Cancelar;
 
 		// Virtual event handlers, override them in your derived class
-		virtual void DisplayConfirmar( wxCommandEvent& event ) { event.Skip(); }
+		virtual void AgregarCliente( wxCommandEvent& event ) { event.Skip(); }
+		virtual void AgregarProducto( wxCommandEvent& event ) { event.Skip(); }
+		virtual void EliminarProducto( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ConfirmarVenta( wxCommandEvent& event ) { event.Skip(); }
+		virtual void CancelarVenta( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
 
-		BaseAddVenta( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 730,500 ), long style = wxDEFAULT_DIALOG_STYLE );
+		BaseAddVenta( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 720,500 ), long style = wxDEFAULT_DIALOG_STYLE );
 
 		~BaseAddVenta();
 

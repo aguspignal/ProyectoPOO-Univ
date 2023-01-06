@@ -11,7 +11,7 @@ AddClienteFrame::~AddClienteFrame() { }
 
 void AddClienteFrame::ClickAgregar( wxCommandEvent& event )  {
 	string nombre = wx_to_std(input_Nombre->GetValue());
-	int DNI = input_DNI->GetValue();	
+	int DNI = stoi(wx_to_std(input_DNI->GetValue()));	
 	
 	Cliente cliente(nombre,DNI);
 	cliente.AddCliente();

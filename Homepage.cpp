@@ -19,7 +19,7 @@ void Homepage::DisplayClientesFrame( wxCommandEvent& event )  {
 }
 
 void Homepage::DisplayVentasFrame( wxCommandEvent& event )  {
-	VentasFrame *win = new VentasFrame(this);
+	VentasFrame *win = new VentasFrame(this,sistema);
 	win->Show();
 }
 

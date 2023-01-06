@@ -206,11 +206,14 @@ void Sistema::DeleteVenta(int id){
 		}
 	}
 	
+	vector<VentaDetalle> v;
 	for(int i=0; i<detallesventa.size(); i++){
-		if(detallesventa[i].GetIDVenta() == id){
-			detallesventa.erase(detallesventa.begin()+i);
+		if(detallesventa[i].GetIDVenta() != id){
+			v.push_back(detallesventa[i]);
 		}
-	}	
+	}
+	this->detallesventa.clear();
+	this->detallesventa = v;
 	
 	ActualizarVentas();
 	ActualizarDetallesVenta();

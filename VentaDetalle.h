@@ -15,7 +15,7 @@ private:
 //	Producto producto;
 	int id_producto;
 	int cantidad;
-	float valor_vendido; // precio_producto , valor_producto 
+	float valor_vendido; 
 	float subtotal;
 
 public:
