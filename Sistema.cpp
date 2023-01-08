@@ -1,5 +1,6 @@
 #include "Sistema.h"
 #include <iostream>
+#include <cctype>
 using namespace std;
 
 Sistema::Sistema(){
@@ -40,7 +41,7 @@ void Sistema::CargarClientes(){
 	for(int i=0; i<cant_clientes; i++){
 		archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
 		
-		Cliente cliente(reg.id, reg.nombre, reg.dni);
+		Cliente cliente(reg.id, reg.nombre, reg.dni, reg.direccion, reg.email, reg.telefono);
 		clientes.push_back(cliente);
 	}
 }
@@ -109,6 +110,10 @@ void Sistema::ActualizarClientes(){
 		reg.id = clientes[i].GetID();
 		strcpy(reg.nombre, clientes[i].GetNombre().c_str());
 		reg.dni = clientes[i].GetDNI();
+		strcpy(reg.direccion,clientes[i].GetDireccion().c_str());
+		strcpy(reg.email,clientes[i].GetEmail().c_str());
+		strcpy(reg.telefono,clientes[i].GetTelefono().c_str());
+		
 		archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
 	}
 	
@@ -143,7 +148,7 @@ void Sistema::ActualizarDetallesVenta(){
 		reg.cantidad = detallesventa[i].GetCantidad();
 		reg.valor_vendido = detallesventa[i].GetValorVendido();
 		reg.subtotal = detallesventa[i].GetSubtotal();
-		
+		 
 		archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
 	}
 	
@@ -244,11 +249,14 @@ void Sistema::RetirarStockProducto(int id, int cantidad){
 
 
 /// -- MODIFICAR Cliente 
-void Sistema::ModificarCliente(int id, string nombre, int dni){
+void Sistema::ModificarCliente(int id, string nombre, int dni, string direccion, string email, string telefono){
 	for(int i=0; i<clientes.size(); i++){
 		if(clientes[i].GetID() == id){
 			clientes[i].SetNombre(nombre);
 			clientes[i].SetDNI(dni);
+			clientes[i].SetDireccion(direccion);
+			clientes[i].SetEmail(email);
+			clientes[i].SetTelefono(telefono);
 		}
 	}
 	ActualizarClientes();
@@ -279,6 +287,17 @@ Producto Sistema::GetProductoByID(int id){
 		}
 	}
 	
+	Producto prod; // vacio
+	return prod;
+}
+
+Producto Sistema::GetProductoByDescrip(string descripcion){
+	for(int i=0; i<productos.size(); i++){
+		if(StrAMinusculas(StrSinEspacios(productos[i].GetDescripcion())) == StrAMinusculas(StrSinEspacios(descripcion))){
+			return productos[i];
+		}
+	}
+	
 	Producto prod;
 	return prod;
 }
@@ -294,6 +313,20 @@ Cliente Sistema::GetClienteByID(int id){
 			return clientes[i];
 		}
 	}
+	Cliente cliente; // vacio
+	return cliente;
+}
+
+Cliente Sistema::GetClienteByNombre(string nombre){
+	for(int i=0; i<clientes.size(); i++){
+		string str1 = StrAMinusculas(StrSinEspacios(clientes[i].GetNombre()));
+		string str2 = StrAMinusculas(StrSinEspacios(nombre));
+		if(str1 == str2){
+			return clientes[i];
+		}
+	}
+	Cliente cliente;
+	return cliente;
 }
 
 /// -- BUSCAR Venta
@@ -328,7 +361,7 @@ vector<VentaDetalle> Sistema::GetDetallesByIDVenta(int id_venta){
 	return v;
 }
 
-/// -- Sizes
+/// -- SIZES
 int Sistema::GetProductosSize(){
 	return productos.size();
 }
@@ -341,29 +374,32 @@ int Sistema::GetVentasSize(){
 	return ventas.size();
 }
 
-//ostream &operator<<(ostream &o, VentaDetalle vdetalle){
-//	Sistema sist;
-//	string str;
-//	if(sist.GetProductoByID(vdetalle.GetIDProducto()).GetDescripcion() == "none"){
-//		str = "Producto eliminado";
-//	} else { 
-//		str = sist.GetProductoByID(vdetalle.GetIDProducto()).GetDescripcion(); 
-//	}
-//	
-//	o << vdetalle.GetIDVenta() <<"    "
-//	   << vdetalle.GetIDProducto() <<"     "
-//		<< str <<"   $"
-//		<< vdetalle.GetValorVendido() <<"    "
-//		<< vdetalle.GetCantidad() <<"    "
-//		<< vdetalle.GetSubtotal() <<endl;
-//	return o;
-//}
+/// -- ORDENAMIENTO
+void Sistema::OrdenarProductos(CriterioOrdenProducto criterio){
+	switch (criterio){
+	case ID_PRODUCTO: sort(productos.begin(), productos.end(), Orden_ID_Prod); break;
+	case DESCRIPCION: sort(productos.begin(), productos.end(), Orden_Descripcion); break;
+	case PRECIO: sort(productos.begin(), productos.end(), Orden_Precio); break;
+	case STOCK: sort(productos.begin(), productos.end(), Orden_Stock); break;
+	}
+}
 
-//void Sistema::MostrarDetalles(){
-//	cout << "ProdID |   Descripcion   | Precio | Cantidad | Subtotal\n";
-//	for(int j=0; j<detallesventa.size(); j++){
-//		cout << detallesventa[j];
-//	}
-//	system("PAUSE");
-//}
+void Sistema::OrdenarClientes(CriterioOrdenCliente criterio){
+	switch (criterio){
+	case ID_CLIENTE: sort(clientes.begin(), clientes.end(), Orden_ID_Cliente); break;
+	case NOMBRE: sort(clientes.begin(), clientes.end(), Orden_Nombre); break;
+	case DNI: sort(clientes.begin(), clientes.end(), Orden_DNI); break;
+	case DIRECCION: sort(clientes.begin(), clientes.end(), Orden_Direccion); break;
+	case EMAIL: sort(clientes.begin(), clientes.end(), Orden_Email); break;
+	case TELEFONO: sort(clientes.begin(), clientes.end(), Orden_Telefono); break;
+	}
+}
+
+void Sistema::OrdenarVentas(CriterioOrdenVenta criterio){
+	switch(criterio){
+	case ID_VENTA: sort(ventas.begin(), ventas.end(), Orden_ID_Venta); break;
+	case IDCLIENTE: sort(ventas.begin(), ventas.end(), Orden_IDCliente); break;
+	case TOTAL: sort(ventas.begin(), ventas.end(), Orden_Total); break;
+	}
+}
 	

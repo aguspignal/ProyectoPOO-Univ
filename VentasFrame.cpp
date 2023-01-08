@@ -87,3 +87,12 @@ void VentasFrame::DisplayEditarVenta( wxCommandEvent& event )  {
 	event.Skip();
 }
 
+void VentasFrame::OrdenarGrid( wxGridEvent& event )  {
+	int col = event.GetCol();
+	switch (col){
+	case 0: sistema->OrdenarVentas(ID_VENTA); break;
+	case 1: sistema->OrdenarVentas(IDCLIENTE); break;
+	case 2: sistema->OrdenarVentas(TOTAL); break;
+	}
+}
+

@@ -5,30 +5,30 @@
 #include <fstream>
 #include <cstring>
 #include <algorithm>
+using namespace std;
 
 struct RegistroCliente {
 	int id;
 	char nombre[100];
-//	char direccion[100];
-//	char email[100];
-//	int telefono;
 	int dni;
+	char direccion[200];
+	char email[100];
+	char telefono[15];
 };
-	
 	
 class Cliente {
 private:
 	int id;
 	std::string nombre;
-//	std::string direccion;
-//	std::string email[100];
-//	int telefono;
 	int dni;
+	std::string direccion;
+	std::string email;
+	std::string telefono;
 	
 public:
 	Cliente();
-	Cliente(std::string nombre, int dni);
-	Cliente(int id, std::string nombre, int dni);
+	Cliente(std::string nombre, int dni, string direccion, string email, string telefono);
+	Cliente(int id, std::string nombre, int dni, string direccion, string email, string telefono);
 	
 	/// ID
 	int GetID();
@@ -42,8 +42,23 @@ public:
 	int GetDNI();
 	void SetDNI(int dni);
 	
+	/// Direccion
+	string GetDireccion();
+	void SetDireccion(string direccion);
+	
+	/// Email
+	string GetEmail();
+	void SetEmail(string email);
+	
+	/// Telefono
+	string GetTelefono();
+	void SetTelefono(string telefono);
+	
 	/// Agregar a la database
 	void AddCliente();
+	
+	/// Validacion de datos
+	std::string ValidarDatos();
 	
 	~Cliente(){};
 };

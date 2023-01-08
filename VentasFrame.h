@@ -9,6 +9,7 @@ private:
 	Sistema *sistema;
 	
 protected:
+	void OrdenarGrid( wxGridEvent& event )  override;
 	void DisplayEditarVenta( wxCommandEvent& event )  override;
 	void DisplayAddVenta( wxCommandEvent& event )  override;
 	void DisplayDetalleVenta( wxCommandEvent& event )  override;

@@ -19,13 +19,33 @@ float AddVenta::CalcularTotal(){
 	return suma;
 }
 
+void AddVenta::ActualizarGrid(){
+	if(gridDetalles->GetNumberRows() != 0){
+		gridDetalles->DeleteRows(0,gridDetalles->GetNumberRows());
+	}
+
+	for(int i=0; i<v.size(); i++){
+		gridDetalles->AppendRows();
+		gridDetalles->SetCellValue(i,0,to_string(v[i].prod.GetID()));
+		gridDetalles->SetCellValue(i,1,v[i].prod.GetDescripcion());
+		gridDetalles->SetCellValue(i,2,to_string(v[i].prod.GetPrecio()));
+		gridDetalles->SetCellValue(i,3,to_string(v[i].cant));
+		gridDetalles->SetCellValue(i,4,to_string(v[i].prod.GetPrecio() * v[i].cant));
+	}
+}
+
 /// Guardar ID Cliente
-void AddVenta::AgregarCliente( wxCommandEvent& event )  {
+void AddVenta::AgregarCliente( wxCommandEvent& event ){
 	this-> id_cliente = stoi(wx_to_std(input_IDCliente->GetValue()));
+	Cliente cliente = sistema->GetClienteByID(id_cliente);
+	if(cliente.GetID() == 0){
+		wxMessageBox("Cliente no encontrado","Error",wxOK|wxICON_ERROR);	
+	} else {
+		string str = cliente.GetNombre();
+		str.append("  "+to_string(cliente.GetDNI()));
+		txt_DatosCliente->SetLabel(std_to_wx(str));
+	}
 	
-	string str = sistema->GetClienteByID(id_cliente).GetNombre();
-	str.append("  "+sistema->GetClienteByID(id_cliente).GetDNI());
-	txt_DatosCliente->SetLabel(std_to_wx(str));
 }
 
 /// Guardar Producto y Cantidad
@@ -39,6 +59,8 @@ void AddVenta::AgregarProducto( wxCommandEvent& event )  {
 	ProdCant.prod = producto;
 	ProdCant.cant = cantidad;
 	v.push_back(ProdCant);
+	
+	ActualizarGrid();
 	
 	txt_Monto->SetLabel(std_to_wx(to_string(CalcularTotal())));
 }

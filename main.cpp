@@ -14,11 +14,13 @@ ostream &operator<<(ostream &o, Producto p){
 	return o;
 }
 ostream &operator<<(ostream &o, RegistroCliente reg){
-	o << reg.id <<"   "<< reg.nombre <<"   "<< reg.dni <<endl;
+	o << reg.id <<"   "<< reg.nombre <<"   "<< reg.dni <<"   "
+		<< reg.direccion << reg.email << reg.telefono <<endl;
 	return o;
 }
 ostream &operator<<(ostream &o, Cliente c){
-	o << c.GetID() <<"   "<< c.GetNombre()<<"  "<< c.GetDNI() <<endl;
+	o << c.GetID() <<"   "<< c.GetNombre()<<"  "<< c.GetDNI() <<"  "
+		<<c.GetDireccion()<<"   "<<c.GetEmail()<<"   "<<c.GetTelefono()<<endl;
 	return o;
 }
 ostream &operator<<(ostream &o, VentaDetalle vdetalle){
@@ -116,7 +118,7 @@ void BorrarArticulo(){
 
 /// -- Clientes
 void MostrarClientes(){
-	cout<<"\n\nID |    Nombre    | DNI\n";
+	cout<<"\n\nID |    Nombre    |   DNI   |    Direccion    |     Email    |     Telefono\n";
 	
 	Sistema sist;
 	for(int i=0; i<sist.GetClientesSize(); i++){
@@ -129,12 +131,20 @@ void MostrarClientes(){
 void AgregarCliente(){
 	cin.ignore();
 	cout << "> Nombre: ";
-	string str; getline(cin,str);
+	string nombre; getline(cin,nombre);
 	
 	cout << "> DNI: ";
 	int dni = GetInput();
 	
-	Cliente cliente(str, dni);
+	cin.ignore();
+	cout << "> Direccion: ";
+	string direccion; getline(cin,direccion);
+	cout << "> Email: ";
+	string email; getline(cin,email);
+	cout << "> Telefono: ";
+	string telefono; getline(cin,telefono);
+	
+	Cliente cliente(nombre, dni, direccion, email, telefono);
 	
 	Sistema sist;
 	sist.GuardarCliente(cliente);
@@ -156,12 +166,19 @@ void EditarCliente(){
 		
 		cin.ignore();
 		cout << "> Nombre: ";
-		string str; getline(cin,str);
+		string nombre; getline(cin,nombre);
 		
 		cout << "> DNI: ";
 		int dni; cin>>dni;
 		
-		sist.ModificarCliente(id,str,dni);
+		cout << "> Direccion: ";
+		string direccion; getline(cin,direccion);
+		cout << "> Email: ";
+		string email; getline(cin,email);
+		cout << "> Telefono: ";
+		string telefono; getline(cin,telefono);
+		
+		sist.ModificarCliente(id,nombre,dni, direccion, email, telefono);
 	}
 }
 	

@@ -17,6 +17,7 @@ protected:
 	void ConfirmarVenta( wxCommandEvent& event )  override;
 	void CancelarVenta( wxCommandEvent& event )  override;
 	float CalcularTotal();
+	void ActualizarGrid();
 	
 public:
 	AddVenta(wxWindow *parent, Sistema *m_sistema);

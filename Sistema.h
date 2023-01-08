@@ -1,14 +1,16 @@
 #ifndef SISTEMA_H
 #define SISTEMA_H
 
-#include "Producto.h"
-#include "Cliente.h"
-#include "Venta.h"
 #include "VentaDetalle.h"
+#include "Tools.h"
 
 #include <string>
 #include <vector>
 using namespace std;
+
+enum CriterioOrdenProducto {ID_PRODUCTO,DESCRIPCION,PRECIO,STOCK};
+enum CriterioOrdenCliente {ID_CLIENTE,NOMBRE,DNI,DIRECCION,EMAIL,TELEFONO};
+enum CriterioOrdenVenta {ID_VENTA,IDCLIENTE,TOTAL};
 
 class Sistema {
 	vector<Producto> productos;
@@ -45,15 +47,17 @@ public:
 	/// Modificar
 	void ModificarProducto(int id, string descripcion, float precio, int stock);
 	void RetirarStockProducto(int id, int cantidad);
-	void ModificarCliente(int id, string nombre, int dni);
+	void ModificarCliente(int id, string nombre, int dni, string direccion, string email, string telefono);
 	void ModificarVenta(int id, int id_cliente, float total);
 	
 	/// Devolviendo cosas
 	Producto &GetProducto(int i);
 	Producto GetProductoByID(int id);
+	Producto GetProductoByDescrip(string descripcion);
 	
 	Cliente &GetCliente(int i);
 	Cliente GetClienteByID(int id);
+	Cliente GetClienteByNombre(string nombre);
 	
 	Venta &GetVenta(int i);
 	Venta GetVentaByID(int id);
@@ -67,6 +71,11 @@ public:
 	int GetDetallesVentaSize(); 
 	
 	void MostrarDetalles();
+	
+	/// Ordenamiento
+	void OrdenarProductos(CriterioOrdenProducto criterio);
+	void OrdenarClientes(CriterioOrdenCliente criterio);
+	void OrdenarVentas(CriterioOrdenVenta criterio);
 	
 	~Sistema(){};
 };

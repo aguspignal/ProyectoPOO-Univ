@@ -9,9 +9,11 @@ private:
 	Sistema *sistema;
 	
 protected:
+	void OrdenarGrid( wxGridEvent& event )  override;
+	void ActualizarGrid( wxCommandEvent& event )  override;
+	void BuscarProducto( wxCommandEvent& event )  override;
 	void DisplayEditarProducto( wxCommandEvent& event )  override;
 	void EliminarProducto( wxCommandEvent& event )  override;
-	void BackToHome( wxCommandEvent& event )  override;
 	void DisplayAddProducto( wxCommandEvent& event )  override;
 	void ActualizarGrid();
 	

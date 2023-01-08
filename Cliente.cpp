@@ -5,18 +5,27 @@ Cliente::Cliente(){
 	this->id = 0;
 	this->nombre = "none";
 	this->dni = 0;
+	this->direccion = "none";
+	this->email = "none";
+	this->telefono = "none";
 }
 
-Cliente::Cliente(std::string nombre, int dni){
+Cliente::Cliente(std::string nombre, int dni, string direccion, string email, string telefono){
 	this->id = GetLastID()+1;
 	this->nombre = nombre;
 	this->dni = dni;
+	this->direccion = direccion;
+	this->email = email;
+	this->telefono = telefono;
 }
 
-Cliente::Cliente(int m_id, std::string m_nombre, int m_dni){
-	this->id = m_id;
-	this->nombre = m_nombre;
-	this->dni = m_dni;
+Cliente::Cliente(int id, std::string nombre, int dni, string direccion, string email, string telefono){
+	this->id = id;
+	this->nombre = nombre;
+	this->dni = dni;
+	this->direccion = direccion;
+	this->email = email;
+	this->telefono = telefono;
 }
 
 /// -- ID
@@ -44,7 +53,7 @@ int Cliente::GetLastID(){
 	return id;
 }
 
-/// -- Nombre
+/// -- NOMBRFE
 string Cliente::GetNombre(){
 	return nombre;
 }
@@ -62,7 +71,35 @@ void Cliente::SetDNI(int dni){
 	this->dni = dni;
 }
 
-/// Agregar Cliente al archivo
+/// -- DIRECCION
+string Cliente::GetDireccion(){
+	return direccion;
+}
+
+void Cliente::SetDireccion(string direccion){
+	this->direccion = direccion;
+}
+
+/// -- EMAIL
+string Cliente::GetEmail(){
+	return email;
+}
+
+void Cliente::SetEmail(string email){
+	this->email = email;
+}
+
+/// -- TELEFONO
+string Cliente::GetTelefono(){
+	return telefono;
+}
+
+void Cliente::SetTelefono(string telefono){
+	this->telefono = telefono;
+}
+
+
+/// -- Agregar Cliente al archivo
 void Cliente::AddCliente(){
 	ofstream archi("clientes.bin",ios::binary|ios::out|ios::app);
 	
@@ -70,7 +107,23 @@ void Cliente::AddCliente(){
 	reg.id = this->id;
 	strcpy(reg.nombre,this->nombre.c_str());
 	reg.dni = this->dni;
+	strcpy(reg.direccion,this->direccion.c_str());
+	strcpy(reg.email,this->email.c_str());
+	strcpy(reg.telefono,this->telefono.c_str());
 	
 	archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
 	archi.close();
 }
+
+/// -- VALIDAR datos
+string Cliente::ValidarDatos(){
+	string errores;
+	if(nombre.length() <= 0 || nombre.length() > 90){ errores += "Nombre invalido\n"; }
+	if(dni < 0){ errores += "DNI invalido\n"; }	
+	if(direccion.length() <= 0 || nombre.length() > 200){ errores += "Direccion invalida\n"; }
+	if(email.length() <= 0 || nombre.length() > 100){ errores += "Email invalido\n"; }
+	if(telefono.length() <= 0 || nombre.length() > 15){ errores += "Telefono invalido\n"; }
+	return errores;
+}
+
+

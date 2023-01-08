@@ -97,16 +97,24 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 	wxBoxSizer* bSizer50;
 	bSizer50 = new wxBoxSizer( wxHORIZONTAL );
 
-	btn_BackHome = new wxButton( this, wxID_ANY, wxT("Regresar"), wxDefaultPosition, wxDefaultSize, 0 );
-	btn_BackHome->SetLabelMarkup( wxT("Regresar") );
-	bSizer50->Add( btn_BackHome, 0, wxALL, 5 );
-
 	input_BuscarProducto = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !input_BuscarProducto->HasFlag( wxTE_MULTILINE ) )
+	{
+	input_BuscarProducto->SetMaxLength( 198 );
+	}
+	#else
+	input_BuscarProducto->SetMaxLength( 198 );
+	#endif
 	bSizer50->Add( input_BuscarProducto, 1, wxALL, 5 );
 
-	btn_BuscarProducto = new wxButton( this, wxID_ANY, wxT("Buscar"), wxDefaultPosition, wxDefaultSize, 0 );
-	btn_BuscarProducto->SetLabelMarkup( wxT("Buscar") );
-	bSizer50->Add( btn_BuscarProducto, 0, wxALL, 5 );
+	btn_Buscar = new wxButton( this, wxID_ANY, wxT("Buscar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Buscar->SetLabelMarkup( wxT("Buscar") );
+	bSizer50->Add( btn_Buscar, 0, wxALL, 5 );
+
+	btn_Actualizar = new wxButton( this, wxID_ANY, wxT("Actualizar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Actualizar->SetLabelMarkup( wxT("Actualizar") );
+	bSizer50->Add( btn_Actualizar, 0, wxALL, 5 );
 
 
 	bSizer8->Add( bSizer50, 0, wxEXPAND, 5 );
@@ -188,7 +196,9 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 	this->Centre( wxBOTH );
 
 	// Connect Events
-	btn_BackHome->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::BackToHome ), NULL, this );
+	btn_Buscar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::BuscarProducto ), NULL, this );
+	btn_Actualizar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::ActualizarGrid ), NULL, this );
+	gridProductos->Connect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseProductosFrame::OrdenarGrid ), NULL, this );
 	btn_AddProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::DisplayAddProducto ), NULL, this );
 	btn_DeleteProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::EliminarProducto ), NULL, this );
 	btn_EditProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::DisplayEditarProducto ), NULL, this );
@@ -197,7 +207,9 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 BaseProductosFrame::~BaseProductosFrame()
 {
 	// Disconnect Events
-	btn_BackHome->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::BackToHome ), NULL, this );
+	btn_Buscar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::BuscarProducto ), NULL, this );
+	btn_Actualizar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::ActualizarGrid ), NULL, this );
+	gridProductos->Disconnect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseProductosFrame::OrdenarGrid ), NULL, this );
 	btn_AddProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::DisplayAddProducto ), NULL, this );
 	btn_DeleteProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::EliminarProducto ), NULL, this );
 	btn_EditProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::DisplayEditarProducto ), NULL, this );
@@ -218,24 +230,24 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 	wxBoxSizer* bSizer9;
 	bSizer9 = new wxBoxSizer( wxHORIZONTAL );
 
-	btn_BackHome = new wxButton( this, wxID_ANY, wxT("Regresar"), wxDefaultPosition, wxDefaultSize, 0 );
-	btn_BackHome->SetLabelMarkup( wxT("Regresar") );
-	bSizer9->Add( btn_BackHome, 0, wxALL|wxEXPAND, 5 );
-
 	input_BuscarCliente = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_BuscarCliente->HasFlag( wxTE_MULTILINE ) )
 	{
-	input_BuscarCliente->SetMaxLength( 100 );
+	input_BuscarCliente->SetMaxLength( 98 );
 	}
 	#else
-	input_BuscarCliente->SetMaxLength( 100 );
+	input_BuscarCliente->SetMaxLength( 98 );
 	#endif
 	bSizer9->Add( input_BuscarCliente, 1, wxALL, 5 );
 
-	btn_BuscarProducto = new wxButton( this, wxID_ANY, wxT("Buscar"), wxDefaultPosition, wxDefaultSize, 0 );
-	btn_BuscarProducto->SetLabelMarkup( wxT("Buscar") );
-	bSizer9->Add( btn_BuscarProducto, 0, wxALL, 5 );
+	btn_Buscar = new wxButton( this, wxID_ANY, wxT("Buscar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Buscar->SetLabelMarkup( wxT("Buscar") );
+	bSizer9->Add( btn_Buscar, 0, wxALL, 5 );
+
+	btn_BackHome = new wxButton( this, wxID_ANY, wxT("Actualizar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_BackHome->SetLabelMarkup( wxT("Actualizar") );
+	bSizer9->Add( btn_BackHome, 0, wxALL|wxEXPAND, 5 );
 
 
 	bSizer7->Add( bSizer9, 0, wxEXPAND, 5 );
@@ -324,7 +336,9 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 	this->Centre( wxBOTH );
 
 	// Connect Events
-	btn_BackHome->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::BackToHome ), NULL, this );
+	btn_Buscar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::BuscarCliente ), NULL, this );
+	btn_BackHome->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::ActualizarGrid ), NULL, this );
+	gridClientes->Connect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseClientesFrame::OrdenarGrid ), NULL, this );
 	btn_AddCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::DisplayAddCliente ), NULL, this );
 	btn_DeleteCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::EliminarCliente ), NULL, this );
 	btn_EditCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::DisplayEditarCliente ), NULL, this );
@@ -333,7 +347,9 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 BaseClientesFrame::~BaseClientesFrame()
 {
 	// Disconnect Events
-	btn_BackHome->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::BackToHome ), NULL, this );
+	btn_Buscar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::BuscarCliente ), NULL, this );
+	btn_BackHome->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::ActualizarGrid ), NULL, this );
+	gridClientes->Disconnect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseClientesFrame::OrdenarGrid ), NULL, this );
 	btn_AddCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::DisplayAddCliente ), NULL, this );
 	btn_DeleteCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::EliminarCliente ), NULL, this );
 	btn_EditCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::DisplayEditarCliente ), NULL, this );
@@ -459,6 +475,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 	bSizer35->Add( btn_VerDetalle, 0, wxALL, 5 );
 
 	btn_EditarVenta = new wxButton( this, wxID_ANY, wxT("Editar Venta"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_EditarVenta->SetLabelMarkup( wxT("Editar Venta") );
 	bSizer35->Add( btn_EditarVenta, 0, wxALL, 5 );
 
 	btn_DeleteVenta = new wxButton( this, wxID_ANY, wxT("Eliminar Venta"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -481,6 +498,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 	this->Centre( wxBOTH );
 
 	// Connect Events
+	gridVentas->Connect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseVentasFrame::OrdenarGrid ), NULL, this );
 	btn_AddVenta->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayAddVenta ), NULL, this );
 	btn_VerDetalle->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayDetalleVenta ), NULL, this );
 	btn_EditarVenta->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayEditarVenta ), NULL, this );
@@ -490,6 +508,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 BaseVentasFrame::~BaseVentasFrame()
 {
 	// Disconnect Events
+	gridVentas->Disconnect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseVentasFrame::OrdenarGrid ), NULL, this );
 	btn_AddVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayAddVenta ), NULL, this );
 	btn_VerDetalle->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayDetalleVenta ), NULL, this );
 	btn_EditarVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayEditarVenta ), NULL, this );
@@ -505,10 +524,10 @@ BaseAddProductoFrame::BaseAddProductoFrame( wxWindow* parent, wxWindowID id, con
 	bSizer14 = new wxBoxSizer( wxVERTICAL );
 
 	wxStaticBoxSizer* sbSizer4;
-	sbSizer4 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Agregar producto nuevo") ), wxVERTICAL );
+	sbSizer4 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Ingrese los datos") ), wxVERTICAL );
 
-	m_panel8 = new wxPanel( sbSizer4->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	sbSizer4->Add( m_panel8, 1, wxEXPAND | wxALL, 5 );
+	m_panel17 = new wxPanel( sbSizer4->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	sbSizer4->Add( m_panel17, 1, wxEXPAND | wxALL, 5 );
 
 	wxBoxSizer* bSizer13;
 	bSizer13 = new wxBoxSizer( wxHORIZONTAL );
@@ -521,10 +540,10 @@ BaseAddProductoFrame::BaseAddProductoFrame( wxWindow* parent, wxWindowID id, con
 	#ifdef __WXGTK__
 	if ( !input_Descripcion->HasFlag( wxTE_MULTILINE ) )
 	{
-	input_Descripcion->SetMaxLength( 200 );
+	input_Descripcion->SetMaxLength( 198 );
 	}
 	#else
-	input_Descripcion->SetMaxLength( 200 );
+	input_Descripcion->SetMaxLength( 198 );
 	#endif
 	bSizer13->Add( input_Descripcion, 1, wxALL|wxEXPAND, 5 );
 
@@ -580,7 +599,7 @@ BaseAddProductoFrame::BaseAddProductoFrame( wxWindow* parent, wxWindowID id, con
 	sbSizer4->Add( bSizer21, 0, wxALL|wxEXPAND, 5 );
 
 
-	bSizer14->Add( sbSizer4, 1, wxEXPAND, 5 );
+	bSizer14->Add( sbSizer4, 1, wxALL|wxEXPAND, 5 );
 
 
 	this->SetSizer( bSizer14 );
@@ -609,10 +628,10 @@ BaseEditProducto::BaseEditProducto( wxWindow* parent, wxWindowID id, const wxStr
 	bSizer14 = new wxBoxSizer( wxVERTICAL );
 
 	wxStaticBoxSizer* sbSizer5;
-	sbSizer5 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Editar Producto") ), wxVERTICAL );
+	sbSizer5 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Ingrese los datos") ), wxVERTICAL );
 
-	m_panel6 = new wxPanel( sbSizer5->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	sbSizer5->Add( m_panel6, 1, wxEXPAND | wxALL, 5 );
+	m_panel16 = new wxPanel( sbSizer5->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	sbSizer5->Add( m_panel16, 1, wxEXPAND | wxALL, 5 );
 
 	wxBoxSizer* bSizer13;
 	bSizer13 = new wxBoxSizer( wxHORIZONTAL );
@@ -622,6 +641,14 @@ BaseEditProducto::BaseEditProducto( wxWindow* parent, wxWindowID id, const wxStr
 	bSizer13->Add( txt_Descripcion, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
 	input_Descripcion = new wxTextCtrl( sbSizer5->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !input_Descripcion->HasFlag( wxTE_MULTILINE ) )
+	{
+	input_Descripcion->SetMaxLength( 198 );
+	}
+	#else
+	input_Descripcion->SetMaxLength( 198 );
+	#endif
 	bSizer13->Add( input_Descripcion, 1, wxALL|wxEXPAND, 5 );
 
 
@@ -676,7 +703,7 @@ BaseEditProducto::BaseEditProducto( wxWindow* parent, wxWindowID id, const wxStr
 	sbSizer5->Add( bSizer21, 0, wxALL|wxEXPAND, 5 );
 
 
-	bSizer14->Add( sbSizer5, 1, wxEXPAND, 5 );
+	bSizer14->Add( sbSizer5, 1, wxALL|wxEXPAND, 5 );
 
 
 	this->SetSizer( bSizer14 );
@@ -705,15 +732,12 @@ BaseAddClienteFrame::BaseAddClienteFrame( wxWindow* parent, wxWindowID id, const
 	bSizer14 = new wxBoxSizer( wxVERTICAL );
 
 	wxStaticBoxSizer* sbSizer2;
-	sbSizer2 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Agregar cliente nuevo") ), wxVERTICAL );
-
-	m_panel3 = new wxPanel( sbSizer2->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	sbSizer2->Add( m_panel3, 1, wxEXPAND | wxALL, 5 );
+	sbSizer2 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Ingrese los datos") ), wxVERTICAL );
 
 	wxBoxSizer* bSizer13;
 	bSizer13 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Nombre = new wxStaticText( sbSizer2->GetStaticBox(), wxID_ANY, wxT("Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Nombre = new wxStaticText( sbSizer2->GetStaticBox(), wxID_ANY, wxT("  Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Nombre->Wrap( -1 );
 	bSizer13->Add( txt_Nombre, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
@@ -721,10 +745,10 @@ BaseAddClienteFrame::BaseAddClienteFrame( wxWindow* parent, wxWindowID id, const
 	#ifdef __WXGTK__
 	if ( !input_Nombre->HasFlag( wxTE_MULTILINE ) )
 	{
-	input_Nombre->SetMaxLength( 100 );
+	input_Nombre->SetMaxLength( 98 );
 	}
 	#else
-	input_Nombre->SetMaxLength( 100 );
+	input_Nombre->SetMaxLength( 98 );
 	#endif
 	bSizer13->Add( input_Nombre, 1, wxALL|wxEXPAND, 5 );
 
@@ -734,15 +758,86 @@ BaseAddClienteFrame::BaseAddClienteFrame( wxWindow* parent, wxWindowID id, const
 	wxBoxSizer* bSizer132;
 	bSizer132 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_DNI = new wxStaticText( sbSizer2->GetStaticBox(), wxID_ANY, wxT("        DNI"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_DNI = new wxStaticText( sbSizer2->GetStaticBox(), wxID_ANY, wxT("          DNI"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_DNI->Wrap( -1 );
 	bSizer132->Add( txt_DNI, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
 	input_DNI = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer132->Add( input_DNI, 1, wxALL, 5 );
+	#ifdef __WXGTK__
+	if ( !input_DNI->HasFlag( wxTE_MULTILINE ) )
+	{
+	input_DNI->SetMaxLength( 10 );
+	}
+	#else
+	input_DNI->SetMaxLength( 10 );
+	#endif
+	bSizer132->Add( input_DNI, 1, wxALL|wxEXPAND, 5 );
 
 
 	sbSizer2->Add( bSizer132, 0, wxALL|wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer1321;
+	bSizer1321 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_Direccion = new wxStaticText( sbSizer2->GetStaticBox(), wxID_ANY, wxT("Direccion"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Direccion->Wrap( -1 );
+	bSizer1321->Add( txt_Direccion, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+	input_Direccion = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !input_Direccion->HasFlag( wxTE_MULTILINE ) )
+	{
+	input_Direccion->SetMaxLength( 99 );
+	}
+	#else
+	input_Direccion->SetMaxLength( 99 );
+	#endif
+	bSizer1321->Add( input_Direccion, 1, wxALL, 5 );
+
+
+	sbSizer2->Add( bSizer1321, 1, wxALL|wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer1322;
+	bSizer1322 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_Email = new wxStaticText( sbSizer2->GetStaticBox(), wxID_ANY, wxT("       Email"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Email->Wrap( -1 );
+	bSizer1322->Add( txt_Email, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+	input_Email = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !input_Email->HasFlag( wxTE_MULTILINE ) )
+	{
+	input_Email->SetMaxLength( 99 );
+	}
+	#else
+	input_Email->SetMaxLength( 99 );
+	#endif
+	bSizer1322->Add( input_Email, 1, wxALL, 5 );
+
+
+	sbSizer2->Add( bSizer1322, 1, wxALL|wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer1323;
+	bSizer1323 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_Telefono = new wxStaticText( sbSizer2->GetStaticBox(), wxID_ANY, wxT(" Telefono"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Telefono->Wrap( -1 );
+	bSizer1323->Add( txt_Telefono, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+	input_Telefono = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !input_Telefono->HasFlag( wxTE_MULTILINE ) )
+	{
+	input_Telefono->SetMaxLength( 10 );
+	}
+	#else
+	input_Telefono->SetMaxLength( 10 );
+	#endif
+	bSizer1323->Add( input_Telefono, 1, wxALL, 5 );
+
+
+	sbSizer2->Add( bSizer1323, 1, wxALL|wxEXPAND, 5 );
 
 	m_panel2 = new wxPanel( sbSizer2->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	sbSizer2->Add( m_panel2, 1, wxEXPAND | wxALL, 5 );
@@ -795,15 +890,12 @@ BaseEditCliente::BaseEditCliente( wxWindow* parent, wxWindowID id, const wxStrin
 	bSizer14 = new wxBoxSizer( wxVERTICAL );
 
 	wxStaticBoxSizer* sbSizer3;
-	sbSizer3 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Editar Cliente") ), wxVERTICAL );
-
-	m_panel4 = new wxPanel( sbSizer3->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	sbSizer3->Add( m_panel4, 1, wxEXPAND | wxALL, 5 );
+	sbSizer3 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Ingrese los datos") ), wxVERTICAL );
 
 	wxBoxSizer* bSizer13;
 	bSizer13 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Nombre = new wxStaticText( sbSizer3->GetStaticBox(), wxID_ANY, wxT("Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Nombre = new wxStaticText( sbSizer3->GetStaticBox(), wxID_ANY, wxT("  Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Nombre->Wrap( -1 );
 	bSizer13->Add( txt_Nombre, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
@@ -811,10 +903,10 @@ BaseEditCliente::BaseEditCliente( wxWindow* parent, wxWindowID id, const wxStrin
 	#ifdef __WXGTK__
 	if ( !input_Nombre->HasFlag( wxTE_MULTILINE ) )
 	{
-	input_Nombre->SetMaxLength( 200 );
+	input_Nombre->SetMaxLength( 98 );
 	}
 	#else
-	input_Nombre->SetMaxLength( 200 );
+	input_Nombre->SetMaxLength( 98 );
 	#endif
 	bSizer13->Add( input_Nombre, 1, wxALL|wxEXPAND, 5 );
 
@@ -824,18 +916,89 @@ BaseEditCliente::BaseEditCliente( wxWindow* parent, wxWindowID id, const wxStrin
 	wxBoxSizer* bSizer132;
 	bSizer132 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_DNI = new wxStaticText( sbSizer3->GetStaticBox(), wxID_ANY, wxT("        DNI"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_DNI = new wxStaticText( sbSizer3->GetStaticBox(), wxID_ANY, wxT("          DNI"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_DNI->Wrap( -1 );
 	bSizer132->Add( txt_DNI, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_DNI = new wxSpinCtrl( sbSizer3->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 10000000, 99999999, 1 );
+	input_DNI = new wxTextCtrl( sbSizer3->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !input_DNI->HasFlag( wxTE_MULTILINE ) )
+	{
+	input_DNI->SetMaxLength( 10 );
+	}
+	#else
+	input_DNI->SetMaxLength( 10 );
+	#endif
 	bSizer132->Add( input_DNI, 1, wxALL, 5 );
 
 
 	sbSizer3->Add( bSizer132, 0, wxALL|wxEXPAND, 5 );
 
-	m_panel5 = new wxPanel( sbSizer3->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	sbSizer3->Add( m_panel5, 1, wxEXPAND | wxALL, 5 );
+	wxBoxSizer* bSizer1321;
+	bSizer1321 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_Direccion = new wxStaticText( sbSizer3->GetStaticBox(), wxID_ANY, wxT("Direccion"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Direccion->Wrap( -1 );
+	bSizer1321->Add( txt_Direccion, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+	input_Direccion = new wxTextCtrl( sbSizer3->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !input_Direccion->HasFlag( wxTE_MULTILINE ) )
+	{
+	input_Direccion->SetMaxLength( 99 );
+	}
+	#else
+	input_Direccion->SetMaxLength( 99 );
+	#endif
+	bSizer1321->Add( input_Direccion, 1, wxALL, 5 );
+
+
+	sbSizer3->Add( bSizer1321, 1, wxALL|wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer1322;
+	bSizer1322 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_Email = new wxStaticText( sbSizer3->GetStaticBox(), wxID_ANY, wxT("       Email"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Email->Wrap( -1 );
+	bSizer1322->Add( txt_Email, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+	input_Email = new wxTextCtrl( sbSizer3->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !input_Email->HasFlag( wxTE_MULTILINE ) )
+	{
+	input_Email->SetMaxLength( 99 );
+	}
+	#else
+	input_Email->SetMaxLength( 99 );
+	#endif
+	bSizer1322->Add( input_Email, 1, wxALL, 5 );
+
+
+	sbSizer3->Add( bSizer1322, 1, wxALL|wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer1323;
+	bSizer1323 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_Telefono = new wxStaticText( sbSizer3->GetStaticBox(), wxID_ANY, wxT(" Telefono"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Telefono->Wrap( -1 );
+	bSizer1323->Add( txt_Telefono, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+	input_Telefono = new wxTextCtrl( sbSizer3->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	#ifdef __WXGTK__
+	if ( !input_Telefono->HasFlag( wxTE_MULTILINE ) )
+	{
+	input_Telefono->SetMaxLength( 14 );
+	}
+	#else
+	input_Telefono->SetMaxLength( 14 );
+	#endif
+	bSizer1323->Add( input_Telefono, 1, wxALL, 5 );
+
+
+	sbSizer3->Add( bSizer1323, 1, wxALL|wxEXPAND, 5 );
+
+	m_panel15 = new wxPanel( sbSizer3->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	sbSizer3->Add( m_panel15, 1, wxEXPAND | wxALL, 5 );
 
 	wxBoxSizer* bSizer21;
 	bSizer21 = new wxBoxSizer( wxHORIZONTAL );
@@ -899,7 +1062,7 @@ BaseAddVenta::BaseAddVenta( wxWindow* parent, wxWindowID id, const wxString& tit
 
 	bSizer421->Add( txt_IDCliente, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_IDCliente = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_IDCliente = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer421->Add( input_IDCliente, 1, wxALL, 5 );
 
 	btn_Cliente = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Aceptar"), wxDefaultPosition, wxDefaultSize, 0 );
