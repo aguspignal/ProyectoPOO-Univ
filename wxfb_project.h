@@ -304,61 +304,41 @@ class BaseAddVenta : public wxDialog
 	private:
 
 	protected:
-		wxStaticText* txt_Cliente1;
+		wxStaticText* txt_Cliente;
 		wxTextCtrl* input_Cliente;
 		wxButton* btn_BuscarClientes;
-		wxStaticText* txt_Producto;
-		wxTextCtrl* input_Producto;
-		wxButton* btn_BuscarProductos;
-		wxStaticText* txt_Cliente;
 		wxStaticText* txt_DatosCliente;
-		wxStaticText* txt_Productos;
+		wxStaticText* txt_ProdsSelect;
 		wxGrid* gridDetalles;
 		wxStaticText* txt_Total;
 		wxStaticText* txt_Monto;
+		wxButton* btn_RemoverProducto;
 		wxButton* btn_Confirmar;
 		wxButton* btn_Cancelar;
-
-		// Virtual event handlers, override them in your derived class
-		virtual void AgregarCliente( wxCommandEvent& event ) { event.Skip(); }
-		virtual void AgregarProducto( wxCommandEvent& event ) { event.Skip(); }
-		virtual void ConfirmarVenta( wxCommandEvent& event ) { event.Skip(); }
-		virtual void CancelarVenta( wxCommandEvent& event ) { event.Skip(); }
-
-
-	public:
-
-		BaseAddVenta( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Crear nueva venta"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 725,500 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
-
-		~BaseAddVenta();
-
-};
-
-///////////////////////////////////////////////////////////////////////////////
-/// Class BaseVerProductos
-///////////////////////////////////////////////////////////////////////////////
-class BaseVerProductos : public wxDialog
-{
-	private:
-
-	protected:
-		wxStaticText* txt_Resultados;
-		wxGrid* gridProductos;
 		wxStaticText* txt_Producto;
+		wxTextCtrl* input_Producto;
+		wxButton* btn_BuscarProductos;
+		wxGrid* gridProductos;
 		wxStaticText* txt_Cantidad;
 		wxSpinCtrl* input_Cantidad;
-		wxButton* btn_Confirmar;
+		wxButton* btn_AgregarProducto;
 
 		// Virtual event handlers, override them in your derived class
+		virtual void BuscarCliente( wxCommandEvent& event ) { event.Skip(); }
+		virtual void QuitarProducto( wxCommandEvent& event ) { event.Skip(); }
+		virtual void ConfirmarVenta( wxCommandEvent& event ) { event.Skip(); }
+		virtual void CancelarVenta( wxCommandEvent& event ) { event.Skip(); }
+		virtual void BuscarProducto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OrdenarGrid( wxGridEvent& event ) { event.Skip(); }
+		virtual void SeleccionarProducto( wxGridEvent& event ) { event.Skip(); }
 		virtual void AgregarProducto( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
 
-		BaseVerProductos( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Resultados de la busqueda"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 535,350 ), long style = wxDEFAULT_DIALOG_STYLE );
+		BaseAddVenta( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Crear nueva venta"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1025,523 ), long style = wxDEFAULT_DIALOG_STYLE );
 
-		~BaseVerProductos();
+		~BaseAddVenta();
 
 };
 
@@ -376,13 +356,15 @@ class BaseVerClientes : public wxDialog
 		wxButton* btn_Confirmar;
 
 		// Virtual event handlers, override them in your derived class
+		virtual void CloseWindow( wxCloseEvent& event ) { event.Skip(); }
 		virtual void OrdenarGrid( wxGridEvent& event ) { event.Skip(); }
+		virtual void SeleccionarCliente( wxGridEvent& event ) { event.Skip(); }
 		virtual void AgregarCliente( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
 
-		BaseVerClientes( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Resultados de la busqueda"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 735,350 ), long style = wxDEFAULT_DIALOG_STYLE );
+		BaseVerClientes( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Resultados de la busqueda"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 500,400 ), long style = wxDEFAULT_DIALOG_STYLE );
 
 		~BaseVerClientes();
 

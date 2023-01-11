@@ -53,6 +53,10 @@ public:
 struct ProductoCantidad {
 	Producto prod;
 	int cant;
+	
+	bool operator==(ProductoCantidad pc){
+		return prod == pc.prod;
+	}
 };
 
 #endif

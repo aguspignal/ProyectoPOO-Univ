@@ -2,19 +2,19 @@
 #include "Venta.h"
 #include "string_conv.h"
 #include <wx/msgdlg.h>
-
+#include "VerClientesFrame.h"
+#include <string>
+using namespace std;
 AddVenta::AddVenta(wxWindow *parent, Sistema *m_sistema) 
 	: BaseAddVenta(parent), sistema(m_sistema) {
 	
 }
-AddVenta::~AddVenta() {
-	
-}
+AddVenta::~AddVenta() {}
 
 float AddVenta::CalcularTotal(){
 	float suma;
-	for(int i=0; i<v.size(); i++){
-		suma += v[i].prod.GetPrecio();
+	for(int i=0; i<prods_seleccionados.size(); i++){
+		suma += (prods_seleccionados[i].prod.GetPrecio() * prods_seleccionados[i].cant);
 	}
 	return suma;
 }
@@ -23,65 +23,132 @@ void AddVenta::ActualizarGrid(){
 	if(gridDetalles->GetNumberRows() != 0){
 		gridDetalles->DeleteRows(0,gridDetalles->GetNumberRows());
 	}
-
-	for(int i=0; i<v.size(); i++){
+	
+	for(int i=0; i<prods_seleccionados.size(); i++){
 		gridDetalles->AppendRows();
-		gridDetalles->SetCellValue(i,0,to_string(v[i].prod.GetID()));
-		gridDetalles->SetCellValue(i,1,v[i].prod.GetDescripcion());
-		gridDetalles->SetCellValue(i,2,to_string(v[i].prod.GetPrecio()));
-		gridDetalles->SetCellValue(i,3,to_string(v[i].cant));
-		gridDetalles->SetCellValue(i,4,to_string(v[i].prod.GetPrecio() * v[i].cant));
+		gridDetalles->SetCellValue(i,0,to_string(prods_seleccionados[i].prod.GetID()));
+		gridDetalles->SetCellValue(i,1,prods_seleccionados[i].prod.GetDescripcion());
+		gridDetalles->SetCellValue(i,2,to_string(prods_seleccionados[i].prod.GetPrecio()));
+		gridDetalles->SetCellValue(i,3,to_string(prods_seleccionados[i].cant));
+		gridDetalles->SetCellValue(i,4,to_string(prods_seleccionados[i].prod.GetPrecio() * prods_seleccionados[i].cant));
 	}
+	
+	txt_Monto->SetLabel(to_string(CalcularTotal()));
 }
 
-/// Guardar ID Cliente
-void AddVenta::AgregarCliente( wxCommandEvent& event ){
-	this-> id_cliente = stoi(wx_to_std(input_Cliente->GetValue()));
-	Cliente cliente = sistema->GetClienteByID(id_cliente);
-	if(cliente.GetID() == 0){
-		wxMessageBox("Cliente no encontrado","Error",wxOK|wxICON_ERROR);	
+/// Buscar Cliente
+void AddVenta::BuscarCliente( wxCommandEvent& event ){
+	if(input_Cliente->IsEmpty()){
+		wxMessageBox("Ingrese un cliente","Error",wxOK|wxICON_HAND);
 	} else {
-		string str = cliente.GetNombre();
-		str.append("  "+to_string(cliente.GetDNI()));
-		txt_DatosCliente->SetLabel(std_to_wx(str));
+		string busqueda = wx_to_std(input_Cliente->GetValue());
+		vector<int> resultados = sistema->BuscarClientes(busqueda);
+		
+		if(resultados.empty()){
+			wxMessageBox("No se encontraron clientes","Error",wxOK|wxICON_ERROR);	
+		} else {
+			VerClientesFrame *win = new VerClientesFrame(this,sistema,busqueda,resultados);
+			id_cliente = win->ShowModal();
+			if(id_cliente != 0){
+				txt_DatosCliente->SetLabel(sistema->GetClienteByID(id_cliente).GetNombre()+" - "+to_string(sistema->GetClienteByID(id_cliente).GetDNI())+" - "+sistema->GetClienteByID(id_cliente).GetDireccion());
+			}
+		}
 	}
-	
 }
 
-/// Guardar Producto y Cantidad
+/// Buscar Producto
+void AddVenta::BuscarProducto( wxCommandEvent& event )  {
+	if(input_Producto->IsEmpty()){
+		wxMessageBox("Ingrese un producto","Error",wxOK|wxICON_HAND);
+	} else {
+		string busqueda = wx_to_std(input_Producto->GetValue());
+		vector<int> resultados = sistema->BuscarProductos(busqueda);
+		
+		if(resultados.empty()){
+			wxMessageBox("No se encontraron productos","Error",wxOK|wxICON_ERROR);	
+		} else {
+			if(gridProductos->GetNumberRows() != 0){
+				gridProductos->DeleteRows(0,gridProductos->GetNumberRows());
+			}
+			for(int i=0; i<resultados.size(); i++){
+				Producto prod = sistema->GetProductoByID(resultados[i]);
+				gridProductos->AppendRows();
+				gridProductos->SetCellValue(i,0,to_string(prod.GetID()));
+				gridProductos->SetCellValue(i,1,prod.GetDescripcion());
+				gridProductos->SetCellValue(i,2,to_string(prod.GetPrecio()));
+				gridProductos->SetCellValue(i,3,to_string(prod.GetStock()));
+			}
+		}
+	}
+}
+
+/// Seleccionar producto
+void AddVenta::SeleccionarProducto( wxGridEvent& event ) {
+	if(gridProductos->GetNumberRows() != 0){
+		int row = event.GetRow();
+		if(!gridProductos->GetCellValue(row,0).IsEmpty()){
+			id_prod = stoi(wx_to_std(gridProductos->GetCellValue(row,0)));
+		}
+	}
+}
+
+/// Agregar detalle
 void AddVenta::AgregarProducto( wxCommandEvent& event )  {
-	int id_producto = stoi(wx_to_std(input_Producto->GetValue()));
-	Producto producto = sistema->GetProductoByID(id_producto);
-	
-//	int cantidad = stoi(wx_to_std(to_string(input_Cantidad->GetValue())));
-	
-	ProductoCantidad ProdCant;
-	ProdCant.prod = producto;
-//	ProdCant.cant = cantidad;
-	v.push_back(ProdCant);
-	
+	if(id_prod != 0){
+		ProductoCantidad prod_cant;
+		prod_cant.prod = sistema->GetProductoByID(id_prod);
+		prod_cant.cant = input_Cantidad->GetValue();
+		prods_seleccionados.push_back(prod_cant);
+		ActualizarGrid();
+	}
+}
+
+/// Quitar producto de detalles
+void AddVenta::QuitarProducto( wxCommandEvent& event )  {
+	if(gridDetalles->GetNumberRows() != 0){
+		int row = gridDetalles->GetGridCursorRow();
+		
+		ProductoCantidad prod_cant;
+		prod_cant.prod = sistema->GetProductoByID(stoi(wx_to_std(gridProductos->GetCellValue(row,0))));
+		
+		auto it = find(prods_seleccionados.begin(), prods_seleccionados.end(), prod_cant);
+		prods_seleccionados.erase(it);
+		
+		gridDetalles->DeleteRows(row);
+	}
 	ActualizarGrid();
-	
-	txt_Monto->SetLabel(std_to_wx(to_string(CalcularTotal())));
 }
 
 /// Guardar la venta
 void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
-	if(this->id_cliente == 0){
-		wxMessageBox("No se ingreso cliente","Error",wxOK|wxICON_ERROR);
-	} else {
-		if(v.empty()){
-			wxMessageBox("No se agregaron productos","Error",wxOK|wxICON_ERROR);
-		} else {
-//			Venta venta(this->id_cliente, this->v);
-//			venta.AddVenta();
-		}
+	string errores;
+	if(id_cliente == 0){
+		errores += "Seleccione un cliente para continuar\n";
 	}
-	
-	EndModal(1);
+	if(prods_seleccionados.empty()){
+		errores += "No selecciono ningun producto\n";
+	}
+	if(errores.size()){
+		wxMessageBox(errores,"Error",wxOK|wxICON_ERROR);
+	} else {
+		int choice = wxMessageBox("Esta seguro de confirmar la venta?","Warning",wxYES_NO|wxICON_INFORMATION);
+		if(int choice = wxYES){
+			Venta venta(id_cliente,prods_seleccionados);
+			venta.AddVenta();
+		}
+		EndModal(1);
+	}
 }
 
+/// Cancelar venta
 void AddVenta::CancelarVenta( wxCommandEvent& event )  {
 	EndModal(0);
 }
+
+/// Ordenar grid detalles
+void AddVenta::OrdenarGrid( wxGridEvent& event )  {
+	event.Skip();
+}
+
+
 

@@ -302,6 +302,18 @@ Producto Sistema::GetProductoByDescrip(string descripcion){
 	return prod;
 }
 
+vector<int> Sistema::BuscarProductos(string busqueda){
+	vector<int> results;
+	for(int i=0; i<productos.size(); i++){
+		string str = StrAMinusculas(productos[i].GetDescripcion());
+		size_t pos = str.find(StrAMinusculas(busqueda),0);
+		if(pos < str.length()){
+			results.push_back(productos[i].GetID());
+		}
+	}
+	return results;
+}
+
 /// -- BUSCAR Cliente
 Cliente &Sistema::GetCliente(int i){
 	return clientes[i];
@@ -327,6 +339,18 @@ Cliente Sistema::GetClienteByNombre(string nombre){
 	}
 	Cliente cliente;
 	return cliente;
+}
+
+vector<int> Sistema::BuscarClientes(string busqueda){
+	vector<int> results;
+	for(int i=0; i<clientes.size(); i++){
+		string str = StrAMinusculas(clientes[i].GetNombre());
+		size_t pos = str.find(StrAMinusculas(busqueda),0);
+		if(pos < str.length()){
+			results.push_back(clientes[i].GetID());
+		}
+	}
+	return results;
 }
 
 /// -- BUSCAR Venta

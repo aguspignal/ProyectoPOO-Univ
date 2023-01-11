@@ -70,6 +70,9 @@ public:
 	int GetVentasSize();        
 	int GetDetallesVentaSize(); 
 	
+	vector<int> BuscarClientes(string busqueda);
+	vector<int> BuscarProductos(string busqueda);
+	
 	void MostrarDetalles();
 	
 	/// Ordenamiento
