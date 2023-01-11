@@ -1,5 +1,4 @@
 #include "Tools.h"
-
 /// String 
 string StrSinEspacios(string str){
 	str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
@@ -11,6 +10,36 @@ string StrAMinusculas(string str){
 		str[i] = tolower(str[i]);
 	}
 	return str;
+}
+
+bool ValidarDNI(string dni){
+	if(dni.length() < 1 || dni.length() > 8){
+		return false;
+	} else {
+		char DNI[dni.length()];
+		strcpy(DNI,dni.c_str());
+		for(int i=0; i<dni.length(); i++){
+			if(DNI[i] < 48 || DNI[i] > 57){
+				return false;
+			}
+		}
+		return true;
+	}
+}
+	
+bool ValidarTelefono(string telefono){
+	if(telefono.length() < 0 || telefono.length() > 12){
+		return false;
+	} else {
+		char TELEF[telefono.length()];
+		strcpy(TELEF,telefono.c_str());
+		for(int i=0; i<telefono.length(); i++){
+			if(TELEF[i] < 48 || TELEF[i] > 57){
+				return false;
+			}
+		}
+		return true;
+	}
 }
 
 /// Criterios de ordenamiento

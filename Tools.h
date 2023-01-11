@@ -10,6 +10,8 @@ using namespace std;
 /// String 
 string StrSinEspacios(string str);
 string StrAMinusculas(string str);
+bool ValidarDNI(string dni);
+bool ValidarTelefono(string telefono);
 
 /// Criterios de ordenamiento
 bool Orden_ID_Prod(Producto p1, Producto p2);

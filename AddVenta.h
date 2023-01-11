@@ -13,7 +13,6 @@ private:
 protected:
 	void AgregarCliente( wxCommandEvent& event )  override;
 	void AgregarProducto( wxCommandEvent& event )  override;
-	void EliminarProducto( wxCommandEvent& event )  override;
 	void ConfirmarVenta( wxCommandEvent& event )  override;
 	void CancelarVenta( wxCommandEvent& event )  override;
 	float CalcularTotal();

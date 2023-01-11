@@ -12,23 +12,21 @@
 BaseHomepage::BaseHomepage( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
 	this->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOW ) );
 	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_INACTIVECAPTION ) );
 
 	wxBoxSizer* bSizer2;
 	bSizer2 = new wxBoxSizer( wxVERTICAL );
 
-	m_panel17 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	bSizer2->Add( m_panel17, 1, wxEXPAND | wxALL, 5 );
+	m_panel188 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	bSizer2->Add( m_panel188, 1, wxEXPAND | wxALL, 5 );
 
 	m_staticText34 = new wxStaticText( this, wxID_ANY, wxT("Bienvenido!"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText34->Wrap( -1 );
-	m_staticText34->SetFont( wxFont( 20, wxFONTFAMILY_SWISS, wxFONTSTYLE_ITALIC, wxFONTWEIGHT_BOLD, false, wxT("BankGothic Md BT") ) );
+	m_staticText34->SetFont( wxFont( 20, wxFONTFAMILY_SWISS, wxFONTSTYLE_ITALIC, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
 
 	bSizer2->Add( m_staticText34, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
-
-	m_panel24 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	bSizer2->Add( m_panel24, 0, wxEXPAND | wxALL, 5 );
 
 	wxBoxSizer* bSizer57;
 	bSizer57 = new wxBoxSizer( wxHORIZONTAL );
@@ -37,20 +35,23 @@ BaseHomepage::BaseHomepage( wxWindow* parent, wxWindowID id, const wxString& tit
 	bSizer57->Add( 0, 0, 1, wxEXPAND, 5 );
 
 	btn_Productos = new wxButton( this, wxID_ANY, wxT("Productos"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Productos->SetFont( wxFont( 12, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
 	btn_Productos->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BTNTEXT ) );
 	btn_Productos->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOW ) );
 
-	bSizer57->Add( btn_Productos, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	bSizer57->Add( btn_Productos, 1, wxALL, 5 );
 
 	btn_Clientes = new wxButton( this, wxID_ANY, wxT("Clientes"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Clientes->SetFont( wxFont( 12, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
 	btn_Clientes->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BTNTEXT ) );
 
-	bSizer57->Add( btn_Clientes, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	bSizer57->Add( btn_Clientes, 1, wxALL, 5 );
 
 	btn_Ventas = new wxButton( this, wxID_ANY, wxT("Ventas"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Ventas->SetFont( wxFont( 12, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
 	btn_Ventas->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_BTNTEXT ) );
 
-	bSizer57->Add( btn_Ventas, 1, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	bSizer57->Add( btn_Ventas, 1, wxALL, 5 );
 
 
 	bSizer57->Add( 0, 0, 1, wxEXPAND, 5 );
@@ -58,8 +59,8 @@ BaseHomepage::BaseHomepage( wxWindow* parent, wxWindowID id, const wxString& tit
 
 	bSizer2->Add( bSizer57, 0, wxEXPAND, 5 );
 
-	m_panel18 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	bSizer2->Add( m_panel18, 1, wxEXPAND | wxALL, 5 );
+	m_panel184 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	bSizer2->Add( m_panel184, 1, wxEXPAND | wxALL, 5 );
 
 
 	this->SetSizer( bSizer2 );
@@ -82,10 +83,9 @@ BaseHomepage::~BaseHomepage()
 
 }
 
-BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
+BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
-	this->SetFont( wxFont( 9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
 	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_ACTIVECAPTION ) );
 
 	wxBoxSizer* bSizer4;
@@ -121,7 +121,7 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 
 	txt_Productos = new wxStaticText( this, wxID_ANY, wxT("Productos"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Productos->Wrap( -1 );
-	txt_Productos->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("BankGothic Md BT") ) );
+	txt_Productos->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
 
 	bSizer8->Add( txt_Productos, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
@@ -136,9 +136,9 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 
 	// Columns
 	gridProductos->SetColSize( 0, 50 );
-	gridProductos->SetColSize( 1, 500 );
-	gridProductos->SetColSize( 2, 75 );
-	gridProductos->SetColSize( 3, 75 );
+	gridProductos->SetColSize( 1, 400 );
+	gridProductos->SetColSize( 2, 100 );
+	gridProductos->SetColSize( 3, 100 );
 	gridProductos->EnableDragColMove( false );
 	gridProductos->EnableDragColSize( true );
 	gridProductos->SetColLabelValue( 0, wxT("ID") );
@@ -149,11 +149,11 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 
 	// Rows
 	gridProductos->EnableDragRowSize( true );
-	gridProductos->SetRowLabelSize( 0 );
+	gridProductos->SetRowLabelSize( 1 );
 	gridProductos->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Label Appearance
-	gridProductos->SetLabelFont( wxFont( 9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Arial") ) );
+	gridProductos->SetLabelFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
 
 	// Cell Defaults
 	gridProductos->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
@@ -216,7 +216,7 @@ BaseProductosFrame::~BaseProductosFrame()
 
 }
 
-BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
+BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_ACTIVECAPTION ) );
@@ -254,7 +254,7 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 
 	txt_Clientes = new wxStaticText( this, wxID_ANY, wxT("Clientes"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Clientes->Wrap( -1 );
-	txt_Clientes->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("BankGothic Md BT") ) );
+	txt_Clientes->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
 
 	bSizer7->Add( txt_Clientes, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
@@ -269,11 +269,11 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 
 	// Columns
 	gridClientes->SetColSize( 0, 50 );
-	gridClientes->SetColSize( 1, 225 );
-	gridClientes->SetColSize( 2, 150 );
-	gridClientes->SetColSize( 3, 225 );
-	gridClientes->SetColSize( 4, 225 );
-	gridClientes->SetColSize( 5, 150 );
+	gridClientes->SetColSize( 1, 200 );
+	gridClientes->SetColSize( 2, 125 );
+	gridClientes->SetColSize( 3, 200 );
+	gridClientes->SetColSize( 4, 200 );
+	gridClientes->SetColSize( 5, 125 );
 	gridClientes->EnableDragColMove( false );
 	gridClientes->EnableDragColSize( true );
 	gridClientes->SetColLabelValue( 0, wxT("ID") );
@@ -290,6 +290,7 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 	gridClientes->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Label Appearance
+	gridClientes->SetLabelFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
 
 	// Cell Defaults
 	gridClientes->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
@@ -356,7 +357,7 @@ BaseClientesFrame::~BaseClientesFrame()
 
 }
 
-BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
+BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_ACTIVECAPTION ) );
@@ -372,7 +373,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	txt_Ventas = new wxStaticText( this, wxID_ANY, wxT("Ventas"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Ventas->Wrap( -1 );
-	txt_Ventas->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("BankGothic Md BT") ) );
+	txt_Ventas->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
 
 	bSizer33->Add( txt_Ventas, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
@@ -402,6 +403,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 	gridVentas->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Label Appearance
+	gridVentas->SetLabelFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
 
 	// Cell Defaults
 	gridVentas->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
@@ -415,7 +417,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	txt_Detalle = new wxStaticText( this, wxID_ANY, wxT("Detalle de venta"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Detalle->Wrap( -1 );
-	txt_Detalle->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("BankGothic Md BT") ) );
+	txt_Detalle->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
 
 	bSizer34->Add( txt_Detalle, 0, wxALL, 5 );
 
@@ -430,9 +432,9 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	// Columns
 	gridDetalles->SetColSize( 0, 100 );
-	gridDetalles->SetColSize( 1, 400 );
-	gridDetalles->SetColSize( 2, 75 );
-	gridDetalles->SetColSize( 3, 75 );
+	gridDetalles->SetColSize( 1, 350 );
+	gridDetalles->SetColSize( 2, 100 );
+	gridDetalles->SetColSize( 3, 100 );
 	gridDetalles->SetColSize( 4, 100 );
 	gridDetalles->EnableDragColMove( false );
 	gridDetalles->EnableDragColSize( true );
@@ -449,6 +451,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 	gridDetalles->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Label Appearance
+	gridDetalles->SetLabelFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
 
 	// Cell Defaults
 	gridDetalles->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
@@ -519,66 +522,64 @@ BaseVentasFrame::~BaseVentasFrame()
 BaseAddProductoFrame::BaseAddProductoFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
 
 	wxBoxSizer* bSizer14;
 	bSizer14 = new wxBoxSizer( wxVERTICAL );
 
-	wxStaticBoxSizer* sbSizer4;
-	sbSizer4 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Ingrese los datos") ), wxVERTICAL );
-
-	m_panel17 = new wxPanel( sbSizer4->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	sbSizer4->Add( m_panel17, 1, wxEXPAND | wxALL, 5 );
+	wxBoxSizer* bSizer86;
+	bSizer86 = new wxBoxSizer( wxVERTICAL );
 
 	wxBoxSizer* bSizer13;
 	bSizer13 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Descripcion = new wxStaticText( sbSizer4->GetStaticBox(), wxID_ANY, wxT("Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Descripcion = new wxStaticText( this, wxID_ANY, wxT("Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Descripcion->Wrap( -1 );
 	bSizer13->Add( txt_Descripcion, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Descripcion = new wxTextCtrl( sbSizer4->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_Descripcion = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_Descripcion->HasFlag( wxTE_MULTILINE ) )
 	{
-	input_Descripcion->SetMaxLength( 198 );
+	input_Descripcion->SetMaxLength( 100 );
 	}
 	#else
-	input_Descripcion->SetMaxLength( 198 );
+	input_Descripcion->SetMaxLength( 100 );
 	#endif
 	bSizer13->Add( input_Descripcion, 1, wxALL|wxEXPAND, 5 );
 
 
-	sbSizer4->Add( bSizer13, 0, wxALL|wxEXPAND, 5 );
+	bSizer86->Add( bSizer13, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer131;
 	bSizer131 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Precio = new wxStaticText( sbSizer4->GetStaticBox(), wxID_ANY, wxT("    Precio"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Precio = new wxStaticText( this, wxID_ANY, wxT("    Precio"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Precio->Wrap( -1 );
 	bSizer131->Add( txt_Precio, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Precio = new wxSpinCtrlDouble( sbSizer4->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 999999, 1, 0.1 );
+	input_Precio = new wxSpinCtrlDouble( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 999999, 1, 0.1 );
 	input_Precio->SetDigits( 2 );
 	bSizer131->Add( input_Precio, 1, wxALL, 5 );
 
 
-	sbSizer4->Add( bSizer131, 0, wxALL|wxEXPAND, 5 );
+	bSizer86->Add( bSizer131, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer132;
 	bSizer132 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Stock = new wxStaticText( sbSizer4->GetStaticBox(), wxID_ANY, wxT("    Stock"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Stock = new wxStaticText( this, wxID_ANY, wxT("    Stock"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Stock->Wrap( -1 );
 	bSizer132->Add( txt_Stock, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Stock = new wxSpinCtrl( sbSizer4->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 999999, 1 );
+	input_Stock = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 999999, 1 );
 	bSizer132->Add( input_Stock, 1, wxALL, 5 );
 
 
-	sbSizer4->Add( bSizer132, 0, wxALL|wxEXPAND, 5 );
+	bSizer86->Add( bSizer132, 0, wxALL|wxEXPAND, 5 );
 
-	m_panel9 = new wxPanel( sbSizer4->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	sbSizer4->Add( m_panel9, 1, wxEXPAND | wxALL, 5 );
+	m_panel9 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	bSizer86->Add( m_panel9, 1, wxEXPAND | wxALL, 5 );
 
 	wxBoxSizer* bSizer21;
 	bSizer21 = new wxBoxSizer( wxHORIZONTAL );
@@ -586,20 +587,20 @@ BaseAddProductoFrame::BaseAddProductoFrame( wxWindow* parent, wxWindowID id, con
 
 	bSizer21->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	btn_Agregar = new wxButton( sbSizer4->GetStaticBox(), wxID_ANY, wxT("Agregar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Agregar = new wxButton( this, wxID_ANY, wxT("Agregar"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer21->Add( btn_Agregar, 0, wxALL, 5 );
 
-	btn_Cancelar = new wxButton( sbSizer4->GetStaticBox(), wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Cancelar = new wxButton( this, wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer21->Add( btn_Cancelar, 0, wxALL, 5 );
 
 
 	bSizer21->Add( 0, 0, 1, wxEXPAND, 5 );
 
 
-	sbSizer4->Add( bSizer21, 0, wxALL|wxEXPAND, 5 );
+	bSizer86->Add( bSizer21, 0, wxALL|wxEXPAND, 5 );
 
 
-	bSizer14->Add( sbSizer4, 1, wxALL|wxEXPAND, 5 );
+	bSizer14->Add( bSizer86, 1, wxALL|wxEXPAND, 5 );
 
 
 	this->SetSizer( bSizer14 );
@@ -623,24 +624,22 @@ BaseAddProductoFrame::~BaseAddProductoFrame()
 BaseEditProducto::BaseEditProducto( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
 
 	wxBoxSizer* bSizer14;
 	bSizer14 = new wxBoxSizer( wxVERTICAL );
 
-	wxStaticBoxSizer* sbSizer5;
-	sbSizer5 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Ingrese los datos") ), wxVERTICAL );
-
-	m_panel16 = new wxPanel( sbSizer5->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	sbSizer5->Add( m_panel16, 1, wxEXPAND | wxALL, 5 );
+	wxBoxSizer* bSizer87;
+	bSizer87 = new wxBoxSizer( wxVERTICAL );
 
 	wxBoxSizer* bSizer13;
 	bSizer13 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Descripcion = new wxStaticText( sbSizer5->GetStaticBox(), wxID_ANY, wxT("Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Descripcion = new wxStaticText( this, wxID_ANY, wxT("Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Descripcion->Wrap( -1 );
 	bSizer13->Add( txt_Descripcion, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Descripcion = new wxTextCtrl( sbSizer5->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_Descripcion = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_Descripcion->HasFlag( wxTE_MULTILINE ) )
 	{
@@ -652,37 +651,37 @@ BaseEditProducto::BaseEditProducto( wxWindow* parent, wxWindowID id, const wxStr
 	bSizer13->Add( input_Descripcion, 1, wxALL|wxEXPAND, 5 );
 
 
-	sbSizer5->Add( bSizer13, 0, wxALL|wxEXPAND, 5 );
+	bSizer87->Add( bSizer13, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer131;
 	bSizer131 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Precio = new wxStaticText( sbSizer5->GetStaticBox(), wxID_ANY, wxT("    Precio"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Precio = new wxStaticText( this, wxID_ANY, wxT("    Precio"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Precio->Wrap( -1 );
 	bSizer131->Add( txt_Precio, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Precio = new wxSpinCtrlDouble( sbSizer5->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 999999, 1, 0.1 );
+	input_Precio = new wxSpinCtrlDouble( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 999999, 1, 0.1 );
 	input_Precio->SetDigits( 2 );
 	bSizer131->Add( input_Precio, 1, wxALL, 5 );
 
 
-	sbSizer5->Add( bSizer131, 0, wxALL|wxEXPAND, 5 );
+	bSizer87->Add( bSizer131, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer132;
 	bSizer132 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Stock = new wxStaticText( sbSizer5->GetStaticBox(), wxID_ANY, wxT("     Stock"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Stock = new wxStaticText( this, wxID_ANY, wxT("     Stock"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Stock->Wrap( -1 );
 	bSizer132->Add( txt_Stock, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Stock = new wxSpinCtrl( sbSizer5->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 999999, 1 );
+	input_Stock = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 999999, 1 );
 	bSizer132->Add( input_Stock, 1, wxALL, 5 );
 
 
-	sbSizer5->Add( bSizer132, 0, wxALL|wxEXPAND, 5 );
+	bSizer87->Add( bSizer132, 0, wxALL|wxEXPAND, 5 );
 
-	m_panel7 = new wxPanel( sbSizer5->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	sbSizer5->Add( m_panel7, 1, wxEXPAND | wxALL, 5 );
+	m_panel7 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	bSizer87->Add( m_panel7, 1, wxEXPAND | wxALL, 5 );
 
 	wxBoxSizer* bSizer21;
 	bSizer21 = new wxBoxSizer( wxHORIZONTAL );
@@ -690,20 +689,20 @@ BaseEditProducto::BaseEditProducto( wxWindow* parent, wxWindowID id, const wxStr
 
 	bSizer21->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	btn_Guardar = new wxButton( sbSizer5->GetStaticBox(), wxID_ANY, wxT("Guardar cambios"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Guardar = new wxButton( this, wxID_ANY, wxT("Guardar cambios"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer21->Add( btn_Guardar, 0, wxALL, 5 );
 
-	btn_Cancelar = new wxButton( sbSizer5->GetStaticBox(), wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Cancelar = new wxButton( this, wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer21->Add( btn_Cancelar, 0, wxALL, 5 );
 
 
 	bSizer21->Add( 0, 0, 1, wxEXPAND, 5 );
 
 
-	sbSizer5->Add( bSizer21, 0, wxALL|wxEXPAND, 5 );
+	bSizer87->Add( bSizer21, 0, wxALL|wxEXPAND, 5 );
 
 
-	bSizer14->Add( sbSizer5, 1, wxALL|wxEXPAND, 5 );
+	bSizer14->Add( bSizer87, 1, wxALL|wxEXPAND, 5 );
 
 
 	this->SetSizer( bSizer14 );
@@ -727,63 +726,64 @@ BaseEditProducto::~BaseEditProducto()
 BaseAddClienteFrame::BaseAddClienteFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
 
 	wxBoxSizer* bSizer14;
 	bSizer14 = new wxBoxSizer( wxVERTICAL );
 
-	wxStaticBoxSizer* sbSizer2;
-	sbSizer2 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Ingrese los datos") ), wxVERTICAL );
+	wxBoxSizer* bSizer85;
+	bSizer85 = new wxBoxSizer( wxVERTICAL );
 
 	wxBoxSizer* bSizer13;
 	bSizer13 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Nombre = new wxStaticText( sbSizer2->GetStaticBox(), wxID_ANY, wxT("  Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Nombre = new wxStaticText( this, wxID_ANY, wxT("  Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Nombre->Wrap( -1 );
 	bSizer13->Add( txt_Nombre, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Nombre = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_Nombre = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_Nombre->HasFlag( wxTE_MULTILINE ) )
 	{
-	input_Nombre->SetMaxLength( 98 );
+	input_Nombre->SetMaxLength( 99 );
 	}
 	#else
-	input_Nombre->SetMaxLength( 98 );
+	input_Nombre->SetMaxLength( 99 );
 	#endif
 	bSizer13->Add( input_Nombre, 1, wxALL|wxEXPAND, 5 );
 
 
-	sbSizer2->Add( bSizer13, 0, wxALL|wxEXPAND, 5 );
+	bSizer85->Add( bSizer13, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer132;
 	bSizer132 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_DNI = new wxStaticText( sbSizer2->GetStaticBox(), wxID_ANY, wxT("          DNI"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_DNI = new wxStaticText( this, wxID_ANY, wxT("          DNI"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_DNI->Wrap( -1 );
 	bSizer132->Add( txt_DNI, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_DNI = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_DNI = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_DNI->HasFlag( wxTE_MULTILINE ) )
 	{
-	input_DNI->SetMaxLength( 10 );
+	input_DNI->SetMaxLength( 8 );
 	}
 	#else
-	input_DNI->SetMaxLength( 10 );
+	input_DNI->SetMaxLength( 8 );
 	#endif
 	bSizer132->Add( input_DNI, 1, wxALL|wxEXPAND, 5 );
 
 
-	sbSizer2->Add( bSizer132, 0, wxALL|wxEXPAND, 5 );
+	bSizer85->Add( bSizer132, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer1321;
 	bSizer1321 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Direccion = new wxStaticText( sbSizer2->GetStaticBox(), wxID_ANY, wxT("Direccion"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Direccion = new wxStaticText( this, wxID_ANY, wxT("Direccion"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Direccion->Wrap( -1 );
 	bSizer1321->Add( txt_Direccion, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Direccion = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_Direccion = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_Direccion->HasFlag( wxTE_MULTILINE ) )
 	{
@@ -795,16 +795,16 @@ BaseAddClienteFrame::BaseAddClienteFrame( wxWindow* parent, wxWindowID id, const
 	bSizer1321->Add( input_Direccion, 1, wxALL, 5 );
 
 
-	sbSizer2->Add( bSizer1321, 1, wxALL|wxEXPAND, 5 );
+	bSizer85->Add( bSizer1321, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer1322;
 	bSizer1322 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Email = new wxStaticText( sbSizer2->GetStaticBox(), wxID_ANY, wxT("       Email"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Email = new wxStaticText( this, wxID_ANY, wxT("       Email"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Email->Wrap( -1 );
 	bSizer1322->Add( txt_Email, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Email = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_Email = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_Email->HasFlag( wxTE_MULTILINE ) )
 	{
@@ -816,31 +816,31 @@ BaseAddClienteFrame::BaseAddClienteFrame( wxWindow* parent, wxWindowID id, const
 	bSizer1322->Add( input_Email, 1, wxALL, 5 );
 
 
-	sbSizer2->Add( bSizer1322, 1, wxALL|wxEXPAND, 5 );
+	bSizer85->Add( bSizer1322, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer1323;
 	bSizer1323 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Telefono = new wxStaticText( sbSizer2->GetStaticBox(), wxID_ANY, wxT(" Telefono"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Telefono = new wxStaticText( this, wxID_ANY, wxT(" Telefono"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Telefono->Wrap( -1 );
 	bSizer1323->Add( txt_Telefono, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Telefono = new wxTextCtrl( sbSizer2->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_Telefono = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_Telefono->HasFlag( wxTE_MULTILINE ) )
 	{
-	input_Telefono->SetMaxLength( 10 );
+	input_Telefono->SetMaxLength( 12 );
 	}
 	#else
-	input_Telefono->SetMaxLength( 10 );
+	input_Telefono->SetMaxLength( 12 );
 	#endif
 	bSizer1323->Add( input_Telefono, 1, wxALL, 5 );
 
 
-	sbSizer2->Add( bSizer1323, 1, wxALL|wxEXPAND, 5 );
+	bSizer85->Add( bSizer1323, 0, wxALL|wxEXPAND, 5 );
 
-	m_panel2 = new wxPanel( sbSizer2->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	sbSizer2->Add( m_panel2, 1, wxEXPAND | wxALL, 5 );
+	m_panel2 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	bSizer85->Add( m_panel2, 1, wxEXPAND | wxALL, 5 );
 
 	wxBoxSizer* bSizer21;
 	bSizer21 = new wxBoxSizer( wxHORIZONTAL );
@@ -848,20 +848,20 @@ BaseAddClienteFrame::BaseAddClienteFrame( wxWindow* parent, wxWindowID id, const
 
 	bSizer21->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	btn_Agregar = new wxButton( sbSizer2->GetStaticBox(), wxID_ANY, wxT("Agregar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Agregar = new wxButton( this, wxID_ANY, wxT("Agregar"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer21->Add( btn_Agregar, 0, wxALL, 5 );
 
-	btn_Cancelar = new wxButton( sbSizer2->GetStaticBox(), wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Cancelar = new wxButton( this, wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer21->Add( btn_Cancelar, 0, wxALL, 5 );
 
 
 	bSizer21->Add( 0, 0, 1, wxEXPAND, 5 );
 
 
-	sbSizer2->Add( bSizer21, 0, wxALL|wxEXPAND, 5 );
+	bSizer85->Add( bSizer21, 0, wxALL|wxEXPAND, 5 );
 
 
-	bSizer14->Add( sbSizer2, 1, wxALL|wxEXPAND, 5 );
+	bSizer14->Add( bSizer85, 1, wxALL|wxEXPAND, 5 );
 
 
 	this->SetSizer( bSizer14 );
@@ -885,63 +885,64 @@ BaseAddClienteFrame::~BaseAddClienteFrame()
 BaseEditCliente::BaseEditCliente( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
 
 	wxBoxSizer* bSizer14;
 	bSizer14 = new wxBoxSizer( wxVERTICAL );
 
-	wxStaticBoxSizer* sbSizer3;
-	sbSizer3 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Ingrese los datos") ), wxVERTICAL );
+	wxBoxSizer* bSizer84;
+	bSizer84 = new wxBoxSizer( wxVERTICAL );
 
 	wxBoxSizer* bSizer13;
 	bSizer13 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Nombre = new wxStaticText( sbSizer3->GetStaticBox(), wxID_ANY, wxT("  Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Nombre = new wxStaticText( this, wxID_ANY, wxT("  Nombre"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Nombre->Wrap( -1 );
 	bSizer13->Add( txt_Nombre, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Nombre = new wxTextCtrl( sbSizer3->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_Nombre = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_Nombre->HasFlag( wxTE_MULTILINE ) )
 	{
-	input_Nombre->SetMaxLength( 98 );
+	input_Nombre->SetMaxLength( 99 );
 	}
 	#else
-	input_Nombre->SetMaxLength( 98 );
+	input_Nombre->SetMaxLength( 99 );
 	#endif
 	bSizer13->Add( input_Nombre, 1, wxALL|wxEXPAND, 5 );
 
 
-	sbSizer3->Add( bSizer13, 0, wxALL|wxEXPAND, 5 );
+	bSizer84->Add( bSizer13, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer132;
 	bSizer132 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_DNI = new wxStaticText( sbSizer3->GetStaticBox(), wxID_ANY, wxT("          DNI"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_DNI = new wxStaticText( this, wxID_ANY, wxT("          DNI"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_DNI->Wrap( -1 );
 	bSizer132->Add( txt_DNI, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_DNI = new wxTextCtrl( sbSizer3->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_DNI = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_DNI->HasFlag( wxTE_MULTILINE ) )
 	{
-	input_DNI->SetMaxLength( 10 );
+	input_DNI->SetMaxLength( 8 );
 	}
 	#else
-	input_DNI->SetMaxLength( 10 );
+	input_DNI->SetMaxLength( 8 );
 	#endif
 	bSizer132->Add( input_DNI, 1, wxALL, 5 );
 
 
-	sbSizer3->Add( bSizer132, 0, wxALL|wxEXPAND, 5 );
+	bSizer84->Add( bSizer132, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer1321;
 	bSizer1321 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Direccion = new wxStaticText( sbSizer3->GetStaticBox(), wxID_ANY, wxT("Direccion"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Direccion = new wxStaticText( this, wxID_ANY, wxT("Direccion"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Direccion->Wrap( -1 );
 	bSizer1321->Add( txt_Direccion, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Direccion = new wxTextCtrl( sbSizer3->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_Direccion = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_Direccion->HasFlag( wxTE_MULTILINE ) )
 	{
@@ -953,16 +954,16 @@ BaseEditCliente::BaseEditCliente( wxWindow* parent, wxWindowID id, const wxStrin
 	bSizer1321->Add( input_Direccion, 1, wxALL, 5 );
 
 
-	sbSizer3->Add( bSizer1321, 1, wxALL|wxEXPAND, 5 );
+	bSizer84->Add( bSizer1321, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer1322;
 	bSizer1322 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Email = new wxStaticText( sbSizer3->GetStaticBox(), wxID_ANY, wxT("       Email"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Email = new wxStaticText( this, wxID_ANY, wxT("       Email"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Email->Wrap( -1 );
 	bSizer1322->Add( txt_Email, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Email = new wxTextCtrl( sbSizer3->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_Email = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_Email->HasFlag( wxTE_MULTILINE ) )
 	{
@@ -974,31 +975,31 @@ BaseEditCliente::BaseEditCliente( wxWindow* parent, wxWindowID id, const wxStrin
 	bSizer1322->Add( input_Email, 1, wxALL, 5 );
 
 
-	sbSizer3->Add( bSizer1322, 1, wxALL|wxEXPAND, 5 );
+	bSizer84->Add( bSizer1322, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer1323;
 	bSizer1323 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Telefono = new wxStaticText( sbSizer3->GetStaticBox(), wxID_ANY, wxT(" Telefono"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Telefono = new wxStaticText( this, wxID_ANY, wxT(" Telefono"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Telefono->Wrap( -1 );
 	bSizer1323->Add( txt_Telefono, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_Telefono = new wxTextCtrl( sbSizer3->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	input_Telefono = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
 	if ( !input_Telefono->HasFlag( wxTE_MULTILINE ) )
 	{
-	input_Telefono->SetMaxLength( 14 );
+	input_Telefono->SetMaxLength( 12 );
 	}
 	#else
-	input_Telefono->SetMaxLength( 14 );
+	input_Telefono->SetMaxLength( 12 );
 	#endif
 	bSizer1323->Add( input_Telefono, 1, wxALL, 5 );
 
 
-	sbSizer3->Add( bSizer1323, 1, wxALL|wxEXPAND, 5 );
+	bSizer84->Add( bSizer1323, 0, wxALL|wxEXPAND, 5 );
 
-	m_panel15 = new wxPanel( sbSizer3->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	sbSizer3->Add( m_panel15, 1, wxEXPAND | wxALL, 5 );
+	m_panel14 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	bSizer84->Add( m_panel14, 1, wxEXPAND | wxALL, 5 );
 
 	wxBoxSizer* bSizer21;
 	bSizer21 = new wxBoxSizer( wxHORIZONTAL );
@@ -1006,20 +1007,20 @@ BaseEditCliente::BaseEditCliente( wxWindow* parent, wxWindowID id, const wxStrin
 
 	bSizer21->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	btn_Guardar = new wxButton( sbSizer3->GetStaticBox(), wxID_ANY, wxT("Guardar cambios"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Guardar = new wxButton( this, wxID_ANY, wxT("Guardar cambios"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer21->Add( btn_Guardar, 0, wxALL, 5 );
 
-	btn_Cancelar = new wxButton( sbSizer3->GetStaticBox(), wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Cancelar = new wxButton( this, wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer21->Add( btn_Cancelar, 0, wxALL, 5 );
 
 
 	bSizer21->Add( 0, 0, 1, wxEXPAND, 5 );
 
 
-	sbSizer3->Add( bSizer21, 0, wxALL|wxEXPAND, 5 );
+	bSizer84->Add( bSizer21, 0, wxALL|wxEXPAND, 5 );
 
 
-	bSizer14->Add( sbSizer3, 1, wxALL|wxEXPAND, 5 );
+	bSizer14->Add( bSizer84, 1, wxALL|wxEXPAND, 5 );
 
 
 	this->SetSizer( bSizer14 );
@@ -1043,102 +1044,86 @@ BaseEditCliente::~BaseEditCliente()
 BaseAddVenta::BaseAddVenta( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
 
 	wxBoxSizer* bSizer36;
 	bSizer36 = new wxBoxSizer( wxVERTICAL );
 
-	wxStaticBoxSizer* sbSizer6;
-	sbSizer6 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, wxT("Agregar venta nueva") ), wxVERTICAL );
+	wxBoxSizer* bSizer83;
+	bSizer83 = new wxBoxSizer( wxVERTICAL );
 
 	wxBoxSizer* bSizer42;
-	bSizer42 = new wxBoxSizer( wxVERTICAL );
+	bSizer42 = new wxBoxSizer( wxHORIZONTAL );
 
 	wxBoxSizer* bSizer421;
 	bSizer421 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_IDCliente = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("ID Cliente"), wxDefaultPosition, wxDefaultSize, 0 );
-	txt_IDCliente->Wrap( -1 );
-	txt_IDCliente->SetFont( wxFont( 9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Arial") ) );
+	txt_Cliente1 = new wxStaticText( this, wxID_ANY, wxT("Cliente   "), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Cliente1->Wrap( -1 );
+	txt_Cliente1->SetFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft Sans Serif") ) );
 
-	bSizer421->Add( txt_IDCliente, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	bSizer421->Add( txt_Cliente1, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_IDCliente = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer421->Add( input_IDCliente, 1, wxALL, 5 );
+	input_Cliente = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer421->Add( input_Cliente, 1, wxALL, 5 );
 
-	btn_Cliente = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Aceptar"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer421->Add( btn_Cliente, 0, wxALL, 5 );
-
-
-	bSizer421->Add( 0, 0, 1, 0, 5 );
+	btn_BuscarClientes = new wxButton( this, wxID_ANY, wxT("Bucar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_BuscarClientes->SetLabelMarkup( wxT("Bucar") );
+	bSizer421->Add( btn_BuscarClientes, 0, wxALL, 5 );
 
 
-	bSizer421->Add( 0, 0, 1, wxEXPAND, 5 );
-
-	txt_DatosCliente = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Nombre y DNI del Cliente"), wxDefaultPosition, wxDefaultSize, 0 );
-	txt_DatosCliente->Wrap( -1 );
-	bSizer421->Add( txt_DatosCliente, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
-
-
-	bSizer42->Add( bSizer421, 1, wxALL|wxEXPAND, 5 );
-
-	wxBoxSizer* bSizer43;
-	bSizer43 = new wxBoxSizer( wxHORIZONTAL );
+	bSizer42->Add( bSizer421, 1, wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer48;
 	bSizer48 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_IDProducto = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT(" ID Producto"), wxDefaultPosition, wxDefaultSize, 0 );
-	txt_IDProducto->Wrap( -1 );
-	txt_IDProducto->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxEmptyString ) );
+	txt_Producto = new wxStaticText( this, wxID_ANY, wxT(" Producto"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Producto->Wrap( -1 );
+	txt_Producto->SetFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft Sans Serif") ) );
 
-	bSizer48->Add( txt_IDProducto, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	bSizer48->Add( txt_Producto, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	input_IDProducto = new wxTextCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer48->Add( input_IDProducto, 1, wxALL, 5 );
+	input_Producto = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer48->Add( input_Producto, 1, wxALL, 5 );
 
-
-	bSizer43->Add( bSizer48, 1, 0, 5 );
-
-	wxBoxSizer* bSizer49;
-	bSizer49 = new wxBoxSizer( wxHORIZONTAL );
-
-	txt_Cantidad = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Cantidad"), wxDefaultPosition, wxDefaultSize, 0 );
-	txt_Cantidad->Wrap( -1 );
-	txt_Cantidad->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxEmptyString ) );
-
-	bSizer49->Add( txt_Cantidad, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
-
-	input_Cantidad = new wxSpinCtrl( sbSizer6->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 999999, 1 );
-	bSizer49->Add( input_Cantidad, 1, wxALL, 5 );
+	btn_BuscarProductos = new wxButton( this, wxID_ANY, wxT("Buscar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_BuscarProductos->SetLabelMarkup( wxT("Buscar") );
+	bSizer48->Add( btn_BuscarProductos, 0, wxALL, 5 );
 
 
-	bSizer43->Add( bSizer49, 1, 0, 5 );
+	bSizer42->Add( bSizer48, 1, wxEXPAND, 5 );
 
 
-	bSizer43->Add( 0, 0, 1, wxEXPAND, 5 );
+	bSizer83->Add( bSizer42, 0, wxALL|wxEXPAND, 5 );
 
-	btn_Agregar = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Agregar producto"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer43->Add( btn_Agregar, 0, wxALL, 5 );
+	wxBoxSizer* bSizer81;
+	bSizer81 = new wxBoxSizer( wxVERTICAL );
 
-	btn_EliminarProducto = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Eliminar Producto"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer43->Add( btn_EliminarProducto, 0, wxALL, 5 );
+	txt_Cliente = new wxStaticText( this, wxID_ANY, wxT("Cliente"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Cliente->Wrap( -1 );
+	txt_Cliente->SetFont( wxFont( 12, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer81->Add( txt_Cliente, 0, wxALL, 5 );
+
+	txt_DatosCliente = new wxStaticText( this, wxID_ANY, wxT("Datos del cliente"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_DatosCliente->Wrap( -1 );
+	txt_DatosCliente->SetFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft Sans Serif") ) );
+
+	bSizer81->Add( txt_DatosCliente, 0, wxALL, 5 );
 
 
-	bSizer42->Add( bSizer43, 0, wxEXPAND, 5 );
-
-
-	sbSizer6->Add( bSizer42, 0, wxALL|wxEXPAND, 5 );
+	bSizer83->Add( bSizer81, 0, wxALL, 5 );
 
 	wxBoxSizer* bSizer41;
 	bSizer41 = new wxBoxSizer( wxVERTICAL );
 
-	txt_Productos = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Productos añadidos"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Productos = new wxStaticText( this, wxID_ANY, wxT("Productos seleccionados"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Productos->Wrap( -1 );
-	txt_Productos->SetFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Arial") ) );
+	txt_Productos->SetFont( wxFont( 12, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
 
 	bSizer41->Add( txt_Productos, 0, wxALL, 5 );
 
-	gridDetalles = new wxGrid( sbSizer6->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
+	gridDetalles = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 
 	// Grid
 	gridDetalles->CreateGrid( 0, 5 );
@@ -1168,46 +1153,50 @@ BaseAddVenta::BaseAddVenta( wxWindow* parent, wxWindowID id, const wxString& tit
 	gridDetalles->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Label Appearance
+	gridDetalles->SetLabelFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
 
 	// Cell Defaults
 	gridDetalles->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	gridDetalles->SetFont( wxFont( 9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
+
 	bSizer41->Add( gridDetalles, 1, wxALL|wxEXPAND, 5 );
 
 
-	sbSizer6->Add( bSizer41, 1, wxEXPAND, 5 );
+	bSizer83->Add( bSizer41, 1, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer44;
 	bSizer44 = new wxBoxSizer( wxHORIZONTAL );
 
-	txt_Total = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Total:"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Total = new wxStaticText( this, wxID_ANY, wxT("Total:"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Total->Wrap( -1 );
-	txt_Total->SetFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Arial") ) );
+	txt_Total->SetFont( wxFont( 12, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
 
 	bSizer44->Add( txt_Total, 0, wxALL|wxALIGN_BOTTOM, 5 );
 
-	txt_Monto = new wxStaticText( sbSizer6->GetStaticBox(), wxID_ANY, wxT("$0"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Monto = new wxStaticText( this, wxID_ANY, wxT("$0"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Monto->Wrap( -1 );
-	txt_Monto->SetFont( wxFont( 12, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxEmptyString ) );
+	txt_Monto->SetFont( wxFont( 12, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft Sans Serif") ) );
 
 	bSizer44->Add( txt_Monto, 0, wxALL, 5 );
 
 
-	sbSizer6->Add( bSizer44, 0, wxALL|wxEXPAND, 5 );
+	bSizer83->Add( bSizer44, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer51;
 	bSizer51 = new wxBoxSizer( wxHORIZONTAL );
 
-	btn_Confirmar = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Confirmar venta"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Confirmar = new wxButton( this, wxID_ANY, wxT("Confirmar venta"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer51->Add( btn_Confirmar, 0, wxALL, 5 );
 
-	btn_Cancelar = new wxButton( sbSizer6->GetStaticBox(), wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Cancelar = new wxButton( this, wxID_ANY, wxT("Cancelar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_Cancelar->SetLabelMarkup( wxT("Cancelar") );
 	bSizer51->Add( btn_Cancelar, 0, wxALL, 5 );
 
 
-	sbSizer6->Add( bSizer51, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
+	bSizer83->Add( bSizer51, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 
 
-	bSizer36->Add( sbSizer6, 1, wxALL|wxEXPAND, 5 );
+	bSizer36->Add( bSizer83, 1, wxALL|wxEXPAND, 5 );
 
 
 	this->SetSizer( bSizer36 );
@@ -1216,9 +1205,8 @@ BaseAddVenta::BaseAddVenta( wxWindow* parent, wxWindowID id, const wxString& tit
 	this->Centre( wxBOTH );
 
 	// Connect Events
-	btn_Cliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::AgregarCliente ), NULL, this );
-	btn_Agregar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::AgregarProducto ), NULL, this );
-	btn_EliminarProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::EliminarProducto ), NULL, this );
+	btn_BuscarClientes->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::AgregarCliente ), NULL, this );
+	btn_BuscarProductos->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::AgregarProducto ), NULL, this );
 	btn_Confirmar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::ConfirmarVenta ), NULL, this );
 	btn_Cancelar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::CancelarVenta ), NULL, this );
 }
@@ -1226,10 +1214,192 @@ BaseAddVenta::BaseAddVenta( wxWindow* parent, wxWindowID id, const wxString& tit
 BaseAddVenta::~BaseAddVenta()
 {
 	// Disconnect Events
-	btn_Cliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::AgregarCliente ), NULL, this );
-	btn_Agregar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::AgregarProducto ), NULL, this );
-	btn_EliminarProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::EliminarProducto ), NULL, this );
+	btn_BuscarClientes->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::AgregarCliente ), NULL, this );
+	btn_BuscarProductos->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::AgregarProducto ), NULL, this );
 	btn_Confirmar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::ConfirmarVenta ), NULL, this );
 	btn_Cancelar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseAddVenta::CancelarVenta ), NULL, this );
+
+}
+
+BaseVerProductos::BaseVerProductos( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
+
+	wxBoxSizer* bSizer67;
+	bSizer67 = new wxBoxSizer( wxVERTICAL );
+
+	wxBoxSizer* bSizer68;
+	bSizer68 = new wxBoxSizer( wxVERTICAL );
+
+	txt_Resultados = new wxStaticText( this, wxID_ANY, wxT("Resultados para: \"busqueda\""), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Resultados->Wrap( -1 );
+	txt_Resultados->SetFont( wxFont( 9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer68->Add( txt_Resultados, 0, wxALL, 5 );
+
+	gridProductos = new wxGrid( this, wxID_ANY, wxPoint( -1,-1 ), wxDefaultSize, 0 );
+
+	// Grid
+	gridProductos->CreateGrid( 0, 4 );
+	gridProductos->EnableEditing( true );
+	gridProductos->EnableGridLines( true );
+	gridProductos->EnableDragGridSize( false );
+	gridProductos->SetMargins( 0, 0 );
+
+	// Columns
+	gridProductos->SetColSize( 0, 50 );
+	gridProductos->SetColSize( 1, 300 );
+	gridProductos->SetColSize( 2, 75 );
+	gridProductos->SetColSize( 3, 75 );
+	gridProductos->EnableDragColMove( false );
+	gridProductos->EnableDragColSize( true );
+	gridProductos->SetColLabelValue( 0, wxT("ID") );
+	gridProductos->SetColLabelValue( 1, wxT("Descripcion") );
+	gridProductos->SetColLabelValue( 2, wxT("Precio") );
+	gridProductos->SetColLabelValue( 3, wxT("Stock") );
+	gridProductos->SetColLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
+
+	// Rows
+	gridProductos->EnableDragRowSize( true );
+	gridProductos->SetRowLabelSize( 1 );
+	gridProductos->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
+
+	// Label Appearance
+	gridProductos->SetLabelFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
+
+	// Cell Defaults
+	gridProductos->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	bSizer68->Add( gridProductos, 1, wxALL|wxEXPAND, 5 );
+
+	txt_Producto = new wxStaticText( this, wxID_ANY, wxT("Producto seleccionado"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Producto->Wrap( -1 );
+	txt_Producto->SetFont( wxFont( 9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer68->Add( txt_Producto, 0, wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+
+	wxBoxSizer* bSizer49;
+	bSizer49 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_Cantidad = new wxStaticText( this, wxID_ANY, wxT("Cantidad"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Cantidad->Wrap( -1 );
+	txt_Cantidad->SetFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer49->Add( txt_Cantidad, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+	input_Cantidad = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 999999, 1 );
+	bSizer49->Add( input_Cantidad, 1, wxALL, 5 );
+
+	btn_Confirmar = new wxButton( this, wxID_ANY, wxT("Confirmar"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer49->Add( btn_Confirmar, 0, wxALL, 5 );
+
+
+	bSizer68->Add( bSizer49, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
+
+
+	bSizer67->Add( bSizer68, 1, wxALL|wxEXPAND, 5 );
+
+
+	this->SetSizer( bSizer67 );
+	this->Layout();
+
+	this->Centre( wxBOTH );
+
+	// Connect Events
+	gridProductos->Connect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseVerProductos::OrdenarGrid ), NULL, this );
+	btn_Confirmar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVerProductos::AgregarProducto ), NULL, this );
+}
+
+BaseVerProductos::~BaseVerProductos()
+{
+	// Disconnect Events
+	gridProductos->Disconnect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseVerProductos::OrdenarGrid ), NULL, this );
+	btn_Confirmar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVerProductos::AgregarProducto ), NULL, this );
+
+}
+
+BaseVerClientes::BaseVerClientes( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
+
+	wxBoxSizer* bSizer67;
+	bSizer67 = new wxBoxSizer( wxVERTICAL );
+
+	wxBoxSizer* bSizer68;
+	bSizer68 = new wxBoxSizer( wxVERTICAL );
+
+	txt_Resultados = new wxStaticText( this, wxID_ANY, wxT("Resultados para: \"busqueda\""), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Resultados->Wrap( -1 );
+	txt_Resultados->SetFont( wxFont( 9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer68->Add( txt_Resultados, 0, wxALL, 5 );
+
+	gridClientes = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
+
+	// Grid
+	gridClientes->CreateGrid( 0, 6 );
+	gridClientes->EnableEditing( true );
+	gridClientes->EnableGridLines( true );
+	gridClientes->EnableDragGridSize( false );
+	gridClientes->SetMargins( 0, 0 );
+
+	// Columns
+	gridClientes->SetColSize( 0, 50 );
+	gridClientes->SetColSize( 1, 150 );
+	gridClientes->SetColSize( 2, 100 );
+	gridClientes->SetColSize( 3, 150 );
+	gridClientes->SetColSize( 4, 150 );
+	gridClientes->SetColSize( 5, 100 );
+	gridClientes->EnableDragColMove( false );
+	gridClientes->EnableDragColSize( true );
+	gridClientes->SetColLabelValue( 0, wxT("ID") );
+	gridClientes->SetColLabelValue( 1, wxT("Nombre") );
+	gridClientes->SetColLabelValue( 2, wxT("DNI") );
+	gridClientes->SetColLabelValue( 3, wxT("Direccion") );
+	gridClientes->SetColLabelValue( 4, wxT("Email") );
+	gridClientes->SetColLabelValue( 5, wxT("Telefono") );
+	gridClientes->SetColLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
+
+	// Rows
+	gridClientes->EnableDragRowSize( true );
+	gridClientes->SetRowLabelSize( 1 );
+	gridClientes->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
+
+	// Label Appearance
+	gridClientes->SetLabelFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
+
+	// Cell Defaults
+	gridClientes->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	bSizer68->Add( gridClientes, 1, wxALL|wxEXPAND, 5 );
+
+	txt_Cliente = new wxStaticText( this, wxID_ANY, wxT("Cliente seleccionado"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Cliente->Wrap( -1 );
+	txt_Cliente->SetFont( wxFont( 9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer68->Add( txt_Cliente, 0, wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL|wxALL, 5 );
+
+	btn_Confirmar = new wxButton( this, wxID_ANY, wxT("Confirmar"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer68->Add( btn_Confirmar, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+
+
+	bSizer67->Add( bSizer68, 1, wxALL|wxEXPAND, 5 );
+
+
+	this->SetSizer( bSizer67 );
+	this->Layout();
+
+	this->Centre( wxBOTH );
+
+	// Connect Events
+	gridClientes->Connect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseVerClientes::OrdenarGrid ), NULL, this );
+	btn_Confirmar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVerClientes::AgregarCliente ), NULL, this );
+}
+
+BaseVerClientes::~BaseVerClientes()
+{
+	// Disconnect Events
+	gridClientes->Disconnect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseVerClientes::OrdenarGrid ), NULL, this );
+	btn_Confirmar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVerClientes::AgregarCliente ), NULL, this );
 
 }

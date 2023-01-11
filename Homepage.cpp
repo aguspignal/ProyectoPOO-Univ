@@ -1,5 +1,5 @@
-#include "Homepage.h"
 #include "ProductosFrame.h"
+#include "Homepage.h"
 #include "ClientesFrame.h"
 #include "VentasFrame.h"
 
@@ -10,17 +10,17 @@ Homepage::Homepage(Sistema *m_sistema)
 
 void Homepage::DisplayProductsFrmae( wxCommandEvent& event )  {
 	ProductosFrame *win = new ProductosFrame(this,sistema);
-	win->Show();
+	win->ShowModal();
 }
 
 void Homepage::DisplayClientesFrame( wxCommandEvent& event )  {
 	ClientesFrame *win = new ClientesFrame(this,sistema);
-	win->Show();
+	win->ShowModal();
 }
 
 void Homepage::DisplayVentasFrame( wxCommandEvent& event )  {
 	VentasFrame *win = new VentasFrame(this,sistema);
-	win->Show();
+	win->ShowModal();
 }
 
 Homepage::~Homepage() {

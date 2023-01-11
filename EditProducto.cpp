@@ -5,6 +5,11 @@
 EditProducto::EditProducto(wxWindow *parent, Sistema *m_sistema, int prod_id) 
 	: BaseEditProducto(parent), sistema(m_sistema), id(prod_id) {
 	
+	Producto producto = sistema->GetProductoByID(id);
+	input_Descripcion->SetValue(std_to_wx(producto.GetDescripcion()));
+	input_Precio->SetValue(std_to_wx(to_string(producto.GetPrecio())));
+	input_Stock->SetValue(std_to_wx(to_string(producto.GetStock())));
+	
 }
 
 EditProducto::~EditProducto() { }

@@ -36,7 +36,7 @@ void AddVenta::ActualizarGrid(){
 
 /// Guardar ID Cliente
 void AddVenta::AgregarCliente( wxCommandEvent& event ){
-	this-> id_cliente = stoi(wx_to_std(input_IDCliente->GetValue()));
+	this-> id_cliente = stoi(wx_to_std(input_Cliente->GetValue()));
 	Cliente cliente = sistema->GetClienteByID(id_cliente);
 	if(cliente.GetID() == 0){
 		wxMessageBox("Cliente no encontrado","Error",wxOK|wxICON_ERROR);	
@@ -50,24 +50,19 @@ void AddVenta::AgregarCliente( wxCommandEvent& event ){
 
 /// Guardar Producto y Cantidad
 void AddVenta::AgregarProducto( wxCommandEvent& event )  {
-	int id_producto = stoi(wx_to_std(input_IDProducto->GetValue()));
+	int id_producto = stoi(wx_to_std(input_Producto->GetValue()));
 	Producto producto = sistema->GetProductoByID(id_producto);
 	
-	int cantidad = stoi(wx_to_std(to_string(input_Cantidad->GetValue())));
+//	int cantidad = stoi(wx_to_std(to_string(input_Cantidad->GetValue())));
 	
 	ProductoCantidad ProdCant;
 	ProdCant.prod = producto;
-	ProdCant.cant = cantidad;
+//	ProdCant.cant = cantidad;
 	v.push_back(ProdCant);
 	
 	ActualizarGrid();
 	
 	txt_Monto->SetLabel(std_to_wx(to_string(CalcularTotal())));
-}
-
-/// Eliminar un producto agregado
-void AddVenta::EliminarProducto( wxCommandEvent& event )  {
-	event.Skip();
 }
 
 /// Guardar la venta

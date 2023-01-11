@@ -10,7 +10,7 @@ Cliente::Cliente(){
 	this->telefono = "none";
 }
 
-Cliente::Cliente(std::string nombre, int dni, string direccion, string email, string telefono){
+Cliente::Cliente(string nombre, int dni, string direccion, string email, string telefono){
 	this->id = GetLastID()+1;
 	this->nombre = nombre;
 	this->dni = dni;
@@ -118,11 +118,11 @@ void Cliente::AddCliente(){
 /// -- VALIDAR datos
 string Cliente::ValidarDatos(){
 	string errores;
-	if(nombre.length() <= 0 || nombre.length() > 90){ errores += "Nombre invalido\n"; }
+	if(nombre.length() <= 0 || nombre.length() > 99){ errores += "Nombre invalido\n"; }
 	if(dni < 0){ errores += "DNI invalido\n"; }	
-	if(direccion.length() <= 0 || nombre.length() > 200){ errores += "Direccion invalida\n"; }
-	if(email.length() <= 0 || nombre.length() > 100){ errores += "Email invalido\n"; }
-	if(telefono.length() <= 0 || nombre.length() > 15){ errores += "Telefono invalido\n"; }
+	if(direccion.length() <= 0 || direccion.length() > 199){ errores += "Direccion invalida\n"; }
+	if(email.length() <= 0 || email.length() > 99){ errores += "Email invalido\n"; }
+	if(telefono.length() <= 0 || telefono.length() > 14){ errores += "Telefono invalido\n"; }
 	return errores;
 }
 

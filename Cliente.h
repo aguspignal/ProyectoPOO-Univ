@@ -19,16 +19,16 @@ struct RegistroCliente {
 class Cliente {
 private:
 	int id;
-	std::string nombre;
+	string nombre;
 	int dni;
-	std::string direccion;
-	std::string email;
-	std::string telefono;
+	string direccion;
+	string email;
+	string telefono;
 	
 public:
 	Cliente();
-	Cliente(std::string nombre, int dni, string direccion, string email, string telefono);
-	Cliente(int id, std::string nombre, int dni, string direccion, string email, string telefono);
+	Cliente(string nombre, int dni, string direccion, string email, string telefono);
+	Cliente(int id, string nombre, int dni, string direccion, string email, string telefono);
 	
 	/// ID
 	int GetID();
@@ -58,7 +58,7 @@ public:
 	void AddCliente();
 	
 	/// Validacion de datos
-	std::string ValidarDatos();
+	string ValidarDatos();
 	
 	~Cliente(){};
 };
