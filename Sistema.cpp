@@ -325,7 +325,7 @@ Cliente Sistema::GetClienteByID(int id){
 			return clientes[i];
 		}
 	}
-	Cliente cliente; // vacio
+	Cliente cliente;
 	return cliente;
 }
 

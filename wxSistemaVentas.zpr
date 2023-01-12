@@ -16,7 +16,7 @@ tab_use_spaces=0
 explorer_path=.
 inspection_improving_template=wxString|>printf "%ls",${EXP}.m_impl._M_data()
 inherits_from=
-current_source=AddVenta.cpp
+current_source=Sistema.cpp
 path_char=\
 [source]
 path=Application.cpp
@@ -34,7 +34,7 @@ path=Producto.cpp
 cursor=65:12
 [source]
 path=Sistema.cpp
-cursor=313:16
+cursor=327:17
 open=true
 [source]
 path=Venta.cpp
@@ -66,7 +66,7 @@ path=EditCliente.cpp
 cursor=14:0
 [source]
 path=AddVenta.cpp
-cursor=137:3
+cursor=131:32
 open=true
 [source]
 path=VentaDetalle.cpp
