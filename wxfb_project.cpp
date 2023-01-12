@@ -139,7 +139,7 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 	gridProductos->SetColSize( 1, 400 );
 	gridProductos->SetColSize( 2, 100 );
 	gridProductos->SetColSize( 3, 100 );
-	gridProductos->EnableDragColMove( false );
+	gridProductos->EnableDragColMove( true );
 	gridProductos->EnableDragColSize( true );
 	gridProductos->SetColLabelValue( 0, wxT("ID") );
 	gridProductos->SetColLabelValue( 1, wxT("Descripcion") );

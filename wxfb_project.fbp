@@ -510,7 +510,7 @@
             <property name="minimum_size"></property>
             <property name="name">BaseProductosFrame</property>
             <property name="pos"></property>
-            <property name="size">800,800</property>
+            <property name="size">800,600</property>
             <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX</property>
             <property name="subclass">; ; forward_declare</property>
             <property name="title"></property>
@@ -855,7 +855,7 @@
                                 <property name="dock">Dock</property>
                                 <property name="dock_fixed">0</property>
                                 <property name="docking">Left</property>
-                                <property name="drag_col_move">0</property>
+                                <property name="drag_col_move">1</property>
                                 <property name="drag_col_size">1</property>
                                 <property name="drag_grid_size">0</property>
                                 <property name="drag_row_size">1</property>
@@ -1238,7 +1238,7 @@
             <property name="minimum_size"></property>
             <property name="name">BaseClientesFrame</property>
             <property name="pos"></property>
-            <property name="size">935,800</property>
+            <property name="size">935,600</property>
             <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX</property>
             <property name="subclass">; ; forward_declare</property>
             <property name="title"></property>
@@ -2039,7 +2039,7 @@
             <property name="minimum_size"></property>
             <property name="name">BaseVentasFrame</property>
             <property name="pos"></property>
-            <property name="size">1100,800</property>
+            <property name="size">1100,700</property>
             <property name="style">wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX</property>
             <property name="subclass">; ; forward_declare</property>
             <property name="title"></property>

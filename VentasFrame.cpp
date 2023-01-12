@@ -27,18 +27,20 @@ void VentasFrame::ActualizarGridVentas(){
 
 /// Actualizar GRID DETALLES
 void VentasFrame::ActualizarGridDetalles(int id_venta){
-	if(gridDetalles->GetNumberRows() != 0 || id_venta == 0){
+	if(gridDetalles->GetNumberRows() != 0){
 		gridDetalles->DeleteRows(0,gridDetalles->GetNumberRows());
 	}
 	
-	vector<VentaDetalle> detalles = sistema->GetDetallesByIDVenta(id_venta);
-	for(int i=0; i<detalles.size(); i++){
-		gridDetalles->AppendRows();
-		gridDetalles->SetCellValue(i,0,to_string(detalles[i].GetIDProducto()));
-		gridDetalles->SetCellValue(i,1, sistema->GetProductoByID(detalles[i].GetIDProducto()).GetDescripcion());
-		gridDetalles->SetCellValue(i,2, to_string(detalles[i].GetValorVendido()));
-		gridDetalles->SetCellValue(i,2, to_string(detalles[i].GetCantidad()));
-		gridDetalles->SetCellValue(i,3, to_string(detalles[i].GetSubtotal()));
+	if(id_venta != 0){
+		vector<VentaDetalle> detalles = sistema->GetDetallesByIDVenta(id_venta);
+		for(int i=0; i<detalles.size(); i++){
+			gridDetalles->AppendRows();
+			gridDetalles->SetCellValue(i,0,to_string(detalles[i].GetIDProducto()));
+			gridDetalles->SetCellValue(i,1, sistema->GetProductoByID(detalles[i].GetIDProducto()).GetDescripcion());
+			gridDetalles->SetCellValue(i,2, to_string(detalles[i].GetValorVendido()));
+			gridDetalles->SetCellValue(i,3, to_string(detalles[i].GetCantidad()));
+			gridDetalles->SetCellValue(i,4, to_string(detalles[i].GetSubtotal()));
+		}
 	}
 }
 
@@ -53,12 +55,9 @@ void VentasFrame::DisplayAddVenta( wxCommandEvent& event )  {
 
 /// -- MOSTRAR DETALLE
 void VentasFrame::DisplayDetalleVenta( wxCommandEvent& event )  {
-	if(gridDetalles->GetNumberRows() == 0){
-		wxMessageBox("No selecciono una venta","Error",wxOK|wxICON_ERROR);
-	} else {
+	if(gridVentas->GetNumberRows() != 0){
 		int row = gridVentas->GetGridCursorRow();
-		string str = wx_to_std(gridVentas->GetCellValue(row,0));
-		int id_venta = stoi(str); // str to int
+		int id_venta = stoi(wx_to_std(gridVentas->GetCellValue(row,0))); // str to int
 		ActualizarGridDetalles(id_venta);
 	}
 }
@@ -67,13 +66,10 @@ void VentasFrame::DisplayDetalleVenta( wxCommandEvent& event )  {
 void VentasFrame::EliminarVenta( wxCommandEvent& event )  {
 	if(gridVentas->GetNumberRows() == 0){
 		wxMessageBox("No hay ventas","Error",wxOK|wxICON_ERROR);
-		
 	} else {
 		int choice = wxMessageBox("¿Esta seguro?","Advertencia",wxYES_NO|wxICON_QUESTION);
 		if(choice == wxYES){
-			int row = gridVentas->GetGridCursorRow();
-			string str = wx_to_std(gridVentas->GetCellValue(row,0));
-			int id = stoi(str); // str to int
+			int id = stoi(wx_to_std(gridVentas->GetCellValue(gridVentas->GetGridCursorRow(),0))); // str to int
 			sistema->DeleteVenta(id);
 			
 			ActualizarGridVentas();

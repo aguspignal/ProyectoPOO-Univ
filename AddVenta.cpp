@@ -115,15 +115,15 @@ void AddVenta::QuitarProducto( wxCommandEvent& event )  {
 		prods_seleccionados.erase(it);
 		
 		gridDetalles->DeleteRows(row);
+		ActualizarGrid();
 	}
-	ActualizarGrid();
 }
 
 /// Guardar la venta
 void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
 	string errores;
 	if(id_cliente == 0){
-		errores += "Seleccione un cliente para continuar\n";
+		errores += "No selecciono ningun cliente\n";
 	}
 	if(prods_seleccionados.empty()){
 		errores += "No selecciono ningun producto\n";
@@ -135,6 +135,8 @@ void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
 		if(int choice = wxYES){
 			Venta venta(id_cliente,prods_seleccionados);
 			venta.AddVenta();
+			sistema->CargarVentas();
+			sistema->CargarDetallesVenta();
 		}
 		EndModal(1);
 	}
