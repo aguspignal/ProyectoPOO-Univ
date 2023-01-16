@@ -14,7 +14,7 @@ AddVenta::~AddVenta() {}
 float AddVenta::CalcularTotal(){
 	float suma;
 	for(int i=0; i<prods_seleccionados.size(); i++){
-		suma += (prods_seleccionados[i].prod.GetPrecio() * prods_seleccionados[i].cant);
+		suma += (prods_seleccionados[i].producto.GetPrecio() * prods_seleccionados[i].cantidad);
 	}
 	return suma;
 }
@@ -26,11 +26,11 @@ void AddVenta::ActualizarGrid(){
 	
 	for(int i=0; i<prods_seleccionados.size(); i++){
 		gridDetalles->AppendRows();
-		gridDetalles->SetCellValue(i,0,to_string(prods_seleccionados[i].prod.GetID()));
-		gridDetalles->SetCellValue(i,1,prods_seleccionados[i].prod.GetDescripcion());
-		gridDetalles->SetCellValue(i,2,to_string(prods_seleccionados[i].prod.GetPrecio()));
-		gridDetalles->SetCellValue(i,3,to_string(prods_seleccionados[i].cant));
-		gridDetalles->SetCellValue(i,4,to_string(prods_seleccionados[i].prod.GetPrecio() * prods_seleccionados[i].cant));
+		gridDetalles->SetCellValue(i,0,to_string(prods_seleccionados[i].producto.GetID()));
+		gridDetalles->SetCellValue(i,1,prods_seleccionados[i].producto.GetDescripcion());
+		gridDetalles->SetCellValue(i,2,to_string(prods_seleccionados[i].producto.GetPrecio()));
+		gridDetalles->SetCellValue(i,3,to_string(prods_seleccionados[i].cantidad));
+		gridDetalles->SetCellValue(i,4,to_string(prods_seleccionados[i].producto.GetPrecio() * prods_seleccionados[i].cantidad));
 	}
 	
 	txt_Monto->SetLabel(to_string(CalcularTotal()));
@@ -76,7 +76,11 @@ void AddVenta::BuscarProducto( wxCommandEvent& event )  {
 				gridProductos->SetCellValue(i,0,to_string(prod.GetID()));
 				gridProductos->SetCellValue(i,1,prod.GetDescripcion());
 				gridProductos->SetCellValue(i,2,to_string(prod.GetPrecio()));
-				gridProductos->SetCellValue(i,3,to_string(prod.GetStock()));
+				if(producto.GetStock() <= 0){
+					gridProductos->SetCellValue(i,3, "Sin stock");
+				} else {
+					gridProductos->SetCellValue(i,3, to_string(producto.GetStock()));
+				}
 			}
 		}
 	}
@@ -96,10 +100,14 @@ void AddVenta::SeleccionarProducto( wxGridEvent& event ) {
 void AddVenta::AgregarProducto( wxCommandEvent& event )  {
 	if(id_prod != 0){
 		ProductoCantidad prod_cant;
-		prod_cant.prod = sistema->GetProductoByID(id_prod);
-		prod_cant.cant = input_Cantidad->GetValue();
-		prods_seleccionados.push_back(prod_cant);
-		ActualizarGrid();
+		prod_cant.producto = sistema->GetProductoByID(id_prod);
+		if( input_Cantidad->GetValue() > prod_cant.producto.GetStock() ){
+			wxMessageBox("Stock no disponible","Error",wxOK|wxICON_ERROR);
+		} else {
+			prod_cant.cantidad = input_Cantidad->GetValue();
+			prods_seleccionados.push_back(prod_cant);
+			ActualizarGrid();
+		}
 	}
 }
 
@@ -109,7 +117,7 @@ void AddVenta::QuitarProducto( wxCommandEvent& event )  {
 		int row = gridDetalles->GetGridCursorRow();
 		
 		ProductoCantidad prod_cant;
-		prod_cant.prod = sistema->GetProductoByID(stoi(wx_to_std(gridProductos->GetCellValue(row,0))));
+		prod_cant.producto = sistema->GetProductoByID(stoi(wx_to_std(gridProductos->GetCellValue(row,0))));
 		
 		auto it = find(prods_seleccionados.begin(), prods_seleccionados.end(), prod_cant);
 		prods_seleccionados.erase(it);

@@ -1,7 +1,7 @@
 #ifndef PRODUCTO_H
 #define PRODUCTO_H
 #include <string>
-
+using namespace std;
 
 struct RegistroProducto {
 	int id;
@@ -13,22 +13,22 @@ struct RegistroProducto {
 class Producto {
 private:
 	int id;
-	std::string descripcion;
+	string descripcion;
 	float precio;
 	int stock;
 	
 public:
 	Producto();
-	Producto(std::string m_descripcion, float m_precio, int m_stock);
-	Producto(int m_id, std::string m_descripcion, float m_precio, int m_stock);
+	Producto(string descripcion, float precio, int stock);
+	Producto(int id, string descripcion, float precio, int stock);
 	
 	/// ID
 	int GetID();
-	int GetLastID(); // mayor id en la base de datos
+	int GetLastID();
 	
 	/// Descripcion
-	std::string GetDescripcion();
-	void SetDescripcion(std::string descrip);
+	string GetDescripcion();
+	void SetDescripcion(string descripcion);
 	
 	/// Precio
 	float GetPrecio();
@@ -37,7 +37,7 @@ public:
 	/// Stock
 	int GetStock();
 	void SetStock(int stock);
-	bool CheckStock(int cant);
+	bool CheckStock(int cantidad);
 	
 	/// Agregar a la database
 	void AddProducto();
@@ -51,11 +51,11 @@ public:
 
 
 struct ProductoCantidad {
-	Producto prod;
-	int cant;
+	Producto producto;
+	int cantidad;
 	
-	bool operator==(ProductoCantidad pc){
-		return prod == pc.prod;
+	bool operator==(ProductoCantidad prod_cant){
+		return producto == prod_cant.producto;
 	}
 };
 

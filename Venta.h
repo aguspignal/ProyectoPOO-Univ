@@ -3,7 +3,6 @@
 
 #include "Producto.h"
 #include "VentaDetalle.h"
-
 #include <vector>
 using namespace std;
 
@@ -19,11 +18,11 @@ private:
 	int id;
 	int id_cliente;
 	float total;
-	bool modificada=false;
+	bool modificada = false;
 	
 public:
 	Venta();
-	Venta(int id_cliente, vector<ProductoCantidad> v);
+	Venta(int id_cliente, vector<ProductoCantidad> productos_cantidades);
 	Venta(int id, int id_cliente, float total, bool modif);
 	
 	/// ID

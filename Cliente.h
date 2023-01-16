@@ -1,10 +1,6 @@
 #ifndef CLIENTE_H
 #define CLIENTE_H
-
 #include <string>
-#include <fstream>
-#include <cstring>
-#include <algorithm>
 using namespace std;
 
 struct RegistroCliente {
@@ -32,11 +28,11 @@ public:
 	
 	/// ID
 	int GetID();
-	int GetLastID(); // mayor id en la base de datos
+	int GetLastID();
 	
 	/// Nombre
 	std::string GetNombre();
-	void SetNombre(std::string nombre);
+	void SetNombre(string nombre);
 	
 	/// DNI
 	int GetDNI();
@@ -56,10 +52,7 @@ public:
 	
 	/// Agregar a la database
 	void AddCliente();
-	
-	/// Validacion de datos
-	string ValidarDatos();
-	
+		
 	~Cliente(){};
 };
 

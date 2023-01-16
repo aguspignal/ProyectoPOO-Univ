@@ -4,7 +4,6 @@
 #include "Sistema.h"
 
 class ProductosFrame : public BaseProductosFrame {
-	
 private:
 	Sistema *sistema;
 	

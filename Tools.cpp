@@ -1,4 +1,7 @@
 #include "Tools.h"
+#include <algorithm>
+#include <cstring>
+using namespace std;
 /// String 
 string StrSinEspacios(string str){
 	str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
@@ -12,6 +15,7 @@ string StrAMinusculas(string str){
 	return str;
 }
 
+/// Validaciones
 bool ValidarDNI(string dni){
 	if(dni.length() < 1 || dni.length() > 8){
 		return false;

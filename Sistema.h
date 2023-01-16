@@ -1,11 +1,7 @@
 #ifndef SISTEMA_H
 #define SISTEMA_H
 
-#include "VentaDetalle.h"
 #include "Tools.h"
-
-#include <string>
-#include <vector>
 using namespace std;
 
 enum CriterioOrdenProducto {ID_PRODUCTO,DESCRIPCION,PRECIO,STOCK};
@@ -45,6 +41,7 @@ public:
 	void DeleteVenta(int id);
 	
 	/// Modificar
+	// revisar argumentos 
 	void ModificarProducto(int id, string descripcion, float precio, int stock);
 	void RetirarStockProducto(int id, int cantidad);
 	void ModificarCliente(int id, string nombre, int dni, string direccion, string email, string telefono);
@@ -70,12 +67,12 @@ public:
 	int GetVentasSize();        
 	int GetDetallesVentaSize(); 
 	
+	/// Vector con id's de los resultados
 	vector<int> BuscarClientes(string busqueda);
 	vector<int> BuscarProductos(string busqueda);
 	
-	void MostrarDetalles();
-	
 	/// Ordenamiento
+	// revisar
 	void OrdenarProductos(CriterioOrdenProducto criterio);
 	void OrdenarClientes(CriterioOrdenCliente criterio);
 	void OrdenarVentas(CriterioOrdenVenta criterio);

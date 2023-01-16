@@ -1,4 +1,8 @@
 #include "Cliente.h"
+#include <string>
+#include <fstream>
+#include <cstring>
+#include <algorithm>
 using namespace std;
 
 Cliente::Cliente(){
@@ -34,11 +38,11 @@ int Cliente::GetID(){
 }
 
 int Cliente::GetLastID(){
-	int id = 0;
 	ifstream archi("clientes.bin",ios::binary|ios::in|ios::ate);
 	int cant_clientes = archi.tellg() / sizeof(RegistroCliente);
 	archi.seekg(0);
 	
+	int id = 0;
 	if(cant_clientes > 0){
 		RegistroCliente reg;
 		for(int i=0; i<cant_clientes; i++){
@@ -113,17 +117,6 @@ void Cliente::AddCliente(){
 	
 	archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
 	archi.close();
-}
-
-/// -- VALIDAR datos
-string Cliente::ValidarDatos(){
-	string errores;
-	if(nombre.length() <= 0 || nombre.length() > 99){ errores += "Nombre invalido\n"; }
-	if(dni < 0){ errores += "DNI invalido\n"; }	
-	if(direccion.length() <= 0 || direccion.length() > 199){ errores += "Direccion invalida\n"; }
-	if(email.length() <= 0 || email.length() > 99){ errores += "Email invalido\n"; }
-	if(telefono.length() <= 0 || telefono.length() > 14){ errores += "Telefono invalido\n"; }
-	return errores;
 }
 
 

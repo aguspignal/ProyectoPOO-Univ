@@ -1,6 +1,6 @@
 #include "Venta.h"
-#include <fstream>
 #include "Sistema.h"
+#include <fstream>
 using namespace std;
 
 Venta::Venta(){
@@ -9,21 +9,21 @@ Venta::Venta(){
 	this->total = 0;
 }
 
-Venta::Venta(int idCliente, vector<ProductoCantidad> v){
+Venta::Venta(int idCliente, vector<ProductoCantidad> prods_cants){
 	this->id = GetLastID()+1;
 	this->id_cliente = idCliente;
-	this->total = CalcularTotal(v);
+	this->total = CalcularTotal(prods_cants);
 	
-	for(int i=0; i<v.size(); i++){
-		VentaDetalle vdetalle(this->id, v[i].cant, v[i].prod.GetID(), v[i].prod.GetPrecio());
+	for(int i=0; i<prods_cants.size(); i++){
+		VentaDetalle vdetalle(this->id, prods_cants[i].cantidad, prods_cants[i].producto.GetID(), prods_cants[i].producto.GetPrecio());
 		vdetalle.AddVentaDetalle();
 	}
 }
 
-Venta::Venta(int m_id, int idCliente, float m_total, bool modif){
-	this->id = m_id;
+Venta::Venta(int id, int idCliente, float total, bool modif){
+	this->id = id;
 	this->id_cliente = idCliente;
-	this->total = m_total;
+	this->total = total;
 	this->modificada = modif;
 }
 
@@ -41,11 +41,11 @@ void Venta::SetIDCliente(int id_cliente){
 }
 
 int Venta::GetLastID(){
-	int id = 0;
 	ifstream archi("ventas.bin",ios::binary|ios::in|ios::ate);
 	int cant_ventas = archi.tellg() / sizeof(RegistroVenta);
 	archi.seekg(0);
 	
+	int id = 0;
 	if(cant_ventas > 0){
 		RegistroVenta reg;
 		for(int i=0; i<cant_ventas; i++){
@@ -65,16 +65,16 @@ float Venta::GetTotal() {
 	return total;
 }
 
-void Venta::SetTotal(float m_total){
-	this->total = m_total;
+void Venta::SetTotal(float total){
+	this->total = total;
 }
 
-float Venta::CalcularTotal(vector<ProductoCantidad> productos){
+float Venta::CalcularTotal(vector<ProductoCantidad> prods_cants){
 	Sistema sist;
 	float suma = 0;
-	for(int i=0; i<productos.size(); i++){
-		float precio = sist.GetProductoByID(productos[i].prod.GetID()).GetPrecio();
-		suma += (precio * productos[i].cant);
+	for(int i=0; i<prods_cants.size(); i++){
+		float precio = sist.GetProductoByID(prods_cants[i].producto.GetID()).GetPrecio();
+		suma += (precio * prods_cants[i].cantidad);
 	}
 	return suma;
 }

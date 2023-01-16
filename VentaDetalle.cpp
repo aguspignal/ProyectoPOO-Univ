@@ -1,19 +1,9 @@
 #include "VentaDetalle.h"
+#include "Sistema.h"
 #include <fstream>
 #include <cstring>
-#include "Sistema.h"
 using namespace std;
 	
-//VentaDetalle::VentaDetalle(int idVenta, int m_cantidad, Producto m_producto){
-//	this->id = GetLastId()+1;
-//	this->id_venta = idVenta;
-//	this->producto = m_producto;
-//	this->cantidad = m_cantidad;
-//	this->subtotal = m_producto.GetPrecio()*m_cantidad;
-//	
-//	RetirarStock();
-//}
-
 VentaDetalle::VentaDetalle(int idVenta, int m_cantidad, int idProducto, float precio_producto){
 	this->id = GetLastId()+1;
 	this->id_venta = idVenta;
@@ -21,8 +11,6 @@ VentaDetalle::VentaDetalle(int idVenta, int m_cantidad, int idProducto, float pr
 	this->cantidad = m_cantidad;
 	this->valor_vendido = precio_producto;
 	this->subtotal = cantidad * valor_vendido;
-	
-	RetirarStock();
 }
 
 VentaDetalle::VentaDetalle(int m_id, int idVenta, int idProducto, int m_cantidad, float valor_vendido, float m_subtotal){
@@ -63,10 +51,6 @@ int VentaDetalle::GetLastId(){
 	return id;
 }
 
-/// -- Producto
-//Producto VentaDetalle::GetProducto(){
-//	return producto;
-//}
 int VentaDetalle::GetIDProducto(){
 	return id_producto;
 }
@@ -89,13 +73,6 @@ float VentaDetalle::GetSubtotal(){
 void VentaDetalle::SetCantidad(int cant){
 	this->cantidad = cant;
 }
-
-/// -- Retirar Stock del producto
-void VentaDetalle::RetirarStock(){
-	Sistema sistema;
-	sistema.RetirarStockProducto(id_producto, cantidad);
-}
-
 
 /// -- Agregar al archivo
 void VentaDetalle::AddVentaDetalle(){

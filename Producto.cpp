@@ -13,18 +13,18 @@ Producto::Producto(){
 	stock = 0;
 }
 
-Producto::Producto(std::string m_descripcion, float m_precio, int m_stock){
+Producto::Producto(std::string descripcion, float precio, int stock){
 	this->id = GetLastID()+1;
-	this->descripcion = m_descripcion;
-	this->precio = m_precio;
-	this->stock = m_stock;
+	this->descripcion = descripcion;
+	this->precio = precio;
+	this->stock = stock;
 }
 
-Producto::Producto(int m_id, std::string m_descripcion, float m_precio, int m_stock){
-	this->id = m_id;
-	this->descripcion = m_descripcion;
-	this->precio = m_precio;
-	this->stock = m_stock;
+Producto::Producto(int id, std::string descripcion, float precio, int stock){
+	this->id = id;
+	this->descripcion = descripcion;
+	this->precio = precio;
+	this->stock = stock;
 }
 
 
@@ -34,11 +34,11 @@ int Producto::GetID(){
 }
 
 int Producto::GetLastID(){
-	int id = 0;
 	ifstream archi("productos.bin",ios::binary|ios::in|ios::ate);
 	int cant_productos = archi.tellg() / sizeof(RegistroProducto);
 	archi.seekg(0);
 	
+	int id = 0;
 	if(cant_productos > 0){ 
 		RegistroProducto reg;
 		for(int i=0; i<cant_productos; i++){
@@ -82,8 +82,8 @@ void Producto::SetStock(int stock){
 	this->stock = stock;
 }
 
-bool Producto::CheckStock(int cant){
-	return stock >= cant;
+bool Producto::CheckStock(int cantidad){
+	return stock >= cantidad;
 }
 
 /// -- Add Producto --
