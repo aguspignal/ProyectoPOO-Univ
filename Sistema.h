@@ -18,18 +18,18 @@ public:
 	Sistema();
 	
 	/// Actualizar el archivo 
-	void ActualizarProductos();
-	void ActualizarClientes();
-	void ActualizarVentas();
-	void ActualizarDetallesVenta();
+	void SaveProductos();
+	void SaveClientes();
+	void SaveVentas();
+	void SaveDetallesVenta();
 	
 	/// Cargar desde el archivo
-	void CargarProductos();
-	void CargarClientes();
-	void CargarVentas();
-	void CargarDetallesVenta();
+	void LoadProductos();
+	void LoadClientes();
+	void LoadVentas();
+	void LoadDetallesVenta();
 	
-	/// Guardar en el archivo
+	/// Guardar un solo dato
 	void GuardarProducto(Producto p);
 	void GuardarCliente(Cliente c);
 	void GuardarVenta(Venta v);

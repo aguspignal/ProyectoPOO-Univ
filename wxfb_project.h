@@ -67,10 +67,10 @@ class BaseProductosFrame : public wxDialog
 	private:
 
 	protected:
+		wxStaticText* txt_Productos;
 		wxTextCtrl* input_BuscarProducto;
 		wxButton* btn_Buscar;
 		wxButton* btn_Actualizar;
-		wxStaticText* txt_Productos;
 		wxGrid* gridProductos;
 		wxButton* btn_AddProducto;
 		wxButton* btn_DeleteProducto;
@@ -102,10 +102,10 @@ class BaseClientesFrame : public wxDialog
 	private:
 
 	protected:
+		wxStaticText* txt_Clientes;
 		wxTextCtrl* input_BuscarCliente;
 		wxButton* btn_Buscar;
 		wxButton* btn_BackHome;
-		wxStaticText* txt_Clientes;
 		wxGrid* gridClientes;
 		wxButton* btn_AddCliente;
 		wxButton* btn_DeleteCliente;
@@ -120,13 +120,31 @@ class BaseClientesFrame : public wxDialog
 		virtual void DisplayAddCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void EliminarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DisplayEditarCliente( wxCommandEvent& event ) { event.Skip(); }
+		virtual void VerVentas( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
 
-		BaseClientesFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 935,600 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+		BaseClientesFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1000,600 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
 
 		~BaseClientesFrame();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class BaseVentasCliente
+///////////////////////////////////////////////////////////////////////////////
+class BaseVentasCliente : public wxDialog
+{
+	private:
+
+	protected:
+
+	public:
+
+		BaseVentasCliente( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 700,400 ), long style = wxDEFAULT_DIALOG_STYLE );
+
+		~BaseVentasCliente();
 
 };
 
@@ -158,7 +176,7 @@ class BaseVentasFrame : public wxDialog
 
 	public:
 
-		BaseVentasFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1100,700 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+		BaseVentasFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1100,600 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
 
 		~BaseVentasFrame();
 
@@ -319,6 +337,7 @@ class BaseAddVenta : public wxDialog
 		wxTextCtrl* input_Producto;
 		wxButton* btn_BuscarProductos;
 		wxGrid* gridProductos;
+		wxStaticText* txt_SelectProducto;
 		wxStaticText* txt_Cantidad;
 		wxSpinCtrl* input_Cantidad;
 		wxButton* btn_AgregarProducto;
@@ -364,7 +383,7 @@ class BaseVerClientes : public wxDialog
 
 	public:
 
-		BaseVerClientes( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Resultados de la busqueda"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 500,400 ), long style = wxDEFAULT_DIALOG_STYLE );
+		BaseVerClientes( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Resultados de la busqueda"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,400 ), long style = wxDEFAULT_DIALOG_STYLE );
 
 		~BaseVerClientes();
 

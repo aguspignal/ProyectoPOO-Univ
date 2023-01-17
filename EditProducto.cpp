@@ -23,7 +23,7 @@ void EditProducto::ClickGuardar( wxCommandEvent& event )  {
 		int stock = input_Stock->GetValue();	
 		
 		sistema->ModificarProducto(id,descripcion,precio,stock);
-		sistema->CargarProductos();
+		sistema->LoadProductos();
 		
 		EndModal(1);
 	}

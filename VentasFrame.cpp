@@ -41,6 +41,8 @@ void VentasFrame::ActualizarGridDetalles(int id_venta){
 			gridDetalles->SetCellValue(i,3, to_string(detalles[i].GetCantidad()));
 			gridDetalles->SetCellValue(i,4, to_string(detalles[i].GetSubtotal()));
 		}
+		gridDetalles->SetColFormatFloat(2,-1,2);
+		gridDetalles->SetColFormatFloat(4,-1,2);
 	}
 }
 

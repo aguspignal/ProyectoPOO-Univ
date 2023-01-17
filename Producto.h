@@ -55,7 +55,9 @@ struct ProductoCantidad {
 	int cantidad;
 	
 	bool operator==(ProductoCantidad prod_cant){
-		return producto == prod_cant.producto;
+		if(producto == prod_cant.producto && cantidad == prod_cant.cantidad){
+			return true;
+		} else { return false; }
 	}
 };
 

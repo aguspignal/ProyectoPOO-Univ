@@ -29,6 +29,7 @@ void ProductosFrame::ActualizarGrid()  {
 			gridProductos->SetCellValue(i,3, to_string(producto.GetStock()));
 		}
 	}
+	gridProductos->SetColFormatFloat(2,-1,2);
 }
 
 void ProductosFrame::ActualizarGrid( wxCommandEvent& event )  {
@@ -48,6 +49,8 @@ void ProductosFrame::ActualizarGrid( wxCommandEvent& event )  {
 			gridProductos->SetCellValue(i,3, to_string(producto.GetStock()));
 		}
 	}
+	gridProductos->SetColFormatFloat(2,-1,2);
+	input_BuscarProducto->SetValue("");
 }
 
 void ProductosFrame::DisplayAddProducto( wxCommandEvent& event )  {
@@ -90,27 +93,7 @@ void ProductosFrame::DisplayEditarProducto( wxCommandEvent& event )  {
 }
 
 void ProductosFrame::BuscarProducto( wxCommandEvent& event )  {
-//	string busqueda = wx_to_std(input_BuscarProducto->GetValue());
-//	
-//	Producto producto = sistema->GetProductoByDescrip(busqueda);
-//	if(producto.GetID() == 0){
-//		wxMessageBox("No se encontro el producto","Error",wxOK|wxICON_ERROR);
-//	} else {
-//		gridProductos->DeleteRows(0,gridProductos->GetNumberRows());
-//		gridProductos->AppendRows();
-//		gridProductos->SetCellValue(0,0, to_string(producto.GetID()));
-//		gridProductos->SetCellValue(0,1, producto.GetDescripcion());
-//		gridProductos->SetCellValue(0,2, to_string(producto.GetPrecio()));
-//		if(producto.GetStock() <= 0){
-//			gridProductos->SetCellValue(0,3, "Sin stock");
-//		} else {
-//			gridProductos->SetCellValue(0,3, to_string(producto.GetStock()));
-//		}
-//	}
-	
-	if(input_BuscarProducto->IsEmpty()){
-		wxMessageBox("Ingrese un producto","Error",wxOK|wxICON_HAND);
-	} else {
+	if(!input_BuscarProducto->IsEmpty()){
 		string busqueda = wx_to_std(input_BuscarProducto->GetValue());
 		vector<int> resultados = sistema->BuscarProductos(busqueda);
 		
@@ -126,8 +109,13 @@ void ProductosFrame::BuscarProducto( wxCommandEvent& event )  {
 				gridProductos->SetCellValue(i,0,to_string(producto.GetID()));
 				gridProductos->SetCellValue(i,1,producto.GetDescripcion());
 				gridProductos->SetCellValue(i,2,to_string(producto.GetPrecio()));
-				gridProductos->SetCellValue(i,3,to_string(producto.GetStock()));
+				if(producto.GetStock() <= 0){
+					gridProductos->SetCellValue(i,3, "Sin stock");
+				} else {
+					gridProductos->SetCellValue(i,3, to_string(producto.GetStock()));
+				}
 			}
+			gridProductos->SetColFormatFloat(2,-1,2);
 		}
 	}
 }

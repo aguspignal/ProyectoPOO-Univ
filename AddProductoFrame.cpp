@@ -24,7 +24,7 @@ void AddProductoFrame::ClickAgregar( wxCommandEvent& event )  {
 		
 		Producto prod(descripcion,precio,stock);
 		prod.AddProducto();
-		sistema->CargarProductos();
+		sistema->LoadProductos();
 		EndModal(1);
 	}
 }

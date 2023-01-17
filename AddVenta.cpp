@@ -32,15 +32,15 @@ void AddVenta::ActualizarGrid(){
 		gridDetalles->SetCellValue(i,3,to_string(prods_seleccionados[i].cantidad));
 		gridDetalles->SetCellValue(i,4,to_string(prods_seleccionados[i].producto.GetPrecio() * prods_seleccionados[i].cantidad));
 	}
+	gridDetalles->SetColFormatFloat(2,-1,2);
+	gridDetalles->SetColFormatFloat(4,-1,2);
 	
 	txt_Monto->SetLabel(to_string(CalcularTotal()));
 }
 
 /// Buscar Cliente
 void AddVenta::BuscarCliente( wxCommandEvent& event ){
-	if(input_Cliente->IsEmpty()){
-		wxMessageBox("Ingrese un cliente","Error",wxOK|wxICON_HAND);
-	} else {
+	if(!input_Cliente->IsEmpty()){
 		string busqueda = wx_to_std(input_Cliente->GetValue());
 		vector<int> resultados = sistema->BuscarClientes(busqueda);
 		
@@ -49,8 +49,9 @@ void AddVenta::BuscarCliente( wxCommandEvent& event ){
 		} else {
 			VerClientesFrame *win = new VerClientesFrame(this,sistema,busqueda,resultados);
 			id_cliente = win->ShowModal();
-			if(id_cliente != 0){
-				txt_DatosCliente->SetLabel(sistema->GetClienteByID(id_cliente).GetNombre()+" - "+to_string(sistema->GetClienteByID(id_cliente).GetDNI())+" - "+sistema->GetClienteByID(id_cliente).GetDireccion());
+			Cliente cliente = sistema->GetClienteByID(id_cliente);
+			if(cliente.GetID() != 0){
+				txt_DatosCliente->SetLabel(cliente.GetNombre()+" - "+to_string(cliente.GetDNI())+" - "+cliente.GetDireccion());
 			}
 		}
 	}
@@ -58,9 +59,7 @@ void AddVenta::BuscarCliente( wxCommandEvent& event ){
 
 /// Buscar Producto
 void AddVenta::BuscarProducto( wxCommandEvent& event )  {
-	if(input_Producto->IsEmpty()){
-		wxMessageBox("Ingrese un producto","Error",wxOK|wxICON_HAND);
-	} else {
+	if(!input_Producto->IsEmpty()){
 		string busqueda = wx_to_std(input_Producto->GetValue());
 		vector<int> resultados = sistema->BuscarProductos(busqueda);
 		
@@ -71,17 +70,18 @@ void AddVenta::BuscarProducto( wxCommandEvent& event )  {
 				gridProductos->DeleteRows(0,gridProductos->GetNumberRows());
 			}
 			for(int i=0; i<resultados.size(); i++){
-				Producto prod = sistema->GetProductoByID(resultados[i]);
+				Producto producto = sistema->GetProductoByID(resultados[i]);
 				gridProductos->AppendRows();
-				gridProductos->SetCellValue(i,0,to_string(prod.GetID()));
-				gridProductos->SetCellValue(i,1,prod.GetDescripcion());
-				gridProductos->SetCellValue(i,2,to_string(prod.GetPrecio()));
+				gridProductos->SetCellValue(i,0,to_string(producto.GetID()));
+				gridProductos->SetCellValue(i,1,producto.GetDescripcion());
+				gridProductos->SetCellValue(i,2,to_string(producto.GetPrecio()));
 				if(producto.GetStock() <= 0){
 					gridProductos->SetCellValue(i,3, "Sin stock");
 				} else {
 					gridProductos->SetCellValue(i,3, to_string(producto.GetStock()));
 				}
 			}
+			gridProductos->SetColFormatFloat(2,-1,2);
 		}
 	}
 }
@@ -92,6 +92,7 @@ void AddVenta::SeleccionarProducto( wxGridEvent& event ) {
 		int row = event.GetRow();
 		if(!gridProductos->GetCellValue(row,0).IsEmpty()){
 			id_prod = stoi(wx_to_std(gridProductos->GetCellValue(row,0)));
+			txt_SelectProducto->SetLabel(gridProductos->GetCellValue(row,1));
 		}
 	}
 }
@@ -117,7 +118,8 @@ void AddVenta::QuitarProducto( wxCommandEvent& event )  {
 		int row = gridDetalles->GetGridCursorRow();
 		
 		ProductoCantidad prod_cant;
-		prod_cant.producto = sistema->GetProductoByID(stoi(wx_to_std(gridProductos->GetCellValue(row,0))));
+		int id_selected_prod = stoi(wx_to_std(gridProductos->GetCellValue(row,0)));
+		prod_cant.producto = sistema->GetProductoByID(id_selected_prod);
 		
 		auto it = find(prods_seleccionados.begin(), prods_seleccionados.end(), prod_cant);
 		prods_seleccionados.erase(it);
@@ -130,7 +132,8 @@ void AddVenta::QuitarProducto( wxCommandEvent& event )  {
 /// Guardar la venta
 void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
 	string errores;
-	if(id_cliente == 0){
+	Cliente cliente = sistema->GetClienteByID(id_cliente);
+	if(cliente.GetID() == 0){
 		errores += "No selecciono ningun cliente\n";
 	}
 	if(prods_seleccionados.empty()){
@@ -143,8 +146,12 @@ void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
 		if(int choice = wxYES){
 			Venta venta(id_cliente,prods_seleccionados);
 			venta.AddVenta();
-			sistema->CargarVentas();
-			sistema->CargarDetallesVenta();
+			for(int i=0; i<prods_seleccionados.size(); i++){
+				sistema->RetirarStockProducto(prods_seleccionados[i].producto.GetID(), prods_seleccionados[i].cantidad);
+			}
+			sistema->LoadProductos();
+			sistema->LoadVentas();
+			sistema->LoadDetallesVenta();
 		}
 		EndModal(1);
 	}

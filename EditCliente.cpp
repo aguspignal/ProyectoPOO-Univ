@@ -57,7 +57,7 @@ void EditCliente::ClickGuardar( wxCommandEvent& event )  {
 		wxMessageBox(errores,"Error",wxOK|wxICON_ERROR,this);
 	} else {
 		sistema->ModificarCliente(id,nombre,dni,direccion,email,telefono);
-		sistema->CargarClientes();
+		sistema->LoadClientes();
 		
 		EndModal(1);
 	}

@@ -14,7 +14,7 @@ BaseHomepage::BaseHomepage( wxWindow* parent, wxWindowID id, const wxString& tit
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	this->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
 	this->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOW ) );
-	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_HIGHLIGHT ) );
+	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_ACTIVECAPTION ) );
 
 	wxBoxSizer* bSizer2;
 	bSizer2 = new wxBoxSizer( wxVERTICAL );
@@ -86,13 +86,19 @@ BaseHomepage::~BaseHomepage()
 BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
-	this->SetBackgroundColour( wxColour( 192, 192, 192 ) );
+	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_SCROLLBAR ) );
 
 	wxBoxSizer* bSizer4;
 	bSizer4 = new wxBoxSizer( wxVERTICAL );
 
 	wxBoxSizer* bSizer8;
 	bSizer8 = new wxBoxSizer( wxVERTICAL );
+
+	txt_Productos = new wxStaticText( this, wxID_ANY, wxT("Productos"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Productos->Wrap( -1 );
+	txt_Productos->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
+
+	bSizer8->Add( txt_Productos, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	wxBoxSizer* bSizer50;
 	bSizer50 = new wxBoxSizer( wxHORIZONTAL );
@@ -118,12 +124,6 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 
 
 	bSizer8->Add( bSizer50, 0, wxEXPAND, 5 );
-
-	txt_Productos = new wxStaticText( this, wxID_ANY, wxT("Productos"), wxDefaultPosition, wxDefaultSize, 0 );
-	txt_Productos->Wrap( -1 );
-	txt_Productos->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
-
-	bSizer8->Add( txt_Productos, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	gridProductos = new wxGrid( this, wxID_ANY, wxPoint( -1,-1 ), wxDefaultSize, 0 );
 
@@ -219,13 +219,19 @@ BaseProductosFrame::~BaseProductosFrame()
 BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
-	this->SetBackgroundColour( wxColour( 192, 192, 192 ) );
+	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_SCROLLBAR ) );
 
 	wxBoxSizer* bSizer4;
 	bSizer4 = new wxBoxSizer( wxVERTICAL );
 
 	wxBoxSizer* bSizer7;
 	bSizer7 = new wxBoxSizer( wxVERTICAL );
+
+	txt_Clientes = new wxStaticText( this, wxID_ANY, wxT("Clientes"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Clientes->Wrap( -1 );
+	txt_Clientes->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
+
+	bSizer7->Add( txt_Clientes, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	wxBoxSizer* bSizer9;
 	bSizer9 = new wxBoxSizer( wxHORIZONTAL );
@@ -251,12 +257,6 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 
 
 	bSizer7->Add( bSizer9, 0, wxEXPAND, 5 );
-
-	txt_Clientes = new wxStaticText( this, wxID_ANY, wxT("Clientes"), wxDefaultPosition, wxDefaultSize, 0 );
-	txt_Clientes->Wrap( -1 );
-	txt_Clientes->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
-
-	bSizer7->Add( txt_Clientes, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	gridClientes = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 
@@ -317,8 +317,8 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 	btn_EditCliente->SetLabelMarkup( wxT("Editar") );
 	bSizer5->Add( btn_EditCliente, 0, wxALL|wxEXPAND, 5 );
 
-	btn_VentasCliente = new wxButton( this, wxID_ANY, wxT("Ver ventas del cliente"), wxDefaultPosition, wxDefaultSize, 0 );
-	btn_VentasCliente->SetLabelMarkup( wxT("Ver ventas del cliente") );
+	btn_VentasCliente = new wxButton( this, wxID_ANY, wxT("Ver ventas"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_VentasCliente->SetLabelMarkup( wxT("Ver ventas") );
 	bSizer5->Add( btn_VentasCliente, 0, wxALL|wxEXPAND, 5 );
 
 
@@ -343,6 +343,7 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 	btn_AddCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::DisplayAddCliente ), NULL, this );
 	btn_DeleteCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::EliminarCliente ), NULL, this );
 	btn_EditCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::DisplayEditarCliente ), NULL, this );
+	btn_VentasCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::VerVentas ), NULL, this );
 }
 
 BaseClientesFrame::~BaseClientesFrame()
@@ -354,13 +355,32 @@ BaseClientesFrame::~BaseClientesFrame()
 	btn_AddCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::DisplayAddCliente ), NULL, this );
 	btn_DeleteCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::EliminarCliente ), NULL, this );
 	btn_EditCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::DisplayEditarCliente ), NULL, this );
+	btn_VentasCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::VerVentas ), NULL, this );
 
+}
+
+BaseVentasCliente::BaseVentasCliente( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+
+	wxBoxSizer* bSizer58;
+	bSizer58 = new wxBoxSizer( wxVERTICAL );
+
+
+	this->SetSizer( bSizer58 );
+	this->Layout();
+
+	this->Centre( wxBOTH );
+}
+
+BaseVentasCliente::~BaseVentasCliente()
+{
 }
 
 BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
-	this->SetBackgroundColour( wxColour( 192, 192, 192 ) );
+	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_SCROLLBAR ) );
 
 	wxBoxSizer* bSizer32;
 	bSizer32 = new wxBoxSizer( wxVERTICAL );
@@ -1243,6 +1263,10 @@ BaseAddVenta::BaseAddVenta( wxWindow* parent, wxWindowID id, const wxString& tit
 	// Cell Defaults
 	gridProductos->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
 	bSizer60->Add( gridProductos, 1, wxALL, 5 );
+
+	txt_SelectProducto = new wxStaticText( this, wxID_ANY, wxT("Seleccione un producto"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_SelectProducto->Wrap( -1 );
+	bSizer60->Add( txt_SelectProducto, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
 	wxBoxSizer* bSizer49;
 	bSizer49 = new wxBoxSizer( wxHORIZONTAL );

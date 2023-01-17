@@ -4,11 +4,11 @@
 #include "Sistema.h"
 
 class ClientesFrame : public BaseClientesFrame {
-	
 private:
 	Sistema *sistema;
 	
 protected:
+	void VerVentas( wxCommandEvent& event )  override;
 	void OrdenarGrid( wxGridEvent& event )  override;
 	void ActualizarGrid( wxCommandEvent& event )  override;
 	void BuscarCliente( wxCommandEvent& event )  override;

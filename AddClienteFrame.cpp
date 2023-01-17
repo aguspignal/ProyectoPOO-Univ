@@ -53,7 +53,7 @@ void AddClienteFrame::ClickAgregar( wxCommandEvent& event )  {
 	} else {
 		Cliente cliente(nombre,dni,direccion,email,telefono);
 		cliente.AddCliente();
-		sistema->CargarClientes();
+		sistema->LoadClientes();
 		
 		EndModal(1);
 	}

@@ -6,14 +6,14 @@
 using namespace std;
 
 Sistema::Sistema(){
-	CargarProductos();
-	CargarClientes();
-	CargarVentas();
-	CargarDetallesVenta();
+	LoadProductos();
+	LoadClientes();
+	LoadVentas();
+	LoadDetallesVenta();
 }
 
 /// -- CARGAR Productos
-void Sistema::CargarProductos(){
+void Sistema::LoadProductos(){
 	ifstream archi("productos.bin",ios::binary|ios::in|ios::ate);
 	int cant_productos = archi.tellg() / sizeof(RegistroProducto);
 	archi.seekg(0);
@@ -30,7 +30,7 @@ void Sistema::CargarProductos(){
 }
 
 /// -- CARGAR Clientes
-void Sistema::CargarClientes(){
+void Sistema::LoadClientes(){
 	ifstream archi("clientes.bin",ios::binary|ios::in|ios::ate);
 	int cant_clientes = archi.tellg() / sizeof(RegistroCliente);
 	archi.seekg(0);
@@ -47,7 +47,7 @@ void Sistema::CargarClientes(){
 }
 
 /// -- CARGAR Ventas
-void Sistema::CargarVentas(){
+void Sistema::LoadVentas(){
 	ifstream archi("ventas.bin",ios::binary|ios::in|ios::ate);
 	int cant_ventas = archi.tellg() / sizeof(RegistroVenta);
 	archi.seekg(0);
@@ -64,7 +64,7 @@ void Sistema::CargarVentas(){
 }
 
 /// -- CARGAR Detalles de Venta
-void Sistema::CargarDetallesVenta(){
+void Sistema::LoadDetallesVenta(){
 	ifstream archi("ventasdetalle.bin",ios::binary|ios::in|ios::ate);
 	int cant_detalles = archi.tellg() / sizeof(RegistroVentaDetalle);
 	archi.seekg(0);
@@ -82,7 +82,7 @@ void Sistema::CargarDetallesVenta(){
 
 
 /// -- ACTUALIZAR Productos
-void Sistema::ActualizarProductos(){
+void Sistema::SaveProductos(){
 	ofstream archi("productos.bin",ios::binary|ios::trunc);
 	
 	RegistroProducto reg;
@@ -98,7 +98,7 @@ void Sistema::ActualizarProductos(){
 }
 
 /// ACTUALIZAR Clientes
-void Sistema::ActualizarClientes(){
+void Sistema::SaveClientes(){
 	ofstream archi("clientes.bin",ios::binary|ios::trunc);
 	
 	RegistroCliente reg;
@@ -116,7 +116,7 @@ void Sistema::ActualizarClientes(){
 }
 
 /// ACTUALIZAR Ventas
-void Sistema::ActualizarVentas(){
+void Sistema::SaveVentas(){
 	ofstream archi("ventas.bin",ios::binary|ios::trunc);
 	
 	RegistroVenta reg;
@@ -132,7 +132,7 @@ void Sistema::ActualizarVentas(){
 }
 
 /// ACTUALIZAR Detalles de Venta
-void Sistema::ActualizarDetallesVenta(){
+void Sistema::SaveDetallesVenta(){
 	ofstream archi("ventasdetalle.bin",ios::binary|ios::trunc);
 	
 	RegistroVentaDetalle reg;
@@ -153,22 +153,22 @@ void Sistema::ActualizarDetallesVenta(){
 /// -- GUARDAR Datos
 void Sistema::GuardarProducto(Producto p){
 	productos.push_back(p);
-	ActualizarProductos();
+	SaveProductos();
 }
 
 void Sistema::GuardarCliente(Cliente c){
 	clientes.push_back(c);
-	ActualizarClientes();
+	SaveClientes();
 }
 
 void Sistema::GuardarVenta(Venta v){
 	ventas.push_back(v);
-	ActualizarVentas();
+	SaveVentas();
 }
 
 void Sistema::GuardarDetalleVenta(VentaDetalle vdetalle){
 	detallesventa.push_back(vdetalle);
-	ActualizarDetallesVenta();
+	SaveDetallesVenta();
 }
 
 
@@ -179,7 +179,7 @@ void Sistema::DeleteProducto(int id){
 			productos.erase(productos.begin()+i);
 		}
 	}
-	ActualizarProductos();
+	SaveProductos();
 }
 
 /// -- ELIMINAR Cliente 
@@ -189,7 +189,7 @@ void Sistema::DeleteCliente(int id){
 			clientes.erase(clientes.begin()+i);
 		}
 	}
-	ActualizarClientes();
+	SaveClientes();
 }
 
 /// -- ELIMINAR Venta
@@ -209,8 +209,8 @@ void Sistema::DeleteVenta(int id){
 	this->detallesventa.clear();
 	this->detallesventa = v;
 	
-	ActualizarVentas();
-	ActualizarDetallesVenta();
+	SaveVentas();
+	SaveDetallesVenta();
 }
 
 
@@ -223,7 +223,7 @@ void Sistema::ModificarProducto(int id, string descripcion, float precio, int st
 			productos[i].SetStock(stock);
 		}
 	}
-	ActualizarProductos();
+	SaveProductos();
 }
 
 void Sistema::RetirarStockProducto(int id, int cantidad){
@@ -232,7 +232,7 @@ void Sistema::RetirarStockProducto(int id, int cantidad){
 			productos[i].SetStock(productos[i].GetStock() - cantidad);
 		}
 	}
-	ActualizarProductos();
+	SaveProductos();
 }
 
 
@@ -247,7 +247,7 @@ void Sistema::ModificarCliente(int id, string nombre, int dni, string direccion,
 			clientes[i].SetTelefono(telefono);
 		}
 	}
-	ActualizarClientes();
+	SaveDetallesVenta();
 }
 
 /// -- MODIFICAR Venta
@@ -259,7 +259,7 @@ void Sistema::ModificarVenta(int id, int id_cliente, float total){
 			ventas[i].SetModifTrue();
 		}
 	}
-	ActualizarVentas();
+	SaveVentas();
 }
 
 
@@ -293,9 +293,9 @@ Producto Sistema::GetProductoByDescrip(string descripcion){
 vector<int> Sistema::BuscarProductos(string busqueda){
 	vector<int> results;
 	for(int i=0; i<productos.size(); i++){
-		string str = StrAMinusculas(productos[i].GetDescripcion());
-		size_t pos = str.find(StrAMinusculas(busqueda),0);
-		if(pos < str.length()){
+		string product_descrip = StrAMinusculas(productos[i].GetDescripcion());
+		size_t pos = product_descrip.find(StrAMinusculas(StrSinEspacios(busqueda)),0);
+		if(pos < product_descrip.length()){
 			results.push_back(productos[i].GetID());
 		}
 	}
@@ -332,9 +332,9 @@ Cliente Sistema::GetClienteByNombre(string nombre){
 vector<int> Sistema::BuscarClientes(string busqueda){
 	vector<int> results;
 	for(int i=0; i<clientes.size(); i++){
-		string str = StrAMinusculas(clientes[i].GetNombre());
-		size_t pos = str.find(StrAMinusculas(StrSinEspacios(busqueda)),0);
-		if(pos < str.length()){
+		string nombre = StrAMinusculas(clientes[i].GetNombre());
+		size_t pos = nombre.find(StrAMinusculas(StrSinEspacios(busqueda)),0);
+		if(pos < nombre.length()){
 			results.push_back(clientes[i].GetID());
 		}
 	}
