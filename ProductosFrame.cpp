@@ -22,7 +22,7 @@ void ProductosFrame::ActualizarGrid()  {
 		gridProductos->AppendRows();
 		gridProductos->SetCellValue(i,0, to_string(producto.GetID()));
 		gridProductos->SetCellValue(i,1, producto.GetDescripcion());
-		gridProductos->SetCellValue(i,2, to_string(producto.GetPrecio()));
+		gridProductos->SetCellValue(i,2, "$"+to_string(producto.GetPrecio()));
 		if(producto.GetStock() <= 0){
 			gridProductos->SetCellValue(i,3, "Sin stock");
 		} else {
@@ -42,7 +42,7 @@ void ProductosFrame::ActualizarGrid( wxCommandEvent& event )  {
 		gridProductos->AppendRows();
 		gridProductos->SetCellValue(i,0, to_string(producto.GetID()));
 		gridProductos->SetCellValue(i,1, producto.GetDescripcion());
-		gridProductos->SetCellValue(i,2, to_string(producto.GetPrecio()));
+		gridProductos->SetCellValue(i,2, "$"+to_string(producto.GetPrecio()));
 		if(producto.GetStock() <= 0){
 			gridProductos->SetCellValue(i,3, "Sin stock");
 		} else {
@@ -108,7 +108,7 @@ void ProductosFrame::BuscarProducto( wxCommandEvent& event )  {
 				gridProductos->AppendRows();
 				gridProductos->SetCellValue(i,0,to_string(producto.GetID()));
 				gridProductos->SetCellValue(i,1,producto.GetDescripcion());
-				gridProductos->SetCellValue(i,2,to_string(producto.GetPrecio()));
+				gridProductos->SetCellValue(i,2,"$"+to_string(producto.GetPrecio()));
 				if(producto.GetStock() <= 0){
 					gridProductos->SetCellValue(i,3, "Sin stock");
 				} else {

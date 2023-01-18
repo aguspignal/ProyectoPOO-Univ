@@ -58,6 +58,7 @@ public:
 	
 	Venta &GetVenta(int i);
 	Venta GetVentaByID(int id);
+	vector<int> GetVentasByIDCliente(int id);
 	
 	VentaDetalle &GetDetalleVenta(int i);
 	vector<VentaDetalle> GetDetallesByIDVenta(int id_venta);

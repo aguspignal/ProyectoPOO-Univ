@@ -10,6 +10,7 @@ private:
 	Sistema *sistema;
 	
 protected:
+	void DisplayEstadisticas( wxCommandEvent& event )  override;
 	void DisplayProductsFrmae( wxCommandEvent& event )  override;
 	void DisplayClientesFrame( wxCommandEvent& event )  override;
 	void DisplayVentasFrame( wxCommandEvent& event )  override;

@@ -28,9 +28,9 @@ void AddVenta::ActualizarGrid(){
 		gridDetalles->AppendRows();
 		gridDetalles->SetCellValue(i,0,to_string(prods_seleccionados[i].producto.GetID()));
 		gridDetalles->SetCellValue(i,1,prods_seleccionados[i].producto.GetDescripcion());
-		gridDetalles->SetCellValue(i,2,to_string(prods_seleccionados[i].producto.GetPrecio()));
+		gridDetalles->SetCellValue(i,2,"$"+to_string(prods_seleccionados[i].producto.GetPrecio()));
 		gridDetalles->SetCellValue(i,3,to_string(prods_seleccionados[i].cantidad));
-		gridDetalles->SetCellValue(i,4,to_string(prods_seleccionados[i].producto.GetPrecio() * prods_seleccionados[i].cantidad));
+		gridDetalles->SetCellValue(i,4,"$"+to_string(prods_seleccionados[i].producto.GetPrecio() * prods_seleccionados[i].cantidad));
 	}
 	gridDetalles->SetColFormatFloat(2,-1,2);
 	gridDetalles->SetColFormatFloat(4,-1,2);
@@ -74,7 +74,7 @@ void AddVenta::BuscarProducto( wxCommandEvent& event )  {
 				gridProductos->AppendRows();
 				gridProductos->SetCellValue(i,0,to_string(producto.GetID()));
 				gridProductos->SetCellValue(i,1,producto.GetDescripcion());
-				gridProductos->SetCellValue(i,2,to_string(producto.GetPrecio()));
+				gridProductos->SetCellValue(i,2,"$"+to_string(producto.GetPrecio()));
 				if(producto.GetStock() <= 0){
 					gridProductos->SetCellValue(i,3, "Sin stock");
 				} else {

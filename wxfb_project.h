@@ -43,12 +43,15 @@ class BaseHomepage : public wxFrame
 		wxButton* btn_Productos;
 		wxButton* btn_Clientes;
 		wxButton* btn_Ventas;
+		wxButton* btn_Estadisticas;
 		wxPanel* m_panel184;
+		wxPanel* m_panel10;
 
 		// Virtual event handlers, override them in your derived class
 		virtual void DisplayProductsFrmae( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DisplayClientesFrame( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DisplayVentasFrame( wxCommandEvent& event ) { event.Skip(); }
+		virtual void DisplayEstadisticas( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
@@ -132,23 +135,6 @@ class BaseClientesFrame : public wxDialog
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Class BaseVentasCliente
-///////////////////////////////////////////////////////////////////////////////
-class BaseVentasCliente : public wxDialog
-{
-	private:
-
-	protected:
-
-	public:
-
-		BaseVentasCliente( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 700,400 ), long style = wxDEFAULT_DIALOG_STYLE );
-
-		~BaseVentasCliente();
-
-};
-
-///////////////////////////////////////////////////////////////////////////////
 /// Class BaseVentasFrame
 ///////////////////////////////////////////////////////////////////////////////
 class BaseVentasFrame : public wxDialog
@@ -176,9 +162,38 @@ class BaseVentasFrame : public wxDialog
 
 	public:
 
-		BaseVentasFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1100,600 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+		BaseVentasFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1050,600 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
 
 		~BaseVentasFrame();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class BaseVentasCliente
+///////////////////////////////////////////////////////////////////////////////
+class BaseVentasCliente : public wxDialog
+{
+	private:
+
+	protected:
+		wxStaticText* txt_Cliente;
+		wxStaticText* txt_DatosCliente;
+		wxStaticText* txt_Ventas;
+		wxStaticText* txt_CantVentas;
+		wxGrid* gridIDVentas;
+		wxGrid* gridDetalles;
+		wxGrid* gridTotales;
+		wxButton* txt_Select;
+
+		// Virtual event handlers, override them in your derived class
+		virtual void VerDetalleVenta( wxCommandEvent& event ) { event.Skip(); }
+
+
+	public:
+
+		BaseVentasCliente( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 750,400 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX );
+
+		~BaseVentasCliente();
 
 };
 
@@ -386,6 +401,24 @@ class BaseVerClientes : public wxDialog
 		BaseVerClientes( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Resultados de la busqueda"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,400 ), long style = wxDEFAULT_DIALOG_STYLE );
 
 		~BaseVerClientes();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class BaseEstadisticas
+///////////////////////////////////////////////////////////////////////////////
+class BaseEstadisticas : public wxDialog
+{
+	private:
+
+	protected:
+		wxStaticText* txt_Estadistica;
+
+	public:
+
+		BaseEstadisticas( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 700,-1 ), long style = wxDEFAULT_DIALOG_STYLE );
+
+		~BaseEstadisticas();
 
 };
 

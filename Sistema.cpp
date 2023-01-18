@@ -357,6 +357,16 @@ Venta Sistema::GetVentaByID(int id){
 	return venta;
 }
 
+vector<int> Sistema::GetVentasByIDCliente(int id_cliente){
+	vector<int> resultados;
+	for(int i=0; i<ventas.size(); i++){
+		if(ventas[i].GetIDCliente() == id_cliente){
+			resultados.push_back(ventas[i].GetID());
+		}
+	}
+	return resultados;
+}
+
 /// -- BUSCAR Detalles Venta
 VentaDetalle &Sistema::GetDetalleVenta(int i){
 	return detallesventa[i];

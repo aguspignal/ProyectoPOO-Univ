@@ -21,8 +21,9 @@ void VentasFrame::ActualizarGridVentas(){
 		gridVentas->AppendRows();
 		gridVentas->SetCellValue(i,0, to_string(sistema->GetVenta(i).GetID()));
 		gridVentas->SetCellValue(i,1, to_string(sistema->GetVenta(i).GetIDCliente()));
-		gridVentas->SetCellValue(i,2, to_string(sistema->GetVenta(i).GetTotal()));
+		gridVentas->SetCellValue(i,2, "$"+to_string(sistema->GetVenta(i).GetTotal()));
 	}
+	gridVentas->SetColFormatFloat(2,-1,2);
 }
 
 /// Actualizar GRID DETALLES
@@ -37,9 +38,9 @@ void VentasFrame::ActualizarGridDetalles(int id_venta){
 			gridDetalles->AppendRows();
 			gridDetalles->SetCellValue(i,0,to_string(detalles[i].GetIDProducto()));
 			gridDetalles->SetCellValue(i,1, sistema->GetProductoByID(detalles[i].GetIDProducto()).GetDescripcion());
-			gridDetalles->SetCellValue(i,2, to_string(detalles[i].GetValorVendido()));
+			gridDetalles->SetCellValue(i,2, "$"+to_string(detalles[i].GetValorVendido()));
 			gridDetalles->SetCellValue(i,3, to_string(detalles[i].GetCantidad()));
-			gridDetalles->SetCellValue(i,4, to_string(detalles[i].GetSubtotal()));
+			gridDetalles->SetCellValue(i,4, "$"+to_string(detalles[i].GetSubtotal()));
 		}
 		gridDetalles->SetColFormatFloat(2,-1,2);
 		gridDetalles->SetColFormatFloat(4,-1,2);

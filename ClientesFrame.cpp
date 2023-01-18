@@ -3,6 +3,7 @@
 #include "EditCliente.h"
 #include "string_conv.h"
 #include <wx/msgdlg.h>
+#include "VentasCliente.h"
 
 ClientesFrame::ClientesFrame(wxWindow *parent, Sistema *m_sistema) 
 	: BaseClientesFrame(parent), sistema(m_sistema) {
@@ -44,6 +45,31 @@ void ClientesFrame::ActualizarGrid( wxCommandEvent& event )  {
 	input_BuscarCliente->SetLabel("");
 }
 
+void ClientesFrame::BuscarCliente( wxCommandEvent& event )  {
+	if(!input_BuscarCliente->IsEmpty()){
+		string busqueda = wx_to_std(input_BuscarCliente->GetValue());
+		vector<int> resultados = sistema->BuscarClientes(busqueda);
+		
+		if(resultados.empty()){
+			wxMessageBox("No se encontraron productos","Error",wxOK|wxICON_ERROR);	
+		} else {
+			if(gridClientes->GetNumberRows() != 0){
+				gridClientes->DeleteRows(0,gridClientes->GetNumberRows());
+			}
+			for(int i=0; i<resultados.size(); i++){
+				Cliente cliente = sistema->GetClienteByID(resultados[i]);
+				gridClientes->AppendRows();
+				gridClientes->SetCellValue(i,0, to_string(cliente.GetID()));
+				gridClientes->SetCellValue(i,1, cliente.GetNombre());
+				gridClientes->SetCellValue(i,2, to_string(cliente.GetDNI()));
+				gridClientes->SetCellValue(i,3, cliente.GetDireccion());
+				gridClientes->SetCellValue(i,4, cliente.GetEmail());
+				gridClientes->SetCellValue(i,5, cliente.GetTelefono());
+			}
+		}
+	}
+}
+
 void ClientesFrame::DisplayAddCliente( wxCommandEvent& event )  {
 	AddClienteFrame *win = new AddClienteFrame(this,sistema);
 	if(win->ShowModal() == 1){
@@ -82,31 +108,22 @@ void ClientesFrame::DisplayEditarCliente( wxCommandEvent& event )  {
 	
 }
 
-void ClientesFrame::BuscarCliente( wxCommandEvent& event )  {
-	if(!input_BuscarCliente->IsEmpty()){
-		string busqueda = wx_to_std(input_BuscarCliente->GetValue());
-		vector<int> resultados = sistema->BuscarClientes(busqueda);
+void ClientesFrame::VerVentas( wxCommandEvent& event )  {
+	if(gridClientes->GetNumberRows() == 0){
+		wxMessageBox("No hay clientes","Error",wxOK|wxICON_ERROR);
+	} else {
+		string str = wx_to_std(gridClientes->GetCellValue(gridClientes->GetGridCursorRow(),0));
+		int id = stoi(str);
 		
-		if(resultados.empty()){
-			wxMessageBox("No se encontraron productos","Error",wxOK|wxICON_ERROR);	
+		vector<int> ventas_cliente = sistema->GetVentasByIDCliente(id);
+		if(ventas_cliente.empty()){
+			wxMessageBox("El cliente no posee ventas","Error",wxOK|wxICON_ERROR);
 		} else {
-			if(gridClientes->GetNumberRows() != 0){
-				gridClientes->DeleteRows(0,gridClientes->GetNumberRows());
-			}
-			for(int i=0; i<resultados.size(); i++){
-				Cliente cliente = sistema->GetClienteByID(resultados[i]);
-				gridClientes->AppendRows();
-				gridClientes->SetCellValue(i,0, to_string(cliente.GetID()));
-				gridClientes->SetCellValue(i,1, cliente.GetNombre());
-				gridClientes->SetCellValue(i,2, to_string(cliente.GetDNI()));
-				gridClientes->SetCellValue(i,3, cliente.GetDireccion());
-				gridClientes->SetCellValue(i,4, cliente.GetEmail());
-				gridClientes->SetCellValue(i,5, cliente.GetTelefono());
-			}
+			VentasCliente *win = new VentasCliente(this,sistema,id,ventas_cliente);
+			win->ShowModal();
 		}
 	}
 }
-
 
 void ClientesFrame::OrdenarGrid( wxGridEvent& event )  {
 	int col = event.GetCol();
@@ -120,7 +137,4 @@ void ClientesFrame::OrdenarGrid( wxGridEvent& event )  {
 	}
 }
 
-void ClientesFrame::VerVentas( wxCommandEvent& event )  {
-	event.Skip();
-}
 

@@ -2,6 +2,7 @@
 #include "ProductosFrame.h"
 #include "ClientesFrame.h"
 #include "VentasFrame.h"
+#include "EstadisticasFrame.h"
 
 Homepage::Homepage(Sistema *m_sistema) 
 	: BaseHomepage(nullptr), sistema(m_sistema) {
@@ -23,7 +24,13 @@ void Homepage::DisplayVentasFrame( wxCommandEvent& event )  {
 	win->ShowModal();
 }
 
+void Homepage::DisplayEstadisticas( wxCommandEvent& event )  {
+	EstadisticasFrame *win = new EstadisticasFrame(this,sistema);
+	win->ShowModal();
+}
+
 Homepage::~Homepage() {
 	
 }
+
 
