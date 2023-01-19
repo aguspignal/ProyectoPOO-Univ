@@ -5,7 +5,7 @@
 using namespace std;
 
 enum CriterioOrdenProducto {ID_PRODUCTO,DESCRIPCION,PRECIO,STOCK};
-enum CriterioOrdenCliente {ID_CLIENTE,NOMBRE,DNI,DIRECCION,EMAIL,TELEFONO};
+enum CriterioOrdenCliente {ID_CLIENTE,NOMBRE,DNI,DIRECCION,EMAIL};
 enum CriterioOrdenVenta {ID_VENTA,IDCLIENTE,TOTAL};
 
 class Sistema {

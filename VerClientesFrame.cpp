@@ -36,8 +36,5 @@ void VerClientesFrame::CloseWindow( wxCloseEvent& event )  {
 	EndModal(0);
 }
 
-void VerClientesFrame::OrdenarGrid( wxGridEvent& event )  {
-	event.Skip();
-}
 
 

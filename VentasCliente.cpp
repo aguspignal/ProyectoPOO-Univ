@@ -21,9 +21,9 @@ void VentasCliente::ActualizarGridVentas(){
 		gridIDVentas->SetCellValue(i,0,to_string(ventas_cliente[i]));
 		
 		gridTotales->AppendRows();
-		gridTotales->SetCellValue(i,0,"$"+to_string(sistema->GetVentaByID(ventas_cliente[i]).GetTotal()));
+		gridTotales->SetCellValue(i,0, to_string(sistema->GetVentaByID(ventas_cliente[i]).GetTotal()));
 	}
-	gridTotales->SetColFormatFloat(0,-1,2);
+	gridTotales->SetColFormatFloat(2,-1,2);
 }
 
 void VentasCliente::ActualizarGridDetalles(int id_venta){
@@ -35,10 +35,10 @@ void VentasCliente::ActualizarGridDetalles(int id_venta){
 		vector<VentaDetalle> detalles = sistema->GetDetallesByIDVenta(id_venta);
 		for(int i=0; i<detalles.size(); i++){
 			gridDetalles->AppendRows();
-			gridDetalles->SetCellValue(i,0, sistema->GetProductoByID(detalles[i].GetIDProducto()).GetDescripcion());
-			gridDetalles->SetCellValue(i,1, "$"+to_string(detalles[i].GetValorVendido()));
+			gridDetalles->SetCellValue(i,0, detalles[i].GetDescripcion());
+			gridDetalles->SetCellValue(i,1, to_string(detalles[i].GetValorVendido()));
 			gridDetalles->SetCellValue(i,2, to_string(detalles[i].GetCantidad()));
-			gridDetalles->SetCellValue(i,3, "$"+to_string(detalles[i].GetSubtotal()));
+			gridDetalles->SetCellValue(i,3, to_string(detalles[i].GetSubtotal()));
 		}
 		gridDetalles->SetColFormatFloat(1,-1,2);
 		gridDetalles->SetColFormatFloat(3,-1,2);

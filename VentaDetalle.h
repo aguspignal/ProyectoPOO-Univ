@@ -1,8 +1,11 @@
 #ifndef VENTADETALLE_H
 #define VENTADETALLE_H
+#include <string>
+using namespace std;
 
 struct RegistroVentaDetalle {
 	int id, id_venta, id_producto, cantidad;
+	char descripcion[200];
 	float valor_vendido, subtotal;
 };
 
@@ -10,14 +13,14 @@ class VentaDetalle {
 private:
 	int id;
 	int id_venta;
-	int id_producto;
+	string descripcion;
 	int cantidad;
 	float valor_vendido; 
 	float subtotal;
 
 public:
-	VentaDetalle(int idVenta, int cantidad, int id_producto, float precio_producto);
-	VentaDetalle(int id, int id_venta, int id_producto, int cantidad, float valor_vendido, float subtotal);
+	VentaDetalle(int idVenta, string descripcion, int cantidad, float precio_producto);
+	VentaDetalle(int id, int id_venta, string descripcion, int cantidad, float valor_vendido, float subtotal);
 	
 	/// ID
 	int GetID();
@@ -25,7 +28,7 @@ public:
 	int GetLastId();
 	
 	/// Producto
-	int GetIDProducto();
+	string GetDescripcion();
 	
 	/// Valor vendido
 	float GetValorVendido();

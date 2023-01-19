@@ -85,10 +85,6 @@ bool Orden_Email(Cliente c1, Cliente c2){
 	return StrAMinusculas(c1.GetEmail()) < StrAMinusculas(c2.GetEmail());
 }
 	
-bool Orden_Telefono(Cliente c1, Cliente c2){
-	return StrAMinusculas(c1.GetTelefono()) < StrAMinusculas(c2.GetTelefono());
-}
-
 // Para Venta
 bool Orden_ID_Venta(Venta v1, Venta v2){
 	return v1.GetID() < v2.GetID();

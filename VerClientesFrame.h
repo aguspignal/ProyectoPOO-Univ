@@ -14,7 +14,6 @@ private:
 protected:
 	void CloseWindow( wxCloseEvent& event )  override;
 	void SeleccionarCliente( wxGridEvent& event )  override;
-	void OrdenarGrid( wxGridEvent& event )  override;
 	void AgregarCliente( wxCommandEvent& event )  override;
 	
 public:

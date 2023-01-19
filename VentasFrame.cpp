@@ -18,10 +18,13 @@ void VentasFrame::ActualizarGridVentas(){
 	}
 	
 	for(int i=0; i<sistema->GetVentasSize(); i++){
+		Venta venta = sistema->GetVenta(i);
 		gridVentas->AppendRows();
-		gridVentas->SetCellValue(i,0, to_string(sistema->GetVenta(i).GetID()));
-		gridVentas->SetCellValue(i,1, to_string(sistema->GetVenta(i).GetIDCliente()));
-		gridVentas->SetCellValue(i,2, "$"+to_string(sistema->GetVenta(i).GetTotal()));
+		gridVentas->SetCellValue(i,0, to_string(venta.GetID()));
+		gridVentas->SetCellValue(i,1, to_string(venta.GetIDCliente()));
+		gridVentas->SetCellValue(i,2, to_string(venta.GetTotal()));
+		string str = to_string(venta.GetDay())+"/"+to_string(venta.GetMonth())+"/"+to_string(venta.GetYear());
+		gridVentas->SetCellValue(i,3, str);
 	}
 	gridVentas->SetColFormatFloat(2,-1,2);
 }
@@ -36,14 +39,13 @@ void VentasFrame::ActualizarGridDetalles(int id_venta){
 		vector<VentaDetalle> detalles = sistema->GetDetallesByIDVenta(id_venta);
 		for(int i=0; i<detalles.size(); i++){
 			gridDetalles->AppendRows();
-			gridDetalles->SetCellValue(i,0,to_string(detalles[i].GetIDProducto()));
-			gridDetalles->SetCellValue(i,1, sistema->GetProductoByID(detalles[i].GetIDProducto()).GetDescripcion());
-			gridDetalles->SetCellValue(i,2, "$"+to_string(detalles[i].GetValorVendido()));
-			gridDetalles->SetCellValue(i,3, to_string(detalles[i].GetCantidad()));
-			gridDetalles->SetCellValue(i,4, "$"+to_string(detalles[i].GetSubtotal()));
+			gridDetalles->SetCellValue(i,0, detalles[i].GetDescripcion());
+			gridDetalles->SetCellValue(i,1, to_string(detalles[i].GetValorVendido()));
+			gridDetalles->SetCellValue(i,2, to_string(detalles[i].GetCantidad()));
+			gridDetalles->SetCellValue(i,3, to_string(detalles[i].GetSubtotal()));
 		}
-		gridDetalles->SetColFormatFloat(2,-1,2);
-		gridDetalles->SetColFormatFloat(4,-1,2);
+		gridDetalles->SetColFormatFloat(1,-1,2);
+		gridDetalles->SetColFormatFloat(3,-1,2);
 	}
 }
 
@@ -81,11 +83,6 @@ void VentasFrame::EliminarVenta( wxCommandEvent& event )  {
 	}
 }
 
-/// -- EDITAR Venta
-void VentasFrame::DisplayEditarVenta( wxCommandEvent& event )  {
-	event.Skip();
-}
-
 void VentasFrame::OrdenarGrid( wxGridEvent& event )  {
 	int col = event.GetCol();
 	switch (col){
@@ -93,5 +90,7 @@ void VentasFrame::OrdenarGrid( wxGridEvent& event )  {
 	case 1: sistema->OrdenarVentas(IDCLIENTE); break;
 	case 2: sistema->OrdenarVentas(TOTAL); break;
 	}
+	ActualizarGridVentas();
+	ActualizarGridDetalles(0);
 }
 

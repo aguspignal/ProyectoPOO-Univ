@@ -6,10 +6,17 @@
 #include <vector>
 using namespace std;
 
+struct Fecha {
+	int year;
+	unsigned short month;
+	unsigned short day;
+};
+
 struct RegistroVenta {
 	int id;
 	int id_cliente;
 	float total;
+	Fecha fecha;
 	bool modificada = false;
 };
 
@@ -18,11 +25,15 @@ private:
 	int id;
 	int id_cliente;
 	float total;
+	int year;
+	unsigned short month;
+	unsigned short day;
 	bool modificada = false;
 	
 public:
 	Venta();
 	Venta(int id_cliente, vector<ProductoCantidad> productos_cantidades);
+	Venta(int id, int id_cliente, float total, Fecha fecha, bool modif);
 	Venta(int id, int id_cliente, float total, bool modif);
 	
 	/// ID
@@ -36,6 +47,18 @@ public:
 	/// Bool
 	bool GetModif();
 	void SetModifTrue();
+	
+	/// Fecha
+	void SetFecha(int year, unsigned short mo, unsigned short day);
+	
+	int GetYear();
+	void SetYear(int yr);
+	
+	unsigned short GetMonth();
+	void SetMonth(unsigned short mo);
+	
+	unsigned short GetDay();
+	void SetDay(unsigned short dy);
 	
 	/// Total
 	float GetTotal();

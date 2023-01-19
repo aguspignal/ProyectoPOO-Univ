@@ -12,7 +12,6 @@ private:
 	int id_prod = 0;
 	
 protected:
-	void OrdenarGrid( wxGridEvent& event )  override;
 	void SeleccionarProducto( wxGridEvent& event )  override;
 	void AgregarProducto( wxCommandEvent& event )  override;
 	void QuitarProducto( wxCommandEvent& event )  override;

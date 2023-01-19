@@ -133,8 +133,8 @@ void ClientesFrame::OrdenarGrid( wxGridEvent& event )  {
 	case 2: sistema->OrdenarClientes(DNI); break;
 	case 3: sistema->OrdenarClientes(DIRECCION); break;
 	case 4: sistema->OrdenarClientes(EMAIL); break;
-	case 5: sistema->OrdenarClientes(TELEFONO); break;
 	}
+	ActualizarGrid();
 }
 
 

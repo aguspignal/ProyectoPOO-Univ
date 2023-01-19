@@ -15,9 +15,20 @@ Venta::Venta(int idCliente, vector<ProductoCantidad> prods_cants){
 	this->total = CalcularTotal(prods_cants);
 	
 	for(int i=0; i<prods_cants.size(); i++){
-		VentaDetalle vdetalle(this->id, prods_cants[i].cantidad, prods_cants[i].producto.GetID(), prods_cants[i].producto.GetPrecio());
+		VentaDetalle vdetalle(this->id, prods_cants[i].producto.GetDescripcion(),
+							  prods_cants[i].cantidad, prods_cants[i].producto.GetPrecio());
 		vdetalle.AddVentaDetalle();
 	}
+}
+
+Venta::Venta(int id, int idCliente, float total, Fecha fecha, bool modif){
+	this->id = id;
+	this->id_cliente = idCliente;
+	this->total = total;
+	this->year = fecha.year;
+	this->month = fecha.month;
+	this->day = fecha.day;
+	this->modificada = modif;
 }
 
 Venta::Venta(int id, int idCliente, float total, bool modif){
@@ -73,8 +84,7 @@ float Venta::CalcularTotal(vector<ProductoCantidad> prods_cants){
 	Sistema sist;
 	float suma = 0;
 	for(int i=0; i<prods_cants.size(); i++){
-		float precio = sist.GetProductoByID(prods_cants[i].producto.GetID()).GetPrecio();
-		suma += (precio * prods_cants[i].cantidad);
+		suma += (prods_cants[i].producto.GetPrecio() * prods_cants[i].cantidad);
 	}
 	return suma;
 }
@@ -88,6 +98,38 @@ void  Venta::SetModifTrue(){
 	this->modificada = true;
 }
 
+/// -- FECHA
+void Venta::SetFecha(int yr, unsigned short mo, unsigned short day){
+	SetYear(yr);
+	SetMonth(mo);
+	SetDay(day);
+}
+
+int Venta::GetYear(){
+	return year;
+}
+
+void Venta::SetYear(int yr){
+	this->year = yr;
+}
+
+unsigned short Venta::GetMonth(){
+	return month;
+}
+
+void Venta::SetMonth(unsigned short mo){
+	this->month = mo;
+}
+
+unsigned short Venta::GetDay(){
+	return day;
+}
+
+void Venta::SetDay(unsigned short dy){
+	this->day = dy;
+}
+
+
 /// -- Agregar al archivo
 void Venta::AddVenta(){
 	ofstream archi("ventas.bin",ios::binary|ios::out|ios::app);
@@ -96,6 +138,9 @@ void Venta::AddVenta(){
 	reg.id = id;
 	reg.id_cliente = id_cliente;
 	reg.total = total;
+	reg.fecha.year = year;
+	reg.fecha.month = month;
+	reg.fecha.day = day;
 	reg.modificada = modificada;
 	
 	archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));

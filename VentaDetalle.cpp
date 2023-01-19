@@ -4,22 +4,22 @@
 #include <cstring>
 using namespace std;
 	
-VentaDetalle::VentaDetalle(int idVenta, int m_cantidad, int idProducto, float precio_producto){
+VentaDetalle::VentaDetalle(int idVenta, string descripcion, int cantidad, float precio_producto){
 	this->id = GetLastId()+1;
 	this->id_venta = idVenta;
-	this->id_producto = idProducto;
-	this->cantidad = m_cantidad;
+	this->descripcion = descripcion;
+	this->cantidad = cantidad;
 	this->valor_vendido = precio_producto;
 	this->subtotal = cantidad * valor_vendido;
 }
 
-VentaDetalle::VentaDetalle(int m_id, int idVenta, int idProducto, int m_cantidad, float valor_vendido, float m_subtotal){
-	this->id = m_id;
-	this->id_venta = idVenta;
-	this->id_producto = idProducto;
-	this->cantidad = m_cantidad;
+VentaDetalle::VentaDetalle(int id, int id_venta, string descripcion, int cantidad, float valor_vendido, float subtotal){
+	this->id = id;
+	this->id_venta = id_venta;
+	this->descripcion = descripcion;
+	this->cantidad = cantidad;
 	this->valor_vendido = valor_vendido;
-	this->subtotal = m_subtotal;
+	this->subtotal = subtotal;
 }
 
 /// -- ID
@@ -51,8 +51,8 @@ int VentaDetalle::GetLastId(){
 	return id;
 }
 
-int VentaDetalle::GetIDProducto(){
-	return id_producto;
+string VentaDetalle::GetDescripcion(){
+	return descripcion;
 }
 
 /// -- Valor vendido
@@ -81,7 +81,7 @@ void VentaDetalle::AddVentaDetalle(){
 	RegistroVentaDetalle reg;
 	reg.id = this->id;
 	reg.id_venta = this->id_venta;
-	reg.id_producto = this->id_producto;
+	strcpy(reg.descripcion,this->descripcion.c_str());
 	reg.cantidad = this->cantidad;
 	reg.valor_vendido = this->valor_vendido;
 	reg.subtotal = this->subtotal;

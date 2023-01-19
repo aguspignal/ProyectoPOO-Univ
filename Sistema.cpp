@@ -57,7 +57,7 @@ void Sistema::LoadVentas(){
 	for(int i=0; i<cant_ventas; i++){
 		archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
 		
-		Venta venta(reg.id,reg.id_cliente,reg.total,reg.modificada);
+		Venta venta(reg.id,reg.id_cliente,reg.total,reg.fecha,reg.modificada);
 		ventas.push_back(venta);
 	}
 	archi.close();
@@ -74,7 +74,7 @@ void Sistema::LoadDetallesVenta(){
 	for(int i=0; i<cant_detalles; i++){
 		archi.read(reinterpret_cast<char*>(&reg),sizeof(reg));
 		
-		VentaDetalle vdetalle(reg.id, reg.id_venta, reg.id_producto, reg.cantidad, reg.valor_vendido, reg.subtotal);
+		VentaDetalle vdetalle(reg.id, reg.id_venta, reg.descripcion, reg.cantidad, reg.valor_vendido, reg.subtotal);
 		detallesventa.push_back(vdetalle);
 	}
 	archi.close();
@@ -124,6 +124,9 @@ void Sistema::SaveVentas(){
 		reg.id = ventas[i].GetID();
 		reg.id_cliente = ventas[i].GetIDCliente();
 		reg.total = ventas[i].GetTotal();
+		reg.fecha.year = ventas[i].GetYear();
+		reg.fecha.month = ventas[i].GetMonth();
+		reg.fecha.day = ventas[i].GetDay();
 		reg.modificada = ventas[i].GetModif();
 		
 		archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
@@ -139,7 +142,7 @@ void Sistema::SaveDetallesVenta(){
 	for(int i=0; i<detallesventa.size(); i++){
 		reg.id = detallesventa[i].GetID();
 		reg.id_venta = detallesventa[i].GetIDVenta();
-		reg.id_producto = detallesventa[i].GetIDProducto();
+		strcpy(reg.descripcion, detallesventa[i].GetDescripcion().c_str());
 		reg.cantidad = detallesventa[i].GetCantidad();
 		reg.valor_vendido = detallesventa[i].GetValorVendido();
 		reg.subtotal = detallesventa[i].GetSubtotal();
@@ -319,9 +322,7 @@ Cliente Sistema::GetClienteByID(int id){
 
 Cliente Sistema::GetClienteByNombre(string nombre){
 	for(int i=0; i<clientes.size(); i++){
-		string str1 = StrAMinusculas(StrSinEspacios(clientes[i].GetNombre()));
-		string str2 = StrAMinusculas(StrSinEspacios(nombre));
-		if(str1 == str2){
+		if(StrAMinusculas(StrSinEspacios(clientes[i].GetNombre())) == StrAMinusculas(StrSinEspacios(nombre))){
 			return clientes[i];
 		}
 	}
@@ -417,7 +418,6 @@ void Sistema::OrdenarClientes(CriterioOrdenCliente criterio){
 	case DNI: sort(clientes.begin(), clientes.end(), Orden_DNI); break;
 	case DIRECCION: sort(clientes.begin(), clientes.end(), Orden_Direccion); break;
 	case EMAIL: sort(clientes.begin(), clientes.end(), Orden_Email); break;
-	case TELEFONO: sort(clientes.begin(), clientes.end(), Orden_Telefono); break;
 	}
 }
 

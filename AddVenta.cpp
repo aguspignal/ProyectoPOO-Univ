@@ -11,14 +11,6 @@ AddVenta::AddVenta(wxWindow *parent, Sistema *m_sistema)
 }
 AddVenta::~AddVenta() {}
 
-float AddVenta::CalcularTotal(){
-	float suma;
-	for(int i=0; i<prods_seleccionados.size(); i++){
-		suma += (prods_seleccionados[i].producto.GetPrecio() * prods_seleccionados[i].cantidad);
-	}
-	return suma;
-}
-
 void AddVenta::ActualizarGrid(){
 	if(gridDetalles->GetNumberRows() != 0){
 		gridDetalles->DeleteRows(0,gridDetalles->GetNumberRows());
@@ -26,16 +18,23 @@ void AddVenta::ActualizarGrid(){
 	
 	for(int i=0; i<prods_seleccionados.size(); i++){
 		gridDetalles->AppendRows();
-		gridDetalles->SetCellValue(i,0,to_string(prods_seleccionados[i].producto.GetID()));
-		gridDetalles->SetCellValue(i,1,prods_seleccionados[i].producto.GetDescripcion());
-		gridDetalles->SetCellValue(i,2,"$"+to_string(prods_seleccionados[i].producto.GetPrecio()));
-		gridDetalles->SetCellValue(i,3,to_string(prods_seleccionados[i].cantidad));
-		gridDetalles->SetCellValue(i,4,"$"+to_string(prods_seleccionados[i].producto.GetPrecio() * prods_seleccionados[i].cantidad));
-	}
-	gridDetalles->SetColFormatFloat(2,-1,2);
-	gridDetalles->SetColFormatFloat(4,-1,2);
-	
+		gridDetalles->SetCellValue(i,0, prods_seleccionados[i].producto.GetDescripcion());
+		gridDetalles->SetCellValue(i,1, to_string(prods_seleccionados[i].producto.GetPrecio()));
+		gridDetalles->SetCellValue(i,2, to_string(prods_seleccionados[i].cantidad));
+		gridDetalles->SetCellValue(i,3, to_string(prods_seleccionados[i].producto.GetPrecio() * prods_seleccionados[i].cantidad));
+	}	
+	gridProductos->SetColFormatFloat(1,-1,2);
+	gridProductos->SetColFormatFloat(3,-1,2);
 	txt_Monto->SetLabel(to_string(CalcularTotal()));
+}
+
+/// -- Total
+float AddVenta::CalcularTotal(){
+	float suma;
+	for(int i=0; i<prods_seleccionados.size(); i++){
+		suma += (prods_seleccionados[i].producto.GetPrecio() * prods_seleccionados[i].cantidad);
+	}
+	return suma;
 }
 
 /// Buscar Cliente
@@ -72,28 +71,24 @@ void AddVenta::BuscarProducto( wxCommandEvent& event )  {
 			for(int i=0; i<resultados.size(); i++){
 				Producto producto = sistema->GetProductoByID(resultados[i]);
 				gridProductos->AppendRows();
-				gridProductos->SetCellValue(i,0,to_string(producto.GetID()));
-				gridProductos->SetCellValue(i,1,producto.GetDescripcion());
-				gridProductos->SetCellValue(i,2,"$"+to_string(producto.GetPrecio()));
+				gridProductos->SetCellValue(i,0, producto.GetDescripcion());
+				gridProductos->SetCellValue(i,1, to_string(producto.GetPrecio()));
 				if(producto.GetStock() <= 0){
-					gridProductos->SetCellValue(i,3, "Sin stock");
+					gridProductos->SetCellValue(i,2, "Sin stock");
 				} else {
-					gridProductos->SetCellValue(i,3, to_string(producto.GetStock()));
+					gridProductos->SetCellValue(i,2, to_string(producto.GetStock()));
 				}
 			}
-			gridProductos->SetColFormatFloat(2,-1,2);
+			gridProductos->SetColFormatFloat(1,-1,2);
 		}
 	}
 }
 
 /// Seleccionar producto
 void AddVenta::SeleccionarProducto( wxGridEvent& event ) {
-	if(gridProductos->GetNumberRows() != 0){
-		int row = event.GetRow();
-		if(!gridProductos->GetCellValue(row,0).IsEmpty()){
-			id_prod = stoi(wx_to_std(gridProductos->GetCellValue(row,0)));
-			txt_SelectProducto->SetLabel(gridProductos->GetCellValue(row,1));
-		}
+	if(gridProductos->GetNumberRows() != 0 && !gridProductos->GetCellValue(event.GetRow(),0).IsEmpty()){
+		id_prod = stoi(wx_to_std(gridProductos->GetCellValue(event.GetRow(),0)));
+		txt_SelectProducto->SetLabel(gridProductos->GetCellValue(event.GetRow(),1));
 	}
 }
 
@@ -102,7 +97,8 @@ void AddVenta::AgregarProducto( wxCommandEvent& event )  {
 	if(id_prod != 0){
 		ProductoCantidad prod_cant;
 		prod_cant.producto = sistema->GetProductoByID(id_prod);
-		if( input_Cantidad->GetValue() > prod_cant.producto.GetStock() ){
+		
+		if(input_Cantidad->GetValue() > prod_cant.producto.GetStock()){
 			wxMessageBox("Stock no disponible","Error",wxOK|wxICON_ERROR);
 		} else {
 			prod_cant.cantidad = input_Cantidad->GetValue();
@@ -145,6 +141,10 @@ void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
 		int choice = wxMessageBox("Esta seguro de confirmar la venta?","Warning",wxYES_NO|wxICON_INFORMATION);
 		if(int choice = wxYES){
 			Venta venta(id_cliente,prods_seleccionados);
+			
+			wxDateTime fecha = input_Fecha->GetValue();
+			venta.SetFecha(fecha.GetYear(), fecha.GetMonth()+1, fecha.GetDay());
+			
 			venta.AddVenta();
 			for(int i=0; i<prods_seleccionados.size(); i++){
 				sistema->RetirarStockProducto(prods_seleccionados[i].producto.GetID(), prods_seleccionados[i].cantidad);
@@ -161,11 +161,4 @@ void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
 void AddVenta::CancelarVenta( wxCommandEvent& event )  {
 	EndModal(0);
 }
-
-/// Ordenar grid detalles
-void AddVenta::OrdenarGrid( wxGridEvent& event )  {
-	event.Skip();
-}
-
-
 

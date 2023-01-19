@@ -26,6 +26,8 @@
 #include <wx/grid.h>
 #include <wx/dialog.h>
 #include <wx/spinctrl.h>
+#include <wx/datectrl.h>
+#include <wx/dateevt.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -91,7 +93,7 @@ class BaseProductosFrame : public wxDialog
 
 	public:
 
-		BaseProductosFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 800,600 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+		BaseProductosFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 800,600 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX );
 
 		~BaseProductosFrame();
 
@@ -128,7 +130,7 @@ class BaseClientesFrame : public wxDialog
 
 	public:
 
-		BaseClientesFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1000,600 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+		BaseClientesFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1000,600 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX );
 
 		~BaseClientesFrame();
 
@@ -148,7 +150,6 @@ class BaseVentasFrame : public wxDialog
 		wxGrid* gridDetalles;
 		wxButton* btn_AddVenta;
 		wxButton* btn_VerDetalle;
-		wxButton* btn_EditarVenta;
 		wxButton* btn_DeleteVenta;
 		wxPanel* m_panel23;
 
@@ -156,44 +157,14 @@ class BaseVentasFrame : public wxDialog
 		virtual void OrdenarGrid( wxGridEvent& event ) { event.Skip(); }
 		virtual void DisplayAddVenta( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DisplayDetalleVenta( wxCommandEvent& event ) { event.Skip(); }
-		virtual void DisplayEditarVenta( wxCommandEvent& event ) { event.Skip(); }
 		virtual void EliminarVenta( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
 
-		BaseVentasFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1050,600 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+		BaseVentasFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 900,600 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX );
 
 		~BaseVentasFrame();
-
-};
-
-///////////////////////////////////////////////////////////////////////////////
-/// Class BaseVentasCliente
-///////////////////////////////////////////////////////////////////////////////
-class BaseVentasCliente : public wxDialog
-{
-	private:
-
-	protected:
-		wxStaticText* txt_Cliente;
-		wxStaticText* txt_DatosCliente;
-		wxStaticText* txt_Ventas;
-		wxStaticText* txt_CantVentas;
-		wxGrid* gridIDVentas;
-		wxGrid* gridDetalles;
-		wxGrid* gridTotales;
-		wxButton* txt_Select;
-
-		// Virtual event handlers, override them in your derived class
-		virtual void VerDetalleVenta( wxCommandEvent& event ) { event.Skip(); }
-
-
-	public:
-
-		BaseVentasCliente( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 750,400 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX );
-
-		~BaseVentasCliente();
 
 };
 
@@ -330,6 +301,35 @@ class BaseEditCliente : public wxDialog
 };
 
 ///////////////////////////////////////////////////////////////////////////////
+/// Class BaseVentasCliente
+///////////////////////////////////////////////////////////////////////////////
+class BaseVentasCliente : public wxDialog
+{
+	private:
+
+	protected:
+		wxStaticText* txt_Cliente;
+		wxStaticText* txt_DatosCliente;
+		wxStaticText* txt_Ventas;
+		wxStaticText* txt_CantVentas;
+		wxGrid* gridIDVentas;
+		wxGrid* gridDetalles;
+		wxGrid* gridTotales;
+		wxButton* txt_Select;
+
+		// Virtual event handlers, override them in your derived class
+		virtual void VerDetalleVenta( wxCommandEvent& event ) { event.Skip(); }
+
+
+	public:
+
+		BaseVentasCliente( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 730,400 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX );
+
+		~BaseVentasCliente();
+
+};
+
+///////////////////////////////////////////////////////////////////////////////
 /// Class BaseAddVenta
 ///////////////////////////////////////////////////////////////////////////////
 class BaseAddVenta : public wxDialog
@@ -340,6 +340,7 @@ class BaseAddVenta : public wxDialog
 		wxStaticText* txt_Cliente;
 		wxTextCtrl* input_Cliente;
 		wxButton* btn_BuscarClientes;
+		wxDatePickerCtrl* input_Fecha;
 		wxStaticText* txt_DatosCliente;
 		wxStaticText* txt_ProdsSelect;
 		wxGrid* gridDetalles;
@@ -363,14 +364,13 @@ class BaseAddVenta : public wxDialog
 		virtual void ConfirmarVenta( wxCommandEvent& event ) { event.Skip(); }
 		virtual void CancelarVenta( wxCommandEvent& event ) { event.Skip(); }
 		virtual void BuscarProducto( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OrdenarGrid( wxGridEvent& event ) { event.Skip(); }
 		virtual void SeleccionarProducto( wxGridEvent& event ) { event.Skip(); }
 		virtual void AgregarProducto( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
 
-		BaseAddVenta( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Crear nueva venta"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 1025,523 ), long style = wxDEFAULT_DIALOG_STYLE );
+		BaseAddVenta( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Crear nueva venta"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 890,500 ), long style = wxDEFAULT_DIALOG_STYLE );
 
 		~BaseAddVenta();
 
@@ -391,7 +391,6 @@ class BaseVerClientes : public wxDialog
 
 		// Virtual event handlers, override them in your derived class
 		virtual void CloseWindow( wxCloseEvent& event ) { event.Skip(); }
-		virtual void OrdenarGrid( wxGridEvent& event ) { event.Skip(); }
 		virtual void SeleccionarCliente( wxGridEvent& event ) { event.Skip(); }
 		virtual void AgregarCliente( wxCommandEvent& event ) { event.Skip(); }
 

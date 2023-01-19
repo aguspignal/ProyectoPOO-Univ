@@ -10,7 +10,6 @@ private:
 	
 protected:
 	void OrdenarGrid( wxGridEvent& event )  override;
-	void DisplayEditarVenta( wxCommandEvent& event )  override;
 	void DisplayAddVenta( wxCommandEvent& event )  override;
 	void DisplayDetalleVenta( wxCommandEvent& event )  override;
 	void EliminarVenta( wxCommandEvent& event )  override;
