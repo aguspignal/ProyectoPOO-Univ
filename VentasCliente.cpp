@@ -13,17 +13,17 @@ VentasCliente::VentasCliente(wxWindow *parent, Sistema *m_sistema, int id_client
 VentasCliente::~VentasCliente() {}
 
 void VentasCliente::ActualizarGridVentas(){
-	if(gridIDVentas->GetNumberRows() != 0){
-		gridIDVentas->DeleteRows(0,gridIDVentas->GetNumberRows());
+	if(gridVentas->GetNumberRows() != 0){
+		gridVentas->DeleteRows(0,gridVentas->GetNumberRows());
 	}
 	for(int i=0; i<ventas_cliente.size(); i++){
-		gridIDVentas->AppendRows();
-		gridIDVentas->SetCellValue(i,0,to_string(ventas_cliente[i]));
-		
-		gridTotales->AppendRows();
-		gridTotales->SetCellValue(i,0, to_string(sistema->GetVentaByID(ventas_cliente[i]).GetTotal()));
+		Venta venta = sistema->GetVentaByID(ventas_cliente[i]);
+		gridVentas->AppendRows();
+		gridVentas->SetCellValue(i,0, to_string(venta.GetID()));
+		gridVentas->SetCellValue(i,1, venta.GetFecha());
+		gridVentas->SetCellValue(i,2, to_string(venta.GetTotal()));
 	}
-	gridTotales->SetColFormatFloat(2,-1,2);
+	gridVentas->SetColFormatFloat(2,-1,2);
 }
 
 void VentasCliente::ActualizarGridDetalles(int id_venta){
@@ -41,14 +41,15 @@ void VentasCliente::ActualizarGridDetalles(int id_venta){
 			gridDetalles->SetCellValue(i,3, to_string(detalles[i].GetSubtotal()));
 		}
 		gridDetalles->SetColFormatFloat(1,-1,2);
+		gridDetalles->SetColFormatFloat(2,-1,0);
 		gridDetalles->SetColFormatFloat(3,-1,2);
 	}
 }
 
 void VentasCliente::VerDetalleVenta( wxCommandEvent& event )  {
-	if(gridIDVentas->GetNumberRows() != 0){
-		int row = gridIDVentas->GetGridCursorRow();
-		int id_venta = stoi(wx_to_std(gridIDVentas->GetCellValue(row,0))); // str to int
+	if(gridVentas->GetNumberRows() != 0){
+		int row = gridVentas->GetGridCursorRow();
+		int id_venta = stoi(wx_to_std(gridVentas->GetCellValue(row,0))); // str to int
 		ActualizarGridDetalles(id_venta);
 	}
 }

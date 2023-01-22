@@ -105,6 +105,11 @@ void Venta::SetFecha(int yr, unsigned short mo, unsigned short day){
 	SetDay(day);
 }
 
+string Venta::GetFecha(){
+	string fecha = to_string(day)+"/"+to_string(month)+"/"+to_string(year);
+	return fecha;
+}
+
 int Venta::GetYear(){
 	return year;
 }

@@ -50,6 +50,7 @@ public:
 	
 	/// Fecha
 	void SetFecha(int year, unsigned short mo, unsigned short day);
+	string GetFecha();
 	
 	int GetYear();
 	void SetYear(int yr);

@@ -158,8 +158,8 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 	gridProductos->SetMargins( 0, 0 );
 
 	// Columns
-	gridProductos->SetColSize( 0, 50 );
-	gridProductos->SetColSize( 1, 400 );
+	gridProductos->SetColSize( 0, 40 );
+	gridProductos->SetColSize( 1, 375 );
 	gridProductos->SetColSize( 2, 100 );
 	gridProductos->SetColSize( 3, 100 );
 	gridProductos->EnableDragColMove( true );
@@ -191,12 +191,12 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 
 	bSizer5->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	btn_AddProducto = new wxButton( this, wxID_ANY, wxT("Agregar Producto"), wxDefaultPosition, wxDefaultSize, 0 );
-	btn_AddProducto->SetLabelMarkup( wxT("Agregar Producto") );
+	btn_AddProducto = new wxButton( this, wxID_ANY, wxT("Agregar producto"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_AddProducto->SetLabelMarkup( wxT("Agregar producto") );
 	bSizer5->Add( btn_AddProducto, 0, wxALL|wxEXPAND, 5 );
 
-	btn_DeleteProducto = new wxButton( this, wxID_ANY, wxT("Eliminar Producto"), wxDefaultPosition, wxDefaultSize, 0 );
-	btn_DeleteProducto->SetLabelMarkup( wxT("Eliminar Producto") );
+	btn_DeleteProducto = new wxButton( this, wxID_ANY, wxT("Eliminar producto"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_DeleteProducto->SetLabelMarkup( wxT("Eliminar producto") );
 	bSizer5->Add( btn_DeleteProducto, 0, wxALL|wxEXPAND, 5 );
 
 	btn_EditProducto = new wxButton( this, wxID_ANY, wxT("Editar"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -291,12 +291,12 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 	gridClientes->SetMargins( 0, 0 );
 
 	// Columns
-	gridClientes->SetColSize( 0, 50 );
-	gridClientes->SetColSize( 1, 200 );
-	gridClientes->SetColSize( 2, 125 );
+	gridClientes->SetColSize( 0, 40 );
+	gridClientes->SetColSize( 1, 175 );
+	gridClientes->SetColSize( 2, 110 );
 	gridClientes->SetColSize( 3, 200 );
 	gridClientes->SetColSize( 4, 200 );
-	gridClientes->SetColSize( 5, 125 );
+	gridClientes->SetColSize( 5, 110 );
 	gridClientes->EnableDragColMove( false );
 	gridClientes->EnableDragColSize( true );
 	gridClientes->SetColLabelValue( 0, wxT("ID") );
@@ -412,9 +412,9 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 	gridVentas->SetMargins( 0, 0 );
 
 	// Columns
-	gridVentas->SetColSize( 0, 50 );
+	gridVentas->SetColSize( 0, 40 );
 	gridVentas->SetColSize( 1, 75 );
-	gridVentas->SetColSize( 2, 125 );
+	gridVentas->SetColSize( 2, 100 );
 	gridVentas->SetColSize( 3, 100 );
 	gridVentas->EnableDragColMove( false );
 	gridVentas->EnableDragColSize( true );
@@ -426,7 +426,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	// Rows
 	gridVentas->EnableDragRowSize( true );
-	gridVentas->SetRowLabelSize( 0 );
+	gridVentas->SetRowLabelSize( 1 );
 	gridVentas->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Label Appearance
@@ -472,7 +472,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	// Rows
 	gridDetalles->EnableDragRowSize( true );
-	gridDetalles->SetRowLabelSize( 0 );
+	gridDetalles->SetRowLabelSize( 1 );
 	gridDetalles->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Label Appearance
@@ -1095,7 +1095,7 @@ BaseVentasCliente::BaseVentasCliente( wxWindow* parent, wxWindowID id, const wxS
 	txt_CantVentas->Wrap( -1 );
 	txt_CantVentas->SetFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
 
-	bSizer59->Add( txt_CantVentas, 0, wxALL, 5 );
+	bSizer59->Add( txt_CantVentas, 0, wxALL|wxALIGN_BOTTOM, 5 );
 
 
 	bSizer58->Add( bSizer59, 0, wxALL|wxEXPAND, 5 );
@@ -1103,34 +1103,36 @@ BaseVentasCliente::BaseVentasCliente( wxWindow* parent, wxWindowID id, const wxS
 	wxBoxSizer* bSizer60;
 	bSizer60 = new wxBoxSizer( wxHORIZONTAL );
 
-	gridIDVentas = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
+	gridVentas = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 
 	// Grid
-	gridIDVentas->CreateGrid( 0, 2 );
-	gridIDVentas->EnableEditing( true );
-	gridIDVentas->EnableGridLines( true );
-	gridIDVentas->EnableDragGridSize( false );
-	gridIDVentas->SetMargins( 0, 0 );
+	gridVentas->CreateGrid( 0, 3 );
+	gridVentas->EnableEditing( true );
+	gridVentas->EnableGridLines( true );
+	gridVentas->EnableDragGridSize( false );
+	gridVentas->SetMargins( 0, 0 );
 
 	// Columns
-	gridIDVentas->SetColSize( 0, 70 );
-	gridIDVentas->SetColSize( 1, 80 );
-	gridIDVentas->EnableDragColMove( false );
-	gridIDVentas->EnableDragColSize( true );
-	gridIDVentas->SetColLabelValue( 0, wxT("ID Venta") );
-	gridIDVentas->SetColLabelValue( 1, wxT("Fecha") );
-	gridIDVentas->SetColLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
+	gridVentas->SetColSize( 0, 70 );
+	gridVentas->SetColSize( 1, 80 );
+	gridVentas->SetColSize( 2, 80 );
+	gridVentas->EnableDragColMove( false );
+	gridVentas->EnableDragColSize( true );
+	gridVentas->SetColLabelValue( 0, wxT("ID Venta") );
+	gridVentas->SetColLabelValue( 1, wxT("Fecha") );
+	gridVentas->SetColLabelValue( 2, wxT("Total") );
+	gridVentas->SetColLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Rows
-	gridIDVentas->EnableDragRowSize( true );
-	gridIDVentas->SetRowLabelSize( 1 );
-	gridIDVentas->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
+	gridVentas->EnableDragRowSize( true );
+	gridVentas->SetRowLabelSize( 1 );
+	gridVentas->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
 
 	// Label Appearance
 
 	// Cell Defaults
-	gridIDVentas->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
-	bSizer60->Add( gridIDVentas, 0, wxALL|wxEXPAND, 5 );
+	gridVentas->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
+	bSizer60->Add( gridVentas, 0, wxALL|wxEXPAND, 5 );
 
 	gridDetalles = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 
@@ -1142,7 +1144,7 @@ BaseVentasCliente::BaseVentasCliente( wxWindow* parent, wxWindowID id, const wxS
 	gridDetalles->SetMargins( 0, 0 );
 
 	// Columns
-	gridDetalles->SetColSize( 0, 200 );
+	gridDetalles->SetColSize( 0, 250 );
 	gridDetalles->SetColSize( 1, 80 );
 	gridDetalles->SetColSize( 2, 80 );
 	gridDetalles->SetColSize( 3, 80 );
@@ -1164,33 +1166,6 @@ BaseVentasCliente::BaseVentasCliente( wxWindow* parent, wxWindowID id, const wxS
 	// Cell Defaults
 	gridDetalles->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
 	bSizer60->Add( gridDetalles, 1, wxALL|wxEXPAND, 5 );
-
-	gridTotales = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
-
-	// Grid
-	gridTotales->CreateGrid( 0, 1 );
-	gridTotales->EnableEditing( true );
-	gridTotales->EnableGridLines( true );
-	gridTotales->EnableDragGridSize( false );
-	gridTotales->SetMargins( 0, 0 );
-
-	// Columns
-	gridTotales->SetColSize( 0, 80 );
-	gridTotales->EnableDragColMove( false );
-	gridTotales->EnableDragColSize( true );
-	gridTotales->SetColLabelValue( 0, wxT("Total") );
-	gridTotales->SetColLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
-
-	// Rows
-	gridTotales->EnableDragRowSize( true );
-	gridTotales->SetRowLabelSize( 1 );
-	gridTotales->SetRowLabelAlignment( wxALIGN_CENTER, wxALIGN_CENTER );
-
-	// Label Appearance
-
-	// Cell Defaults
-	gridTotales->SetDefaultCellAlignment( wxALIGN_LEFT, wxALIGN_TOP );
-	bSizer60->Add( gridTotales, 0, wxALL|wxEXPAND, 5 );
 
 
 	bSizer58->Add( bSizer60, 1, wxALIGN_CENTER_HORIZONTAL, 5 );
@@ -1398,7 +1373,7 @@ BaseAddVenta::BaseAddVenta( wxWindow* parent, wxWindowID id, const wxString& tit
 	gridProductos->SetMargins( 0, 0 );
 
 	// Columns
-	gridProductos->SetColSize( 0, 200 );
+	gridProductos->SetColSize( 0, 250 );
 	gridProductos->SetColSize( 1, 80 );
 	gridProductos->SetColSize( 2, 70 );
 	gridProductos->EnableDragColMove( false );
@@ -1501,7 +1476,7 @@ BaseVerClientes::BaseVerClientes( wxWindow* parent, wxWindowID id, const wxStrin
 	gridClientes->SetMargins( 0, 0 );
 
 	// Columns
-	gridClientes->SetColSize( 0, 50 );
+	gridClientes->SetColSize( 0, 40 );
 	gridClientes->SetColSize( 1, 150 );
 	gridClientes->SetColSize( 2, 100 );
 	gridClientes->SetColSize( 3, 150 );

@@ -23,9 +23,9 @@ void AddVenta::ActualizarGrid(){
 		gridDetalles->SetCellValue(i,2, to_string(prods_seleccionados[i].cantidad));
 		gridDetalles->SetCellValue(i,3, to_string(prods_seleccionados[i].producto.GetPrecio() * prods_seleccionados[i].cantidad));
 	}	
-	gridProductos->SetColFormatFloat(1,-1,2);
-	gridProductos->SetColFormatFloat(3,-1,2);
-	txt_Monto->SetLabel(to_string(CalcularTotal()));
+	gridDetalles->SetColFormatFloat(1,-1,2);
+	gridDetalles->SetColFormatFloat(3,-1,2);
+	txt_Monto->SetLabel(StrDosDecimales(to_string(CalcularTotal())));
 }
 
 /// -- Total
@@ -86,9 +86,12 @@ void AddVenta::BuscarProducto( wxCommandEvent& event )  {
 
 /// Seleccionar producto
 void AddVenta::SeleccionarProducto( wxGridEvent& event ) {
-	if(gridProductos->GetNumberRows() != 0 && !gridProductos->GetCellValue(event.GetRow(),0).IsEmpty()){
-		id_prod = stoi(wx_to_std(gridProductos->GetCellValue(event.GetRow(),0)));
-		txt_SelectProducto->SetLabel(gridProductos->GetCellValue(event.GetRow(),1));
+	if(gridProductos->GetNumberRows() > 0){
+		if(!gridProductos->GetCellValue(event.GetRow(),0).IsEmpty()){
+			Producto producto = sistema->GetProductoByDescrip(wx_to_std(gridProductos->GetCellValue(event.GetRow(),0)));
+			id_prod = producto.GetID();
+			txt_SelectProducto->SetLabel(producto.GetDescripcion());
+		}
 	}
 }
 
@@ -114,13 +117,12 @@ void AddVenta::QuitarProducto( wxCommandEvent& event )  {
 		int row = gridDetalles->GetGridCursorRow();
 		
 		ProductoCantidad prod_cant;
-		int id_selected_prod = stoi(wx_to_std(gridProductos->GetCellValue(row,0)));
-		prod_cant.producto = sistema->GetProductoByID(id_selected_prod);
+		prod_cant.producto = sistema->GetProductoByDescrip(wx_to_std(gridProductos->GetCellValue(row,0)));
+		prod_cant.cantidad = stoi(wx_to_std(gridDetalles->GetCellValue(row,2)));
 		
 		auto it = find(prods_seleccionados.begin(), prods_seleccionados.end(), prod_cant);
 		prods_seleccionados.erase(it);
 		
-		gridDetalles->DeleteRows(row);
 		ActualizarGrid();
 	}
 }

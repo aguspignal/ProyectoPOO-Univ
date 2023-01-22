@@ -117,7 +117,7 @@ void ClientesFrame::VerVentas( wxCommandEvent& event )  {
 		
 		vector<int> ventas_cliente = sistema->GetVentasByIDCliente(id);
 		if(ventas_cliente.empty()){
-			wxMessageBox("El cliente no posee ventas","Error",wxOK|wxICON_ERROR);
+			wxMessageBox("El cliente no posee ventas","Error",wxOK|wxICON_EXCLAMATION);
 		} else {
 			VentasCliente *win = new VentasCliente(this,sistema,id,ventas_cliente);
 			win->ShowModal();

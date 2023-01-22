@@ -14,6 +14,15 @@ string StrAMinusculas(string str){
 	}
 	return str;
 }
+	
+string StrDosDecimales(string str){
+	size_t pos = str.find(".",0);
+	if(pos != str.length()){ 
+		string str2 = str.substr(0,pos+3);
+		return str2;
+	}
+	return str;
+}
 
 /// Validaciones
 bool ValidarDNI(string dni){

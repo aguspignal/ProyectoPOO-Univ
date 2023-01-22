@@ -23,9 +23,9 @@ void VentasFrame::ActualizarGridVentas(){
 		gridVentas->SetCellValue(i,0, to_string(venta.GetID()));
 		gridVentas->SetCellValue(i,1, to_string(venta.GetIDCliente()));
 		gridVentas->SetCellValue(i,2, to_string(venta.GetTotal()));
-		string str = to_string(venta.GetDay())+"/"+to_string(venta.GetMonth())+"/"+to_string(venta.GetYear());
-		gridVentas->SetCellValue(i,3, str);
+		gridVentas->SetCellValue(i,3, venta.GetFecha());
 	}
+	gridVentas->SetColFormatFloat(1,-1,0);
 	gridVentas->SetColFormatFloat(2,-1,2);
 }
 
@@ -45,6 +45,7 @@ void VentasFrame::ActualizarGridDetalles(int id_venta){
 			gridDetalles->SetCellValue(i,3, to_string(detalles[i].GetSubtotal()));
 		}
 		gridDetalles->SetColFormatFloat(1,-1,2);
+		gridDetalles->SetColFormatFloat(2,-1,0);
 		gridDetalles->SetColFormatFloat(3,-1,2);
 	}
 }
