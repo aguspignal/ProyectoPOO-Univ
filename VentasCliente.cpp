@@ -49,7 +49,7 @@ void VentasCliente::ActualizarGridDetalles(int id_venta){
 void VentasCliente::VerDetalleVenta( wxCommandEvent& event )  {
 	if(gridVentas->GetNumberRows() != 0){
 		int row = gridVentas->GetGridCursorRow();
-		int id_venta = stoi(wx_to_std(gridVentas->GetCellValue(row,0))); // str to int
+		int id_venta = stoi(wx_to_std(gridVentas->GetCellValue(row,0)));
 		ActualizarGridDetalles(id_venta);
 	}
 }

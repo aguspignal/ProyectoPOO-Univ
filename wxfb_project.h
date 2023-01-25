@@ -147,6 +147,7 @@ class BaseVentasFrame : public wxDialog
 		wxStaticText* txt_Ventas;
 		wxGrid* gridVentas;
 		wxStaticText* txt_Detalle;
+		wxButton* btn_ActualizarGrids;
 		wxGrid* gridDetalles;
 		wxButton* btn_AddVenta;
 		wxButton* btn_VerDetalle;
@@ -155,6 +156,7 @@ class BaseVentasFrame : public wxDialog
 
 		// Virtual event handlers, override them in your derived class
 		virtual void OrdenarGrid( wxGridEvent& event ) { event.Skip(); }
+		virtual void ActualizarGrids( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DisplayAddVenta( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DisplayDetalleVenta( wxCommandEvent& event ) { event.Skip(); }
 		virtual void EliminarVenta( wxCommandEvent& event ) { event.Skip(); }
@@ -322,7 +324,7 @@ class BaseVentasCliente : public wxDialog
 
 	public:
 
-		BaseVentasCliente( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 780,400 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX );
+		BaseVentasCliente( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 810,400 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX );
 
 		~BaseVentasCliente();
 
@@ -410,11 +412,29 @@ class BaseEstadisticas : public wxDialog
 	private:
 
 	protected:
-		wxStaticText* txt_Estadistica;
+		wxStaticText* txt_Estadisticas;
+		wxStaticText* txt_Periodo;
+		wxDatePickerCtrl* datepicker_from;
+		wxStaticText* txt_a;
+		wxDatePickerCtrl* datepicker_to;
+		wxStaticText* txt_VentasRealizadas;
+		wxStaticText* txt_CantidadVentas;
+		wxStaticText* txt_Ganancias;
+		wxStaticText* txt_Monto;
+		wxStaticText* txt_TitCliente;
+		wxStaticText* txt_DatosCliente;
+		wxStaticText* txt_TitProductos;
+		wxStaticText* txt_Producto1;
+		wxStaticText* txt_Producto2;
+		wxStaticText* txt_Producto3;
+
+		// Virtual event handlers, override them in your derived class
+		virtual void ActualizarDatos( wxDateEvent& event ) { event.Skip(); }
+
 
 	public:
 
-		BaseEstadisticas( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 700,-1 ), long style = wxDEFAULT_DIALOG_STYLE );
+		BaseEstadisticas( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 625,-1 ), long style = wxDEFAULT_DIALOG_STYLE );
 
 		~BaseEstadisticas();
 

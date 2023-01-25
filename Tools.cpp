@@ -106,3 +106,24 @@ bool Orden_IDCliente(Venta v1, Venta v2){
 bool Orden_Total(Venta v1, Venta v2){
 	return v1.GetTotal() < v2.GetTotal();
 }
+bool Orden_Fecha(Venta v1, Venta v2){
+	if(v1.GetYear() == v2.GetYear()){
+		if(v1.GetMonth() == v2.GetMonth()){
+			if(v1.GetDay() == v2.GetDay()){
+				return true;
+			} else {
+				return v1.GetDay() < v2.GetDay();
+			}
+		} else {
+			return v1.GetMonth() < v2.GetMonth();
+		}
+	} else {
+		return v1.GetYear() < v2.GetYear();
+	}
+	return false;
+}
+
+	
+
+	
+	

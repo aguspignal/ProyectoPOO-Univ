@@ -50,6 +50,13 @@ void VentasFrame::ActualizarGridDetalles(int id_venta){
 	}
 }
 
+void VentasFrame::ActualizarGrids( wxCommandEvent& event )  {
+	sistema->LoadVentas();
+	sistema->LoadDetallesVenta();
+	ActualizarGridVentas();
+	ActualizarGridDetalles(0);
+}
+
 /// -- AGREGAR Venta
 void VentasFrame::DisplayAddVenta( wxCommandEvent& event )  {
 	AddVenta *win = new AddVenta(this,sistema);
@@ -90,6 +97,7 @@ void VentasFrame::OrdenarGrid( wxGridEvent& event )  {
 	case 0: sistema->OrdenarVentas(ID_VENTA); break;
 	case 1: sistema->OrdenarVentas(IDCLIENTE); break;
 	case 2: sistema->OrdenarVentas(TOTAL); break;
+	case 3: sistema->OrdenarVentas(FECHA); break;
 	}
 	ActualizarGridVentas();
 	ActualizarGridDetalles(0);

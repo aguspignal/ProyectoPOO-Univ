@@ -107,6 +107,7 @@ void AddVenta::AgregarProducto( wxCommandEvent& event )  {
 			prod_cant.cantidad = input_Cantidad->GetValue();
 			prods_seleccionados.push_back(prod_cant);
 			ActualizarGrid();
+			input_Cantidad->SetValue("");
 		}
 	}
 }
@@ -141,7 +142,7 @@ void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
 		wxMessageBox(errores,"Error",wxOK|wxICON_ERROR);
 	} else {
 		int choice = wxMessageBox("Esta seguro de confirmar la venta?","Warning",wxYES_NO|wxICON_INFORMATION);
-		if(int choice = wxYES){
+		if(choice == wxYES){
 			Venta venta(id_cliente,prods_seleccionados);
 			
 			wxDateTime fecha = input_Fecha->GetValue();
@@ -154,8 +155,8 @@ void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
 			sistema->LoadProductos();
 			sistema->LoadVentas();
 			sistema->LoadDetallesVenta();
+			EndModal(1);
 		}
-		EndModal(1);
 	}
 }
 

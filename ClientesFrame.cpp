@@ -30,18 +30,8 @@ void ClientesFrame::ActualizarGrid(){
 }
 
 void ClientesFrame::ActualizarGrid( wxCommandEvent& event )  {
-	if(gridClientes->GetNumberRows() != 0){
-		gridClientes->DeleteRows(0,gridClientes->GetNumberRows());
-	}
-	for(int i=0; i<sistema->GetClientesSize(); i++){
-		gridClientes->AppendRows();
-		gridClientes->SetCellValue(i,0, to_string(sistema->GetCliente(i).GetID()));
-		gridClientes->SetCellValue(i,1, sistema->GetCliente(i).GetNombre());
-		gridClientes->SetCellValue(i,2, to_string(sistema->GetCliente(i).GetDNI()));
-		gridClientes->SetCellValue(i,3, sistema->GetCliente(i).GetDireccion());
-		gridClientes->SetCellValue(i,4, sistema->GetCliente(i).GetEmail());
-		gridClientes->SetCellValue(i,5, sistema->GetCliente(i).GetTelefono());
-	}
+	sistema->LoadClientes();
+	ActualizarGrid();
 	input_BuscarCliente->SetLabel("");
 }
 

@@ -6,7 +6,7 @@ using namespace std;
 
 enum CriterioOrdenProducto {ID_PRODUCTO,DESCRIPCION,PRECIO,STOCK};
 enum CriterioOrdenCliente {ID_CLIENTE,NOMBRE,DNI,DIRECCION,EMAIL};
-enum CriterioOrdenVenta {ID_VENTA,IDCLIENTE,TOTAL};
+enum CriterioOrdenVenta {ID_VENTA,IDCLIENTE,TOTAL,FECHA};
 
 class Sistema {
 	vector<Producto> productos;
@@ -41,7 +41,6 @@ public:
 	void DeleteVenta(int id);
 	
 	/// Modificar
-	// revisar argumentos 
 	void ModificarProducto(int id, string descripcion, float precio, int stock);
 	void RetirarStockProducto(int id, int cantidad);
 	void ModificarCliente(int id, string nombre, int dni, string direccion, string email, string telefono);
@@ -73,7 +72,6 @@ public:
 	vector<int> BuscarProductos(string busqueda);
 	
 	/// Ordenamiento
-	// revisar
 	void OrdenarProductos(CriterioOrdenProducto criterio);
 	void OrdenarClientes(CriterioOrdenCliente criterio);
 	void OrdenarVentas(CriterioOrdenVenta criterio);

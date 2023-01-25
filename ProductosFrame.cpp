@@ -34,24 +34,8 @@ void ProductosFrame::ActualizarGrid()  {
 }
 
 void ProductosFrame::ActualizarGrid( wxCommandEvent& event )  {
-	if(gridProductos->GetNumberRows() != 0){
-		gridProductos->DeleteRows(0,gridProductos->GetNumberRows());
-	}
-	
-	for(int i=0; i<sistema->GetProductosSize(); i++){
-		Producto producto = sistema->GetProducto(i);
-		gridProductos->AppendRows();
-		gridProductos->SetCellValue(i,0, to_string(producto.GetID()));
-		gridProductos->SetCellValue(i,1, producto.GetDescripcion());
-		gridProductos->SetCellValue(i,2, to_string(producto.GetPrecio()));
-		if(producto.GetStock() <= 0){
-			gridProductos->SetCellValue(i,3, "Sin stock");
-		} else {
-			gridProductos->SetCellValue(i,3, to_string(producto.GetStock()));
-			gridProductos->SetColFormatFloat(3,-1,0);
-		}
-	}
-	gridProductos->SetColFormatFloat(2,-1,2);
+	sistema->LoadProductos();
+	ActualizarGrid();
 	input_BuscarProducto->SetValue("");
 }
 

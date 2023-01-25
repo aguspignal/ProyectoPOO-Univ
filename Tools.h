@@ -31,4 +31,5 @@ bool Orden_Telefono(Cliente c1, Cliente c2);
 bool Orden_ID_Venta(Venta v1, Venta v2);
 bool Orden_IDCliente(Venta v1, Venta v2);
 bool Orden_Total(Venta v1, Venta v2);
+bool Orden_Fecha(Venta v1, Venta v2);
 #endif

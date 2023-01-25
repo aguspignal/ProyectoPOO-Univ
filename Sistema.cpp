@@ -426,6 +426,7 @@ void Sistema::OrdenarVentas(CriterioOrdenVenta criterio){
 	case ID_VENTA: sort(ventas.begin(), ventas.end(), Orden_ID_Venta); break;
 	case IDCLIENTE: sort(ventas.begin(), ventas.end(), Orden_IDCliente); break;
 	case TOTAL: sort(ventas.begin(), ventas.end(), Orden_Total); break;
+	case FECHA: sort(ventas.begin(), ventas.end(), Orden_Fecha); break;
 	}
 }
 	

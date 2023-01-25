@@ -442,11 +442,24 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 	wxBoxSizer* bSizer34;
 	bSizer34 = new wxBoxSizer( wxVERTICAL );
 
+	wxBoxSizer* bSizer67;
+	bSizer67 = new wxBoxSizer( wxHORIZONTAL );
+
 	txt_Detalle = new wxStaticText( this, wxID_ANY, wxT("Detalle de venta"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Detalle->Wrap( -1 );
 	txt_Detalle->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
 
-	bSizer34->Add( txt_Detalle, 0, wxALL, 5 );
+	bSizer67->Add( txt_Detalle, 0, wxALL, 5 );
+
+
+	bSizer67->Add( 0, 0, 1, wxEXPAND, 5 );
+
+	btn_ActualizarGrids = new wxButton( this, wxID_ANY, wxT("Actualizar"), wxDefaultPosition, wxDefaultSize, 0 );
+	btn_ActualizarGrids->SetLabelMarkup( wxT("Actualizar") );
+	bSizer67->Add( btn_ActualizarGrids, 0, wxALL, 5 );
+
+
+	bSizer34->Add( bSizer67, 0, wxEXPAND, 5 );
 
 	gridDetalles = new wxGrid( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 
@@ -523,6 +536,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	// Connect Events
 	gridVentas->Connect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseVentasFrame::OrdenarGrid ), NULL, this );
+	btn_ActualizarGrids->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::ActualizarGrids ), NULL, this );
 	btn_AddVenta->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayAddVenta ), NULL, this );
 	btn_VerDetalle->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayDetalleVenta ), NULL, this );
 	btn_DeleteVenta->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::EliminarVenta ), NULL, this );
@@ -532,6 +546,7 @@ BaseVentasFrame::~BaseVentasFrame()
 {
 	// Disconnect Events
 	gridVentas->Disconnect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseVentasFrame::OrdenarGrid ), NULL, this );
+	btn_ActualizarGrids->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::ActualizarGrids ), NULL, this );
 	btn_AddVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayAddVenta ), NULL, this );
 	btn_VerDetalle->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayDetalleVenta ), NULL, this );
 	btn_DeleteVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::EliminarVenta ), NULL, this );
@@ -1542,25 +1557,145 @@ BaseEstadisticas::BaseEstadisticas( wxWindow* parent, wxWindowID id, const wxStr
 	wxBoxSizer* bSizer65;
 	bSizer65 = new wxBoxSizer( wxVERTICAL );
 
-	wxBoxSizer* bSizer66;
-	bSizer66 = new wxBoxSizer( wxVERTICAL );
+	txt_Estadisticas = new wxStaticText( this, wxID_ANY, wxT("Estadisticas"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Estadisticas->Wrap( -1 );
+	txt_Estadisticas->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
 
-	txt_Estadistica = new wxStaticText( this, wxID_ANY, wxT("Estadisticas"), wxDefaultPosition, wxDefaultSize, 0 );
-	txt_Estadistica->Wrap( -1 );
-	txt_Estadistica->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
+	bSizer65->Add( txt_Estadisticas, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
-	bSizer66->Add( txt_Estadistica, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	wxBoxSizer* bSizer661;
+	bSizer661 = new wxBoxSizer( wxVERTICAL );
+
+	wxBoxSizer* bSizer68;
+	bSizer68 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_Periodo = new wxStaticText( this, wxID_ANY, wxT("Periodo:"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Periodo->Wrap( -1 );
+	txt_Periodo->SetFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer68->Add( txt_Periodo, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+	datepicker_from = new wxDatePickerCtrl( this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT );
+	bSizer68->Add( datepicker_from, 0, wxALL, 5 );
+
+	txt_a = new wxStaticText( this, wxID_ANY, wxT("a"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_a->Wrap( -1 );
+	bSizer68->Add( txt_a, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+
+	datepicker_to = new wxDatePickerCtrl( this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT );
+	bSizer68->Add( datepicker_to, 0, wxALL, 5 );
 
 
-	bSizer65->Add( bSizer66, 1, wxALL|wxEXPAND, 5 );
+	bSizer661->Add( bSizer68, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
+
+	wxBoxSizer* bSizer712;
+	bSizer712 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_VentasRealizadas = new wxStaticText( this, wxID_ANY, wxT("Ventas realizadas:"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_VentasRealizadas->Wrap( -1 );
+	txt_VentasRealizadas->SetFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer712->Add( txt_VentasRealizadas, 0, wxALL, 5 );
+
+	txt_CantidadVentas = new wxStaticText( this, wxID_ANY, wxT("0"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_CantidadVentas->Wrap( -1 );
+	txt_CantidadVentas->SetFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer712->Add( txt_CantidadVentas, 0, wxALL, 5 );
+
+
+	bSizer661->Add( bSizer712, 0, wxALL|wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer71;
+	bSizer71 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_Ganancias = new wxStaticText( this, wxID_ANY, wxT("Ganancias obtenidas:"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Ganancias->Wrap( -1 );
+	txt_Ganancias->SetFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer71->Add( txt_Ganancias, 0, wxALL, 5 );
+
+	txt_Monto = new wxStaticText( this, wxID_ANY, wxT("$0000"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Monto->Wrap( -1 );
+	txt_Monto->SetFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer71->Add( txt_Monto, 0, wxALL, 5 );
+
+
+	bSizer661->Add( bSizer71, 0, wxALL|wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer711;
+	bSizer711 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_TitCliente = new wxStaticText( this, wxID_ANY, wxT("Cliente con mas ventas registradas:"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_TitCliente->Wrap( -1 );
+	txt_TitCliente->SetFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer711->Add( txt_TitCliente, 0, wxALL, 5 );
+
+	txt_DatosCliente = new wxStaticText( this, wxID_ANY, wxT("Datos del cliente"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_DatosCliente->Wrap( -1 );
+	txt_DatosCliente->SetFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer711->Add( txt_DatosCliente, 0, wxALL, 5 );
+
+
+	bSizer661->Add( bSizer711, 0, wxALL|wxEXPAND, 5 );
+
+	wxBoxSizer* bSizer7111;
+	bSizer7111 = new wxBoxSizer( wxHORIZONTAL );
+
+	txt_TitProductos = new wxStaticText( this, wxID_ANY, wxT("Productos mas vendidos:"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_TitProductos->Wrap( -1 );
+	txt_TitProductos->SetFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer7111->Add( txt_TitProductos, 0, wxALL, 5 );
+
+	wxBoxSizer* bSizer78;
+	bSizer78 = new wxBoxSizer( wxVERTICAL );
+
+	txt_Producto1 = new wxStaticText( this, wxID_ANY, wxT("Producto 1"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Producto1->Wrap( -1 );
+	txt_Producto1->SetFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer78->Add( txt_Producto1, 0, wxALL, 5 );
+
+	txt_Producto2 = new wxStaticText( this, wxID_ANY, wxT("Producto 2"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Producto2->Wrap( -1 );
+	txt_Producto2->SetFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer78->Add( txt_Producto2, 0, wxALL, 5 );
+
+	txt_Producto3 = new wxStaticText( this, wxID_ANY, wxT("Producto 3"), wxDefaultPosition, wxDefaultSize, 0 );
+	txt_Producto3->Wrap( -1 );
+	txt_Producto3->SetFont( wxFont( 11, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer78->Add( txt_Producto3, 0, wxALL, 5 );
+
+
+	bSizer7111->Add( bSizer78, 1, wxEXPAND, 5 );
+
+
+	bSizer661->Add( bSizer7111, 1, wxALL|wxEXPAND, 5 );
+
+
+	bSizer65->Add( bSizer661, 1, wxALL|wxEXPAND, 5 );
 
 
 	this->SetSizer( bSizer65 );
 	this->Layout();
 
 	this->Centre( wxBOTH );
+
+	// Connect Events
+	datepicker_from->Connect( wxEVT_DATE_CHANGED, wxDateEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
+	datepicker_to->Connect( wxEVT_DATE_CHANGED, wxDateEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
 }
 
 BaseEstadisticas::~BaseEstadisticas()
 {
+	// Disconnect Events
+	datepicker_from->Disconnect( wxEVT_DATE_CHANGED, wxDateEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
+	datepicker_to->Disconnect( wxEVT_DATE_CHANGED, wxDateEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
+
 }
