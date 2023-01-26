@@ -1,4 +1,5 @@
 #include "EstadisticasFrame.h"
+#include <wx/msgdlg.h>
 
 EstadisticasFrame::EstadisticasFrame(wxWindow *parent, Sistema *m_sistema)
 	: BaseEstadisticas(parent), sistema(m_sistema) {
@@ -8,7 +9,7 @@ EstadisticasFrame::EstadisticasFrame(wxWindow *parent, Sistema *m_sistema)
 
 EstadisticasFrame::~EstadisticasFrame() {}
 
-void EstadisticasFrame::ActualizarDatos( wxDateEvent& event )  {
+void EstadisticasFrame::ActualizarDatos( wxCommandEvent& event )  {
 	wxDateTime DateFrom = datepicker_from->GetValue();
 	wxDateTime DateTo = datepicker_to->GetValue();
 	
@@ -16,23 +17,29 @@ void EstadisticasFrame::ActualizarDatos( wxDateEvent& event )  {
 	float ganancias=0;
 	for(int i=0; i<sistema->GetVentasSize(); i++){
 		Venta venta = sistema->GetVenta(i);
-		if(venta.GetYear() >= DateFrom.GetYear() && venta.GetYear() <= DateTo.GetYear()){
-			if(venta.GetMonth() >= DateFrom.GetMonth() && venta.GetMonth() <= DateTo.GetMonth()){
-				if(venta.GetDay() >= DateFrom.GetDay() && venta.GetDay() <= DateTo.GetDay()){
+		if(DateFrom.GetYear() == DateTo.GetYear()){
+			if(venta.GetDayOfYear() > DateFrom.GetDayOfYear() && venta.GetDayOfYear() < DateTo.GetDayOfYear()){
+				ventas_en_periodo.push_back(venta);
+				ganancias += venta.GetTotal();
+			} 
+		} else {
+			if(venta.GetYear() == DateFrom.GetYear()){
+				if(venta.GetDayOfYear() > DateFrom.GetDayOfYear()){
 					ventas_en_periodo.push_back(venta);
 					ganancias += venta.GetTotal();
-					
+				}
+			} else if(venta.GetYear() == DateTo.GetYear()){
+				if(venta.GetDayOfYear() < DateTo.GetDayOfYear()){
+					ventas_en_periodo.push_back(venta);
+					ganancias += venta.GetTotal();
 				}
 			}
 		}
 	}
 	
 	if(!ventas_en_periodo.empty()){
-		sort(ventas_en_periodo.begin(), ventas_en_periodo.end(), Orden_Fecha);
-		
 		txt_CantidadVentas->SetLabel(to_string(ventas_en_periodo.size()));
 		txt_Monto->SetLabel(to_string(ganancias));
 	}
-	
 }
 

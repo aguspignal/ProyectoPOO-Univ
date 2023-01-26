@@ -28,6 +28,7 @@ Venta::Venta(int id, int idCliente, float total, Fecha fecha, bool modif){
 	this->year = fecha.year;
 	this->month = fecha.month;
 	this->day = fecha.day;
+	this->year_day = fecha.year_day;
 	this->modificada = modif;
 }
 
@@ -134,6 +135,13 @@ void Venta::SetDay(unsigned short dy){
 	this->day = dy;
 }
 
+unsigned short Venta::GetDayOfYear(){
+	return year_day;
+}
+
+void Venta::SetDayOfYear(unsigned short yd){
+	this->year_day = yd;
+}
 
 /// -- Agregar al archivo
 void Venta::AddVenta(){
@@ -146,6 +154,7 @@ void Venta::AddVenta(){
 	reg.fecha.year = year;
 	reg.fecha.month = month;
 	reg.fecha.day = day;
+	reg.fecha.year_day = year_day;
 	reg.modificada = modificada;
 	
 	archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));

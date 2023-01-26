@@ -1575,15 +1575,18 @@ BaseEstadisticas::BaseEstadisticas( wxWindow* parent, wxWindowID id, const wxStr
 
 	bSizer68->Add( txt_Periodo, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	datepicker_from = new wxDatePickerCtrl( this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT );
+	datepicker_from = new wxDatePickerCtrl( this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT|wxDP_DROPDOWN );
 	bSizer68->Add( datepicker_from, 0, wxALL, 5 );
 
 	txt_a = new wxStaticText( this, wxID_ANY, wxT("a"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_a->Wrap( -1 );
 	bSizer68->Add( txt_a, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
-	datepicker_to = new wxDatePickerCtrl( this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT );
+	datepicker_to = new wxDatePickerCtrl( this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT|wxDP_DROPDOWN );
 	bSizer68->Add( datepicker_to, 0, wxALL, 5 );
+
+	btn_Actualizar = new wxButton( this, wxID_ANY, wxT("Actualizar"), wxDefaultPosition, wxDefaultSize, 0 );
+	bSizer68->Add( btn_Actualizar, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
 
 	bSizer661->Add( bSizer68, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
@@ -1688,14 +1691,12 @@ BaseEstadisticas::BaseEstadisticas( wxWindow* parent, wxWindowID id, const wxStr
 	this->Centre( wxBOTH );
 
 	// Connect Events
-	datepicker_from->Connect( wxEVT_DATE_CHANGED, wxDateEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
-	datepicker_to->Connect( wxEVT_DATE_CHANGED, wxDateEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
+	btn_Actualizar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
 }
 
 BaseEstadisticas::~BaseEstadisticas()
 {
 	// Disconnect Events
-	datepicker_from->Disconnect( wxEVT_DATE_CHANGED, wxDateEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
-	datepicker_to->Disconnect( wxEVT_DATE_CHANGED, wxDateEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
+	btn_Actualizar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
 
 }

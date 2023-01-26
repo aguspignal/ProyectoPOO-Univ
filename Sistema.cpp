@@ -127,6 +127,7 @@ void Sistema::SaveVentas(){
 		reg.fecha.year = ventas[i].GetYear();
 		reg.fecha.month = ventas[i].GetMonth();
 		reg.fecha.day = ventas[i].GetDay();
+		reg.fecha.year_day = ventas[i].GetDayOfYear();
 		reg.modificada = ventas[i].GetModif();
 		
 		archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));

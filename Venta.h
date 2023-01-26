@@ -10,6 +10,7 @@ struct Fecha {
 	int year;
 	unsigned short month;
 	unsigned short day;
+	unsigned short year_day;
 };
 
 struct RegistroVenta {
@@ -28,6 +29,7 @@ private:
 	int year;
 	unsigned short month;
 	unsigned short day;
+	unsigned short year_day;
 	bool modificada = false;
 	
 public:
@@ -59,7 +61,10 @@ public:
 	void SetMonth(unsigned short mo);
 	
 	unsigned short GetDay();
-	void SetDay(unsigned short dy);
+	void SetDay(unsigned short d);
+	
+	unsigned short GetDayOfYear();
+	void SetDayOfYear(unsigned short yd);
 	
 	/// Total
 	float GetTotal();

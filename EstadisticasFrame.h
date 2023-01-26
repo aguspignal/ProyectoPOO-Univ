@@ -8,7 +8,7 @@ private:
 	Sistema *sistema; 
 	
 protected:
-	void ActualizarDatos( wxDateEvent& event )  override;
+	void ActualizarDatos( wxCommandEvent& event )  override;
 	
 public:
 	EstadisticasFrame(wxWindow *parent, Sistema *m_sistema);

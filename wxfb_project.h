@@ -417,6 +417,7 @@ class BaseEstadisticas : public wxDialog
 		wxDatePickerCtrl* datepicker_from;
 		wxStaticText* txt_a;
 		wxDatePickerCtrl* datepicker_to;
+		wxButton* btn_Actualizar;
 		wxStaticText* txt_VentasRealizadas;
 		wxStaticText* txt_CantidadVentas;
 		wxStaticText* txt_Ganancias;
@@ -429,7 +430,7 @@ class BaseEstadisticas : public wxDialog
 		wxStaticText* txt_Producto3;
 
 		// Virtual event handlers, override them in your derived class
-		virtual void ActualizarDatos( wxDateEvent& event ) { event.Skip(); }
+		virtual void ActualizarDatos( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
