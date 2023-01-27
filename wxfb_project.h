@@ -28,6 +28,7 @@
 #include <wx/spinctrl.h>
 #include <wx/datectrl.h>
 #include <wx/dateevt.h>
+#include <wx/combobox.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -413,11 +414,7 @@ class BaseEstadisticas : public wxDialog
 
 	protected:
 		wxStaticText* txt_Estadisticas;
-		wxStaticText* txt_Periodo;
-		wxDatePickerCtrl* datepicker_from;
-		wxStaticText* txt_a;
-		wxDatePickerCtrl* datepicker_to;
-		wxButton* btn_Actualizar;
+		wxComboBox* combo_year;
 		wxStaticText* txt_VentasRealizadas;
 		wxStaticText* txt_CantidadVentas;
 		wxStaticText* txt_Ganancias;
@@ -435,7 +432,7 @@ class BaseEstadisticas : public wxDialog
 
 	public:
 
-		BaseEstadisticas( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 625,-1 ), long style = wxDEFAULT_DIALOG_STYLE );
+		BaseEstadisticas( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 625,350 ), long style = wxDEFAULT_DIALOG_STYLE );
 
 		~BaseEstadisticas();
 

@@ -1557,39 +1557,27 @@ BaseEstadisticas::BaseEstadisticas( wxWindow* parent, wxWindowID id, const wxStr
 	wxBoxSizer* bSizer65;
 	bSizer65 = new wxBoxSizer( wxVERTICAL );
 
+	wxBoxSizer* bSizer68;
+	bSizer68 = new wxBoxSizer( wxHORIZONTAL );
+
 	txt_Estadisticas = new wxStaticText( this, wxID_ANY, wxT("Estadisticas"), wxDefaultPosition, wxDefaultSize, 0 );
 	txt_Estadisticas->Wrap( -1 );
 	txt_Estadisticas->SetFont( wxFont( 16, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxT("Microsoft Sans Serif") ) );
 
-	bSizer65->Add( txt_Estadisticas, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	bSizer68->Add( txt_Estadisticas, 0, wxALL, 5 );
 
-	wxBoxSizer* bSizer661;
-	bSizer661 = new wxBoxSizer( wxVERTICAL );
-
-	wxBoxSizer* bSizer68;
-	bSizer68 = new wxBoxSizer( wxHORIZONTAL );
-
-	txt_Periodo = new wxStaticText( this, wxID_ANY, wxT("Periodo:"), wxDefaultPosition, wxDefaultSize, 0 );
-	txt_Periodo->Wrap( -1 );
-	txt_Periodo->SetFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
-
-	bSizer68->Add( txt_Periodo, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
-
-	datepicker_from = new wxDatePickerCtrl( this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT|wxDP_DROPDOWN );
-	bSizer68->Add( datepicker_from, 0, wxALL, 5 );
-
-	txt_a = new wxStaticText( this, wxID_ANY, wxT("a"), wxDefaultPosition, wxDefaultSize, 0 );
-	txt_a->Wrap( -1 );
-	bSizer68->Add( txt_a, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
-
-	datepicker_to = new wxDatePickerCtrl( this, wxID_ANY, wxDefaultDateTime, wxDefaultPosition, wxDefaultSize, wxDP_DEFAULT|wxDP_DROPDOWN );
-	bSizer68->Add( datepicker_to, 0, wxALL, 5 );
-
-	btn_Actualizar = new wxButton( this, wxID_ANY, wxT("Actualizar"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer68->Add( btn_Actualizar, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	combo_year = new wxComboBox( this, wxID_ANY, wxT("2023"), wxDefaultPosition, wxDefaultSize, 0, NULL, 0 );
+	combo_year->Append( wxT("2023") );
+	combo_year->Append( wxT("2022") );
+	combo_year->Append( wxT("2021") );
+	combo_year->Append( wxT("2020") );
+	combo_year->Append( wxT("2019") );
+	combo_year->Append( wxT("2018") );
+	combo_year->Append( wxT("2017") );
+	bSizer68->Add( combo_year, 0, wxALL|wxALIGN_BOTTOM, 5 );
 
 
-	bSizer661->Add( bSizer68, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
+	bSizer65->Add( bSizer68, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 
 	wxBoxSizer* bSizer712;
 	bSizer712 = new wxBoxSizer( wxHORIZONTAL );
@@ -1607,7 +1595,7 @@ BaseEstadisticas::BaseEstadisticas( wxWindow* parent, wxWindowID id, const wxStr
 	bSizer712->Add( txt_CantidadVentas, 0, wxALL, 5 );
 
 
-	bSizer661->Add( bSizer712, 0, wxALL|wxEXPAND, 5 );
+	bSizer65->Add( bSizer712, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer71;
 	bSizer71 = new wxBoxSizer( wxHORIZONTAL );
@@ -1625,7 +1613,7 @@ BaseEstadisticas::BaseEstadisticas( wxWindow* parent, wxWindowID id, const wxStr
 	bSizer71->Add( txt_Monto, 0, wxALL, 5 );
 
 
-	bSizer661->Add( bSizer71, 0, wxALL|wxEXPAND, 5 );
+	bSizer65->Add( bSizer71, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer711;
 	bSizer711 = new wxBoxSizer( wxHORIZONTAL );
@@ -1643,7 +1631,7 @@ BaseEstadisticas::BaseEstadisticas( wxWindow* parent, wxWindowID id, const wxStr
 	bSizer711->Add( txt_DatosCliente, 0, wxALL, 5 );
 
 
-	bSizer661->Add( bSizer711, 0, wxALL|wxEXPAND, 5 );
+	bSizer65->Add( bSizer711, 0, wxALL|wxEXPAND, 5 );
 
 	wxBoxSizer* bSizer7111;
 	bSizer7111 = new wxBoxSizer( wxHORIZONTAL );
@@ -1679,10 +1667,7 @@ BaseEstadisticas::BaseEstadisticas( wxWindow* parent, wxWindowID id, const wxStr
 	bSizer7111->Add( bSizer78, 1, wxEXPAND, 5 );
 
 
-	bSizer661->Add( bSizer7111, 1, wxALL|wxEXPAND, 5 );
-
-
-	bSizer65->Add( bSizer661, 1, wxALL|wxEXPAND, 5 );
+	bSizer65->Add( bSizer7111, 1, wxALL|wxEXPAND, 5 );
 
 
 	this->SetSizer( bSizer65 );
@@ -1691,12 +1676,12 @@ BaseEstadisticas::BaseEstadisticas( wxWindow* parent, wxWindowID id, const wxStr
 	this->Centre( wxBOTH );
 
 	// Connect Events
-	btn_Actualizar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
+	combo_year->Connect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
 }
 
 BaseEstadisticas::~BaseEstadisticas()
 {
 	// Disconnect Events
-	btn_Actualizar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
+	combo_year->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( BaseEstadisticas::ActualizarDatos ), NULL, this );
 
 }
