@@ -1,6 +1,8 @@
 #include "EstadisticasFrame.h"
 #include "string_conv.h"
 #include <wx/msgdlg.h>
+#include <algorithm>
+using namespace std;
 
 EstadisticasFrame::EstadisticasFrame(wxWindow *parent, Sistema *m_sistema)
 	: BaseEstadisticas(parent), sistema(m_sistema) {
@@ -73,18 +75,29 @@ void EstadisticasFrame::SetClienteConMasVentas(){
 }
 
 void EstadisticasFrame::SetProductosMasVendidos(){
-	producto_top1.cantidad = producto_top2.cantidad = producto_top3.cantidad = 0;
+	vector<ProductoCantidad> productos;
 	
 	for(int i=0; i<ventas_en_periodo.size(); i++){
-		vector<VentaDetalle> detallesventa = sistema->GetDetallesByIDVenta(ventas_en_periodo[i].GetID());
-		int max1=0, max2=0, max3=0;
-		for(int i=0; i<detallesventa.size(); i++){
-			
+		vector<VentaDetalle> detalles = sistema->GetDetallesByIDVenta(ventas_en_periodo[i].GetID());
+		for(int i=0; i<detalles.size(); i++){
+			ProductoCantidad producto_cant;
+			producto_cant.cantidad = detalles[i].GetCantidad();
+			producto_cant.producto = sistema->GetProductoByDescrip(detalles[i].GetDescripcion());
+			productos.push_back(producto_cant);
 		}
 	}
-//	producto_top3.producto = sistema->GetProductoByDescrip(detallesventa[i].GetDescripcion());
-//	producto_top2.producto = sistema->GetProductoByDescrip(detallesventa[i].GetDescripcion());
-//	producto_top1.producto = sistema->GetProductoByDescrip(detallesventa[i].GetDescripcion());
+	
+	auto max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
+	producto_top1 = *max;
+	productos.erase(max);
+	
+	max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
+	producto_top2 = *max;
+	productos.erase(max);
+	
+	max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
+	producto_top3 = *max;
+	productos.erase(max);
 }
 
 void EstadisticasFrame::CalcularGanancias(){

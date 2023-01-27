@@ -2,6 +2,8 @@
 #define ESTADISTICASFRAME_H
 #include "wxfb_project.h"
 #include "Sistema.h"
+#include <tuple>
+using namespace std;
 
 class EstadisticasFrame : public BaseEstadisticas {
 private:

@@ -407,7 +407,9 @@ void Sistema::OrdenarProductos(CriterioOrdenProducto criterio){
 	switch (criterio){
 	case ID_PRODUCTO: sort(productos.begin(), productos.end(), Orden_ID_Prod); break;
 	case DESCRIPCION: sort(productos.begin(), productos.end(), Orden_Descripcion); break;
-	case PRECIO: sort(productos.begin(), productos.end(), Orden_Precio); break;
+	case PRECIO: sort(productos.begin(), productos.end(), Orden_Precio); 
+				reverse(productos.begin(), productos.end());
+				break;
 	case STOCK: sort(productos.begin(), productos.end(), Orden_Stock); break;
 	}
 }
@@ -426,8 +428,12 @@ void Sistema::OrdenarVentas(CriterioOrdenVenta criterio){
 	switch(criterio){
 	case ID_VENTA: sort(ventas.begin(), ventas.end(), Orden_ID_Venta); break;
 	case IDCLIENTE: sort(ventas.begin(), ventas.end(), Orden_IDCliente); break;
-	case TOTAL: sort(ventas.begin(), ventas.end(), Orden_Total); break;
-	case FECHA: sort(ventas.begin(), ventas.end(), Orden_Fecha); break;
+	case TOTAL: sort(ventas.begin(), ventas.end(), Orden_Total); 
+				reverse(ventas.begin(), ventas.end());
+				break;
+	case FECHA: sort(ventas.begin(), ventas.end(), Orden_Fecha); 
+				reverse(ventas.begin(), ventas.end());
+				break;
 	}
 }
 	

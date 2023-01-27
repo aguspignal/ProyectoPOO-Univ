@@ -11,6 +11,9 @@ string StrSinEspacios(string str);
 string StrAMinusculas(string str);
 string StrDosDecimales(string str);
 
+/// Producto-Cantidad
+bool GetMayorProductoCantidad(ProductoCantidad p1, ProductoCantidad p2);
+
 /// Validaciones 
 bool ValidarDNI(string dni);
 bool ValidarTelefono(string telefono);

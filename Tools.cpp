@@ -24,6 +24,11 @@ string StrDosDecimales(string str){
 	return str;
 }
 
+/// Producto-Cantidad
+bool GetMayorProductoCantidad(ProductoCantidad p1, ProductoCantidad p2){
+	return p1.cantidad < p2.cantidad;
+}
+	
 /// Validaciones
 bool ValidarDNI(string dni){
 	if(dni.length() < 1 || dni.length() > 8){
