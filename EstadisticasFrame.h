@@ -22,7 +22,7 @@ protected:
 	void ActualizarDatos();
 	void SetClienteConMasVentas();
 	void SetProductosMasVendidos();
-	void CalcularGanancias();
+	void SetGanancias();
 	
 public:
 	EstadisticasFrame(wxWindow *parent, Sistema *m_sistema);

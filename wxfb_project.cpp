@@ -1579,6 +1579,18 @@ BaseEstadisticas::BaseEstadisticas( wxWindow* parent, wxWindowID id, const wxStr
 
 	bSizer65->Add( bSizer68, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 
+	wxBoxSizer* bSizer72;
+	bSizer72 = new wxBoxSizer( wxVERTICAL );
+
+	txt_NoData = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	txt_NoData->Wrap( -1 );
+	txt_NoData->SetFont( wxFont( 10, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
+
+	bSizer72->Add( txt_NoData, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
+
+
+	bSizer65->Add( bSizer72, 0, wxEXPAND, 5 );
+
 	wxBoxSizer* bSizer712;
 	bSizer712 = new wxBoxSizer( wxHORIZONTAL );
 

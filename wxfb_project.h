@@ -415,6 +415,7 @@ class BaseEstadisticas : public wxDialog
 	protected:
 		wxStaticText* txt_Estadisticas;
 		wxComboBox* combo_year;
+		wxStaticText* txt_NoData;
 		wxStaticText* txt_VentasRealizadas;
 		wxStaticText* txt_CantidadVentas;
 		wxStaticText* txt_Ganancias;
