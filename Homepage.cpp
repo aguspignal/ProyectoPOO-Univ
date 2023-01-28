@@ -3,6 +3,7 @@
 #include "ClientesFrame.h"
 #include "VentasFrame.h"
 #include "EstadisticasFrame.h"
+#include <wx/statbmp.h>
 
 Homepage::Homepage(Sistema *m_sistema) 
 	: BaseHomepage(nullptr), sistema(m_sistema) {

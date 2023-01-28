@@ -72,15 +72,13 @@ void EstadisticasFrame::SetClienteConMasVentas(){
 			cliente_top = cliente;
 		}
 	}
-	
 	if(cliente_top.GetID() != 0){
 		txt_DatosCliente->SetLabel(cliente_top.GetNombre()+" - "+to_string(cliente_top.GetDNI())+
 								   " ("+to_string(cant_ventas)+")");
 	} else {
 		txt_DatosCliente->SetLabel("No se encontraron clientes");
-	}
+	} 
 }
-
 void EstadisticasFrame::SetProductosMasVendidos(){
 	vector<ProductoCantidad> productos;
 	

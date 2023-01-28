@@ -14,13 +14,13 @@ BaseHomepage::BaseHomepage( wxWindow* parent, wxWindowID id, const wxString& tit
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	this->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Arial") ) );
 	this->SetForegroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_WINDOW ) );
-	this->SetBackgroundColour( wxSystemSettings::GetColour( wxSYS_COLOUR_ACTIVECAPTION ) );
+	this->SetBackgroundColour( wxColour( 117, 191, 204 ) );
 
 	wxBoxSizer* bSizer2;
 	bSizer2 = new wxBoxSizer( wxVERTICAL );
 
-	m_panel188 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	bSizer2->Add( m_panel188, 1, wxEXPAND | wxALL, 5 );
+
+	bSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
 
 	m_staticText34 = new wxStaticText( this, wxID_ANY, wxT("Bienvenido!"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText34->Wrap( -1 );
@@ -77,11 +77,8 @@ BaseHomepage::BaseHomepage( wxWindow* parent, wxWindowID id, const wxString& tit
 
 	bSizer2->Add( bSizer57, 0, wxALL|wxEXPAND, 5 );
 
-	m_panel184 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	bSizer2->Add( m_panel184, 1, wxEXPAND | wxALL, 5 );
 
-	m_panel10 = new wxPanel( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	bSizer2->Add( m_panel10, 1, wxEXPAND | wxALL, 5 );
+	bSizer2->Add( 0, 0, 1, wxEXPAND, 5 );
 
 
 	this->SetSizer( bSizer2 );
