@@ -119,3 +119,8 @@ void ProductosFrame::OrdenarGrid( wxGridEvent& event )  {
 	ActualizarGrid();
 }
 
+void ProductosFrame::SeleccionarRow( wxGridEvent& event )  {
+//	gridProductos->ClearSelection();
+//	gridProductos->SelectRow(event.GetRow());
+}
+

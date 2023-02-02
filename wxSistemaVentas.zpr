@@ -62,7 +62,7 @@ path=EditCliente.cpp
 cursor=59:15
 [source]
 path=AddVenta.cpp
-cursor=144:5
+cursor=151:7
 [source]
 path=VentaDetalle.cpp
 cursor=83:48
@@ -74,7 +74,7 @@ path=VerClientesFrame.cpp
 cursor=37:0
 [source]
 path=VentasCliente.cpp
-cursor=15:0
+cursor=18:15
 [source]
 path=EstadisticasFrame.cpp
 cursor=88:9

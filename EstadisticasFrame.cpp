@@ -36,6 +36,7 @@ void EstadisticasFrame::ActualizarDatos()  {
 		SetProductosMasVendidos();
 		
 		txt_NoData->SetLabel("");
+		
 	} else {
 		txt_VentasRealizadas->SetLabel("");
 		txt_CantidadVentas->SetLabel("");
@@ -92,17 +93,22 @@ void EstadisticasFrame::SetProductosMasVendidos(){
 		}
 	}
 	
-	auto max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
-	producto_top1 = *max;
-	productos.erase(max);
-	
-	max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
-	producto_top2 = *max;
-	productos.erase(max);
-	
-	max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
-	producto_top3 = *max;
-	productos.erase(max);
+	auto max = productos.begin();
+	if(productos.size() >= 1){
+		max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
+		producto_top1 = *max;
+		productos.erase(max);
+	}
+	if(productos.size() >= 2){
+		max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
+		producto_top2 = *max;
+		productos.erase(max);
+	}
+	if(productos.size() >= 3){
+		max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
+		producto_top3 = *max;
+		productos.erase(max);
+	}
 	
 	if(producto_top1.producto.GetID() != 0){
 		txt_Producto1->SetLabel(producto_top1.producto.GetDescripcion()+" ("+to_string(producto_top1.cantidad)+")");

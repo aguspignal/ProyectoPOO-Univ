@@ -83,6 +83,7 @@ class BaseProductosFrame : public wxDialog
 		// Virtual event handlers, override them in your derived class
 		virtual void BuscarProducto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ActualizarGrid( wxCommandEvent& event ) { event.Skip(); }
+		virtual void SeleccionarRow( wxGridEvent& event ) { event.Skip(); }
 		virtual void OrdenarGrid( wxGridEvent& event ) { event.Skip(); }
 		virtual void DisplayAddProducto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void EliminarProducto( wxCommandEvent& event ) { event.Skip(); }

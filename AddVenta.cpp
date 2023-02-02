@@ -30,7 +30,7 @@ void AddVenta::ActualizarGrid(){
 
 /// -- Total
 float AddVenta::CalcularTotal(){
-	float suma;
+	float suma = 0;
 	for(int i=0; i<prods_seleccionados.size(); i++){
 		suma += (prods_seleccionados[i].producto.GetPrecio() * prods_seleccionados[i].cantidad);
 	}

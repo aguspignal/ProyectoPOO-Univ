@@ -218,6 +218,7 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 	// Connect Events
 	btn_Buscar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::BuscarProducto ), NULL, this );
 	btn_Actualizar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::ActualizarGrid ), NULL, this );
+	gridProductos->Connect( wxEVT_GRID_CELL_LEFT_CLICK, wxGridEventHandler( BaseProductosFrame::SeleccionarRow ), NULL, this );
 	gridProductos->Connect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseProductosFrame::OrdenarGrid ), NULL, this );
 	btn_AddProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::DisplayAddProducto ), NULL, this );
 	btn_DeleteProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::EliminarProducto ), NULL, this );
@@ -229,6 +230,7 @@ BaseProductosFrame::~BaseProductosFrame()
 	// Disconnect Events
 	btn_Buscar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::BuscarProducto ), NULL, this );
 	btn_Actualizar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::ActualizarGrid ), NULL, this );
+	gridProductos->Disconnect( wxEVT_GRID_CELL_LEFT_CLICK, wxGridEventHandler( BaseProductosFrame::SeleccionarRow ), NULL, this );
 	gridProductos->Disconnect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseProductosFrame::OrdenarGrid ), NULL, this );
 	btn_AddProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::DisplayAddProducto ), NULL, this );
 	btn_DeleteProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::EliminarProducto ), NULL, this );
