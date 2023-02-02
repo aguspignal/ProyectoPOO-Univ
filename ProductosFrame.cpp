@@ -8,11 +8,13 @@ ProductosFrame::ProductosFrame(wxWindow *parent, Sistema *m_sistema)
 	: BaseProductosFrame(parent), sistema(m_sistema) { 
 	
 	ActualizarGrid();
+	gridProductos->ClearSelection();
 }
 
 ProductosFrame::~ProductosFrame() { }
 
 void ProductosFrame::ActualizarGrid()  {
+	gridProductos->ClearSelection();
 	if(gridProductos->GetNumberRows() != 0){
 		gridProductos->DeleteRows(0,gridProductos->GetNumberRows());
 	}
@@ -120,7 +122,7 @@ void ProductosFrame::OrdenarGrid( wxGridEvent& event )  {
 }
 
 void ProductosFrame::SeleccionarRow( wxGridEvent& event )  {
-//	gridProductos->ClearSelection();
-//	gridProductos->SelectRow(event.GetRow());
+	gridProductos->ClearSelection();
+	gridProductos->SelectRow(event.GetRow());
 }
 

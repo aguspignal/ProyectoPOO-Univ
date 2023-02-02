@@ -218,8 +218,8 @@ BaseProductosFrame::BaseProductosFrame( wxWindow* parent, wxWindowID id, const w
 	// Connect Events
 	btn_Buscar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::BuscarProducto ), NULL, this );
 	btn_Actualizar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::ActualizarGrid ), NULL, this );
-	gridProductos->Connect( wxEVT_GRID_CELL_LEFT_CLICK, wxGridEventHandler( BaseProductosFrame::SeleccionarRow ), NULL, this );
 	gridProductos->Connect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseProductosFrame::OrdenarGrid ), NULL, this );
+	gridProductos->Connect( wxEVT_GRID_SELECT_CELL, wxGridEventHandler( BaseProductosFrame::SeleccionarRow ), NULL, this );
 	btn_AddProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::DisplayAddProducto ), NULL, this );
 	btn_DeleteProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::EliminarProducto ), NULL, this );
 	btn_EditProducto->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::DisplayEditarProducto ), NULL, this );
@@ -230,8 +230,8 @@ BaseProductosFrame::~BaseProductosFrame()
 	// Disconnect Events
 	btn_Buscar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::BuscarProducto ), NULL, this );
 	btn_Actualizar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::ActualizarGrid ), NULL, this );
-	gridProductos->Disconnect( wxEVT_GRID_CELL_LEFT_CLICK, wxGridEventHandler( BaseProductosFrame::SeleccionarRow ), NULL, this );
 	gridProductos->Disconnect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseProductosFrame::OrdenarGrid ), NULL, this );
+	gridProductos->Disconnect( wxEVT_GRID_SELECT_CELL, wxGridEventHandler( BaseProductosFrame::SeleccionarRow ), NULL, this );
 	btn_AddProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::DisplayAddProducto ), NULL, this );
 	btn_DeleteProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::EliminarProducto ), NULL, this );
 	btn_EditProducto->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseProductosFrame::DisplayEditarProducto ), NULL, this );
@@ -284,7 +284,7 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 
 	// Grid
 	gridClientes->CreateGrid( 0, 6 );
-	gridClientes->EnableEditing( true );
+	gridClientes->EnableEditing( false );
 	gridClientes->EnableGridLines( true );
 	gridClientes->EnableDragGridSize( false );
 	gridClientes->SetMargins( 0, 0 );
@@ -362,6 +362,7 @@ BaseClientesFrame::BaseClientesFrame( wxWindow* parent, wxWindowID id, const wxS
 	btn_Buscar->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::BuscarCliente ), NULL, this );
 	btn_BackHome->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::ActualizarGrid ), NULL, this );
 	gridClientes->Connect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseClientesFrame::OrdenarGrid ), NULL, this );
+	gridClientes->Connect( wxEVT_GRID_SELECT_CELL, wxGridEventHandler( BaseClientesFrame::SeleccionarRow ), NULL, this );
 	btn_AddCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::DisplayAddCliente ), NULL, this );
 	btn_DeleteCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::EliminarCliente ), NULL, this );
 	btn_EditCliente->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::DisplayEditarCliente ), NULL, this );
@@ -374,6 +375,7 @@ BaseClientesFrame::~BaseClientesFrame()
 	btn_Buscar->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::BuscarCliente ), NULL, this );
 	btn_BackHome->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::ActualizarGrid ), NULL, this );
 	gridClientes->Disconnect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseClientesFrame::OrdenarGrid ), NULL, this );
+	gridClientes->Disconnect( wxEVT_GRID_SELECT_CELL, wxGridEventHandler( BaseClientesFrame::SeleccionarRow ), NULL, this );
 	btn_AddCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::DisplayAddCliente ), NULL, this );
 	btn_DeleteCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::EliminarCliente ), NULL, this );
 	btn_EditCliente->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseClientesFrame::DisplayEditarCliente ), NULL, this );
@@ -405,7 +407,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	// Grid
 	gridVentas->CreateGrid( 0, 4 );
-	gridVentas->EnableEditing( true );
+	gridVentas->EnableEditing( false );
 	gridVentas->EnableGridLines( true );
 	gridVentas->EnableDragGridSize( false );
 	gridVentas->SetMargins( 0, 0 );
@@ -464,7 +466,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	// Grid
 	gridDetalles->CreateGrid( 0, 4 );
-	gridDetalles->EnableEditing( true );
+	gridDetalles->EnableEditing( false );
 	gridDetalles->EnableGridLines( true );
 	gridDetalles->EnableDragGridSize( false );
 	gridDetalles->SetMargins( 0, 0 );
@@ -535,7 +537,9 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	// Connect Events
 	gridVentas->Connect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseVentasFrame::OrdenarGrid ), NULL, this );
+	gridVentas->Connect( wxEVT_GRID_SELECT_CELL, wxGridEventHandler( BaseVentasFrame::SeleccionarRow ), NULL, this );
 	btn_ActualizarGrids->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::ActualizarGrids ), NULL, this );
+	gridDetalles->Connect( wxEVT_GRID_SELECT_CELL, wxGridEventHandler( BaseVentasFrame::SelecionarRow ), NULL, this );
 	btn_AddVenta->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayAddVenta ), NULL, this );
 	btn_VerDetalle->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayDetalleVenta ), NULL, this );
 	btn_DeleteVenta->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::EliminarVenta ), NULL, this );
@@ -545,7 +549,9 @@ BaseVentasFrame::~BaseVentasFrame()
 {
 	// Disconnect Events
 	gridVentas->Disconnect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseVentasFrame::OrdenarGrid ), NULL, this );
+	gridVentas->Disconnect( wxEVT_GRID_SELECT_CELL, wxGridEventHandler( BaseVentasFrame::SeleccionarRow ), NULL, this );
 	btn_ActualizarGrids->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::ActualizarGrids ), NULL, this );
+	gridDetalles->Disconnect( wxEVT_GRID_SELECT_CELL, wxGridEventHandler( BaseVentasFrame::SelecionarRow ), NULL, this );
 	btn_AddVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayAddVenta ), NULL, this );
 	btn_VerDetalle->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayDetalleVenta ), NULL, this );
 	btn_DeleteVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::EliminarVenta ), NULL, this );
@@ -1121,7 +1127,7 @@ BaseVentasCliente::BaseVentasCliente( wxWindow* parent, wxWindowID id, const wxS
 
 	// Grid
 	gridVentas->CreateGrid( 0, 3 );
-	gridVentas->EnableEditing( true );
+	gridVentas->EnableEditing( false );
 	gridVentas->EnableGridLines( true );
 	gridVentas->EnableDragGridSize( false );
 	gridVentas->SetMargins( 0, 0 );
@@ -1152,7 +1158,7 @@ BaseVentasCliente::BaseVentasCliente( wxWindow* parent, wxWindowID id, const wxS
 
 	// Grid
 	gridDetalles->CreateGrid( 0, 4 );
-	gridDetalles->EnableEditing( true );
+	gridDetalles->EnableEditing( false );
 	gridDetalles->EnableGridLines( true );
 	gridDetalles->EnableDragGridSize( false );
 	gridDetalles->SetMargins( 0, 0 );
@@ -1274,7 +1280,7 @@ BaseAddVenta::BaseAddVenta( wxWindow* parent, wxWindowID id, const wxString& tit
 
 	// Grid
 	gridDetalles->CreateGrid( 0, 4 );
-	gridDetalles->EnableEditing( true );
+	gridDetalles->EnableEditing( false );
 	gridDetalles->EnableGridLines( true );
 	gridDetalles->EnableDragGridSize( false );
 	gridDetalles->SetMargins( 0, 0 );
@@ -1381,7 +1387,7 @@ BaseAddVenta::BaseAddVenta( wxWindow* parent, wxWindowID id, const wxString& tit
 
 	// Grid
 	gridProductos->CreateGrid( 0, 3 );
-	gridProductos->EnableEditing( true );
+	gridProductos->EnableEditing( false );
 	gridProductos->EnableGridLines( true );
 	gridProductos->EnableDragGridSize( false );
 	gridProductos->SetMargins( 0, 0 );
@@ -1484,7 +1490,7 @@ BaseVerClientes::BaseVerClientes( wxWindow* parent, wxWindowID id, const wxStrin
 
 	// Grid
 	gridClientes->CreateGrid( 0, 4 );
-	gridClientes->EnableEditing( true );
+	gridClientes->EnableEditing( false );
 	gridClientes->EnableGridLines( true );
 	gridClientes->EnableDragGridSize( false );
 	gridClientes->SetMargins( 0, 0 );

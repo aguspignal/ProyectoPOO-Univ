@@ -7,12 +7,14 @@ VentasFrame::VentasFrame(wxWindow *parent, Sistema *m_sistema)
 	: BaseVentasFrame(parent), sistema(m_sistema) {
 	
 	ActualizarGridVentas();
+	gridVentas->ClearSelection();
 }
 
 VentasFrame::~VentasFrame() {}
 
 /// Actualizar GRID VENTAS
 void VentasFrame::ActualizarGridVentas(){
+	gridVentas->ClearSelection();
 	if(gridVentas->GetNumberRows() != 0){
 		gridVentas->DeleteRows(0,gridVentas->GetNumberRows());
 	}
@@ -102,4 +104,5 @@ void VentasFrame::OrdenarGrid( wxGridEvent& event )  {
 	ActualizarGridVentas();
 	ActualizarGridDetalles(0);
 }
+
 

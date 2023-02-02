@@ -83,8 +83,8 @@ class BaseProductosFrame : public wxDialog
 		// Virtual event handlers, override them in your derived class
 		virtual void BuscarProducto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ActualizarGrid( wxCommandEvent& event ) { event.Skip(); }
-		virtual void SeleccionarRow( wxGridEvent& event ) { event.Skip(); }
 		virtual void OrdenarGrid( wxGridEvent& event ) { event.Skip(); }
+		virtual void SeleccionarRow( wxGridEvent& event ) { event.Skip(); }
 		virtual void DisplayAddProducto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void EliminarProducto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DisplayEditarProducto( wxCommandEvent& event ) { event.Skip(); }
@@ -121,6 +121,7 @@ class BaseClientesFrame : public wxDialog
 		virtual void BuscarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void ActualizarGrid( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OrdenarGrid( wxGridEvent& event ) { event.Skip(); }
+		virtual void SeleccionarRow( wxGridEvent& event ) { event.Skip(); }
 		virtual void DisplayAddCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void EliminarCliente( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DisplayEditarCliente( wxCommandEvent& event ) { event.Skip(); }
@@ -155,7 +156,9 @@ class BaseVentasFrame : public wxDialog
 
 		// Virtual event handlers, override them in your derived class
 		virtual void OrdenarGrid( wxGridEvent& event ) { event.Skip(); }
+		virtual void SeleccionarRow( wxGridEvent& event ) { event.Skip(); }
 		virtual void ActualizarGrids( wxCommandEvent& event ) { event.Skip(); }
+		virtual void SelecionarRow( wxGridEvent& event ) { event.Skip(); }
 		virtual void DisplayAddVenta( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DisplayDetalleVenta( wxCommandEvent& event ) { event.Skip(); }
 		virtual void EliminarVenta( wxCommandEvent& event ) { event.Skip(); }

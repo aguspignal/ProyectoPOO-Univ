@@ -494,7 +494,7 @@
                 </object>
             </object>
         </object>
-        <object class="Dialog" expanded="0">
+        <object class="Dialog" expanded="1">
             <property name="aui_managed">0</property>
             <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
             <property name="bg">wxSYS_COLOUR_SCROLLBAR</property>
@@ -521,16 +521,16 @@
             <property name="window_extra_style"></property>
             <property name="window_name"></property>
             <property name="window_style"></property>
-            <object class="wxBoxSizer" expanded="0">
+            <object class="wxBoxSizer" expanded="1">
                 <property name="minimum_size"></property>
                 <property name="name">bSizer4</property>
                 <property name="orient">wxVERTICAL</property>
                 <property name="permission">none</property>
-                <object class="sizeritem" expanded="0">
+                <object class="sizeritem" expanded="1">
                     <property name="border">5</property>
                     <property name="flag">wxALL|wxEXPAND</property>
                     <property name="proportion">1</property>
-                    <object class="wxBoxSizer" expanded="0">
+                    <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
                         <property name="name">bSizer8</property>
                         <property name="orient">wxVERTICAL</property>
@@ -905,17 +905,17 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
-                                <event name="OnGridCellLeftClick">SeleccionarRow</event>
                                 <event name="OnGridLabelLeftClick">OrdenarGrid</event>
+                                <event name="OnGridSelectCell">SeleccionarRow</event>
                             </object>
                         </object>
                     </object>
                 </object>
-                <object class="sizeritem" expanded="0">
+                <object class="sizeritem" expanded="1">
                     <property name="border">5</property>
                     <property name="flag">wxALL|wxEXPAND</property>
                     <property name="proportion">0</property>
-                    <object class="wxBoxSizer" expanded="0">
+                    <object class="wxBoxSizer" expanded="1">
                         <property name="minimum_size"></property>
                         <property name="name">bSizer5</property>
                         <property name="orient">wxHORIZONTAL</property>
@@ -1590,7 +1590,7 @@
                                 <property name="drag_col_size">1</property>
                                 <property name="drag_grid_size">0</property>
                                 <property name="drag_row_size">1</property>
-                                <property name="editing">1</property>
+                                <property name="editing">0</property>
                                 <property name="enabled">1</property>
                                 <property name="fg"></property>
                                 <property name="floatable">1</property>
@@ -1635,6 +1635,7 @@
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
                                 <event name="OnGridLabelLeftClick">OrdenarGrid</event>
+                                <event name="OnGridSelectCell">SeleccionarRow</event>
                             </object>
                         </object>
                     </object>
@@ -2178,7 +2179,7 @@
                                         <property name="drag_col_size">1</property>
                                         <property name="drag_grid_size">0</property>
                                         <property name="drag_row_size">1</property>
-                                        <property name="editing">1</property>
+                                        <property name="editing">0</property>
                                         <property name="enabled">1</property>
                                         <property name="fg"></property>
                                         <property name="floatable">1</property>
@@ -2223,6 +2224,7 @@
                                         <property name="window_name"></property>
                                         <property name="window_style"></property>
                                         <event name="OnGridLabelLeftClick">OrdenarGrid</event>
+                                        <event name="OnGridSelectCell">SeleccionarRow</event>
                                     </object>
                                 </object>
                             </object>
@@ -2434,7 +2436,7 @@
                                         <property name="drag_col_size">1</property>
                                         <property name="drag_grid_size">0</property>
                                         <property name="drag_row_size">1</property>
-                                        <property name="editing">1</property>
+                                        <property name="editing">0</property>
                                         <property name="enabled">1</property>
                                         <property name="fg"></property>
                                         <property name="floatable">1</property>
@@ -2478,6 +2480,7 @@
                                         <property name="window_extra_style"></property>
                                         <property name="window_name"></property>
                                         <property name="window_style"></property>
+                                        <event name="OnGridSelectCell">SelecionarRow</event>
                                     </object>
                                 </object>
                             </object>
@@ -6440,7 +6443,7 @@
                                 <property name="drag_col_size">1</property>
                                 <property name="drag_grid_size">0</property>
                                 <property name="drag_row_size">1</property>
-                                <property name="editing">1</property>
+                                <property name="editing">0</property>
                                 <property name="enabled">1</property>
                                 <property name="fg"></property>
                                 <property name="floatable">1</property>
@@ -6528,7 +6531,7 @@
                                 <property name="drag_col_size">1</property>
                                 <property name="drag_grid_size">0</property>
                                 <property name="drag_row_size">1</property>
-                                <property name="editing">1</property>
+                                <property name="editing">0</property>
                                 <property name="enabled">1</property>
                                 <property name="fg"></property>
                                 <property name="floatable">1</property>
@@ -7171,7 +7174,7 @@
                                         <property name="drag_col_size">1</property>
                                         <property name="drag_grid_size">0</property>
                                         <property name="drag_row_size">1</property>
-                                        <property name="editing">1</property>
+                                        <property name="editing">0</property>
                                         <property name="enabled">1</property>
                                         <property name="fg"></property>
                                         <property name="floatable">1</property>
@@ -7869,7 +7872,7 @@
                                 <property name="drag_col_size">1</property>
                                 <property name="drag_grid_size">0</property>
                                 <property name="drag_row_size">1</property>
-                                <property name="editing">1</property>
+                                <property name="editing">0</property>
                                 <property name="enabled">1</property>
                                 <property name="fg"></property>
                                 <property name="floatable">1</property>
@@ -8334,7 +8337,7 @@
                                 <property name="drag_col_size">1</property>
                                 <property name="drag_grid_size">0</property>
                                 <property name="drag_row_size">1</property>
-                                <property name="editing">1</property>
+                                <property name="editing">0</property>
                                 <property name="enabled">1</property>
                                 <property name="fg"></property>
                                 <property name="floatable">1</property>

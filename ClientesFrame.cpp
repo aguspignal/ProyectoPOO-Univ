@@ -9,11 +9,13 @@ ClientesFrame::ClientesFrame(wxWindow *parent, Sistema *m_sistema)
 	: BaseClientesFrame(parent), sistema(m_sistema) {
 	
 	ActualizarGrid();
+	gridClientes->ClearSelection();
 }
 
 ClientesFrame::~ClientesFrame() { }
 
 void ClientesFrame::ActualizarGrid(){
+	gridClientes->ClearSelection();
 	if(gridClientes->GetNumberRows() != 0){
 		gridClientes->DeleteRows(0,gridClientes->GetNumberRows());
 	}
@@ -127,4 +129,9 @@ void ClientesFrame::OrdenarGrid( wxGridEvent& event )  {
 	ActualizarGrid();
 }
 
+
+void ClientesFrame::SeleccionarRow( wxGridEvent& event )  {
+	gridClientes->ClearSelection();
+	gridClientes->SelectRow(event.GetRow());
+}
 

@@ -8,6 +8,7 @@ private:
 	Sistema *sistema;
 	
 protected:
+	void SeleccionarRow( wxGridEvent& event )  override;
 	void VerVentas( wxCommandEvent& event )  override;
 	void OrdenarGrid( wxGridEvent& event )  override;
 	void ActualizarGrid( wxCommandEvent& event )  override;

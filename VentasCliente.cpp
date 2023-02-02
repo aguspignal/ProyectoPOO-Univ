@@ -54,5 +54,3 @@ void VentasCliente::VerDetalleVenta( wxCommandEvent& event )  {
 	}
 }
 
-
-
