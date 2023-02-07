@@ -56,7 +56,7 @@ class BaseHomepage : public wxFrame
 
 	public:
 
-		BaseHomepage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 800,500 ), long style = wxDEFAULT_FRAME_STYLE|wxMAXIMIZE|wxTAB_TRAVERSAL );
+		BaseHomepage( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 800,600 ), long style = wxDEFAULT_FRAME_STYLE|wxMAXIMIZE|wxTAB_TRAVERSAL );
 
 		~BaseHomepage();
 
@@ -156,9 +156,7 @@ class BaseVentasFrame : public wxDialog
 
 		// Virtual event handlers, override them in your derived class
 		virtual void OrdenarGrid( wxGridEvent& event ) { event.Skip(); }
-		virtual void SeleccionarRow( wxGridEvent& event ) { event.Skip(); }
 		virtual void ActualizarGrids( wxCommandEvent& event ) { event.Skip(); }
-		virtual void SelecionarRow( wxGridEvent& event ) { event.Skip(); }
 		virtual void DisplayAddVenta( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DisplayDetalleVenta( wxCommandEvent& event ) { event.Skip(); }
 		virtual void EliminarVenta( wxCommandEvent& event ) { event.Skip(); }
@@ -400,7 +398,7 @@ class BaseVerClientes : public wxDialog
 
 	public:
 
-		BaseVerClientes( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Resultados de la busqueda"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,400 ), long style = wxDEFAULT_DIALOG_STYLE );
+		BaseVerClientes( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxT("Resultados de la busqueda"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 500,400 ), long style = wxDEFAULT_DIALOG_STYLE );
 
 		~BaseVerClientes();
 

@@ -14,6 +14,7 @@ VerClientesFrame::VerClientesFrame(wxWindow *parent, Sistema *m_sistema, string 
 		gridClientes->SetCellValue(i,2,to_string(cliente.GetDNI()));
 		gridClientes->SetCellValue(i,3,cliente.GetDireccion());
 	}
+	gridClientes->ClearSelection();
 }
 
 VerClientesFrame::~VerClientesFrame() {}
@@ -23,8 +24,13 @@ void VerClientesFrame::SeleccionarCliente( wxGridEvent& event )  {
 		int row = event.GetRow();
 		long id;
 		gridClientes->GetCellValue(row,0).ToLong(&id);
-		id_cliente = id;
-		txt_Cliente->SetLabel(gridClientes->GetCellValue(row,1)+" "+gridClientes->GetCellValue(row,2));
+		Cliente cliente = sistema->GetClienteByID(id);
+		if(cliente.GetID() != 0){
+			id_cliente = id;
+			txt_Cliente->SetLabel(gridClientes->GetCellValue(row,1)+" - "+
+								  gridClientes->GetCellValue(row,2)+" - "+
+								  gridClientes->GetCellValue(row,3));
+		}
 	}	
 }
 

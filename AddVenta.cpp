@@ -27,7 +27,6 @@ void AddVenta::ActualizarGrid(){
 	gridDetalles->SetColFormatFloat(3,-1,2);
 	txt_Monto->SetLabel(StrDosDecimales(to_string(CalcularTotal())));
 }
-
 /// -- Total
 float AddVenta::CalcularTotal(){
 	float suma = 0;
@@ -47,11 +46,16 @@ void AddVenta::BuscarCliente( wxCommandEvent& event ){
 			wxMessageBox("No se encontraron clientes","Error",wxOK|wxICON_ERROR);	
 		} else {
 			VerClientesFrame *win = new VerClientesFrame(this,sistema,busqueda,resultados);
-			id_cliente = win->ShowModal();
-			Cliente cliente = sistema->GetClienteByID(id_cliente);
-			if(cliente.GetID() != 0){
-				txt_DatosCliente->SetLabel(cliente.GetNombre()+" - "+to_string(cliente.GetDNI())+" - "+cliente.GetDireccion());
-			}
+			int id = win->ShowModal();
+			if(id != 0){
+				id_cliente = id;
+				Cliente cliente = sistema->GetClienteByID(id_cliente);
+				if(cliente.GetID() != 0){
+					txt_DatosCliente->SetLabel(cliente.GetNombre()+" - "+to_string(cliente.GetDNI())+" - "+cliente.GetDireccion());
+				} else {
+					txt_DatosCliente->SetLabel("Seleccione un cliente");
+				}
+			} 
 		}
 	}
 }
@@ -132,7 +136,7 @@ void AddVenta::QuitarProducto( wxCommandEvent& event )  {
 void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
 	string errores;
 	Cliente cliente = sistema->GetClienteByID(id_cliente);
-	if(cliente.GetID() == 0){
+	if(cliente.GetID() == 0){ 
 		errores += "No selecciono ningun cliente\n";
 	}
 	if(prods_seleccionados.empty()){
@@ -164,4 +168,10 @@ void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
 void AddVenta::CancelarVenta( wxCommandEvent& event )  {
 	EndModal(0);
 }
+
+
+
+
+
+
 

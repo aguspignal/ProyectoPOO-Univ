@@ -47,7 +47,7 @@
             <property name="minimum_size">300,200</property>
             <property name="name">BaseHomepage</property>
             <property name="pos"></property>
-            <property name="size">800,500</property>
+            <property name="size">800,600</property>
             <property name="style">wxDEFAULT_FRAME_STYLE|wxMAXIMIZE</property>
             <property name="subclass">; ; forward_declare</property>
             <property name="title"></property>
@@ -2224,7 +2224,6 @@
                                         <property name="window_name"></property>
                                         <property name="window_style"></property>
                                         <event name="OnGridLabelLeftClick">OrdenarGrid</event>
-                                        <event name="OnGridSelectCell">SeleccionarRow</event>
                                     </object>
                                 </object>
                             </object>
@@ -2480,7 +2479,6 @@
                                         <property name="window_extra_style"></property>
                                         <property name="window_name"></property>
                                         <property name="window_style"></property>
-                                        <event name="OnGridSelectCell">SelecionarRow</event>
                                     </object>
                                 </object>
                             </object>
@@ -8210,7 +8208,7 @@
             <property name="minimum_size"></property>
             <property name="name">BaseVerClientes</property>
             <property name="pos"></property>
-            <property name="size">-1,400</property>
+            <property name="size">500,400</property>
             <property name="style">wxDEFAULT_DIALOG_STYLE</property>
             <property name="subclass">; ; forward_declare</property>
             <property name="title">Resultados de la busqueda</property>
@@ -8386,7 +8384,7 @@
                         </object>
                         <object class="sizeritem" expanded="0">
                             <property name="border">5</property>
-                            <property name="flag">wxALIGN_CENTER_VERTICAL|wxALL|wxALIGN_CENTER_HORIZONTAL</property>
+                            <property name="flag">wxALIGN_CENTER_HORIZONTAL|wxALL</property>
                             <property name="proportion">0</property>
                             <object class="wxStaticText" expanded="0">
                                 <property name="BottomDockable">1</property>

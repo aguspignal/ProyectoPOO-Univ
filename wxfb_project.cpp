@@ -537,9 +537,7 @@ BaseVentasFrame::BaseVentasFrame( wxWindow* parent, wxWindowID id, const wxStrin
 
 	// Connect Events
 	gridVentas->Connect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseVentasFrame::OrdenarGrid ), NULL, this );
-	gridVentas->Connect( wxEVT_GRID_SELECT_CELL, wxGridEventHandler( BaseVentasFrame::SeleccionarRow ), NULL, this );
 	btn_ActualizarGrids->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::ActualizarGrids ), NULL, this );
-	gridDetalles->Connect( wxEVT_GRID_SELECT_CELL, wxGridEventHandler( BaseVentasFrame::SelecionarRow ), NULL, this );
 	btn_AddVenta->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayAddVenta ), NULL, this );
 	btn_VerDetalle->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayDetalleVenta ), NULL, this );
 	btn_DeleteVenta->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::EliminarVenta ), NULL, this );
@@ -549,9 +547,7 @@ BaseVentasFrame::~BaseVentasFrame()
 {
 	// Disconnect Events
 	gridVentas->Disconnect( wxEVT_GRID_LABEL_LEFT_CLICK, wxGridEventHandler( BaseVentasFrame::OrdenarGrid ), NULL, this );
-	gridVentas->Disconnect( wxEVT_GRID_SELECT_CELL, wxGridEventHandler( BaseVentasFrame::SeleccionarRow ), NULL, this );
 	btn_ActualizarGrids->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::ActualizarGrids ), NULL, this );
-	gridDetalles->Disconnect( wxEVT_GRID_SELECT_CELL, wxGridEventHandler( BaseVentasFrame::SelecionarRow ), NULL, this );
 	btn_AddVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayAddVenta ), NULL, this );
 	btn_VerDetalle->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::DisplayDetalleVenta ), NULL, this );
 	btn_DeleteVenta->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( BaseVentasFrame::EliminarVenta ), NULL, this );
@@ -1526,7 +1522,7 @@ BaseVerClientes::BaseVerClientes( wxWindow* parent, wxWindowID id, const wxStrin
 	txt_Cliente->Wrap( -1 );
 	txt_Cliente->SetFont( wxFont( 9, wxFONTFAMILY_SWISS, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_NORMAL, false, wxT("Microsoft JhengHei") ) );
 
-	bSizer68->Add( txt_Cliente, 0, wxALIGN_CENTER_VERTICAL|wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	bSizer68->Add( txt_Cliente, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
 
 	btn_Confirmar = new wxButton( this, wxID_ANY, wxT("Confirmar"), wxDefaultPosition, wxDefaultSize, 0 );
 	bSizer68->Add( btn_Confirmar, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
