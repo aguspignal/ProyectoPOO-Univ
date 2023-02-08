@@ -12,6 +12,7 @@ Sistema::Sistema(){
 	LoadDetallesVenta();
 }
 
+
 /// -- CARGAR Productos
 void Sistema::LoadProductos(){
 	ifstream archi("productos.bin",ios::binary|ios::in|ios::ate);
@@ -28,6 +29,7 @@ void Sistema::LoadProductos(){
 	}
 	archi.close();
 }
+
 
 /// -- CARGAR Clientes
 void Sistema::LoadClientes(){
@@ -46,6 +48,7 @@ void Sistema::LoadClientes(){
 	archi.close();
 }
 
+
 /// -- CARGAR Ventas
 void Sistema::LoadVentas(){
 	ifstream archi("ventas.bin",ios::binary|ios::in|ios::ate);
@@ -62,6 +65,7 @@ void Sistema::LoadVentas(){
 	}
 	archi.close();
 }
+
 
 /// -- CARGAR Detalles de Venta
 void Sistema::LoadDetallesVenta(){
@@ -97,6 +101,7 @@ void Sistema::SaveProductos(){
 	archi.close();
 }
 
+
 /// ACTUALIZAR Clientes
 void Sistema::SaveClientes(){
 	ofstream archi("clientes.bin",ios::binary|ios::trunc);
@@ -115,6 +120,7 @@ void Sistema::SaveClientes(){
 	archi.close();
 }
 
+
 /// ACTUALIZAR Ventas
 void Sistema::SaveVentas(){
 	ofstream archi("ventas.bin",ios::binary|ios::trunc);
@@ -124,16 +130,14 @@ void Sistema::SaveVentas(){
 		reg.id = ventas[i].GetID();
 		reg.id_cliente = ventas[i].GetIDCliente();
 		reg.total = ventas[i].GetTotal();
-		reg.fecha.year = ventas[i].GetYear();
-		reg.fecha.month = ventas[i].GetMonth();
-		reg.fecha.day = ventas[i].GetDay();
-		reg.fecha.year_day = ventas[i].GetDayOfYear();
+		reg.fecha = ventas[i].GetFecha();
 		reg.modificada = ventas[i].GetModif();
 		
 		archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));
 	}
 	archi.close();
 }
+
 
 /// ACTUALIZAR Detalles de Venta
 void Sistema::SaveDetallesVenta(){
@@ -186,6 +190,7 @@ void Sistema::DeleteProducto(int id){
 	SaveProductos();
 }
 
+
 /// -- ELIMINAR Cliente 
 void Sistema::DeleteCliente(int id){
 	for(int i=0; i<clientes.size(); i++){
@@ -195,6 +200,7 @@ void Sistema::DeleteCliente(int id){
 	}
 	SaveClientes();
 }
+
 
 /// -- ELIMINAR Venta
 void Sistema::DeleteVenta(int id){
@@ -254,6 +260,7 @@ void Sistema::ModificarCliente(int id, string nombre, int dni, string direccion,
 	SaveDetallesVenta();
 }
 
+
 /// -- MODIFICAR Venta
 void Sistema::ModificarVenta(int id, int id_cliente, float total){
 	for(int i=0; i<ventas.size(); i++){
@@ -278,7 +285,6 @@ Producto Sistema::GetProductoByID(int id){
 			return productos[i];
 		}
 	}
-	
 	Producto prod;
 	return prod;
 }
@@ -289,7 +295,6 @@ Producto Sistema::GetProductoByDescrip(string descripcion){
 			return productos[i];
 		}
 	}
-	
 	Producto prod;
 	return prod;
 }
@@ -297,7 +302,7 @@ Producto Sistema::GetProductoByDescrip(string descripcion){
 vector<int> Sistema::BuscarProductos(string busqueda){
 	vector<int> results;
 	for(int i=0; i<productos.size(); i++){
-		string product_descrip = StrAMinusculas(productos[i].GetDescripcion());
+		string product_descrip = StrAMinusculas(StrSinEspacios(productos[i].GetDescripcion()));
 		size_t pos = product_descrip.find(StrAMinusculas(StrSinEspacios(busqueda)),0);
 		if(pos < product_descrip.length()){
 			results.push_back(productos[i].GetID());
@@ -305,6 +310,7 @@ vector<int> Sistema::BuscarProductos(string busqueda){
 	}
 	return results;
 }
+
 
 /// -- BUSCAR Cliente
 Cliente &Sistema::GetCliente(int i){
@@ -343,6 +349,7 @@ vector<int> Sistema::BuscarClientes(string busqueda){
 	return results;
 }
 
+
 /// -- BUSCAR Venta
 Venta &Sistema::GetVenta(int i){
 	return ventas[i];
@@ -369,6 +376,17 @@ vector<int> Sistema::GetVentasByIDCliente(int id_cliente){
 	return resultados;
 }
 
+vector<Venta> Sistema::GetVentasByYear(int year){
+	vector<Venta> ventas_en_periodo;
+	for(int i=0; i<ventas.size(); i++){
+		if(ventas[i].GetYear() == year){
+			ventas_en_periodo.push_back(ventas[i]);
+		}
+	}
+	return ventas_en_periodo;
+}
+
+
 /// -- BUSCAR Detalles Venta
 VentaDetalle &Sistema::GetDetalleVenta(int i){
 	return detallesventa[i];
@@ -383,6 +401,7 @@ vector<VentaDetalle> Sistema::GetDetallesByIDVenta(int id_venta){
 	}
 	return v;
 }
+
 
 /// -- SIZES
 int Sistema::GetProductosSize(){

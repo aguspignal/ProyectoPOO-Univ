@@ -4,9 +4,9 @@
 #include <cstring>
 using namespace std;
 	
-VentaDetalle::VentaDetalle(int idVenta, string descripcion, int cantidad, float precio_producto){
+VentaDetalle::VentaDetalle(int id_venta, string descripcion, int cantidad, float precio_producto){
 	this->id = GetLastId()+1;
-	this->id_venta = idVenta;
+	this->id_venta = id_venta;
 	this->descripcion = descripcion;
 	this->cantidad = cantidad;
 	this->valor_vendido = precio_producto;
@@ -21,6 +21,7 @@ VentaDetalle::VentaDetalle(int id, int id_venta, string descripcion, int cantida
 	this->valor_vendido = valor_vendido;
 	this->subtotal = subtotal;
 }
+
 
 /// -- ID
 int VentaDetalle::GetID(){
@@ -51,28 +52,34 @@ int VentaDetalle::GetLastId(){
 	return id;
 }
 
+
+/// -- Descripcion
 string VentaDetalle::GetDescripcion(){
 	return descripcion;
 }
+
 
 /// -- Valor vendido
 float VentaDetalle::GetValorVendido(){
 	return valor_vendido;
 }
 
+
 /// -- Cantidad
 int VentaDetalle::GetCantidad(){
 	return cantidad;
 }
+
+void VentaDetalle::SetCantidad(int cant){
+	this->cantidad = cant;
+}
+
 
 /// -- Subtotal
 float VentaDetalle::GetSubtotal(){
 	return subtotal;
 }
 
-void VentaDetalle::SetCantidad(int cant){
-	this->cantidad = cant;
-}
 
 /// -- Agregar al archivo
 void VentaDetalle::AddVentaDetalle(){

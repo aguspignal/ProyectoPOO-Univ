@@ -46,7 +46,7 @@ public:
 	void ModificarCliente(int id, string nombre, int dni, string direccion, string email, string telefono);
 	void ModificarVenta(int id, int id_cliente, float total);
 	
-	/// Devolviendo cosas
+	/// Devolviendo
 	Producto &GetProducto(int i);
 	Producto GetProductoByID(int id);
 	Producto GetProductoByDescrip(string descripcion);
@@ -58,6 +58,7 @@ public:
 	Venta &GetVenta(int i);
 	Venta GetVentaByID(int id);
 	vector<int> GetVentasByIDCliente(int id);
+	vector<Venta> GetVentasByYear(int year);
 	
 	VentaDetalle &GetDetalleVenta(int i);
 	vector<VentaDetalle> GetDetallesByIDVenta(int id_venta);

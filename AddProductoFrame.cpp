@@ -16,7 +16,7 @@ AddProductoFrame::~AddProductoFrame() {
 
 void AddProductoFrame::ClickAgregar( wxCommandEvent& event )  {
 	string descripcion = wx_to_std(input_Descripcion->GetValue());
-	if(descripcion == ""){
+	if(descripcion.empty()){
 		wxMessageBox("Nombre invalido","Error",wxOK|wxICON_ERROR);
 	} else {
 		float precio = input_Precio->GetValue();

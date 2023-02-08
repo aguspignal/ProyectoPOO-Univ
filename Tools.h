@@ -15,8 +15,7 @@ string StrDosDecimales(string str);
 bool GetMayorProductoCantidad(ProductoCantidad p1, ProductoCantidad p2);
 
 /// Validaciones 
-bool ValidarDNI(string dni);
-bool ValidarTelefono(string telefono);
+bool ValidarNumerico(string input);
 
 /// Criterios de ordenamiento
 bool Orden_ID_Prod(Producto p1, Producto p2);

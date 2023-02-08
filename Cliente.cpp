@@ -57,7 +57,7 @@ int Cliente::GetLastID(){
 	return id;
 }
 
-/// -- NOMBRFE
+/// -- NOMBRE
 string Cliente::GetNombre(){
 	return nombre;
 }
@@ -65,6 +65,7 @@ string Cliente::GetNombre(){
 void Cliente::SetNombre(string str){
 	this->nombre = str;
 }
+
 
 /// -- DNI
 int Cliente::GetDNI(){
@@ -75,6 +76,7 @@ void Cliente::SetDNI(int dni){
 	this->dni = dni;
 }
 
+
 /// -- DIRECCION
 string Cliente::GetDireccion(){
 	return direccion;
@@ -84,6 +86,7 @@ void Cliente::SetDireccion(string direccion){
 	this->direccion = direccion;
 }
 
+
 /// -- EMAIL
 string Cliente::GetEmail(){
 	return email;
@@ -92,6 +95,7 @@ string Cliente::GetEmail(){
 void Cliente::SetEmail(string email){
 	this->email = email;
 }
+
 
 /// -- TELEFONO
 string Cliente::GetTelefono(){

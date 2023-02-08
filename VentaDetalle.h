@@ -19,7 +19,7 @@ private:
 	float subtotal;
 
 public:
-	VentaDetalle(int idVenta, string descripcion, int cantidad, float precio_producto);
+	VentaDetalle(int id_venta, string descripcion, int cantidad, float precio_producto);
 	VentaDetalle(int id, int id_venta, string descripcion, int cantidad, float valor_vendido, float subtotal);
 	
 	/// ID

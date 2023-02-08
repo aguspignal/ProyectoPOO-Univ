@@ -14,15 +14,11 @@ EstadisticasFrame::~EstadisticasFrame() {}
 
 void EstadisticasFrame::ActualizarDatos()  {
 	year = stoi(wx_to_std(combo_year->GetValue()));
-	ventas_en_periodo.clear();
-	for(int i=0; i<sistema->GetVentasSize(); i++){
-		Venta venta = sistema->GetVenta(i);
-		if(venta.GetYear() == year){
-			ventas_en_periodo.push_back(venta);
-		}
-	}
 	
-	if(ventas_en_periodo.size() != 0){
+	ventas_en_periodo.clear();
+	ventas_en_periodo = sistema->GetVentasByYear(year);
+	
+	if(ventas_en_periodo.size() > 0){
 		txt_VentasRealizadas->SetLabel("Ventas registradas:");
 		txt_CantidadVentas->SetLabel(to_string(ventas_en_periodo.size()));
 		
@@ -38,23 +34,15 @@ void EstadisticasFrame::ActualizarDatos()  {
 		txt_NoData->SetLabel("");
 		
 	} else {
-		txt_VentasRealizadas->SetLabel("");
-		txt_CantidadVentas->SetLabel("");
-		txt_Ganancias->SetLabel("");
-		txt_Monto->SetLabel("");
-		txt_TitCliente->SetLabel("");
-		txt_DatosCliente->SetLabel("");
-		txt_TitProductos->SetLabel("");
-		txt_Producto1->SetLabel("");
-		txt_Producto2->SetLabel("");
-		txt_Producto3->SetLabel("");
-		txt_NoData->SetLabel("Sin registros");
+		SetEmptyLabels();
 	}
 }
+
 
 void EstadisticasFrame::ActualizarDatos( wxCommandEvent& event )  {
 	ActualizarDatos();
 }
+
 
 void EstadisticasFrame::SetClienteConMasVentas(){
 	cant_ventas = 0;
@@ -80,6 +68,8 @@ void EstadisticasFrame::SetClienteConMasVentas(){
 		txt_DatosCliente->SetLabel("No se encontraron clientes");
 	} 
 }
+
+
 void EstadisticasFrame::SetProductosMasVendidos(){
 	vector<ProductoCantidad> productos;
 	
@@ -98,16 +88,18 @@ void EstadisticasFrame::SetProductosMasVendidos(){
 		max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
 		producto_top1 = *max;
 		productos.erase(max);
-	}
-	if(productos.size() >= 2){
-		max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
-		producto_top2 = *max;
-		productos.erase(max);
-	}
-	if(productos.size() >= 3){
-		max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
-		producto_top3 = *max;
-		productos.erase(max);
+		
+		if(productos.size() >= 2){
+			max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
+			producto_top2 = *max;
+			productos.erase(max);
+			
+			if(productos.size() >= 3){
+				max = max_element(productos.begin(), productos.end(), GetMayorProductoCantidad);
+				producto_top3 = *max;
+				productos.erase(max);
+			}
+		}
 	}
 	
 	if(producto_top1.producto.GetID() != 0){
@@ -123,6 +115,7 @@ void EstadisticasFrame::SetProductosMasVendidos(){
 	} else { txt_Producto3->SetLabel(""); }
 }
 
+
 void EstadisticasFrame::SetGanancias(){
 	ganancias = 0;
 	for(int i=0; i<ventas_en_periodo.size(); i++){
@@ -131,3 +124,17 @@ void EstadisticasFrame::SetGanancias(){
 	txt_Monto->SetLabel("$"+to_string(ganancias));
 }
 
+
+void EstadisticasFrame::SetEmptyLabels(){
+	txt_VentasRealizadas->SetLabel("");
+	txt_CantidadVentas->SetLabel("");
+	txt_Ganancias->SetLabel("");
+	txt_Monto->SetLabel("");
+	txt_TitCliente->SetLabel("");
+	txt_DatosCliente->SetLabel("");
+	txt_TitProductos->SetLabel("");
+	txt_Producto1->SetLabel("");
+	txt_Producto2->SetLabel("");
+	txt_Producto3->SetLabel("");
+	txt_NoData->SetLabel("Sin registros");
+}

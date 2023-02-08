@@ -14,6 +14,7 @@ ClientesFrame::ClientesFrame(wxWindow *parent, Sistema *m_sistema)
 
 ClientesFrame::~ClientesFrame() { }
 
+/// -- ACTUALIZAR Grid
 void ClientesFrame::ActualizarGrid(){
 	gridClientes->ClearSelection();
 	if(gridClientes->GetNumberRows() != 0){
@@ -31,12 +32,73 @@ void ClientesFrame::ActualizarGrid(){
 	}
 }
 
+// Ejecutada en btn "Actualizar"
 void ClientesFrame::ActualizarGrid( wxCommandEvent& event )  {
 	sistema->LoadClientes();
 	ActualizarGrid();
 	input_BuscarCliente->SetLabel("");
 }
 
+
+/// -- AGREGAR
+void ClientesFrame::DisplayAddCliente( wxCommandEvent& event )  {
+	AddClienteFrame *win = new AddClienteFrame(this,sistema);
+	if(win->ShowModal() == 1){
+		ActualizarGrid();
+	}
+}
+
+
+/// -- ELIMINAR
+void ClientesFrame::EliminarCliente( wxCommandEvent& event )  {
+	if(gridClientes->GetNumberRows() == 0){
+		wxMessageBox("No hay clientes","Error",wxOK|wxICON_ERROR);
+	} else {
+		int choice = wxMessageBox("¿Esta seguro?","Advertencia",wxYES_NO|wxICON_QUESTION);
+		if(choice == wxYES){
+			int id = stoi(wx_to_std(gridClientes->GetCellValue(gridClientes->GetGridCursorRow(),0)));
+			sistema->DeleteCliente(id);
+			
+			ActualizarGrid();
+		}
+	}
+}
+
+
+/// -- EDITAR
+void ClientesFrame::DisplayEditarCliente( wxCommandEvent& event )  {
+	if(gridClientes->GetNumberRows() == 0){
+		wxMessageBox("No hay clientes","Error",wxOK|wxICON_ERROR);
+	} else {
+		int id = stoi(wx_to_std(gridClientes->GetCellValue(gridClientes->GetGridCursorRow(),0)));
+		
+		EditCliente *win = new EditCliente(this,sistema,id);
+		if(win->ShowModal() == 1){
+			ActualizarGrid();
+		}
+	}
+	
+}
+
+
+/// -- VENTAS Registradas
+void ClientesFrame::VerVentas( wxCommandEvent& event )  {
+	if(gridClientes->GetNumberRows() == 0){
+		wxMessageBox("No hay clientes","Error",wxOK|wxICON_ERROR);
+	} else {
+		int id = stoi(wx_to_std(gridClientes->GetCellValue(gridClientes->GetGridCursorRow(),0)));
+		
+		vector<int> ventas_cliente = sistema->GetVentasByIDCliente(id);
+		if(ventas_cliente.empty()){
+			wxMessageBox("El cliente no posee ventas","Error",wxOK|wxICON_EXCLAMATION);
+		} else {
+			VentasCliente *win = new VentasCliente(this,sistema,id,ventas_cliente);
+			win->ShowModal();
+		}
+	}
+}
+
+/// -- BUSQUEDA
 void ClientesFrame::BuscarCliente( wxCommandEvent& event )  {
 	if(!input_BuscarCliente->IsEmpty()){
 		string busqueda = wx_to_std(input_BuscarCliente->GetValue());
@@ -62,61 +124,8 @@ void ClientesFrame::BuscarCliente( wxCommandEvent& event )  {
 	}
 }
 
-void ClientesFrame::DisplayAddCliente( wxCommandEvent& event )  {
-	AddClienteFrame *win = new AddClienteFrame(this,sistema);
-	if(win->ShowModal() == 1){
-		ActualizarGrid();
-	}
-}
 
-void ClientesFrame::EliminarCliente( wxCommandEvent& event )  {
-	if(gridClientes->GetNumberRows() == 0){
-		wxMessageBox("No hay clientes","Error",wxOK|wxICON_ERROR);
-	} else {
-		int choice = wxMessageBox("¿Esta seguro?","Advertencia",wxYES_NO|wxICON_QUESTION);
-		if(choice == wxYES){
-			int row = gridClientes->GetGridCursorRow();
-			string str = wx_to_std(gridClientes->GetCellValue(row,0));
-			int id = stoi(str); // str to int
-			sistema->DeleteCliente(id);
-			
-			ActualizarGrid();
-		}
-	}
-}
-
-void ClientesFrame::DisplayEditarCliente( wxCommandEvent& event )  {
-	if(gridClientes->GetNumberRows() == 0){
-		wxMessageBox("No hay clientes","Error",wxOK|wxICON_ERROR);
-	} else {
-		string str = wx_to_std(gridClientes->GetCellValue(gridClientes->GetGridCursorRow(),0));
-		int id = stoi(str);
-		
-		EditCliente *win = new EditCliente(this,sistema,id);
-		if(win->ShowModal() == 1){
-			ActualizarGrid();
-		}
-	}
-	
-}
-
-void ClientesFrame::VerVentas( wxCommandEvent& event )  {
-	if(gridClientes->GetNumberRows() == 0){
-		wxMessageBox("No hay clientes","Error",wxOK|wxICON_ERROR);
-	} else {
-		string str = wx_to_std(gridClientes->GetCellValue(gridClientes->GetGridCursorRow(),0));
-		int id = stoi(str);
-		
-		vector<int> ventas_cliente = sistema->GetVentasByIDCliente(id);
-		if(ventas_cliente.empty()){
-			wxMessageBox("El cliente no posee ventas","Error",wxOK|wxICON_EXCLAMATION);
-		} else {
-			VentasCliente *win = new VentasCliente(this,sistema,id,ventas_cliente);
-			win->ShowModal();
-		}
-	}
-}
-
+/// -- ORDENAR
 void ClientesFrame::OrdenarGrid( wxGridEvent& event )  {
 	int col = event.GetCol();
 	switch (col){

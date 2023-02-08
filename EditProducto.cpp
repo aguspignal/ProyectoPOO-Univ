@@ -9,14 +9,14 @@ EditProducto::EditProducto(wxWindow *parent, Sistema *m_sistema, int prod_id)
 	input_Descripcion->SetValue(std_to_wx(producto.GetDescripcion()));
 	input_Precio->SetValue(std_to_wx(to_string(producto.GetPrecio())));
 	input_Stock->SetValue(std_to_wx(to_string(producto.GetStock())));
-	
 }
 
 EditProducto::~EditProducto() { }
 
+/// -- GUARDAR Cambios
 void EditProducto::ClickGuardar( wxCommandEvent& event )  {
 	string descripcion = wx_to_std(input_Descripcion->GetValue());
-	if(descripcion == ""){
+	if(descripcion.empty()){
 		wxMessageBox("Nombre invalido","Error",wxOK|wxICON_ERROR,this);
 	} else {
 		float precio = input_Precio->GetValue();

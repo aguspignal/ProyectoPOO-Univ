@@ -21,15 +21,14 @@ VerClientesFrame::~VerClientesFrame() {}
 
 void VerClientesFrame::SeleccionarCliente( wxGridEvent& event )  {
 	if(gridClientes->GetNumberRows() != 0){
-		int row = event.GetRow();
 		long id;
-		gridClientes->GetCellValue(row,0).ToLong(&id);
+		gridClientes->GetCellValue(event.GetRow(),0).ToLong(&id);
 		Cliente cliente = sistema->GetClienteByID(id);
 		if(cliente.GetID() != 0){
 			id_cliente = id;
-			txt_Cliente->SetLabel(gridClientes->GetCellValue(row,1)+" - "+
-								  gridClientes->GetCellValue(row,2)+" - "+
-								  gridClientes->GetCellValue(row,3));
+			txt_Cliente->SetLabel(gridClientes->GetCellValue(event.GetRow(),1)+" - "+
+								  gridClientes->GetCellValue(event.GetRow(),2)+" - "+
+								  gridClientes->GetCellValue(event.GetRow(),3));
 		}
 	}	
 }

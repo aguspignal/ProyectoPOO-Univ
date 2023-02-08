@@ -5,7 +5,7 @@ using namespace std;
 
 struct RegistroProducto {
 	int id;
-	char descripcion[200];
+	char descripcion[150];
 	float precio;
 	int stock;
 };
@@ -57,7 +57,9 @@ struct ProductoCantidad {
 	bool operator==(ProductoCantidad prod_cant){
 		if(producto == prod_cant.producto && cantidad == prod_cant.cantidad){
 			return true;
-		} else { return false; }
+		} else { 
+			return false; 
+		}
 	}
 };
 

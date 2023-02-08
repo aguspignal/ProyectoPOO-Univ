@@ -86,6 +86,7 @@ bool Producto::CheckStock(int cantidad){
 	return stock >= cantidad;
 }
 
+
 /// -- Add Producto --
 void Producto::AddProducto(){
 	ofstream archi("productos.bin",ios::binary|ios::out|ios::app);

@@ -25,21 +25,18 @@ Venta::Venta(int id, int idCliente, float total, Fecha fecha, bool modif){
 	this->id = id;
 	this->id_cliente = idCliente;
 	this->total = total;
-	this->year = fecha.year;
-	this->month = fecha.month;
-	this->day = fecha.day;
-	this->year_day = fecha.year_day;
+	this->fecha = fecha;
 	this->modificada = modif;
 }
 
-Venta::Venta(int id, int idCliente, float total, bool modif){
-	this->id = id;
-	this->id_cliente = idCliente;
-	this->total = total;
-	this->modificada = modif;
-}
+//Venta::Venta(int id, int idCliente, float total, bool modif){
+//	this->id = id;
+//	this->id_cliente = idCliente;
+//	this->total = total;
+//	this->modificada = modif;
+//}
 
-/// -- ID
+/// -- ID --
 int Venta::GetID(){
 	return id;
 }
@@ -72,7 +69,7 @@ int Venta::GetLastID(){
 	return id;
 }
 
-/// -- Total
+/// -- Total --
 float Venta::GetTotal() {
 	return total;
 }
@@ -90,7 +87,7 @@ float Venta::CalcularTotal(vector<ProductoCantidad> prods_cants){
 	return suma;
 }
 
-/// -- Bool
+/// -- Bool --
 bool Venta::GetModif(){
 	return modificada;
 }
@@ -99,51 +96,60 @@ void  Venta::SetModifTrue(){
 	this->modificada = true;
 }
 
-/// -- FECHA
+/// -- FECHA -- 
 void Venta::SetFecha(int yr, unsigned short mo, unsigned short day){
 	SetYear(yr);
 	SetMonth(mo);
 	SetDay(day);
 }
 
-string Venta::GetFecha(){
-	string fecha = to_string(day)+"/"+to_string(month)+"/"+to_string(year);
-	return fecha;
+Fecha Venta::GetFecha(){
+	return this->fecha;
 }
 
+string Venta::GetStrFecha(){
+	string str = to_string(fecha.day)+"/"+to_string(fecha.month)+"/"+to_string(fecha.year);
+	return str;
+}
+
+// -- Año --
 int Venta::GetYear(){
-	return year;
+	return fecha.year;
 }
 
 void Venta::SetYear(int yr){
-	this->year = yr;
+	this->fecha.year = yr;
 }
 
+// -- Mes --
 unsigned short Venta::GetMonth(){
-	return month;
+	return fecha.month;
 }
 
 void Venta::SetMonth(unsigned short mo){
-	this->month = mo;
+	this->fecha.month = mo;
 }
 
+// -- Dia --
 unsigned short Venta::GetDay(){
-	return day;
+	return fecha.day;
 }
 
 void Venta::SetDay(unsigned short dy){
-	this->day = dy;
+	this->fecha.day = dy;
 }
 
+// -- Dia del año --
 unsigned short Venta::GetDayOfYear(){
-	return year_day;
+	return fecha.year_day;
 }
 
 void Venta::SetDayOfYear(unsigned short yd){
-	this->year_day = yd;
+	this->fecha.year_day = yd;
 }
 
-/// -- Agregar al archivo
+
+/// -- Agregar al archivo --
 void Venta::AddVenta(){
 	ofstream archi("ventas.bin",ios::binary|ios::out|ios::app);
 	
@@ -151,10 +157,7 @@ void Venta::AddVenta(){
 	reg.id = id;
 	reg.id_cliente = id_cliente;
 	reg.total = total;
-	reg.fecha.year = year;
-	reg.fecha.month = month;
-	reg.fecha.day = day;
-	reg.fecha.year_day = year_day;
+	reg.fecha = fecha;
 	reg.modificada = modificada;
 	
 	archi.write(reinterpret_cast<char*>(&reg),sizeof(reg));

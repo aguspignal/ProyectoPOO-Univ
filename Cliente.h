@@ -52,7 +52,7 @@ public:
 	
 	/// Agregar a la database
 	void AddCliente();
-		
+	
 	~Cliente(){};
 };
 

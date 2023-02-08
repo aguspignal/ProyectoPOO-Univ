@@ -678,10 +678,10 @@ BaseEditProducto::BaseEditProducto( wxWindow* parent, wxWindowID id, const wxStr
 	#ifdef __WXGTK__
 	if ( !input_Descripcion->HasFlag( wxTE_MULTILINE ) )
 	{
-	input_Descripcion->SetMaxLength( 198 );
+	input_Descripcion->SetMaxLength( 100 );
 	}
 	#else
-	input_Descripcion->SetMaxLength( 198 );
+	input_Descripcion->SetMaxLength( 100 );
 	#endif
 	bSizer13->Add( input_Descripcion, 1, wxALL|wxEXPAND, 5 );
 

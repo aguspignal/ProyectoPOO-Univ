@@ -11,6 +11,7 @@ AddVenta::AddVenta(wxWindow *parent, Sistema *m_sistema)
 }
 AddVenta::~AddVenta() {}
 
+/// -- Actualizar Grid Detalles
 void AddVenta::ActualizarGrid(){
 	if(gridDetalles->GetNumberRows() != 0){
 		gridDetalles->DeleteRows(0,gridDetalles->GetNumberRows());
@@ -27,7 +28,9 @@ void AddVenta::ActualizarGrid(){
 	gridDetalles->SetColFormatFloat(3,-1,2);
 	txt_Monto->SetLabel(StrDosDecimales(to_string(CalcularTotal())));
 }
-/// -- Total
+
+
+/// -- TOTAL
 float AddVenta::CalcularTotal(){
 	float suma = 0;
 	for(int i=0; i<prods_seleccionados.size(); i++){
@@ -36,7 +39,8 @@ float AddVenta::CalcularTotal(){
 	return suma;
 }
 
-/// Buscar Cliente
+
+/// -- BUSCAR CLIENTE
 void AddVenta::BuscarCliente( wxCommandEvent& event ){
 	if(!input_Cliente->IsEmpty()){
 		string busqueda = wx_to_std(input_Cliente->GetValue());
@@ -60,7 +64,8 @@ void AddVenta::BuscarCliente( wxCommandEvent& event ){
 	}
 }
 
-/// Buscar Producto
+
+/// -- BUSCAR PRODUCTO
 void AddVenta::BuscarProducto( wxCommandEvent& event )  {
 	if(!input_Producto->IsEmpty()){
 		string busqueda = wx_to_std(input_Producto->GetValue());
@@ -88,7 +93,8 @@ void AddVenta::BuscarProducto( wxCommandEvent& event )  {
 	}
 }
 
-/// Seleccionar producto
+
+/// SELECCION Producto 
 void AddVenta::SeleccionarProducto( wxGridEvent& event ) {
 	if(gridProductos->GetNumberRows() > 0){
 		if(!gridProductos->GetCellValue(event.GetRow(),0).IsEmpty()){
@@ -99,7 +105,8 @@ void AddVenta::SeleccionarProducto( wxGridEvent& event ) {
 	}
 }
 
-/// Agregar detalle
+
+/// AGREGAR Producto Seleccionado
 void AddVenta::AgregarProducto( wxCommandEvent& event )  {
 	if(id_prod != 0){
 		ProductoCantidad prod_cant;
@@ -111,28 +118,28 @@ void AddVenta::AgregarProducto( wxCommandEvent& event )  {
 			prod_cant.cantidad = input_Cantidad->GetValue();
 			prods_seleccionados.push_back(prod_cant);
 			ActualizarGrid();
-			input_Cantidad->SetValue("");
 		}
 	}
 }
 
-/// Quitar producto de detalles
+
+/// ELIMINAR Producto
 void AddVenta::QuitarProducto( wxCommandEvent& event )  {
 	if(gridDetalles->GetNumberRows() != 0){
 		int row = gridDetalles->GetGridCursorRow();
 		
 		ProductoCantidad prod_cant;
-		prod_cant.producto = sistema->GetProductoByDescrip(wx_to_std(gridProductos->GetCellValue(row,0)));
+		prod_cant.producto = sistema->GetProductoByDescrip(wx_to_std(gridDetalles->GetCellValue(row,0)));
 		prod_cant.cantidad = stoi(wx_to_std(gridDetalles->GetCellValue(row,2)));
 		
 		auto it = find(prods_seleccionados.begin(), prods_seleccionados.end(), prod_cant);
 		prods_seleccionados.erase(it);
-		
 		ActualizarGrid();
 	}
 }
 
-/// Guardar la venta
+
+/// CONFIRMAR Venta
 void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
 	string errores;
 	Cliente cliente = sistema->GetClienteByID(id_cliente);
@@ -164,14 +171,8 @@ void AddVenta::ConfirmarVenta( wxCommandEvent& event )  {
 	}
 }
 
-/// Cancelar venta
 void AddVenta::CancelarVenta( wxCommandEvent& event )  {
 	EndModal(0);
 }
-
-
-
-
-
 
 

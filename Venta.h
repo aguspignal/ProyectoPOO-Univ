@@ -26,17 +26,14 @@ private:
 	int id;
 	int id_cliente;
 	float total;
-	int year;
-	unsigned short month;
-	unsigned short day;
-	unsigned short year_day;
+	Fecha fecha;
 	bool modificada = false;
 	
 public:
 	Venta();
 	Venta(int id_cliente, vector<ProductoCantidad> productos_cantidades);
 	Venta(int id, int id_cliente, float total, Fecha fecha, bool modif);
-	Venta(int id, int id_cliente, float total, bool modif);
+//	Venta(int id, int id_cliente, float total, bool modif);
 	
 	/// ID
 	int GetID();
@@ -52,7 +49,8 @@ public:
 	
 	/// Fecha
 	void SetFecha(int year, unsigned short mo, unsigned short day);
-	string GetFecha();
+	Fecha GetFecha();
+	string GetStrFecha();
 	
 	int GetYear();
 	void SetYear(int yr);

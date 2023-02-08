@@ -13,6 +13,7 @@ ProductosFrame::ProductosFrame(wxWindow *parent, Sistema *m_sistema)
 
 ProductosFrame::~ProductosFrame() { }
 
+/// -- ACTUALIZAR Grid
 void ProductosFrame::ActualizarGrid()  {
 	gridProductos->ClearSelection();
 	if(gridProductos->GetNumberRows() != 0){
@@ -35,12 +36,15 @@ void ProductosFrame::ActualizarGrid()  {
 	}
 }
 
+// Ejecutada en btn "Actualizar"
 void ProductosFrame::ActualizarGrid( wxCommandEvent& event )  {
 	sistema->LoadProductos();
 	ActualizarGrid();
 	input_BuscarProducto->SetValue("");
 }
 
+
+/// -- AGREGAR
 void ProductosFrame::DisplayAddProducto( wxCommandEvent& event )  {
 	AddProductoFrame *win = new AddProductoFrame(this,sistema);
 	if(win->ShowModal() == 1){
@@ -48,6 +52,8 @@ void ProductosFrame::DisplayAddProducto( wxCommandEvent& event )  {
 	}
 }
 
+
+/// -- ELIMINAR 
 void ProductosFrame::EliminarProducto( wxCommandEvent& event )  {
 	if(gridProductos->GetNumberRows() == 0){
 		wxMessageBox("No hay productos","Error",wxOK|wxICON_ERROR);
@@ -56,8 +62,7 @@ void ProductosFrame::EliminarProducto( wxCommandEvent& event )  {
 		int choice = wxMessageBox("¿Esta seguro?","Advertencia",wxYES_NO|wxICON_QUESTION);
 		if(choice == wxYES){
 			int selected_row = gridProductos->GetGridCursorRow();
-			string str = wx_to_std(gridProductos->GetCellValue(selected_row,0));
-			int id = stoi(str);
+			int id = stoi(wx_to_std(gridProductos->GetCellValue(selected_row,0)));
 			sistema->DeleteProducto(id);
 			
 			ActualizarGrid();
@@ -65,13 +70,14 @@ void ProductosFrame::EliminarProducto( wxCommandEvent& event )  {
 	}
 }
 
+
+/// -- EDITAR
 void ProductosFrame::DisplayEditarProducto( wxCommandEvent& event )  {
 	if(gridProductos->GetNumberRows() == 0){
 		wxMessageBox("No hay productos","Error",wxOK|wxICON_ERROR);
 	} else {
 		int selected_row = gridProductos->GetGridCursorRow();
-		string str = wx_to_std(gridProductos->GetCellValue(selected_row,0));
-		int id = stoi(str);
+		int id = stoi(wx_to_std(gridProductos->GetCellValue(selected_row,0)));
 		
 		EditProducto *win = new EditProducto(this,sistema,id);
 		if(win->ShowModal() == 1){
@@ -80,6 +86,8 @@ void ProductosFrame::DisplayEditarProducto( wxCommandEvent& event )  {
 	}
 }
 
+
+/// -- BUSQUEDA
 void ProductosFrame::BuscarProducto( wxCommandEvent& event )  {
 	if(!input_BuscarProducto->IsEmpty()){
 		string busqueda = wx_to_std(input_BuscarProducto->GetValue());
@@ -110,6 +118,7 @@ void ProductosFrame::BuscarProducto( wxCommandEvent& event )  {
 }
 
 
+/// -- ORDENAR
 void ProductosFrame::OrdenarGrid( wxGridEvent& event )  {
 	int col = event.GetCol();
 	switch (col){

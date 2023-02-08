@@ -2,7 +2,8 @@
 #include <algorithm>
 #include <cstring>
 using namespace std;
-/// String 
+
+/// STRING 
 string StrSinEspacios(string str){
 	str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
 	return str;
@@ -24,43 +25,28 @@ string StrDosDecimales(string str){
 	return str;
 }
 
-/// Producto-Cantidad
+	
+/// PRODUCTO-CANTIDAD
 bool GetMayorProductoCantidad(ProductoCantidad p1, ProductoCantidad p2){
 	return p1.cantidad < p2.cantidad;
 }
 	
-/// Validaciones
-bool ValidarDNI(string dni){
-	if(dni.length() < 1 || dni.length() > 8){
-		return false;
-	} else {
-		char DNI[dni.length()];
-		strcpy(DNI,dni.c_str());
-		for(int i=0; i<dni.length(); i++){
-			if(DNI[i] < 48 || DNI[i] > 57){
-				return false;
-			}
+	
+/// VALIDACIONES
+bool ValidarNumerico(string input){
+	char C_INPUT[input.length()];
+	strcpy(C_INPUT,input.c_str());
+	
+	for(int i=0; i<input.length(); i++){
+		if(C_INPUT[i] < 48 || C_INPUT[i] > 57){ // numeros en codigo ASCII
+			return false;
 		}
-		return true;
 	}
+	return true;
 }
 	
-bool ValidarTelefono(string telefono){
-	if(telefono.length() < 0 || telefono.length() > 12){
-		return false;
-	} else {
-		char TELEF[telefono.length()];
-		strcpy(TELEF,telefono.c_str());
-		for(int i=0; i<telefono.length(); i++){
-			if(TELEF[i] < 48 || TELEF[i] > 57){
-				return false;
-			}
-		}
-		return true;
-	}
-}
-
-/// Criterios de ordenamiento
+	
+/// CRITERIOS ORDENAMIENTO
 // Para Producto
 bool Orden_ID_Prod(Producto p1, Producto p2){
 	return p1.GetID() < p2.GetID();
@@ -78,6 +64,7 @@ bool Orden_Stock(Producto p1, Producto p2){
 	return p1.GetStock() < p2.GetStock();
 }
 
+	
 // Para Cliente
 bool Orden_ID_Cliente(Cliente c1, Cliente c2){
 	return c1.GetID() < c2.GetID();
@@ -98,6 +85,7 @@ bool Orden_Direccion(Cliente c1, Cliente c2){
 bool Orden_Email(Cliente c1, Cliente c2){
 	return StrAMinusculas(c1.GetEmail()) < StrAMinusculas(c2.GetEmail());
 }
+	
 	
 // Para Venta
 bool Orden_ID_Venta(Venta v1, Venta v2){

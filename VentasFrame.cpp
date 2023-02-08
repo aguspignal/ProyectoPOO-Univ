@@ -12,7 +12,7 @@ VentasFrame::VentasFrame(wxWindow *parent, Sistema *m_sistema)
 
 VentasFrame::~VentasFrame() {}
 
-/// Actualizar GRID VENTAS
+/// -- Actualizar GRID VENTAS
 void VentasFrame::ActualizarGridVentas(){
 	gridVentas->ClearSelection();
 	if(gridVentas->GetNumberRows() != 0){
@@ -25,13 +25,14 @@ void VentasFrame::ActualizarGridVentas(){
 		gridVentas->SetCellValue(i,0, to_string(venta.GetID()));
 		gridVentas->SetCellValue(i,1, to_string(venta.GetIDCliente()));
 		gridVentas->SetCellValue(i,2, to_string(venta.GetTotal()));
-		gridVentas->SetCellValue(i,3, venta.GetFecha());
+		gridVentas->SetCellValue(i,3, venta.GetStrFecha());
 	}
 	gridVentas->SetColFormatFloat(1,-1,0);
 	gridVentas->SetColFormatFloat(2,-1,2);
 }
 
-/// Actualizar GRID DETALLES
+
+/// -- Actualizar GRID DETALLES
 void VentasFrame::ActualizarGridDetalles(int id_venta){
 	if(gridDetalles->GetNumberRows() != 0){
 		gridDetalles->DeleteRows(0,gridDetalles->GetNumberRows());
@@ -52,6 +53,7 @@ void VentasFrame::ActualizarGridDetalles(int id_venta){
 	}
 }
 
+// Ejecutada en btn "Actualizar"
 void VentasFrame::ActualizarGrids( wxCommandEvent& event )  {
 	sistema->LoadVentas();
 	sistema->LoadDetallesVenta();
@@ -59,7 +61,8 @@ void VentasFrame::ActualizarGrids( wxCommandEvent& event )  {
 	ActualizarGridDetalles(0);
 }
 
-/// -- AGREGAR Venta
+
+/// -- AGREGAR
 void VentasFrame::DisplayAddVenta( wxCommandEvent& event )  {
 	AddVenta *win = new AddVenta(this,sistema);
 	if(win->ShowModal() == 1){
@@ -68,23 +71,25 @@ void VentasFrame::DisplayAddVenta( wxCommandEvent& event )  {
 	}
 }
 
+
 /// -- MOSTRAR DETALLE
 void VentasFrame::DisplayDetalleVenta( wxCommandEvent& event )  {
 	if(gridVentas->GetNumberRows() != 0){
 		int row = gridVentas->GetGridCursorRow();
-		int id_venta = stoi(wx_to_std(gridVentas->GetCellValue(row,0))); // str to int
+		int id_venta = stoi(wx_to_std(gridVentas->GetCellValue(row,0)));
 		ActualizarGridDetalles(id_venta);
 	}
 }
 
-/// -- ELIMINAR Venta
+
+/// -- ELIMINAR
 void VentasFrame::EliminarVenta( wxCommandEvent& event )  {
 	if(gridVentas->GetNumberRows() == 0){
 		wxMessageBox("No hay ventas","Error",wxOK|wxICON_ERROR);
 	} else {
 		int choice = wxMessageBox("¿Esta seguro?","Advertencia",wxYES_NO|wxICON_QUESTION);
 		if(choice == wxYES){
-			int id = stoi(wx_to_std(gridVentas->GetCellValue(gridVentas->GetGridCursorRow(),0))); // str to int
+			int id = stoi(wx_to_std(gridVentas->GetCellValue(gridVentas->GetGridCursorRow(),0)));
 			sistema->DeleteVenta(id);
 			
 			ActualizarGridVentas();
@@ -93,6 +98,8 @@ void VentasFrame::EliminarVenta( wxCommandEvent& event )  {
 	}
 }
 
+
+/// -- ORDENAR
 void VentasFrame::OrdenarGrid( wxGridEvent& event )  {
 	int col = event.GetCol();
 	switch (col){

@@ -20,7 +20,7 @@ void VentasCliente::ActualizarGridVentas(){
 		Venta venta = sistema->GetVentaByID(ventas_cliente[i]);
 		gridVentas->AppendRows();
 		gridVentas->SetCellValue(i,0, to_string(venta.GetID()));
-		gridVentas->SetCellValue(i,1, venta.GetFecha());
+		gridVentas->SetCellValue(i,1, venta.GetStrFecha());
 		gridVentas->SetCellValue(i,2, to_string(venta.GetTotal()));
 	}
 	gridVentas->SetColFormatFloat(2,-1,2);

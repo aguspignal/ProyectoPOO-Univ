@@ -21,7 +21,7 @@ void AddClienteFrame::ClickAgregar( wxCommandEvent& event )  {
 	}
 	
 	long dni;
-	if( input_DNI->IsEmpty() || !ValidarDNI(wx_to_std(input_DNI->GetValue())) ){
+	if( input_DNI->IsEmpty() || !ValidarNumerico(wx_to_std(input_DNI->GetValue())) ){
 		errores += "DNI invalido\n";
 	} else {
 		input_DNI->GetValue().ToLong(&dni);
@@ -42,7 +42,7 @@ void AddClienteFrame::ClickAgregar( wxCommandEvent& event )  {
 	}
 	
 	string telefono;
-	if( input_Telefono->IsEmpty() || !ValidarTelefono(wx_to_std(input_Telefono->GetValue())) ){
+	if( input_Telefono->IsEmpty() || !ValidarNumerico(wx_to_std(input_Telefono->GetValue())) ){
 		errores += "Telefono invalido\n";
 	} else {
 		telefono = wx_to_std(input_Telefono->GetValue());
